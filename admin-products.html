@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Products | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-layout">
+    <!-- Sidebar -->
+
+
+    <aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li >
+<span>🏠</span>
+<a href="admin-dashboard.html">Dashboard</a>
+</li>
+
+<li class="active">
+<span>📦</span>
+<a href="admin-products.html">Products</a>
+</li>
+
+<li>
+<span>🖼️</span>
+<a href="admin-gallery.html">Gallery</a>
+</li>
+
+<li>
+<span>💰</span>
+<a href="admin-sales.html">Sales</a>
+</li>
+
+<li>
+<span>⭐</span>
+<a href="admin-reviews.html">Reviews</a>
+</li>
+
+<li>
+<span>📋</span>
+<a href="admin-orders.html">Orders</a>
+</li>
+
+<li>
+<span>👤</span>
+<a href="admin-users.html">Users</a>
+</li>
+
+<li>
+<span>📈</span>
+<a href="admin-reports.html">Reports</a>
+</li>
+
+<li>
+<span>⚙️</span>
+<a href="admin-settings.html">Settings</a>
+</li>
+
+<li onclick="adminLogout()">
+<span>🚪</span>
+Logout
+</li>
+
+
+</ul>
+
+</aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <button id="menuToggle" class="menu-toggle">
+☰
+</button>
+
+            <div>
+
+                <h1>Products</h1>
+
+                <p>Manage all fertilizer products</p>
+
+            </div>
+
+            <a href="admin-product-add.html" class="btn">
+
+                + Add Product
+
+            </a>
+
+        </div>
+
+        <div class="table-box">
+
+            <table class="dashboard-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Image</th>
+
+                        <th>Product</th>
+
+                        <th>Category</th>
+
+                        <th>Price</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+               <tbody id="productsTableBody">
+
+    <!-- Products will load here -->
+
+</tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</section>
+<script type="module" src="assets/js/auth.js"></script>
+<script type="module" src="assets/js/admin-products.js"></script>
+<script src="assets/js/admin.js"></script>
+
+
+</body>
+</html>

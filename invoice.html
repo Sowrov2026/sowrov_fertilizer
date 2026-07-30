@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Invoice</title>
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+<link rel="stylesheet"
+href="assets/css/pages.css">
+
+</head>
+
+<body>
+
+<div class="invoice-container">
+
+<div id="invoice">
+
+<div class="invoice-header">
+
+<div class="company-left">
+
+<img
+src="assets/images/logo/logo.png"
+class="invoice-logo">
+
+<div>
+
+<h1>Sowrov Fertilizer</h1>
+
+<p>
+Organic Fertilizer & Agro Solution
+</p>
+
+<p id="companyAddress">
+Loading...
+</p>
+
+<p id="companyPhone">
+Loading...
+</p>
+
+<p id="companyEmail">
+Loading...
+</p>
+
+</div>
+
+</div>
+
+<div class="company-right">
+
+<h2>INVOICE</h2>
+
+<p>
+
+Invoice No
+
+</p>
+
+<h3 id="invoiceNumber">
+
+Loading...
+
+</h3>
+
+<p id="invoiceDate">
+
+Loading...
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="bill-box">
+
+    <div class="bill-left">
+
+        <h3>Bill To</h3>
+
+        <p id="customerName"></p>
+
+        <p id="customerPhone"></p>
+
+        <p id="customerAddress"></p>
+
+    </div>
+
+    <div class="bill-right">
+
+        <h3>Payment Information</h3>
+
+        <p>
+
+            <b>Method :</b>
+
+            <span id="paymentMethod">
+
+                Cash On Delivery
+
+            </span>
+
+        </p>
+
+        <p>
+
+<b>Status :</b>
+
+<span
+id="paymentStatus"
+class="status-badge">
+
+Pending
+
+</span>
+
+</p>
+
+    </div>
+
+</div>
+
+<table class="invoice-table">
+
+<thead>
+
+<tr>
+
+<th>
+
+Image
+
+</th>
+
+<th>
+
+Product
+
+</th>
+
+<th>
+
+Price
+
+</th>
+
+<th>
+
+Qty
+
+</th>
+
+<th>
+
+Subtotal
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="invoiceProductBody">
+
+</tbody>
+
+</table>
+<div class="invoice-summary">
+
+<table>
+
+<tr>
+
+<td>
+
+Subtotal
+
+</td>
+
+<td id="subTotal">
+
+৳0
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Delivery
+
+</td>
+
+<td id="deliveryCharge">৳0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Discount
+
+</td>
+
+<td id="discountAmount">৳0</td>
+
+</tr>
+
+<tr class="grand-total">
+
+<td>
+
+Grand Total
+
+</td>
+
+<td id="grandTotal">
+
+৳0
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+<div class="invoice-signature">
+
+<div>
+    <div class="invoice-verify">
+
+<h3>
+
+Scan To Verify
+
+</h3>
+
+<div id="qrcode"></div>
+
+<p id="verifyInvoiceId"></p>
+
+</div>
+<p>
+
+Customer Signature
+
+</p>
+
+<br><br>
+
+____________________
+
+</div>
+
+<div>
+
+<p>
+
+Authorized Signature
+
+</p>
+
+<br><br>
+
+____________________
+
+</div>
+
+</div>
+<div class="invoice-footer">
+
+<p>
+
+Thank you for purchasing from
+
+Sowrov Fertilizer.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="invoice-buttons">
+
+<button
+id="printBtn"
+class="btn">
+
+Print Invoice
+
+</button>
+
+<button
+id="downloadBtn"
+class="btn">
+
+Download PDF
+
+</button>
+
+</div>
+
+</div>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+</script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+
+<script
+type="module"
+src="assets/js/invoice.js">
+</script>
+
+</body>
+
+</html>

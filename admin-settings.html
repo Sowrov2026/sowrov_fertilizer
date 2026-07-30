@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+
+</head>
+
+
+<body>
+
+
+<section class="dashboard">
+
+<div class="dashboard-layout">
+
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li>
+<span>🏠</span>
+<a href="admin-dashboard.html">Dashboard</a>
+</li>
+
+<li>
+<span>📦</span>
+<a href="admin-products.html">Products</a>
+</li>
+
+<li>
+<span>🖼️</span>
+<a href="admin-gallery.html">Gallery</a>
+</li>
+
+<li>
+<span>💰</span>
+<a href="admin-sales.html">Sales</a>
+</li>
+
+<li>
+<span>⭐</span>
+<a href="admin-reviews.html">Reviews</a>
+</li>
+
+<li>
+<span>📋</span>
+<a href="admin-orders.html">Orders</a>
+</li>
+
+<li>
+<span>👤</span>
+<a href="admin-users.html">Users</a>
+</li>
+
+<li>
+<span>📈</span>
+<a href="admin-reports.html">Reports</a>
+</li>
+
+<li class="active">
+<span>⚙️</span>
+<a href="admin-settings.html">Settings</a>
+</li>
+
+<li onclick="adminLogout()">
+<span>🚪</span>
+Logout
+</li>
+
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main-content">
+
+
+<div class="topbar">
+
+
+<button id="menuToggle"
+class="menu-toggle">
+
+☰
+
+</button>
+
+
+<div>
+
+<h1>
+Website Settings
+</h1>
+
+<p>
+Manage your business information
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="settings-container">
+
+
+
+<div class="settings-card">
+
+
+<h2>
+🌐 Website Information
+</h2>
+
+
+<label>
+Website Name
+</label>
+
+
+<input id="siteName"
+placeholder="Sowrov Fertilizer">
+
+
+
+<label>
+Phone
+</label>
+
+
+<input id="phone"
+placeholder="01XXXXXXXXX">
+
+
+
+<label>
+Email
+</label>
+
+
+<input id="email"
+placeholder="email@gmail.com">
+
+
+
+<label>
+Address
+</label>
+
+
+<textarea id="address"></textarea>
+
+
+
+<label>
+About Website
+</label>
+
+
+<textarea id="about"></textarea>
+
+
+
+
+<button id="saveSettings">
+
+💾 Save Settings
+
+</button>
+
+
+
+</div>
+
+
+
+
+<div class="settings-card">
+
+
+<h2>
+👤 Admin Profile
+</h2>
+
+
+<label>
+Admin Name
+</label>
+
+
+<input id="adminName"
+placeholder="Admin">
+
+
+
+<label>
+Role
+</label>
+
+
+<input id="adminRole"
+placeholder="Super Admin">
+
+
+
+<label>
+Profile Image URL
+</label>
+
+
+<input id="adminImage">
+
+
+
+<button id="saveAdmin">
+
+Update Profile
+
+</button>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</main>
+
+
+</div>
+
+</section>
+
+
+
+<script src="assets/js/admin.js"></script>
+
+<script type="module"
+src="assets/js/admin-settings.js"></script>
+
+
+</body>
+
+</html>

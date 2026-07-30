@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Barishal"
+  },
+  {
+    "id": 2,
+    "name": "Chattogram"
+  },
+  {
+    "id": 3,
+    "name": "Dhaka"
+  },
+  {
+    "id": 4,
+    "name": "Khulna"
+  },
+  {
+    "id": 5,
+    "name": "Rajshahi"
+  },
+  {
+    "id": 6,
+    "name": "Rangpur"
+  },
+  {
+    "id": 7,
+    "name": "Sylhet"
+  },
+  {
+    "id": 8,
+    "name": "Mymensingh"
+  }
+]

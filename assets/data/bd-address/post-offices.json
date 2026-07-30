@@ -1,0 +1,7982 @@
+[
+  {
+    "id": 1,
+    "upazilla_id": 266,
+    "name": "Amtali",
+    "postcode": "8710"
+  },
+  {
+    "id": 2,
+    "upazilla_id": 269,
+    "name": "Bamna",
+    "postcode": "8730"
+  },
+  {
+    "id": 3,
+    "upazilla_id": 267,
+    "name": "Barguna Sadar",
+    "postcode": "8700"
+  },
+  {
+    "id": 4,
+    "upazilla_id": 267,
+    "name": "Nali Bandar",
+    "postcode": "8701"
+  },
+  {
+    "id": 5,
+    "upazilla_id": 268,
+    "name": "Betagi",
+    "postcode": "8740"
+  },
+  {
+    "id": 6,
+    "upazilla_id": 268,
+    "name": "Darul Ulam",
+    "postcode": "8741"
+  },
+  {
+    "id": 7,
+    "upazilla_id": 270,
+    "name": "Kakchira",
+    "postcode": "8721"
+  },
+  {
+    "id": 8,
+    "upazilla_id": 270,
+    "name": "Patharghata",
+    "postcode": "8720"
+  },
+  {
+    "id": 9,
+    "upazilla_id": 255,
+    "name": "Agailzhara",
+    "postcode": "8240"
+  },
+  {
+    "id": 10,
+    "upazilla_id": 255,
+    "name": "Gaila",
+    "postcode": "8241"
+  },
+  {
+    "id": 11,
+    "upazilla_id": 255,
+    "name": "Paisarhat",
+    "postcode": "8242"
+  },
+  {
+    "id": 12,
+    "upazilla_id": 251,
+    "name": "Babuganj",
+    "postcode": "8210"
+  },
+  {
+    "id": 13,
+    "upazilla_id": 251,
+    "name": "Barisal Cadet",
+    "postcode": "8216"
+  },
+  {
+    "id": 14,
+    "upazilla_id": 251,
+    "name": "Chandpasha",
+    "postcode": "8212"
+  },
+  {
+    "id": 15,
+    "upazilla_id": 251,
+    "name": "Madhabpasha",
+    "postcode": "8213"
+  },
+  {
+    "id": 16,
+    "upazilla_id": 251,
+    "name": "Nizamuddin College",
+    "postcode": "8215"
+  },
+  {
+    "id": 17,
+    "upazilla_id": 251,
+    "name": "Rahamatpur",
+    "postcode": "8211"
+  },
+  {
+    "id": 18,
+    "upazilla_id": 251,
+    "name": "Thakur Mallik",
+    "postcode": "8214"
+  },
+  {
+    "id": 19,
+    "upazilla_id": 250,
+    "name": "Barajalia",
+    "postcode": "8260"
+  },
+  {
+    "id": 20,
+    "upazilla_id": 250,
+    "name": "Osman Manjil",
+    "postcode": "8261"
+  },
+  {
+    "id": 21,
+    "upazilla_id": 249,
+    "name": "Barisal Sadar",
+    "postcode": "8200"
+  },
+  {
+    "id": 22,
+    "upazilla_id": 249,
+    "name": "Bukhainagar",
+    "postcode": "8201"
+  },
+  {
+    "id": 23,
+    "upazilla_id": 249,
+    "name": "Jaguarhat",
+    "postcode": "8206"
+  },
+  {
+    "id": 24,
+    "upazilla_id": 249,
+    "name": "Kashipur",
+    "postcode": "8205"
+  },
+  {
+    "id": 25,
+    "upazilla_id": 249,
+    "name": "Patang",
+    "postcode": "8204"
+  },
+  {
+    "id": 26,
+    "upazilla_id": 249,
+    "name": "Saheberhat",
+    "postcode": "8202"
+  },
+  {
+    "id": 27,
+    "upazilla_id": 249,
+    "name": "Sugandia",
+    "postcode": "8203"
+  },
+  {
+    "id": 28,
+    "upazilla_id": 254,
+    "name": "Batajor",
+    "postcode": "8233"
+  },
+  {
+    "id": 29,
+    "upazilla_id": 254,
+    "name": "Gouranadi",
+    "postcode": "8230"
+  },
+  {
+    "id": 30,
+    "upazilla_id": 254,
+    "name": "Kashemabad",
+    "postcode": "8232"
+  },
+  {
+    "id": 31,
+    "upazilla_id": 254,
+    "name": "Tarki Bandar",
+    "postcode": "8231"
+  },
+  {
+    "id": 32,
+    "upazilla_id": 256,
+    "name": "Langutia",
+    "postcode": "8274"
+  },
+  {
+    "id": 33,
+    "upazilla_id": 256,
+    "name": "Laskarpur",
+    "postcode": "8271"
+  },
+  {
+    "id": 34,
+    "upazilla_id": 256,
+    "name": "Mahendiganj",
+    "postcode": "8270"
+  },
+  {
+    "id": 35,
+    "upazilla_id": 256,
+    "name": "Nalgora",
+    "postcode": "8273"
+  },
+  {
+    "id": 36,
+    "upazilla_id": 256,
+    "name": "Ulania",
+    "postcode": "8272"
+  },
+  {
+    "id": 37,
+    "upazilla_id": 257,
+    "name": "Charkalekhan",
+    "postcode": "8252"
+  },
+  {
+    "id": 38,
+    "upazilla_id": 257,
+    "name": "Kazirchar",
+    "postcode": "8251"
+  },
+  {
+    "id": 39,
+    "upazilla_id": 257,
+    "name": "Muladi",
+    "postcode": "8250"
+  },
+  {
+    "id": 40,
+    "upazilla_id": 251,
+    "name": "Charamandi",
+    "postcode": "8281"
+  },
+  {
+    "id": 41,
+    "upazilla_id": 251,
+    "name": "kalaskati",
+    "postcode": "8284"
+  },
+  {
+    "id": 42,
+    "upazilla_id": 251,
+    "name": "Padri Shibpur",
+    "postcode": "8282"
+  },
+  {
+    "id": 43,
+    "upazilla_id": 251,
+    "name": "Sahebganj",
+    "postcode": "8280"
+  },
+  {
+    "id": 44,
+    "upazilla_id": 251,
+    "name": "Shialguni",
+    "postcode": "8283"
+  },
+  {
+    "id": 45,
+    "upazilla_id": 252,
+    "name": "Dakuarhat",
+    "postcode": "8223"
+  },
+  {
+    "id": 46,
+    "upazilla_id": 252,
+    "name": "Dhamura",
+    "postcode": "8221"
+  },
+  {
+    "id": 47,
+    "upazilla_id": 252,
+    "name": "Jugirkanda",
+    "postcode": "8222"
+  },
+  {
+    "id": 48,
+    "upazilla_id": 252,
+    "name": "Shikarpur",
+    "postcode": "8224"
+  },
+  {
+    "id": 49,
+    "upazilla_id": 252,
+    "name": "Uzirpur",
+    "postcode": "8220"
+  },
+  {
+    "id": 50,
+    "upazilla_id": 259,
+    "name": "Bhola Sadar",
+    "postcode": "8300"
+  },
+  {
+    "id": 51,
+    "upazilla_id": 259,
+    "name": "Joynagar",
+    "postcode": "8301"
+  },
+  {
+    "id": 52,
+    "upazilla_id": 260,
+    "name": "Borhanuddin UPO",
+    "postcode": "8320"
+  },
+  {
+    "id": 53,
+    "upazilla_id": 260,
+    "name": "Mirzakalu",
+    "postcode": "8321"
+  },
+  {
+    "id": 54,
+    "upazilla_id": 261,
+    "name": "Charfashion",
+    "postcode": "8340"
+  },
+  {
+    "id": 55,
+    "upazilla_id": 261,
+    "name": "Dularhat",
+    "postcode": "8341"
+  },
+  {
+    "id": 56,
+    "upazilla_id": 261,
+    "name": "Keramatganj",
+    "postcode": "8342"
+  },
+  {
+    "id": 57,
+    "upazilla_id": 262,
+    "name": "Doulatkhan",
+    "postcode": "8310"
+  },
+  {
+    "id": 58,
+    "upazilla_id": 262,
+    "name": "Hajipur",
+    "postcode": "8311"
+  },
+  {
+    "id": 59,
+    "upazilla_id": 263,
+    "name": "Hajirhat",
+    "postcode": "8360"
+  },
+  {
+    "id": 60,
+    "upazilla_id": 265,
+    "name": "Hatshoshiganj",
+    "postcode": "8350"
+  },
+  {
+    "id": 61,
+    "upazilla_id": 265,
+    "name": "Daurihat",
+    "postcode": "8331"
+  },
+  {
+    "id": 62,
+    "upazilla_id": 265,
+    "name": "Gazaria",
+    "postcode": "8332"
+  },
+  {
+    "id": 63,
+    "upazilla_id": 265,
+    "name": "Lalmohan UPO",
+    "postcode": "8330"
+  },
+  {
+    "id": 64,
+    "upazilla_id": 230,
+    "name": "Baukathi",
+    "postcode": "8402"
+  },
+  {
+    "id": 65,
+    "upazilla_id": 230,
+    "name": "Gabha",
+    "postcode": "8403"
+  },
+  {
+    "id": 66,
+    "upazilla_id": 230,
+    "name": "Jhalokathi Sadar",
+    "postcode": "8400"
+  },
+  {
+    "id": 67,
+    "upazilla_id": 230,
+    "name": "Nabagram",
+    "postcode": "8401"
+  },
+  {
+    "id": 68,
+    "upazilla_id": 230,
+    "name": "Shekherhat",
+    "postcode": "8404"
+  },
+  {
+    "id": 69,
+    "upazilla_id": 231,
+    "name": "Amua",
+    "postcode": "8431"
+  },
+  {
+    "id": 70,
+    "upazilla_id": 231,
+    "name": "Kathalia",
+    "postcode": "8430"
+  },
+  {
+    "id": 71,
+    "upazilla_id": 231,
+    "name": "Niamatee",
+    "postcode": "8432"
+  },
+  {
+    "id": 72,
+    "upazilla_id": 231,
+    "name": "Shoulajalia",
+    "postcode": "8433"
+  },
+  {
+    "id": 73,
+    "upazilla_id": 232,
+    "name": "Beerkathi",
+    "postcode": "8421"
+  },
+  {
+    "id": 74,
+    "upazilla_id": 232,
+    "name": "Nalchhiti",
+    "postcode": "8420"
+  },
+  {
+    "id": 75,
+    "upazilla_id": 233,
+    "name": "Rajapur",
+    "postcode": "8410"
+  },
+  {
+    "id": 76,
+    "upazilla_id": 234,
+    "name": "Bagabandar",
+    "postcode": "8621"
+  },
+  {
+    "id": 77,
+    "upazilla_id": 234,
+    "name": "Bauphal",
+    "postcode": "8620"
+  },
+  {
+    "id": 78,
+    "upazilla_id": 234,
+    "name": "Birpasha",
+    "postcode": "8622"
+  },
+  {
+    "id": 79,
+    "upazilla_id": 234,
+    "name": "Kalaia",
+    "postcode": "8624"
+  },
+  {
+    "id": 80,
+    "upazilla_id": 234,
+    "name": "Kalishari",
+    "postcode": "8623"
+  },
+  {
+    "id": 81,
+    "upazilla_id": 237,
+    "name": "Dashmina",
+    "postcode": "8630"
+  },
+  {
+    "id": 82,
+    "upazilla_id": 240,
+    "name": "Galachipa",
+    "postcode": "8640"
+  },
+  {
+    "id": 83,
+    "upazilla_id": 240,
+    "name": "Gazipur Bandar",
+    "postcode": "8641"
+  },
+  {
+    "id": 84,
+    "upazilla_id": 238,
+    "name": "Khepupara",
+    "postcode": "8650"
+  },
+  {
+    "id": 85,
+    "upazilla_id": 238,
+    "name": "Mahipur",
+    "postcode": "8651"
+  },
+  {
+    "id": 86,
+    "upazilla_id": 235,
+    "name": "Dumkee",
+    "postcode": "8602"
+  },
+  {
+    "id": 87,
+    "upazilla_id": 235,
+    "name": "Moukaran",
+    "postcode": "8601"
+  },
+  {
+    "id": 88,
+    "upazilla_id": 235,
+    "name": "Patuakhali Sadar",
+    "postcode": "8600"
+  },
+  {
+    "id": 89,
+    "upazilla_id": 235,
+    "name": "Rahimabad",
+    "postcode": "8603"
+  },
+  {
+    "id": 90,
+    "upazilla_id": 234,
+    "name": "Subidkhali",
+    "postcode": "8610"
+  },
+  {
+    "id": 91,
+    "upazilla_id": 246,
+    "name": "Banaripara",
+    "postcode": "8530"
+  },
+  {
+    "id": 92,
+    "upazilla_id": 246,
+    "name": "Chakhar",
+    "postcode": "8531"
+  },
+  {
+    "id": 93,
+    "upazilla_id": 246,
+    "name": "Bhandaria",
+    "postcode": "8550"
+  },
+  {
+    "id": 94,
+    "upazilla_id": 246,
+    "name": "Dhaoa",
+    "postcode": "8552"
+  },
+  {
+    "id": 95,
+    "upazilla_id": 246,
+    "name": "Kanudashkathi",
+    "postcode": "8551"
+  },
+  {
+    "id": 96,
+    "upazilla_id": 244,
+    "name": "Jolagati",
+    "postcode": "8513"
+  },
+  {
+    "id": 97,
+    "upazilla_id": 244,
+    "name": "Joykul",
+    "postcode": "8512"
+  },
+  {
+    "id": 98,
+    "upazilla_id": 244,
+    "name": "Kaukhali",
+    "postcode": "8510"
+  },
+  {
+    "id": 99,
+    "upazilla_id": 244,
+    "name": "Keundia",
+    "postcode": "8511"
+  },
+  {
+    "id": 100,
+    "upazilla_id": 247,
+    "name": "Betmor Natun Hat",
+    "postcode": "8565"
+  },
+  {
+    "id": 101,
+    "upazilla_id": 247,
+    "name": "Gulishakhali",
+    "postcode": "8563"
+  },
+  {
+    "id": 102,
+    "upazilla_id": 247,
+    "name": "Halta",
+    "postcode": "8562"
+  },
+  {
+    "id": 103,
+    "upazilla_id": 247,
+    "name": "Mathbaria",
+    "postcode": "8560"
+  },
+  {
+    "id": 104,
+    "upazilla_id": 247,
+    "name": "Shilarganj",
+    "postcode": "8566"
+  },
+  {
+    "id": 105,
+    "upazilla_id": 247,
+    "name": "Tiarkhali",
+    "postcode": "8564"
+  },
+  {
+    "id": 106,
+    "upazilla_id": 247,
+    "name": "Tushkhali",
+    "postcode": "8561"
+  },
+  {
+    "id": 107,
+    "upazilla_id": 243,
+    "name": "Nazirpur",
+    "postcode": "8540"
+  },
+  {
+    "id": 108,
+    "upazilla_id": 243,
+    "name": "Sriramkathi",
+    "postcode": "8541"
+  },
+  {
+    "id": 109,
+    "upazilla_id": 242,
+    "name": "Hularhat",
+    "postcode": "8501"
+  },
+  {
+    "id": 110,
+    "upazilla_id": 242,
+    "name": "Parerhat",
+    "postcode": "8502"
+  },
+  {
+    "id": 111,
+    "upazilla_id": 242,
+    "name": "Pirojpur Sadar",
+    "postcode": "8500"
+  },
+  {
+    "id": 112,
+    "upazilla_id": 244,
+    "name": "Darus Sunnat",
+    "postcode": "8521"
+  },
+  {
+    "id": 113,
+    "upazilla_id": 244,
+    "name": "Jalabari",
+    "postcode": "8523"
+  },
+  {
+    "id": 114,
+    "upazilla_id": 244,
+    "name": "Kaurikhara",
+    "postcode": "8522"
+  },
+  {
+    "id": 115,
+    "upazilla_id": 244,
+    "name": "Swarupkathi",
+    "postcode": "8520"
+  },
+  {
+    "id": 116,
+    "upazilla_id": 98,
+    "name": "Alikadam",
+    "postcode": "4650"
+  },
+  {
+    "id": 117,
+    "upazilla_id": 97,
+    "name": "Bandarban Sadar",
+    "postcode": "4600"
+  },
+  {
+    "id": 118,
+    "upazilla_id": 99,
+    "name": "Naikhong",
+    "postcode": "4660"
+  },
+  {
+    "id": 119,
+    "upazilla_id": 100,
+    "name": "Roanchhari",
+    "postcode": "4610"
+  },
+  {
+    "id": 120,
+    "upazilla_id": 102,
+    "name": "Ruma",
+    "postcode": "4620"
+  },
+  {
+    "id": 121,
+    "upazilla_id": 103,
+    "name": "Lama",
+    "postcode": "4641"
+  },
+  {
+    "id": 122,
+    "upazilla_id": 103,
+    "name": "Thanchi",
+    "postcode": "4630"
+  },
+  {
+    "id": 123,
+    "upazilla_id": 29,
+    "name": "Akhaura",
+    "postcode": "3450"
+  },
+  {
+    "id": 124,
+    "upazilla_id": 29,
+    "name": "Azampur",
+    "postcode": "3451"
+  },
+  {
+    "id": 125,
+    "upazilla_id": 29,
+    "name": "Gangasagar",
+    "postcode": "3452"
+  },
+  {
+    "id": 126,
+    "upazilla_id": 31,
+    "name": "Banchharampur",
+    "postcode": "3420"
+  },
+  {
+    "id": 127,
+    "upazilla_id": 24,
+    "name": "Ashuganj",
+    "postcode": "3402"
+  },
+  {
+    "id": 128,
+    "upazilla_id": 24,
+    "name": "Ashuganj Share",
+    "postcode": "3403"
+  },
+  {
+    "id": 129,
+    "upazilla_id": 24,
+    "name": "Brahamanbaria Sadar",
+    "postcode": "3400"
+  },
+  {
+    "id": 130,
+    "upazilla_id": 24,
+    "name": "Poun",
+    "postcode": "3404"
+  },
+  {
+    "id": 131,
+    "upazilla_id": 24,
+    "name": "Talshahar",
+    "postcode": "3401"
+  },
+  {
+    "id": 132,
+    "upazilla_id": 25,
+    "name": "Chandidar",
+    "postcode": "3462"
+  },
+  {
+    "id": 133,
+    "upazilla_id": 25,
+    "name": "Chargachh",
+    "postcode": "3463"
+  },
+  {
+    "id": 134,
+    "upazilla_id": 25,
+    "name": "Gopinathpur",
+    "postcode": "3464"
+  },
+  {
+    "id": 135,
+    "upazilla_id": 25,
+    "name": "Kasba",
+    "postcode": "3460"
+  },
+  {
+    "id": 136,
+    "upazilla_id": 25,
+    "name": "Kuti",
+    "postcode": "3461"
+  },
+  {
+    "id": 137,
+    "upazilla_id": 30,
+    "name": "Jibanganj",
+    "postcode": "3419"
+  },
+  {
+    "id": 138,
+    "upazilla_id": 30,
+    "name": "Kaitala",
+    "postcode": "3417"
+  },
+  {
+    "id": 139,
+    "upazilla_id": 30,
+    "name": "Laubfatehpur",
+    "postcode": "3411"
+  },
+  {
+    "id": 140,
+    "upazilla_id": 30,
+    "name": "Nabinagar",
+    "postcode": "3410"
+  },
+  {
+    "id": 141,
+    "upazilla_id": 30,
+    "name": "Rasullabad",
+    "postcode": "3412"
+  },
+  {
+    "id": 142,
+    "upazilla_id": 30,
+    "name": "Ratanpur",
+    "postcode": "3414"
+  },
+  {
+    "id": 143,
+    "upazilla_id": 30,
+    "name": "Salimganj",
+    "postcode": "3418"
+  },
+  {
+    "id": 144,
+    "upazilla_id": 30,
+    "name": "Shahapur",
+    "postcode": "3415"
+  },
+  {
+    "id": 145,
+    "upazilla_id": 30,
+    "name": "Shamgram",
+    "postcode": "3413"
+  },
+  {
+    "id": 146,
+    "upazilla_id": 26,
+    "name": "Fandauk",
+    "postcode": "3441"
+  },
+  {
+    "id": 147,
+    "upazilla_id": 26,
+    "name": "Nasirnagar",
+    "postcode": "3440"
+  },
+  {
+    "id": 148,
+    "upazilla_id": 27,
+    "name": "Chandura",
+    "postcode": "3432"
+  },
+  {
+    "id": 149,
+    "upazilla_id": 27,
+    "name": "Sarial",
+    "postcode": "3430"
+  },
+  {
+    "id": 150,
+    "upazilla_id": 27,
+    "name": "Shahbajpur",
+    "postcode": "3431"
+  },
+  {
+    "id": 151,
+    "upazilla_id": 55,
+    "name": "Baburhat",
+    "postcode": "3602"
+  },
+  {
+    "id": 152,
+    "upazilla_id": 55,
+    "name": "Chandpur Sadar",
+    "postcode": "3600"
+  },
+  {
+    "id": 153,
+    "upazilla_id": 55,
+    "name": "Puranbazar",
+    "postcode": "3601"
+  },
+  {
+    "id": 154,
+    "upazilla_id": 55,
+    "name": "Sahatali",
+    "postcode": "3603"
+  },
+  {
+    "id": 155,
+    "upazilla_id": 59,
+    "name": "Chandra",
+    "postcode": "3651"
+  },
+  {
+    "id": 156,
+    "upazilla_id": 59,
+    "name": "Faridganj",
+    "postcode": "3650"
+  },
+  {
+    "id": 157,
+    "upazilla_id": 59,
+    "name": "Gridkaliandia",
+    "postcode": "3653"
+  },
+  {
+    "id": 158,
+    "upazilla_id": 59,
+    "name": "Islampur Shah Isain",
+    "postcode": "3655"
+  },
+  {
+    "id": 159,
+    "upazilla_id": 59,
+    "name": "Rampurbazar",
+    "postcode": "3654"
+  },
+  {
+    "id": 160,
+    "upazilla_id": 59,
+    "name": "Rupsha",
+    "postcode": "3652"
+  },
+  {
+    "id": 161,
+    "upazilla_id": 57,
+    "name": "Bolakhal",
+    "postcode": "3611"
+  },
+  {
+    "id": 162,
+    "upazilla_id": 57,
+    "name": "Hajiganj",
+    "postcode": "3610"
+  },
+  {
+    "id": 163,
+    "upazilla_id": 52,
+    "name": "Gandamara",
+    "postcode": "3661"
+  },
+  {
+    "id": 164,
+    "upazilla_id": 52,
+    "name": "Hayemchar",
+    "postcode": "3660"
+  },
+  {
+    "id": 165,
+    "upazilla_id": 53,
+    "name": "Kachua",
+    "postcode": "3630"
+  },
+  {
+    "id": 166,
+    "upazilla_id": 53,
+    "name": "Pak Shrirampur",
+    "postcode": "3631"
+  },
+  {
+    "id": 167,
+    "upazilla_id": 53,
+    "name": "Rahima Nagar",
+    "postcode": "3632"
+  },
+  {
+    "id": 168,
+    "upazilla_id": 53,
+    "name": "Shachar",
+    "postcode": "3633"
+  },
+  {
+    "id": 169,
+    "upazilla_id": 57,
+    "name": "Kalipur",
+    "postcode": "3642"
+  },
+  {
+    "id": 170,
+    "upazilla_id": 57,
+    "name": "Matlobganj",
+    "postcode": "3640"
+  },
+  {
+    "id": 171,
+    "upazilla_id": 57,
+    "name": "Mohanpur",
+    "postcode": "3641"
+  },
+  {
+    "id": 172,
+    "upazilla_id": 54,
+    "name": "Chotoshi",
+    "postcode": "3623"
+  },
+  {
+    "id": 173,
+    "upazilla_id": 54,
+    "name": "Islamia Madrasha",
+    "postcode": "3624"
+  },
+  {
+    "id": 174,
+    "upazilla_id": 54,
+    "name": "Khilabazar",
+    "postcode": "3621"
+  },
+  {
+    "id": 175,
+    "upazilla_id": 54,
+    "name": "Pashchim Kherihar Al",
+    "postcode": "3622"
+  },
+  {
+    "id": 176,
+    "upazilla_id": 54,
+    "name": "Shahrasti",
+    "postcode": "3620"
+  },
+  {
+    "id": 177,
+    "upazilla_id": 72,
+    "name": "Anowara",
+    "postcode": "4376"
+  },
+  {
+    "id": 178,
+    "upazilla_id": 72,
+    "name": "Battali",
+    "postcode": "4378"
+  },
+  {
+    "id": 179,
+    "upazilla_id": 72,
+    "name": "Paroikora",
+    "postcode": "4377"
+  },
+  {
+    "id": 180,
+    "upazilla_id": 71,
+    "name": "Boalkhali",
+    "postcode": "4366"
+  },
+  {
+    "id": 181,
+    "upazilla_id": 71,
+    "name": "Charandwip",
+    "postcode": "4369"
+  },
+  {
+    "id": 182,
+    "upazilla_id": 71,
+    "name": "Iqbal Park",
+    "postcode": "4365"
+  },
+  {
+    "id": 183,
+    "upazilla_id": 71,
+    "name": "Kadurkhal",
+    "postcode": "4368"
+  },
+  {
+    "id": 184,
+    "upazilla_id": 71,
+    "name": "Kanungopara",
+    "postcode": "4363"
+  },
+  {
+    "id": 185,
+    "upazilla_id": 71,
+    "name": "Sakpura",
+    "postcode": "4367"
+  },
+  {
+    "id": 186,
+    "upazilla_id": 71,
+    "name": "Saroatoli",
+    "postcode": "4364"
+  },
+  {
+    "id": 187,
+    "upazilla_id": 66,
+    "name": "Al- Amin Baria Madra",
+    "postcode": "4221"
+  },
+  {
+    "id": 188,
+    "upazilla_id": 66,
+    "name": "Amin Jute Mills",
+    "postcode": "4211"
+  },
+  {
+    "id": 189,
+    "upazilla_id": 66,
+    "name": "Anandabazar",
+    "postcode": "4215"
+  },
+  {
+    "id": 190,
+    "upazilla_id": 66,
+    "name": "Bayezid Bostami",
+    "postcode": "4210"
+  },
+  {
+    "id": 191,
+    "upazilla_id": 66,
+    "name": "Chandgaon",
+    "postcode": "4212"
+  },
+  {
+    "id": 192,
+    "upazilla_id": 66,
+    "name": "Chawkbazar",
+    "postcode": "4203"
+  },
+  {
+    "id": 193,
+    "upazilla_id": 66,
+    "name": "Chitt. Cantonment",
+    "postcode": "4220"
+  },
+  {
+    "id": 194,
+    "upazilla_id": 66,
+    "name": "Chitt. Customs Acca",
+    "postcode": "4219"
+  },
+  {
+    "id": 195,
+    "upazilla_id": 66,
+    "name": "Chitt. Politechnic In",
+    "postcode": "4209"
+  },
+  {
+    "id": 196,
+    "upazilla_id": 66,
+    "name": "Chitt. Sailers Colon",
+    "postcode": "4218"
+  },
+  {
+    "id": 197,
+    "upazilla_id": 66,
+    "name": "Chittagong Airport",
+    "postcode": "4205"
+  },
+  {
+    "id": 198,
+    "upazilla_id": 66,
+    "name": "Chittagong Bandar",
+    "postcode": "4100"
+  },
+  {
+    "id": 199,
+    "upazilla_id": 66,
+    "name": "Chittagong GPO",
+    "postcode": "4000"
+  },
+  {
+    "id": 200,
+    "upazilla_id": 66,
+    "name": "Export Processing",
+    "postcode": "4223"
+  },
+  {
+    "id": 201,
+    "upazilla_id": 66,
+    "name": "Firozshah",
+    "postcode": "4207"
+  },
+  {
+    "id": 202,
+    "upazilla_id": 66,
+    "name": "Halishahar",
+    "postcode": "4216"
+  },
+  {
+    "id": 203,
+    "upazilla_id": 66,
+    "name": "Halishshar",
+    "postcode": "4225"
+  },
+  {
+    "id": 204,
+    "upazilla_id": 66,
+    "name": "Jalalabad",
+    "postcode": "4214"
+  },
+  {
+    "id": 205,
+    "upazilla_id": 66,
+    "name": "Jaldia Merine Accade",
+    "postcode": "4206"
+  },
+  {
+    "id": 206,
+    "upazilla_id": 66,
+    "name": "Middle Patenga",
+    "postcode": "4222"
+  },
+  {
+    "id": 207,
+    "upazilla_id": 66,
+    "name": "Mohard",
+    "postcode": "4208"
+  },
+  {
+    "id": 208,
+    "upazilla_id": 66,
+    "name": "North Halishahar",
+    "postcode": "4226"
+  },
+  {
+    "id": 209,
+    "upazilla_id": 66,
+    "name": "North Katuli",
+    "postcode": "4217"
+  },
+  {
+    "id": 210,
+    "upazilla_id": 66,
+    "name": "Pahartoli",
+    "postcode": "4202"
+  },
+  {
+    "id": 211,
+    "upazilla_id": 66,
+    "name": "Patenga",
+    "postcode": "4204"
+  },
+  {
+    "id": 212,
+    "upazilla_id": 66,
+    "name": "Rampura TSO",
+    "postcode": "4224"
+  },
+  {
+    "id": 213,
+    "upazilla_id": 66,
+    "name": "Wazedia",
+    "postcode": "4213"
+  },
+  {
+    "id": 214,
+    "upazilla_id": 74,
+    "name": "Barma",
+    "postcode": "4383"
+  },
+  {
+    "id": 215,
+    "upazilla_id": 74,
+    "name": "Dohazari",
+    "postcode": "4382"
+  },
+  {
+    "id": 216,
+    "upazilla_id": 74,
+    "name": "East Joara",
+    "postcode": "4380"
+  },
+  {
+    "id": 217,
+    "upazilla_id": 74,
+    "name": "Gachbaria",
+    "postcode": "4381"
+  },
+  {
+    "id": 218,
+    "upazilla_id": 77,
+    "name": "Bhandar Sharif",
+    "postcode": "4352"
+  },
+  {
+    "id": 219,
+    "upazilla_id": 77,
+    "name": "Fatikchhari",
+    "postcode": "4350"
+  },
+  {
+    "id": 220,
+    "upazilla_id": 77,
+    "name": "Harualchhari",
+    "postcode": "4354"
+  },
+  {
+    "id": 221,
+    "upazilla_id": 77,
+    "name": "Najirhat",
+    "postcode": "4353"
+  },
+  {
+    "id": 222,
+    "upazilla_id": 77,
+    "name": "Nanupur",
+    "postcode": "4351"
+  },
+  {
+    "id": 223,
+    "upazilla_id": 77,
+    "name": "Narayanhat",
+    "postcode": "4355"
+  },
+  {
+    "id": 224,
+    "upazilla_id": 76,
+    "name": "Chitt.University",
+    "postcode": "4331"
+  },
+  {
+    "id": 225,
+    "upazilla_id": 76,
+    "name": "Fatahabad",
+    "postcode": "4335"
+  },
+  {
+    "id": 226,
+    "upazilla_id": 76,
+    "name": "Gorduara",
+    "postcode": "4332"
+  },
+  {
+    "id": 227,
+    "upazilla_id": 76,
+    "name": "Hathazari",
+    "postcode": "4330"
+  },
+  {
+    "id": 228,
+    "upazilla_id": 76,
+    "name": "Katirhat",
+    "postcode": "4333"
+  },
+  {
+    "id": 229,
+    "upazilla_id": 76,
+    "name": "Madrasa",
+    "postcode": "4339"
+  },
+  {
+    "id": 230,
+    "upazilla_id": 76,
+    "name": "Mirzapur",
+    "postcode": "4334"
+  },
+  {
+    "id": 231,
+    "upazilla_id": 76,
+    "name": "Nuralibari",
+    "postcode": "4337"
+  },
+  {
+    "id": 232,
+    "upazilla_id": 76,
+    "name": "Yunus Nagar",
+    "postcode": "4338"
+  },
+  {
+    "id": 233,
+    "upazilla_id": 69,
+    "name": "Banigram",
+    "postcode": "4393"
+  },
+  {
+    "id": 234,
+    "upazilla_id": 69,
+    "name": "Gunagari",
+    "postcode": "4392"
+  },
+  {
+    "id": 235,
+    "upazilla_id": 69,
+    "name": "Jaldi",
+    "postcode": "4390"
+  },
+  {
+    "id": 236,
+    "upazilla_id": 69,
+    "name": "Khan Bahadur",
+    "postcode": "4391"
+  },
+  {
+    "id": 237,
+    "upazilla_id": 75,
+    "name": "Chunti",
+    "postcode": "4398"
+  },
+  {
+    "id": 238,
+    "upazilla_id": 75,
+    "name": "Lohagara",
+    "postcode": "4396"
+  },
+  {
+    "id": 239,
+    "upazilla_id": 75,
+    "name": "Padua",
+    "postcode": "4397"
+  },
+  {
+    "id": 240,
+    "upazilla_id": 67,
+    "name": "Abutorab",
+    "postcode": "4321"
+  },
+  {
+    "id": 241,
+    "upazilla_id": 67,
+    "name": "Azampur",
+    "postcode": "4325"
+  },
+  {
+    "id": 242,
+    "upazilla_id": 67,
+    "name": "Bharawazhat",
+    "postcode": "4323"
+  },
+  {
+    "id": 243,
+    "upazilla_id": 67,
+    "name": "Darrogahat",
+    "postcode": "4322"
+  },
+  {
+    "id": 244,
+    "upazilla_id": 67,
+    "name": "Joarganj",
+    "postcode": "4324"
+  },
+  {
+    "id": 245,
+    "upazilla_id": 67,
+    "name": "Korerhat",
+    "postcode": "4327"
+  },
+  {
+    "id": 246,
+    "upazilla_id": 67,
+    "name": "Mirsharai",
+    "postcode": "4320"
+  },
+  {
+    "id": 247,
+    "upazilla_id": 67,
+    "name": "Mohazanhat",
+    "postcode": "4328"
+  },
+  {
+    "id": 248,
+    "upazilla_id": 68,
+    "name": "Budhpara",
+    "postcode": "4371"
+  },
+  {
+    "id": 249,
+    "upazilla_id": 68,
+    "name": "Patiya Head Office",
+    "postcode": "4370"
+  },
+  {
+    "id": 250,
+    "upazilla_id": 65,
+    "name": "Dhamair",
+    "postcode": "4361"
+  },
+  {
+    "id": 251,
+    "upazilla_id": 65,
+    "name": "Rangunia",
+    "postcode": "4360"
+  },
+  {
+    "id": 252,
+    "upazilla_id": 78,
+    "name": "B.I.T Post Office",
+    "postcode": "4349"
+  },
+  {
+    "id": 253,
+    "upazilla_id": 78,
+    "name": "Beenajuri",
+    "postcode": "4341"
+  },
+  {
+    "id": 254,
+    "upazilla_id": 78,
+    "name": "Dewanpur",
+    "postcode": "4347"
+  },
+  {
+    "id": 255,
+    "upazilla_id": 78,
+    "name": "Fatepur",
+    "postcode": "4345"
+  },
+  {
+    "id": 256,
+    "upazilla_id": 78,
+    "name": "Gahira",
+    "postcode": "4343"
+  },
+  {
+    "id": 257,
+    "upazilla_id": 78,
+    "name": "Guzra Noapara",
+    "postcode": "4346"
+  },
+  {
+    "id": 258,
+    "upazilla_id": 78,
+    "name": "jagannath Hat",
+    "postcode": "4344"
+  },
+  {
+    "id": 259,
+    "upazilla_id": 78,
+    "name": "Kundeshwari",
+    "postcode": "4342"
+  },
+  {
+    "id": 260,
+    "upazilla_id": 78,
+    "name": "Mohamuni",
+    "postcode": "4348"
+  },
+  {
+    "id": 261,
+    "upazilla_id": 78,
+    "name": "Rouzan",
+    "postcode": "4340"
+  },
+  {
+    "id": 262,
+    "upazilla_id": 69,
+    "name": "Sandwip",
+    "postcode": "4300"
+  },
+  {
+    "id": 263,
+    "upazilla_id": 69,
+    "name": "Shiberhat",
+    "postcode": "4301"
+  },
+  {
+    "id": 264,
+    "upazilla_id": 69,
+    "name": "Urirchar",
+    "postcode": "4302"
+  },
+  {
+    "id": 265,
+    "upazilla_id": 74,
+    "name": "Baitul Ijjat",
+    "postcode": "4387"
+  },
+  {
+    "id": 266,
+    "upazilla_id": 74,
+    "name": "Bazalia",
+    "postcode": "4388"
+  },
+  {
+    "id": 267,
+    "upazilla_id": 74,
+    "name": "Satkania",
+    "postcode": "4386"
+  },
+  {
+    "id": 268,
+    "upazilla_id": 66,
+    "name": "Barabkunda",
+    "postcode": "4312"
+  },
+  {
+    "id": 269,
+    "upazilla_id": 66,
+    "name": "Baroidhala",
+    "postcode": "4311"
+  },
+  {
+    "id": 270,
+    "upazilla_id": 66,
+    "name": "Bawashbaria",
+    "postcode": "4313"
+  },
+  {
+    "id": 271,
+    "upazilla_id": 66,
+    "name": "Bhatiari",
+    "postcode": "4315"
+  },
+  {
+    "id": 272,
+    "upazilla_id": 66,
+    "name": "Fouzdarhat",
+    "postcode": "4316"
+  },
+  {
+    "id": 273,
+    "upazilla_id": 66,
+    "name": "Jafrabad",
+    "postcode": "4317"
+  },
+  {
+    "id": 274,
+    "upazilla_id": 66,
+    "name": "Kumira",
+    "postcode": "4314"
+  },
+  {
+    "id": 275,
+    "upazilla_id": 66,
+    "name": "Sitakunda",
+    "postcode": "4310"
+  },
+  {
+    "id": 276,
+    "upazilla_id": 2,
+    "name": "Barura",
+    "postcode": "3560"
+  },
+  {
+    "id": 277,
+    "upazilla_id": 2,
+    "name": "Murdafarganj",
+    "postcode": "3562"
+  },
+  {
+    "id": 278,
+    "upazilla_id": 2,
+    "name": "Poyalgachha",
+    "postcode": "3561"
+  },
+  {
+    "id": 279,
+    "upazilla_id": 3,
+    "name": "Brahmanpara",
+    "postcode": "3526"
+  },
+  {
+    "id": 280,
+    "upazilla_id": 16,
+    "name": "Burichang",
+    "postcode": "3520"
+  },
+  {
+    "id": 281,
+    "upazilla_id": 16,
+    "name": "Maynamoti bazar",
+    "postcode": "3521"
+  },
+  {
+    "id": 282,
+    "upazilla_id": 4,
+    "name": "Chandia",
+    "postcode": "3510"
+  },
+  {
+    "id": 283,
+    "upazilla_id": 4,
+    "name": "Madhaiabazar",
+    "postcode": "3511"
+  },
+  {
+    "id": 284,
+    "upazilla_id": 5,
+    "name": "Batisa",
+    "postcode": "3551"
+  },
+  {
+    "id": 285,
+    "upazilla_id": 5,
+    "name": "Chiora",
+    "postcode": "3552"
+  },
+  {
+    "id": 286,
+    "upazilla_id": 5,
+    "name": "Chouddagram",
+    "postcode": "3550"
+  },
+  {
+    "id": 287,
+    "upazilla_id": 11,
+    "name": "Comilla Contoment",
+    "postcode": "3501"
+  },
+  {
+    "id": 288,
+    "upazilla_id": 11,
+    "name": "Comilla Sadar",
+    "postcode": "3500"
+  },
+  {
+    "id": 289,
+    "upazilla_id": 11,
+    "name": "Courtbari",
+    "postcode": "3503"
+  },
+  {
+    "id": 290,
+    "upazilla_id": 11,
+    "name": "Halimanagar",
+    "postcode": "3502"
+  },
+  {
+    "id": 291,
+    "upazilla_id": 11,
+    "name": "Suaganj",
+    "postcode": "3504"
+  },
+  {
+    "id": 292,
+    "upazilla_id": 6,
+    "name": "Dashpara",
+    "postcode": "3518"
+  },
+  {
+    "id": 293,
+    "upazilla_id": 6,
+    "name": "Daudkandi",
+    "postcode": "3516"
+  },
+  {
+    "id": 294,
+    "upazilla_id": 6,
+    "name": "Eliotganj",
+    "postcode": "3519"
+  },
+  {
+    "id": 295,
+    "upazilla_id": 6,
+    "name": "Gouripur",
+    "postcode": "3517"
+  },
+  {
+    "id": 296,
+    "upazilla_id": 1,
+    "name": "Barashalghar",
+    "postcode": "3532"
+  },
+  {
+    "id": 297,
+    "upazilla_id": 1,
+    "name": "Davidhar",
+    "postcode": "3530"
+  },
+  {
+    "id": 298,
+    "upazilla_id": 1,
+    "name": "Dhamtee",
+    "postcode": "3533"
+  },
+  {
+    "id": 299,
+    "upazilla_id": 1,
+    "name": "Gangamandal",
+    "postcode": "3531"
+  },
+  {
+    "id": 300,
+    "upazilla_id": 7,
+    "name": "Homna",
+    "postcode": "3546"
+  },
+  {
+    "id": 301,
+    "upazilla_id": 8,
+    "name": "Bipulasar",
+    "postcode": "3572"
+  },
+  {
+    "id": 302,
+    "upazilla_id": 8,
+    "name": "Laksam",
+    "postcode": "3570"
+  },
+  {
+    "id": 303,
+    "upazilla_id": 8,
+    "name": "Lakshamanpur",
+    "postcode": "3571"
+  },
+  {
+    "id": 304,
+    "upazilla_id": 10,
+    "name": "Chhariabazar",
+    "postcode": "3582"
+  },
+  {
+    "id": 305,
+    "upazilla_id": 10,
+    "name": "Dhalua",
+    "postcode": "3581"
+  },
+  {
+    "id": 306,
+    "upazilla_id": 10,
+    "name": "Gunabati",
+    "postcode": "3583"
+  },
+  {
+    "id": 307,
+    "upazilla_id": 10,
+    "name": "Langalkot",
+    "postcode": "3580"
+  },
+  {
+    "id": 308,
+    "upazilla_id": 9,
+    "name": "Bangra",
+    "postcode": "3543"
+  },
+  {
+    "id": 309,
+    "upazilla_id": 9,
+    "name": "Companyganj",
+    "postcode": "3542"
+  },
+  {
+    "id": 310,
+    "upazilla_id": 9,
+    "name": "Muradnagar",
+    "postcode": "3540"
+  },
+  {
+    "id": 311,
+    "upazilla_id": 9,
+    "name": "Pantibazar",
+    "postcode": "3545"
+  },
+  {
+    "id": 312,
+    "upazilla_id": 9,
+    "name": "Ramchandarpur",
+    "postcode": "3541"
+  },
+  {
+    "id": 313,
+    "upazilla_id": 9,
+    "name": "Sonakanda",
+    "postcode": "3544"
+  },
+  {
+    "id": 314,
+    "upazilla_id": 81,
+    "name": "Badarkali",
+    "postcode": "4742"
+  },
+  {
+    "id": 315,
+    "upazilla_id": 81,
+    "name": "Chiringga",
+    "postcode": "4740"
+  },
+  {
+    "id": 316,
+    "upazilla_id": 81,
+    "name": "Chiringga S.O",
+    "postcode": "4741"
+  },
+  {
+    "id": 317,
+    "upazilla_id": 81,
+    "name": "Malumghat",
+    "postcode": "4743"
+  },
+  {
+    "id": 318,
+    "upazilla_id": 80,
+    "name": "Coxs Bazar Sadar",
+    "postcode": "4700"
+  },
+  {
+    "id": 319,
+    "upazilla_id": 80,
+    "name": "Eidga",
+    "postcode": "4702"
+  },
+  {
+    "id": 320,
+    "upazilla_id": 80,
+    "name": "Zhilanja",
+    "postcode": "4701"
+  },
+  {
+    "id": 321,
+    "upazilla_id": 84,
+    "name": "Gorakghata",
+    "postcode": "4710"
+  },
+  {
+    "id": 322,
+    "upazilla_id": 82,
+    "name": "Kutubdia",
+    "postcode": "4720"
+  },
+  {
+    "id": 323,
+    "upazilla_id": 86,
+    "name": "Ramu",
+    "postcode": "4730"
+  },
+  {
+    "id": 324,
+    "upazilla_id": 87,
+    "name": "Hnila",
+    "postcode": "4761"
+  },
+  {
+    "id": 325,
+    "upazilla_id": 87,
+    "name": "St.Martin",
+    "postcode": "4762"
+  },
+  {
+    "id": 326,
+    "upazilla_id": 87,
+    "name": "Teknaf",
+    "postcode": "4760"
+  },
+  {
+    "id": 327,
+    "upazilla_id": 83,
+    "name": "Ukhia",
+    "postcode": "4750"
+  },
+  {
+    "id": 328,
+    "upazilla_id": 18,
+    "name": "Chhagalnaia",
+    "postcode": "3910"
+  },
+  {
+    "id": 329,
+    "upazilla_id": 18,
+    "name": "Daraga Hat",
+    "postcode": "3912"
+  },
+  {
+    "id": 330,
+    "upazilla_id": 18,
+    "name": "Maharajganj",
+    "postcode": "3911"
+  },
+  {
+    "id": 331,
+    "upazilla_id": 18,
+    "name": "Puabashimulia",
+    "postcode": "3913"
+  },
+  {
+    "id": 332,
+    "upazilla_id": 23,
+    "name": "Chhilonia",
+    "postcode": "3922"
+  },
+  {
+    "id": 333,
+    "upazilla_id": 23,
+    "name": "Dagondhuia",
+    "postcode": "3920"
+  },
+  {
+    "id": 334,
+    "upazilla_id": 23,
+    "name": "Dudmukha",
+    "postcode": "3921"
+  },
+  {
+    "id": 335,
+    "upazilla_id": 23,
+    "name": "Rajapur",
+    "postcode": "3923"
+  },
+  {
+    "id": 336,
+    "upazilla_id": 19,
+    "name": "Fazilpur",
+    "postcode": "3901"
+  },
+  {
+    "id": 337,
+    "upazilla_id": 19,
+    "name": "Feni Sadar",
+    "postcode": "3900"
+  },
+  {
+    "id": 338,
+    "upazilla_id": 19,
+    "name": "Laskarhat",
+    "postcode": "3903"
+  },
+  {
+    "id": 339,
+    "upazilla_id": 19,
+    "name": "Sharshadie",
+    "postcode": "3902"
+  },
+  {
+    "id": 340,
+    "upazilla_id": 22,
+    "name": "Fulgazi",
+    "postcode": "3942"
+  },
+  {
+    "id": 341,
+    "upazilla_id": 22,
+    "name": "Munshirhat",
+    "postcode": "3943"
+  },
+  {
+    "id": 342,
+    "upazilla_id": 22,
+    "name": "Pashurampur",
+    "postcode": "3940"
+  },
+  {
+    "id": 343,
+    "upazilla_id": 22,
+    "name": "Shuarbazar",
+    "postcode": "3941"
+  },
+  {
+    "id": 344,
+    "upazilla_id": 20,
+    "name": "Ahmadpur",
+    "postcode": "3932"
+  },
+  {
+    "id": 345,
+    "upazilla_id": 20,
+    "name": "Kazirhat",
+    "postcode": "3933"
+  },
+  {
+    "id": 346,
+    "upazilla_id": 20,
+    "name": "Motiganj",
+    "postcode": "3931"
+  },
+  {
+    "id": 347,
+    "upazilla_id": 20,
+    "name": "Sonagazi",
+    "postcode": "3930"
+  },
+  {
+    "id": 348,
+    "upazilla_id": 89,
+    "name": "Diginala",
+    "postcode": "4420"
+  },
+  {
+    "id": 349,
+    "upazilla_id": 88,
+    "name": "Khagrachari Sadar",
+    "postcode": "4400"
+  },
+  {
+    "id": 350,
+    "upazilla_id": 91,
+    "name": "Laxmichhari",
+    "postcode": "4470"
+  },
+  {
+    "id": 351,
+    "upazilla_id": 92,
+    "name": "Mahalchhari",
+    "postcode": "4430"
+  },
+  {
+    "id": 352,
+    "upazilla_id": 93,
+    "name": "Manikchhari",
+    "postcode": "4460"
+  },
+  {
+    "id": 353,
+    "upazilla_id": 95,
+    "name": "Matiranga",
+    "postcode": "4450"
+  },
+  {
+    "id": 354,
+    "upazilla_id": 90,
+    "name": "Panchhari",
+    "postcode": "4410"
+  },
+  {
+    "id": 355,
+    "upazilla_id": 94,
+    "name": "Ramghar Head Office",
+    "postcode": "4440"
+  },
+  {
+    "id": 356,
+    "upazilla_id": 61,
+    "name": "Char Alexgander",
+    "postcode": "3730"
+  },
+  {
+    "id": 357,
+    "upazilla_id": 61,
+    "name": "Hajirghat",
+    "postcode": "3731"
+  },
+  {
+    "id": 358,
+    "upazilla_id": 61,
+    "name": "Ramgatirhat",
+    "postcode": "3732"
+  },
+  {
+    "id": 359,
+    "upazilla_id": 60,
+    "name": "Amani Lakshimpur",
+    "postcode": "3709"
+  },
+  {
+    "id": 360,
+    "upazilla_id": 60,
+    "name": "Bhabaniganj",
+    "postcode": "3702"
+  },
+  {
+    "id": 361,
+    "upazilla_id": 60,
+    "name": "Chandraganj",
+    "postcode": "3708"
+  },
+  {
+    "id": 362,
+    "upazilla_id": 60,
+    "name": "Choupalli",
+    "postcode": "3707"
+  },
+  {
+    "id": 363,
+    "upazilla_id": 60,
+    "name": "Dalal Bazar",
+    "postcode": "3701"
+  },
+  {
+    "id": 364,
+    "upazilla_id": 60,
+    "name": "Duttapara",
+    "postcode": "3706"
+  },
+  {
+    "id": 365,
+    "upazilla_id": 60,
+    "name": "Keramatganj",
+    "postcode": "3704"
+  },
+  {
+    "id": 366,
+    "upazilla_id": 60,
+    "name": "Lakshimpur Sadar",
+    "postcode": "3700"
+  },
+  {
+    "id": 367,
+    "upazilla_id": 60,
+    "name": "Mandari",
+    "postcode": "3703"
+  },
+  {
+    "id": 368,
+    "upazilla_id": 60,
+    "name": "Rupchara",
+    "postcode": "3705"
+  },
+  {
+    "id": 369,
+    "upazilla_id": 64,
+    "name": "Alipur",
+    "postcode": "3721"
+  },
+  {
+    "id": 370,
+    "upazilla_id": 64,
+    "name": "Dolta",
+    "postcode": "3725"
+  },
+  {
+    "id": 371,
+    "upazilla_id": 64,
+    "name": "Kanchanpur",
+    "postcode": "3723"
+  },
+  {
+    "id": 372,
+    "upazilla_id": 64,
+    "name": "Naagmud",
+    "postcode": "3724"
+  },
+  {
+    "id": 373,
+    "upazilla_id": 64,
+    "name": "Panpara",
+    "postcode": "3722"
+  },
+  {
+    "id": 374,
+    "upazilla_id": 64,
+    "name": "Ramganj",
+    "postcode": "3720"
+  },
+  {
+    "id": 375,
+    "upazilla_id": 62,
+    "name": "Bhuabari",
+    "postcode": "3714"
+  },
+  {
+    "id": 376,
+    "upazilla_id": 62,
+    "name": "Haydarganj",
+    "postcode": "3713"
+  },
+  {
+    "id": 377,
+    "upazilla_id": 62,
+    "name": "Nagerdighirpar",
+    "postcode": "3712"
+  },
+  {
+    "id": 378,
+    "upazilla_id": 62,
+    "name": "Rakhallia",
+    "postcode": "3711"
+  },
+  {
+    "id": 379,
+    "upazilla_id": 62,
+    "name": "Raypur",
+    "postcode": "3710"
+  },
+  {
+    "id": 380,
+    "upazilla_id": 48,
+    "name": "Basur Hat",
+    "postcode": "3850"
+  },
+  {
+    "id": 381,
+    "upazilla_id": 48,
+    "name": "Charhajari",
+    "postcode": "3851"
+  },
+  {
+    "id": 382,
+    "upazilla_id": 45,
+    "name": "Alaiarpur",
+    "postcode": "3831"
+  },
+  {
+    "id": 383,
+    "upazilla_id": 45,
+    "name": "Amisha Para",
+    "postcode": "3847"
+  },
+  {
+    "id": 384,
+    "upazilla_id": 45,
+    "name": "Banglabazar",
+    "postcode": "3822"
+  },
+  {
+    "id": 385,
+    "upazilla_id": 45,
+    "name": "Bazra",
+    "postcode": "3824"
+  },
+  {
+    "id": 386,
+    "upazilla_id": 45,
+    "name": "Begumganj",
+    "postcode": "3820"
+  },
+  {
+    "id": 387,
+    "upazilla_id": 45,
+    "name": "Bhabani Jibanpur",
+    "postcode": "3837"
+  },
+  {
+    "id": 388,
+    "upazilla_id": 45,
+    "name": "Choumohani",
+    "postcode": "3821"
+  },
+  {
+    "id": 389,
+    "upazilla_id": 45,
+    "name": "Dauti",
+    "postcode": "3843"
+  },
+  {
+    "id": 390,
+    "upazilla_id": 45,
+    "name": "Durgapur",
+    "postcode": "3848"
+  },
+  {
+    "id": 391,
+    "upazilla_id": 45,
+    "name": "Gopalpur",
+    "postcode": "3828"
+  },
+  {
+    "id": 392,
+    "upazilla_id": 45,
+    "name": "Jamidar Hat",
+    "postcode": "3825"
+  },
+  {
+    "id": 393,
+    "upazilla_id": 45,
+    "name": "Joyag",
+    "postcode": "3844"
+  },
+  {
+    "id": 394,
+    "upazilla_id": 45,
+    "name": "Joynarayanpur",
+    "postcode": "3829"
+  },
+  {
+    "id": 395,
+    "upazilla_id": 45,
+    "name": "Khalafat Bazar",
+    "postcode": "3833"
+  },
+  {
+    "id": 396,
+    "upazilla_id": 45,
+    "name": "Khalishpur",
+    "postcode": "3842"
+  },
+  {
+    "id": 397,
+    "upazilla_id": 45,
+    "name": "Maheshganj",
+    "postcode": "3838"
+  },
+  {
+    "id": 398,
+    "upazilla_id": 45,
+    "name": "Mir Owarishpur",
+    "postcode": "3823"
+  },
+  {
+    "id": 399,
+    "upazilla_id": 45,
+    "name": "Nadona",
+    "postcode": "3839"
+  },
+  {
+    "id": 400,
+    "upazilla_id": 45,
+    "name": "Nandiapara",
+    "postcode": "3841"
+  },
+  {
+    "id": 401,
+    "upazilla_id": 45,
+    "name": "Oachhekpur",
+    "postcode": "3835"
+  },
+  {
+    "id": 402,
+    "upazilla_id": 45,
+    "name": "Rajganj",
+    "postcode": "3834"
+  },
+  {
+    "id": 403,
+    "upazilla_id": 45,
+    "name": "Sonaimuri",
+    "postcode": "3827"
+  },
+  {
+    "id": 404,
+    "upazilla_id": 45,
+    "name": "Tangirpar",
+    "postcode": "3832"
+  },
+  {
+    "id": 405,
+    "upazilla_id": 45,
+    "name": "Thanar Hat",
+    "postcode": "3845"
+  },
+  {
+    "id": 406,
+    "upazilla_id": 50,
+    "name": "Bansa Bazar",
+    "postcode": "3879"
+  },
+  {
+    "id": 407,
+    "upazilla_id": 50,
+    "name": "Bodalcourt",
+    "postcode": "3873"
+  },
+  {
+    "id": 408,
+    "upazilla_id": 50,
+    "name": "Chatkhil",
+    "postcode": "3870"
+  },
+  {
+    "id": 409,
+    "upazilla_id": 50,
+    "name": "Dosh Gharia",
+    "postcode": "3878"
+  },
+  {
+    "id": 410,
+    "upazilla_id": 50,
+    "name": "Karihati",
+    "postcode": "3877"
+  },
+  {
+    "id": 411,
+    "upazilla_id": 50,
+    "name": "Khilpara",
+    "postcode": "3872"
+  },
+  {
+    "id": 412,
+    "upazilla_id": 50,
+    "name": "Palla",
+    "postcode": "3871"
+  },
+  {
+    "id": 413,
+    "upazilla_id": 50,
+    "name": "Rezzakpur",
+    "postcode": "3874"
+  },
+  {
+    "id": 414,
+    "upazilla_id": 50,
+    "name": "Sahapur",
+    "postcode": "3881"
+  },
+  {
+    "id": 415,
+    "upazilla_id": 50,
+    "name": "Sampara",
+    "postcode": "3882"
+  },
+  {
+    "id": 416,
+    "upazilla_id": 50,
+    "name": "Shingbahura",
+    "postcode": "3883"
+  },
+  {
+    "id": 417,
+    "upazilla_id": 50,
+    "name": "Solla",
+    "postcode": "3875"
+  },
+  {
+    "id": 418,
+    "upazilla_id": 46,
+    "name": "Afazia",
+    "postcode": "3891"
+  },
+  {
+    "id": 419,
+    "upazilla_id": 46,
+    "name": "Hatiya",
+    "postcode": "3890"
+  },
+  {
+    "id": 420,
+    "upazilla_id": 46,
+    "name": "Tamoraddi",
+    "postcode": "3892"
+  },
+  {
+    "id": 421,
+    "upazilla_id": 43,
+    "name": "Chaprashir Hat",
+    "postcode": "3811"
+  },
+  {
+    "id": 422,
+    "upazilla_id": 43,
+    "name": "Char Jabbar",
+    "postcode": "3812"
+  },
+  {
+    "id": 423,
+    "upazilla_id": 43,
+    "name": "Charam Tua",
+    "postcode": "3809"
+  },
+  {
+    "id": 424,
+    "upazilla_id": 43,
+    "name": "Din Monir Hat",
+    "postcode": "3803"
+  },
+  {
+    "id": 425,
+    "upazilla_id": 43,
+    "name": "Kabirhat",
+    "postcode": "3807"
+  },
+  {
+    "id": 426,
+    "upazilla_id": 43,
+    "name": "Khalifar Hat",
+    "postcode": "3808"
+  },
+  {
+    "id": 427,
+    "upazilla_id": 43,
+    "name": "Mriddarhat",
+    "postcode": "3806"
+  },
+  {
+    "id": 428,
+    "upazilla_id": 43,
+    "name": "Noakhali College",
+    "postcode": "3801"
+  },
+  {
+    "id": 429,
+    "upazilla_id": 43,
+    "name": "Noakhali Sadar",
+    "postcode": "3800"
+  },
+  {
+    "id": 430,
+    "upazilla_id": 43,
+    "name": "Pak Kishoreganj",
+    "postcode": "3804"
+  },
+  {
+    "id": 431,
+    "upazilla_id": 43,
+    "name": "Sonapur",
+    "postcode": "3802"
+  },
+  {
+    "id": 432,
+    "upazilla_id": 49,
+    "name": "Beezbag",
+    "postcode": "3862"
+  },
+  {
+    "id": 433,
+    "upazilla_id": 49,
+    "name": "Chatarpaia",
+    "postcode": "3864"
+  },
+  {
+    "id": 434,
+    "upazilla_id": 49,
+    "name": "Kallyandi",
+    "postcode": "3861"
+  },
+  {
+    "id": 435,
+    "upazilla_id": 49,
+    "name": "Kankirhat",
+    "postcode": "3863"
+  },
+  {
+    "id": 436,
+    "upazilla_id": 49,
+    "name": "Senbag",
+    "postcode": "3860"
+  },
+  {
+    "id": 437,
+    "upazilla_id": 49,
+    "name": "T.P. Lamua",
+    "postcode": "3865"
+  },
+  {
+    "id": 438,
+    "upazilla_id": 37,
+    "name": "Barakal",
+    "postcode": "4570"
+  },
+  {
+    "id": 439,
+    "upazilla_id": 40,
+    "name": "Bilaichhari",
+    "postcode": "4550"
+  },
+  {
+    "id": 440,
+    "upazilla_id": 41,
+    "name": "Jarachhari",
+    "postcode": "4560"
+  },
+  {
+    "id": 441,
+    "upazilla_id": 34,
+    "name": "Betbunia",
+    "postcode": "4511"
+  },
+  {
+    "id": 442,
+    "upazilla_id": 34,
+    "name": "Kalampati",
+    "postcode": "4510"
+  },
+  {
+    "id": 443,
+    "upazilla_id": 34,
+    "name": "Chandraghona",
+    "postcode": "4531"
+  },
+  {
+    "id": 444,
+    "upazilla_id": 34,
+    "name": "Kaptai",
+    "postcode": "4530"
+  },
+  {
+    "id": 445,
+    "upazilla_id": 34,
+    "name": "Kaptai Nuton Bazar",
+    "postcode": "4533"
+  },
+  {
+    "id": 446,
+    "upazilla_id": 34,
+    "name": "Kaptai Project",
+    "postcode": "4532"
+  },
+  {
+    "id": 447,
+    "upazilla_id": 38,
+    "name": "Longachh",
+    "postcode": "4580"
+  },
+  {
+    "id": 448,
+    "upazilla_id": 42,
+    "name": "Marishya",
+    "postcode": "4590"
+  },
+  {
+    "id": 449,
+    "upazilla_id": 42,
+    "name": "Nanichhar",
+    "postcode": "4520"
+  },
+  {
+    "id": 450,
+    "upazilla_id": 39,
+    "name": "Rajsthali",
+    "postcode": "4540"
+  },
+  {
+    "id": 451,
+    "upazilla_id": 33,
+    "name": "Rangamati Sadar",
+    "postcode": "4500"
+  },
+  {
+    "id": 452,
+    "upazilla_id": 366,
+    "name": "Demra",
+    "postcode": "1360"
+  },
+  {
+    "id": 453,
+    "upazilla_id": 366,
+    "name": "Matuail",
+    "postcode": "1362"
+  },
+  {
+    "id": 454,
+    "upazilla_id": 366,
+    "name": "Sarulia",
+    "postcode": "1361"
+  },
+  {
+    "id": 455,
+    "upazilla_id": 366,
+    "name": "Dhaka CantonmentTSO",
+    "postcode": "1206"
+  },
+  {
+    "id": 456,
+    "upazilla_id": 366,
+    "name": "Dhamrai",
+    "postcode": "1350"
+  },
+  {
+    "id": 457,
+    "upazilla_id": 366,
+    "name": "Kamalpur",
+    "postcode": "1351"
+  },
+  {
+    "id": 458,
+    "upazilla_id": 366,
+    "name": "Jigatala TSO",
+    "postcode": "1209"
+  },
+  {
+    "id": 459,
+    "upazilla_id": 366,
+    "name": "Dhania TSO",
+    "postcode": "1232"
+  },
+  {
+    "id": 460,
+    "upazilla_id": 369,
+    "name": "Joypara",
+    "postcode": "1330"
+  },
+  {
+    "id": 461,
+    "upazilla_id": 369,
+    "name": "Narisha",
+    "postcode": "1332"
+  },
+  {
+    "id": 462,
+    "upazilla_id": 369,
+    "name": "Palamganj",
+    "postcode": "1331"
+  },
+  {
+    "id": 463,
+    "upazilla_id": 367,
+    "name": "Ati",
+    "postcode": "1312"
+  },
+  {
+    "id": 464,
+    "upazilla_id": 367,
+    "name": "Dhaka Jute Mills",
+    "postcode": "1311"
+  },
+  {
+    "id": 465,
+    "upazilla_id": 367,
+    "name": "Kalatia",
+    "postcode": "1313"
+  },
+  {
+    "id": 466,
+    "upazilla_id": 367,
+    "name": "Keraniganj",
+    "postcode": "1310"
+  },
+  {
+    "id": 467,
+    "upazilla_id": 367,
+    "name": "KhilgaonTSO",
+    "postcode": "1219"
+  },
+  {
+    "id": 468,
+    "upazilla_id": 368,
+    "name": "Posta TSO",
+    "postcode": "1211"
+  },
+  {
+    "id": 469,
+    "upazilla_id": 369,
+    "name": "Mohammadpur Housing",
+    "postcode": "1207"
+  },
+  {
+    "id": 470,
+    "upazilla_id": 369,
+    "name": "Sangsad BhabanTSO",
+    "postcode": "1225"
+  },
+  {
+    "id": 471,
+    "upazilla_id": 368,
+    "name": "Agla",
+    "postcode": "1323"
+  },
+  {
+    "id": 472,
+    "upazilla_id": 368,
+    "name": "Churain",
+    "postcode": "1325"
+  },
+  {
+    "id": 473,
+    "upazilla_id": 368,
+    "name": "Daudpur",
+    "postcode": "1322"
+  },
+  {
+    "id": 474,
+    "upazilla_id": 368,
+    "name": "Hasnabad",
+    "postcode": "1321"
+  },
+  {
+    "id": 475,
+    "upazilla_id": 368,
+    "name": "Khalpar",
+    "postcode": "1324"
+  },
+  {
+    "id": 476,
+    "upazilla_id": 368,
+    "name": "Nawabganj",
+    "postcode": "1320"
+  },
+  {
+    "id": 477,
+    "upazilla_id": 366,
+    "name": "Shantinagr TSO",
+    "postcode": "1217"
+  },
+  {
+    "id": 478,
+    "upazilla_id": 365,
+    "name": "Basabo TSO",
+    "postcode": "1214"
+  },
+  {
+    "id": 479,
+    "upazilla_id": 365,
+    "name": "Amin Bazar",
+    "postcode": "1348"
+  },
+  {
+    "id": 480,
+    "upazilla_id": 365,
+    "name": "Dairy Farm",
+    "postcode": "1341"
+  },
+  {
+    "id": 481,
+    "upazilla_id": 365,
+    "name": "EPZ",
+    "postcode": "1349"
+  },
+  {
+    "id": 482,
+    "upazilla_id": 365,
+    "name": "Jahangirnagar Univer",
+    "postcode": "1342"
+  },
+  {
+    "id": 483,
+    "upazilla_id": 365,
+    "name": "Kashem Cotton Mills",
+    "postcode": "1346"
+  },
+  {
+    "id": 484,
+    "upazilla_id": 365,
+    "name": "Rajphulbaria",
+    "postcode": "1347"
+  },
+  {
+    "id": 485,
+    "upazilla_id": 365,
+    "name": "Savar",
+    "postcode": "1340"
+  },
+  {
+    "id": 486,
+    "upazilla_id": 365,
+    "name": "Savar Canttonment",
+    "postcode": "1344"
+  },
+  {
+    "id": 487,
+    "upazilla_id": 365,
+    "name": "Saver P.A.T.C",
+    "postcode": "1343"
+  },
+  {
+    "id": 488,
+    "upazilla_id": 365,
+    "name": "Shimulia",
+    "postcode": "1345"
+  },
+  {
+    "id": 489,
+    "upazilla_id": 365,
+    "name": "Dhaka Sadar HO",
+    "postcode": "1100"
+  },
+  {
+    "id": 490,
+    "upazilla_id": 365,
+    "name": "Gendaria TSO",
+    "postcode": "1204"
+  },
+  {
+    "id": 491,
+    "upazilla_id": 365,
+    "name": "Wari TSO",
+    "postcode": "1203"
+  },
+  {
+    "id": 492,
+    "upazilla_id": 367,
+    "name": "Tejgaon TSO",
+    "postcode": "1215"
+  },
+  {
+    "id": 493,
+    "upazilla_id": 366,
+    "name": "Uttara Model TwonTSO",
+    "postcode": "1230"
+  },
+  {
+    "id": 494,
+    "upazilla_id": 391,
+    "name": "Alfadanga",
+    "postcode": "7870"
+  },
+  {
+    "id": 495,
+    "upazilla_id": 395,
+    "name": "Bhanga",
+    "postcode": "7830"
+  },
+  {
+    "id": 496,
+    "upazilla_id": 392,
+    "name": "Boalmari",
+    "postcode": "7860"
+  },
+  {
+    "id": 497,
+    "upazilla_id": 392,
+    "name": "Rupatpat",
+    "postcode": "7861"
+  },
+  {
+    "id": 498,
+    "upazilla_id": 396,
+    "name": "Charbadrashan",
+    "postcode": "7810"
+  },
+  {
+    "id": 499,
+    "upazilla_id": 390,
+    "name": "Ambikapur",
+    "postcode": "7802"
+  },
+  {
+    "id": 500,
+    "upazilla_id": 390,
+    "name": "Baitulaman Politecni",
+    "postcode": "7803"
+  },
+  {
+    "id": 501,
+    "upazilla_id": 390,
+    "name": "Faridpursadar",
+    "postcode": "7800"
+  },
+  {
+    "id": 502,
+    "upazilla_id": 390,
+    "name": "Kanaipur",
+    "postcode": "7801"
+  },
+  {
+    "id": 503,
+    "upazilla_id": 397,
+    "name": "Kamarkali",
+    "postcode": "7851"
+  },
+  {
+    "id": 504,
+    "upazilla_id": 397,
+    "name": "Madukhali",
+    "postcode": "7850"
+  },
+  {
+    "id": 505,
+    "upazilla_id": 394,
+    "name": "Nagarkanda",
+    "postcode": "7840"
+  },
+  {
+    "id": 506,
+    "upazilla_id": 394,
+    "name": "Talma",
+    "postcode": "7841"
+  },
+  {
+    "id": 507,
+    "upazilla_id": 393,
+    "name": "Bishwa jaker Manjil",
+    "postcode": "7822"
+  },
+  {
+    "id": 508,
+    "upazilla_id": 393,
+    "name": "Hat Krishapur",
+    "postcode": "7821"
+  },
+  {
+    "id": 509,
+    "upazilla_id": 393,
+    "name": "Sadarpur",
+    "postcode": "7820"
+  },
+  {
+    "id": 510,
+    "upazilla_id": 395,
+    "name": "Shriangan",
+    "postcode": "7804"
+  },
+  {
+    "id": 511,
+    "upazilla_id": 320,
+    "name": "B.O.F",
+    "postcode": "1703"
+  },
+  {
+    "id": 512,
+    "upazilla_id": 320,
+    "name": "B.R.R",
+    "postcode": "1701"
+  },
+  {
+    "id": 513,
+    "upazilla_id": 320,
+    "name": "Chandna",
+    "postcode": "1702"
+  },
+  {
+    "id": 514,
+    "upazilla_id": 320,
+    "name": "Gazipur Sadar",
+    "postcode": "1700"
+  },
+  {
+    "id": 515,
+    "upazilla_id": 320,
+    "name": "National University",
+    "postcode": "1704"
+  },
+  {
+    "id": 516,
+    "upazilla_id": 318,
+    "name": "Kaliakaar",
+    "postcode": "1750"
+  },
+  {
+    "id": 517,
+    "upazilla_id": 318,
+    "name": "Safipur",
+    "postcode": "1751"
+  },
+  {
+    "id": 518,
+    "upazilla_id": 317,
+    "name": "Kaliganj",
+    "postcode": "1720"
+  },
+  {
+    "id": 519,
+    "upazilla_id": 317,
+    "name": "Pubail",
+    "postcode": "1721"
+  },
+  {
+    "id": 520,
+    "upazilla_id": 317,
+    "name": "Santanpara",
+    "postcode": "1722"
+  },
+  {
+    "id": 521,
+    "upazilla_id": 317,
+    "name": "Vaoal Jamalpur",
+    "postcode": "1723"
+  },
+  {
+    "id": 522,
+    "upazilla_id": 319,
+    "name": "kapashia",
+    "postcode": "1730"
+  },
+  {
+    "id": 523,
+    "upazilla_id": 320,
+    "name": "Ershad Nagar",
+    "postcode": "1712"
+  },
+  {
+    "id": 524,
+    "upazilla_id": 320,
+    "name": "Monnunagar",
+    "postcode": "1710"
+  },
+  {
+    "id": 525,
+    "upazilla_id": 320,
+    "name": "Nishat Nagar",
+    "postcode": "1711"
+  },
+  {
+    "id": 526,
+    "upazilla_id": 321,
+    "name": "Barmi",
+    "postcode": "1743"
+  },
+  {
+    "id": 527,
+    "upazilla_id": 321,
+    "name": "Bashamur",
+    "postcode": "1747"
+  },
+  {
+    "id": 528,
+    "upazilla_id": 321,
+    "name": "Boubi",
+    "postcode": "1748"
+  },
+  {
+    "id": 529,
+    "upazilla_id": 321,
+    "name": "Kawraid",
+    "postcode": "1745"
+  },
+  {
+    "id": 530,
+    "upazilla_id": 321,
+    "name": "Satkhamair",
+    "postcode": "1744"
+  },
+  {
+    "id": 531,
+    "upazilla_id": 321,
+    "name": "Sreepur",
+    "postcode": "1740"
+  },
+  {
+    "id": 532,
+    "upazilla_id": 321,
+    "name": "Rajendrapur",
+    "postcode": "1741"
+  },
+  {
+    "id": 533,
+    "upazilla_id": 321,
+    "name": "Rajendrapur Canttome",
+    "postcode": "1742"
+  },
+  {
+    "id": 534,
+    "upazilla_id": 385,
+    "name": "Barfa",
+    "postcode": "8102"
+  },
+  {
+    "id": 535,
+    "upazilla_id": 385,
+    "name": "Chandradighalia",
+    "postcode": "8103"
+  },
+  {
+    "id": 536,
+    "upazilla_id": 385,
+    "name": "Gopalganj Sadar",
+    "postcode": "8100"
+  },
+  {
+    "id": 537,
+    "upazilla_id": 385,
+    "name": "Ulpur",
+    "postcode": "8101"
+  },
+  {
+    "id": 538,
+    "upazilla_id": 386,
+    "name": "Jonapur",
+    "postcode": "8133"
+  },
+  {
+    "id": 539,
+    "upazilla_id": 386,
+    "name": "Kashiani",
+    "postcode": "8130"
+  },
+  {
+    "id": 540,
+    "upazilla_id": 386,
+    "name": "Ramdia College",
+    "postcode": "8131"
+  },
+  {
+    "id": 541,
+    "upazilla_id": 386,
+    "name": "Ratoil",
+    "postcode": "8132"
+  },
+  {
+    "id": 542,
+    "upazilla_id": 388,
+    "name": "Kotalipara",
+    "postcode": "8110"
+  },
+  {
+    "id": 543,
+    "upazilla_id": 389,
+    "name": "Batkiamari",
+    "postcode": "8141"
+  },
+  {
+    "id": 544,
+    "upazilla_id": 389,
+    "name": "Khandarpara",
+    "postcode": "8142"
+  },
+  {
+    "id": 545,
+    "upazilla_id": 389,
+    "name": "Maksudpur",
+    "postcode": "8140"
+  },
+  {
+    "id": 546,
+    "upazilla_id": 387,
+    "name": "Patgati",
+    "postcode": "8121"
+  },
+  {
+    "id": 547,
+    "upazilla_id": 387,
+    "name": "Tungipara",
+    "postcode": "8120"
+  },
+  {
+    "id": 548,
+    "upazilla_id": 478,
+    "name": "Dewangonj",
+    "postcode": "2030"
+  },
+  {
+    "id": 549,
+    "upazilla_id": 478,
+    "name": "Dewangonj S. Mills",
+    "postcode": "2031"
+  },
+  {
+    "id": 550,
+    "upazilla_id": 477,
+    "name": "Durmoot",
+    "postcode": "2021"
+  },
+  {
+    "id": 551,
+    "upazilla_id": 477,
+    "name": "Gilabari",
+    "postcode": "2022"
+  },
+  {
+    "id": 552,
+    "upazilla_id": 477,
+    "name": "Islampur",
+    "postcode": "2020"
+  },
+  {
+    "id": 553,
+    "upazilla_id": 475,
+    "name": "Jamalpur",
+    "postcode": "2000"
+  },
+  {
+    "id": 554,
+    "upazilla_id": 475,
+    "name": "Nandina",
+    "postcode": "2001"
+  },
+  {
+    "id": 555,
+    "upazilla_id": 475,
+    "name": "Narundi",
+    "postcode": "2002"
+  },
+  {
+    "id": 556,
+    "upazilla_id": 476,
+    "name": "Jamalpur",
+    "postcode": "2011"
+  },
+  {
+    "id": 557,
+    "upazilla_id": 476,
+    "name": "Mahmoodpur",
+    "postcode": "2013"
+  },
+  {
+    "id": 558,
+    "upazilla_id": 476,
+    "name": "Malancha",
+    "postcode": "2012"
+  },
+  {
+    "id": 559,
+    "upazilla_id": 476,
+    "name": "Malandah",
+    "postcode": "2010"
+  },
+  {
+    "id": 560,
+    "upazilla_id": 480,
+    "name": "Balijhuri",
+    "postcode": "2041"
+  },
+  {
+    "id": 561,
+    "upazilla_id": 480,
+    "name": "Mathargonj",
+    "postcode": "2040"
+  },
+  {
+    "id": 562,
+    "upazilla_id": 479,
+    "name": "Bausee",
+    "postcode": "2052"
+  },
+  {
+    "id": 563,
+    "upazilla_id": 479,
+    "name": "Gunerbari",
+    "postcode": "2051"
+  },
+  {
+    "id": 564,
+    "upazilla_id": 479,
+    "name": "Jagannath Ghat",
+    "postcode": "2053"
+  },
+  {
+    "id": 565,
+    "upazilla_id": 479,
+    "name": "Jamuna Sar Karkhana",
+    "postcode": "2055"
+  },
+  {
+    "id": 566,
+    "upazilla_id": 479,
+    "name": "Pingna",
+    "postcode": "2054"
+  },
+  {
+    "id": 567,
+    "upazilla_id": 479,
+    "name": "Shorishabari",
+    "postcode": "2050"
+  },
+  {
+    "id": 568,
+    "upazilla_id": 354,
+    "name": "Bajitpur",
+    "postcode": "2336"
+  },
+  {
+    "id": 569,
+    "upazilla_id": 354,
+    "name": "Laksmipur",
+    "postcode": "2338"
+  },
+  {
+    "id": 570,
+    "upazilla_id": 354,
+    "name": "Sararchar",
+    "postcode": "2337"
+  },
+  {
+    "id": 571,
+    "upazilla_id": 347,
+    "name": "Bhairab",
+    "postcode": "2350"
+  },
+  {
+    "id": 572,
+    "upazilla_id": 349,
+    "name": "Hossenpur",
+    "postcode": "2320"
+  },
+  {
+    "id": 573,
+    "upazilla_id": 345,
+    "name": "Itna",
+    "postcode": "2390"
+  },
+  {
+    "id": 574,
+    "upazilla_id": 353,
+    "name": "Karimganj",
+    "postcode": "2310"
+  },
+  {
+    "id": 575,
+    "upazilla_id": 346,
+    "name": "Gochhihata",
+    "postcode": "2331"
+  },
+  {
+    "id": 576,
+    "upazilla_id": 346,
+    "name": "Katiadi",
+    "postcode": "2330"
+  },
+  {
+    "id": 577,
+    "upazilla_id": 352,
+    "name": "Kishoreganj S.Mills",
+    "postcode": "2301"
+  },
+  {
+    "id": 578,
+    "upazilla_id": 352,
+    "name": "Kishoreganj Sadar",
+    "postcode": "2300"
+  },
+  {
+    "id": 579,
+    "upazilla_id": 352,
+    "name": "Maizhati",
+    "postcode": "2302"
+  },
+  {
+    "id": 580,
+    "upazilla_id": 352,
+    "name": "Nilganj",
+    "postcode": "2303"
+  },
+  {
+    "id": 581,
+    "upazilla_id": 351,
+    "name": "Chhoysuti",
+    "postcode": "2341"
+  },
+  {
+    "id": 582,
+    "upazilla_id": 351,
+    "name": "Kuliarchar",
+    "postcode": "2340"
+  },
+  {
+    "id": 583,
+    "upazilla_id": 356,
+    "name": "Abdullahpur",
+    "postcode": "2371"
+  },
+  {
+    "id": 584,
+    "upazilla_id": 356,
+    "name": "MIthamoin",
+    "postcode": "2370"
+  },
+  {
+    "id": 585,
+    "upazilla_id": 357,
+    "name": "Nikli",
+    "postcode": "2360"
+  },
+  {
+    "id": 586,
+    "upazilla_id": 355,
+    "name": "Ostagram",
+    "postcode": "2380"
+  },
+  {
+    "id": 587,
+    "upazilla_id": 350,
+    "name": "Pakundia",
+    "postcode": "2326"
+  },
+  {
+    "id": 588,
+    "upazilla_id": 348,
+    "name": "Tarial",
+    "postcode": "2316"
+  },
+  {
+    "id": 589,
+    "upazilla_id": 382,
+    "name": "Bahadurpur",
+    "postcode": "7932"
+  },
+  {
+    "id": 590,
+    "upazilla_id": 382,
+    "name": "Barhamganj",
+    "postcode": "7930"
+  },
+  {
+    "id": 591,
+    "upazilla_id": 382,
+    "name": "Nilaksmibandar",
+    "postcode": "7931"
+  },
+  {
+    "id": 592,
+    "upazilla_id": 382,
+    "name": "Umedpur",
+    "postcode": "7933"
+  },
+  {
+    "id": 593,
+    "upazilla_id": 383,
+    "name": "Kalkini",
+    "postcode": "7920"
+  },
+  {
+    "id": 594,
+    "upazilla_id": 383,
+    "name": "Sahabrampur",
+    "postcode": "7921"
+  },
+  {
+    "id": 595,
+    "upazilla_id": 381,
+    "name": "Charmugria",
+    "postcode": "7901"
+  },
+  {
+    "id": 596,
+    "upazilla_id": 381,
+    "name": "Habiganj",
+    "postcode": "7903"
+  },
+  {
+    "id": 597,
+    "upazilla_id": 381,
+    "name": "Kulpaddi",
+    "postcode": "7902"
+  },
+  {
+    "id": 598,
+    "upazilla_id": 381,
+    "name": "Madaripur Sadar",
+    "postcode": "7900"
+  },
+  {
+    "id": 599,
+    "upazilla_id": 381,
+    "name": "Mustafapur",
+    "postcode": "7904"
+  },
+  {
+    "id": 600,
+    "upazilla_id": 384,
+    "name": "Khalia",
+    "postcode": "7911"
+  },
+  {
+    "id": 601,
+    "upazilla_id": 384,
+    "name": "Rajoir",
+    "postcode": "7910"
+  },
+  {
+    "id": 602,
+    "upazilla_id": 363,
+    "name": "Doulatpur",
+    "postcode": "1860"
+  },
+  {
+    "id": 603,
+    "upazilla_id": 361,
+    "name": "Gheor",
+    "postcode": "1840"
+  },
+  {
+    "id": 604,
+    "upazilla_id": 358,
+    "name": "Jhitka",
+    "postcode": "1831"
+  },
+  {
+    "id": 605,
+    "upazilla_id": 358,
+    "name": "Lechhraganj",
+    "postcode": "1830"
+  },
+  {
+    "id": 606,
+    "upazilla_id": 360,
+    "name": "Barangail",
+    "postcode": "1804"
+  },
+  {
+    "id": 607,
+    "upazilla_id": 360,
+    "name": "Gorpara",
+    "postcode": "1802"
+  },
+  {
+    "id": 608,
+    "upazilla_id": 360,
+    "name": "Mahadebpur",
+    "postcode": "1803"
+  },
+  {
+    "id": 609,
+    "upazilla_id": 360,
+    "name": "Manikganj Bazar",
+    "postcode": "1801"
+  },
+  {
+    "id": 610,
+    "upazilla_id": 360,
+    "name": "Manikganj Sadar",
+    "postcode": "1800"
+  },
+  {
+    "id": 611,
+    "upazilla_id": 359,
+    "name": "Baliati",
+    "postcode": "1811"
+  },
+  {
+    "id": 612,
+    "upazilla_id": 359,
+    "name": "Saturia",
+    "postcode": "1810"
+  },
+  {
+    "id": 613,
+    "upazilla_id": 362,
+    "name": "Aricha",
+    "postcode": "1851"
+  },
+  {
+    "id": 614,
+    "upazilla_id": 362,
+    "name": "Shibaloy",
+    "postcode": "1850"
+  },
+  {
+    "id": 615,
+    "upazilla_id": 362,
+    "name": "Tewta",
+    "postcode": "1852"
+  },
+  {
+    "id": 616,
+    "upazilla_id": 362,
+    "name": "Uthli",
+    "postcode": "1853"
+  },
+  {
+    "id": 617,
+    "upazilla_id": 364,
+    "name": "Baira",
+    "postcode": "1821"
+  },
+  {
+    "id": 618,
+    "upazilla_id": 364,
+    "name": "joymantop",
+    "postcode": "1822"
+  },
+  {
+    "id": 619,
+    "upazilla_id": 364,
+    "name": "Singair",
+    "postcode": "1820"
+  },
+  {
+    "id": 620,
+    "upazilla_id": 374,
+    "name": "Gajaria",
+    "postcode": "1510"
+  },
+  {
+    "id": 621,
+    "upazilla_id": 374,
+    "name": "Hossendi",
+    "postcode": "1511"
+  },
+  {
+    "id": 622,
+    "upazilla_id": 374,
+    "name": "Rasulpur",
+    "postcode": "1512"
+  },
+  {
+    "id": 623,
+    "upazilla_id": 373,
+    "name": "Gouragonj",
+    "postcode": "1334"
+  },
+  {
+    "id": 624,
+    "upazilla_id": 373,
+    "name": "Gouragonj",
+    "postcode": "1534"
+  },
+  {
+    "id": 625,
+    "upazilla_id": 373,
+    "name": "Haldia SO",
+    "postcode": "1532"
+  },
+  {
+    "id": 626,
+    "upazilla_id": 373,
+    "name": "Haridia",
+    "postcode": "1333"
+  },
+  {
+    "id": 627,
+    "upazilla_id": 373,
+    "name": "Haridia DESO",
+    "postcode": "1533"
+  },
+  {
+    "id": 628,
+    "upazilla_id": 373,
+    "name": "Korhati",
+    "postcode": "1531"
+  },
+  {
+    "id": 629,
+    "upazilla_id": 373,
+    "name": "Lohajang",
+    "postcode": "1530"
+  },
+  {
+    "id": 630,
+    "upazilla_id": 373,
+    "name": "Madini Mandal",
+    "postcode": "1335"
+  },
+  {
+    "id": 631,
+    "upazilla_id": 373,
+    "name": "Medini Mandal EDSO",
+    "postcode": "1535"
+  },
+  {
+    "id": 632,
+    "upazilla_id": 370,
+    "name": "Kathakhali",
+    "postcode": "1503"
+  },
+  {
+    "id": 633,
+    "upazilla_id": 370,
+    "name": "Mirkadim",
+    "postcode": "1502"
+  },
+  {
+    "id": 634,
+    "upazilla_id": 370,
+    "name": "Munshiganj Sadar",
+    "postcode": "1500"
+  },
+  {
+    "id": 635,
+    "upazilla_id": 370,
+    "name": "Rikabibazar",
+    "postcode": "1501"
+  },
+  {
+    "id": 636,
+    "upazilla_id": 372,
+    "name": "Ichapur",
+    "postcode": "1542"
+  },
+  {
+    "id": 637,
+    "upazilla_id": 372,
+    "name": "Kola",
+    "postcode": "1541"
+  },
+  {
+    "id": 638,
+    "upazilla_id": 372,
+    "name": "Malkha Nagar",
+    "postcode": "1543"
+  },
+  {
+    "id": 639,
+    "upazilla_id": 372,
+    "name": "Shekher Nagar",
+    "postcode": "1544"
+  },
+  {
+    "id": 640,
+    "upazilla_id": 372,
+    "name": "Sirajdikhan",
+    "postcode": "1540"
+  },
+  {
+    "id": 641,
+    "upazilla_id": 371,
+    "name": "Baghra",
+    "postcode": "1557"
+  },
+  {
+    "id": 642,
+    "upazilla_id": 371,
+    "name": "Barikhal",
+    "postcode": "1551"
+  },
+  {
+    "id": 643,
+    "upazilla_id": 371,
+    "name": "Bhaggyakul",
+    "postcode": "1558"
+  },
+  {
+    "id": 644,
+    "upazilla_id": 371,
+    "name": "Hashara",
+    "postcode": "1553"
+  },
+  {
+    "id": 645,
+    "upazilla_id": 371,
+    "name": "Kolapara",
+    "postcode": "1554"
+  },
+  {
+    "id": 646,
+    "upazilla_id": 371,
+    "name": "Kumarbhog",
+    "postcode": "1555"
+  },
+  {
+    "id": 647,
+    "upazilla_id": 371,
+    "name": "Mazpara",
+    "postcode": "1552"
+  },
+  {
+    "id": 648,
+    "upazilla_id": 371,
+    "name": "Srinagar",
+    "postcode": "1550"
+  },
+  {
+    "id": 649,
+    "upazilla_id": 371,
+    "name": "Vaggyakul SO",
+    "postcode": "1556"
+  },
+  {
+    "id": 650,
+    "upazilla_id": 375,
+    "name": "Bajrajugini",
+    "postcode": "1523"
+  },
+  {
+    "id": 651,
+    "upazilla_id": 375,
+    "name": "Baligao",
+    "postcode": "1522"
+  },
+  {
+    "id": 652,
+    "upazilla_id": 375,
+    "name": "Betkahat",
+    "postcode": "1521"
+  },
+  {
+    "id": 653,
+    "upazilla_id": 375,
+    "name": "Dighirpar",
+    "postcode": "1525"
+  },
+  {
+    "id": 654,
+    "upazilla_id": 375,
+    "name": "Hasail",
+    "postcode": "1524"
+  },
+  {
+    "id": 655,
+    "upazilla_id": 375,
+    "name": "Pura",
+    "postcode": "1527"
+  },
+  {
+    "id": 656,
+    "upazilla_id": 375,
+    "name": "Pura EDSO",
+    "postcode": "1526"
+  },
+  {
+    "id": 657,
+    "upazilla_id": 375,
+    "name": "Tangibari",
+    "postcode": "1520"
+  },
+  {
+    "id": 658,
+    "upazilla_id": 464,
+    "name": "Bhaluka",
+    "postcode": "2240"
+  },
+  {
+    "id": 659,
+    "upazilla_id": 462,
+    "name": "Fulbaria",
+    "postcode": "2216"
+  },
+  {
+    "id": 660,
+    "upazilla_id": 471,
+    "name": "Duttarbazar",
+    "postcode": "2234"
+  },
+  {
+    "id": 661,
+    "upazilla_id": 471,
+    "name": "Gaforgaon",
+    "postcode": "2230"
+  },
+  {
+    "id": 662,
+    "upazilla_id": 471,
+    "name": "Kandipara",
+    "postcode": "2233"
+  },
+  {
+    "id": 663,
+    "upazilla_id": 471,
+    "name": "Shibganj",
+    "postcode": "2231"
+  },
+  {
+    "id": 664,
+    "upazilla_id": 471,
+    "name": "Usti",
+    "postcode": "2232"
+  },
+  {
+    "id": 665,
+    "upazilla_id": 470,
+    "name": "Gouripur",
+    "postcode": "2270"
+  },
+  {
+    "id": 666,
+    "upazilla_id": 470,
+    "name": "Ramgopalpur",
+    "postcode": "2271"
+  },
+  {
+    "id": 667,
+    "upazilla_id": 469,
+    "name": "Dhara",
+    "postcode": "2261"
+  },
+  {
+    "id": 668,
+    "upazilla_id": 469,
+    "name": "Haluaghat",
+    "postcode": "2260"
+  },
+  {
+    "id": 669,
+    "upazilla_id": 469,
+    "name": "Munshirhat",
+    "postcode": "2262"
+  },
+  {
+    "id": 670,
+    "upazilla_id": 472,
+    "name": "Atharabari",
+    "postcode": "2282"
+  },
+  {
+    "id": 671,
+    "upazilla_id": 472,
+    "name": "Isshwargonj",
+    "postcode": "2280"
+  },
+  {
+    "id": 672,
+    "upazilla_id": 472,
+    "name": "Sohagi",
+    "postcode": "2281"
+  },
+  {
+    "id": 673,
+    "upazilla_id": 465,
+    "name": "Muktagachha",
+    "postcode": "2210"
+  },
+  {
+    "id": 674,
+    "upazilla_id": 466,
+    "name": "Agriculture Universi",
+    "postcode": "2202"
+  },
+  {
+    "id": 675,
+    "upazilla_id": 466,
+    "name": "Biddyaganj",
+    "postcode": "2204"
+  },
+  {
+    "id": 676,
+    "upazilla_id": 466,
+    "name": "Kawatkhali",
+    "postcode": "2201"
+  },
+  {
+    "id": 677,
+    "upazilla_id": 466,
+    "name": "Mymensingh Sadar",
+    "postcode": "2200"
+  },
+  {
+    "id": 678,
+    "upazilla_id": 466,
+    "name": "Pearpur",
+    "postcode": "2205"
+  },
+  {
+    "id": 679,
+    "upazilla_id": 466,
+    "name": "Shombhuganj",
+    "postcode": "2203"
+  },
+  {
+    "id": 680,
+    "upazilla_id": 473,
+    "name": "Gangail",
+    "postcode": "2291"
+  },
+  {
+    "id": 681,
+    "upazilla_id": 473,
+    "name": "Nandail",
+    "postcode": "2290"
+  },
+  {
+    "id": 682,
+    "upazilla_id": 468,
+    "name": "Beltia",
+    "postcode": "2251"
+  },
+  {
+    "id": 683,
+    "upazilla_id": 468,
+    "name": "Phulpur",
+    "postcode": "2250"
+  },
+  {
+    "id": 684,
+    "upazilla_id": 468,
+    "name": "Tarakanda",
+    "postcode": "2252"
+  },
+  {
+    "id": 685,
+    "upazilla_id": 463,
+    "name": "Ahmadbad",
+    "postcode": "2221"
+  },
+  {
+    "id": 686,
+    "upazilla_id": 463,
+    "name": "Dhala",
+    "postcode": "2223"
+  },
+  {
+    "id": 687,
+    "upazilla_id": 463,
+    "name": "Ram Amritaganj",
+    "postcode": "2222"
+  },
+  {
+    "id": 688,
+    "upazilla_id": 463,
+    "name": "Trishal",
+    "postcode": "2220"
+  },
+  {
+    "id": 689,
+    "upazilla_id": 328,
+    "name": "Araihazar",
+    "postcode": "1450"
+  },
+  {
+    "id": 690,
+    "upazilla_id": 328,
+    "name": "Gopaldi",
+    "postcode": "1451"
+  },
+  {
+    "id": 691,
+    "upazilla_id": 328,
+    "name": "Baidder Bazar",
+    "postcode": "1440"
+  },
+  {
+    "id": 692,
+    "upazilla_id": 328,
+    "name": "Bara Nagar",
+    "postcode": "1441"
+  },
+  {
+    "id": 693,
+    "upazilla_id": 328,
+    "name": "Barodi",
+    "postcode": "1442"
+  },
+  {
+    "id": 694,
+    "upazilla_id": 329,
+    "name": "Bandar",
+    "postcode": "1410"
+  },
+  {
+    "id": 695,
+    "upazilla_id": 329,
+    "name": "BIDS",
+    "postcode": "1413"
+  },
+  {
+    "id": 696,
+    "upazilla_id": 329,
+    "name": "D.C Mills",
+    "postcode": "1411"
+  },
+  {
+    "id": 697,
+    "upazilla_id": 329,
+    "name": "Madanganj",
+    "postcode": "1414"
+  },
+  {
+    "id": 698,
+    "upazilla_id": 329,
+    "name": "Nabiganj",
+    "postcode": "1412"
+  },
+  {
+    "id": 699,
+    "upazilla_id": 330,
+    "name": "Fatulla Bazar",
+    "postcode": "1421"
+  },
+  {
+    "id": 700,
+    "upazilla_id": 330,
+    "name": "Fatullah",
+    "postcode": "1420"
+  },
+  {
+    "id": 701,
+    "upazilla_id": 330,
+    "name": "Narayanganj Sadar",
+    "postcode": "1400"
+  },
+  {
+    "id": 702,
+    "upazilla_id": 331,
+    "name": "Bhulta",
+    "postcode": "1462"
+  },
+  {
+    "id": 703,
+    "upazilla_id": 331,
+    "name": "Kanchan",
+    "postcode": "1461"
+  },
+  {
+    "id": 704,
+    "upazilla_id": 331,
+    "name": "Murapara",
+    "postcode": "1464"
+  },
+  {
+    "id": 705,
+    "upazilla_id": 331,
+    "name": "Nagri",
+    "postcode": "1463"
+  },
+  {
+    "id": 706,
+    "upazilla_id": 331,
+    "name": "Rupganj",
+    "postcode": "1460"
+  },
+  {
+    "id": 707,
+    "upazilla_id": 332,
+    "name": "Adamjeenagar",
+    "postcode": "1431"
+  },
+  {
+    "id": 708,
+    "upazilla_id": 332,
+    "name": "LN Mills",
+    "postcode": "1432"
+  },
+  {
+    "id": 709,
+    "upazilla_id": 332,
+    "name": "Siddirganj",
+    "postcode": "1430"
+  },
+  {
+    "id": 710,
+    "upazilla_id": 311,
+    "name": "Belabo",
+    "postcode": "1640"
+  },
+  {
+    "id": 711,
+    "upazilla_id": 312,
+    "name": "Hatirdia",
+    "postcode": "1651"
+  },
+  {
+    "id": 712,
+    "upazilla_id": 312,
+    "name": "Katabaria",
+    "postcode": "1652"
+  },
+  {
+    "id": 713,
+    "upazilla_id": 312,
+    "name": "Monohordi",
+    "postcode": "1650"
+  },
+  {
+    "id": 714,
+    "upazilla_id": 313,
+    "name": "Karimpur",
+    "postcode": "1605"
+  },
+  {
+    "id": 715,
+    "upazilla_id": 313,
+    "name": "Madhabdi",
+    "postcode": "1604"
+  },
+  {
+    "id": 716,
+    "upazilla_id": 313,
+    "name": "Narsingdi College",
+    "postcode": "1602"
+  },
+  {
+    "id": 717,
+    "upazilla_id": 313,
+    "name": "Narsingdi Sadar",
+    "postcode": "1600"
+  },
+  {
+    "id": 718,
+    "upazilla_id": 313,
+    "name": "Panchdona",
+    "postcode": "1603"
+  },
+  {
+    "id": 719,
+    "upazilla_id": 313,
+    "name": "UMC Jute Mills",
+    "postcode": "1601"
+  },
+  {
+    "id": 720,
+    "upazilla_id": 314,
+    "name": "Char Sindhur",
+    "postcode": "1612"
+  },
+  {
+    "id": 721,
+    "upazilla_id": 314,
+    "name": "Ghorashal",
+    "postcode": "1613"
+  },
+  {
+    "id": 722,
+    "upazilla_id": 314,
+    "name": "Ghorashal Urea Facto",
+    "postcode": "1611"
+  },
+  {
+    "id": 723,
+    "upazilla_id": 314,
+    "name": "Palash",
+    "postcode": "1610"
+  },
+  {
+    "id": 724,
+    "upazilla_id": 315,
+    "name": "Bazar Hasnabad",
+    "postcode": "1631"
+  },
+  {
+    "id": 725,
+    "upazilla_id": 315,
+    "name": "Radhaganj bazar",
+    "postcode": "1632"
+  },
+  {
+    "id": 726,
+    "upazilla_id": 315,
+    "name": "Raypura",
+    "postcode": "1630"
+  },
+  {
+    "id": 727,
+    "upazilla_id": 316,
+    "name": "Shibpur",
+    "postcode": "1620"
+  },
+  {
+    "id": 728,
+    "upazilla_id": 483,
+    "name": "Susnng Durgapur",
+    "postcode": "2420"
+  },
+  {
+    "id": 729,
+    "upazilla_id": 485,
+    "name": "Atpara",
+    "postcode": "2470"
+  },
+  {
+    "id": 730,
+    "upazilla_id": 482,
+    "name": "Barhatta",
+    "postcode": "2440"
+  },
+  {
+    "id": 731,
+    "upazilla_id": 488,
+    "name": "Dharampasha",
+    "postcode": "2450"
+  },
+  {
+    "id": 732,
+    "upazilla_id": 483,
+    "name": "Dhobaura",
+    "postcode": "2416"
+  },
+  {
+    "id": 733,
+    "upazilla_id": 483,
+    "name": "Sakoai",
+    "postcode": "2417"
+  },
+  {
+    "id": 734,
+    "upazilla_id": 488,
+    "name": "Kalmakanda",
+    "postcode": "2430"
+  },
+  {
+    "id": 735,
+    "upazilla_id": 484,
+    "name": "Kendua",
+    "postcode": "2480"
+  },
+  {
+    "id": 736,
+    "upazilla_id": 487,
+    "name": "Khaliajhri",
+    "postcode": "2460"
+  },
+  {
+    "id": 737,
+    "upazilla_id": 487,
+    "name": "Shaldigha",
+    "postcode": "2462"
+  },
+  {
+    "id": 738,
+    "upazilla_id": 486,
+    "name": "Madan",
+    "postcode": "2490"
+  },
+  {
+    "id": 739,
+    "upazilla_id": 489,
+    "name": "Moddoynagar",
+    "postcode": "2456"
+  },
+  {
+    "id": 740,
+    "upazilla_id": 489,
+    "name": "Mohanganj",
+    "postcode": "2446"
+  },
+  {
+    "id": 741,
+    "upazilla_id": 491,
+    "name": "Baikherhati",
+    "postcode": "2401"
+  },
+  {
+    "id": 742,
+    "upazilla_id": 491,
+    "name": "Netrakona Sadar",
+    "postcode": "2400"
+  },
+  {
+    "id": 743,
+    "upazilla_id": 490,
+    "name": "Jaria Jhanjhail",
+    "postcode": "2412"
+  },
+  {
+    "id": 744,
+    "upazilla_id": 490,
+    "name": "Purbadhola",
+    "postcode": "2410"
+  },
+  {
+    "id": 745,
+    "upazilla_id": 490,
+    "name": "Shamgonj",
+    "postcode": "2411"
+  },
+  {
+    "id": 746,
+    "upazilla_id": 379,
+    "name": "Baliakandi",
+    "postcode": "7730"
+  },
+  {
+    "id": 747,
+    "upazilla_id": 379,
+    "name": "Nalia",
+    "postcode": "7731"
+  },
+  {
+    "id": 748,
+    "upazilla_id": 378,
+    "name": "Mrigibazar",
+    "postcode": "7723"
+  },
+  {
+    "id": 749,
+    "upazilla_id": 378,
+    "name": "Pangsha",
+    "postcode": "7720"
+  },
+  {
+    "id": 750,
+    "upazilla_id": 378,
+    "name": "Ramkol",
+    "postcode": "7721"
+  },
+  {
+    "id": 751,
+    "upazilla_id": 378,
+    "name": "Ratandia",
+    "postcode": "7722"
+  },
+  {
+    "id": 752,
+    "upazilla_id": 376,
+    "name": "Goalanda",
+    "postcode": "7710"
+  },
+  {
+    "id": 753,
+    "upazilla_id": 376,
+    "name": "Khankhanapur",
+    "postcode": "7711"
+  },
+  {
+    "id": 754,
+    "upazilla_id": 376,
+    "name": "Rajbari Sadar",
+    "postcode": "7700"
+  },
+  {
+    "id": 755,
+    "upazilla_id": 326,
+    "name": "Bhedorganj",
+    "postcode": "8030"
+  },
+  {
+    "id": 756,
+    "upazilla_id": 327,
+    "name": "Damudhya",
+    "postcode": "8040"
+  },
+  {
+    "id": 757,
+    "upazilla_id": 325,
+    "name": "Gosairhat",
+    "postcode": "8050"
+  },
+  {
+    "id": 758,
+    "upazilla_id": 324,
+    "name": "Jajira",
+    "postcode": "8010"
+  },
+  {
+    "id": 759,
+    "upazilla_id": 323,
+    "name": "Bhozeshwar",
+    "postcode": "8021"
+  },
+  {
+    "id": 760,
+    "upazilla_id": 323,
+    "name": "Gharisar",
+    "postcode": "8022"
+  },
+  {
+    "id": 761,
+    "upazilla_id": 323,
+    "name": "Kartikpur",
+    "postcode": "8024"
+  },
+  {
+    "id": 762,
+    "upazilla_id": 323,
+    "name": "Naria",
+    "postcode": "8020"
+  },
+  {
+    "id": 763,
+    "upazilla_id": 323,
+    "name": "Upshi",
+    "postcode": "8023"
+  },
+  {
+    "id": 764,
+    "upazilla_id": 322,
+    "name": "Angaria",
+    "postcode": "8001"
+  },
+  {
+    "id": 765,
+    "upazilla_id": 322,
+    "name": "Chikandi",
+    "postcode": "8002"
+  },
+  {
+    "id": 766,
+    "upazilla_id": 322,
+    "name": "Shariatpur Sadar",
+    "postcode": "8000"
+  },
+  {
+    "id": 767,
+    "upazilla_id": 481,
+    "name": "Bakshigonj",
+    "postcode": "2140"
+  },
+  {
+    "id": 768,
+    "upazilla_id": 461,
+    "name": "Jhinaigati",
+    "postcode": "2120"
+  },
+  {
+    "id": 769,
+    "upazilla_id": 460,
+    "name": "Gonopaddi",
+    "postcode": "2151"
+  },
+  {
+    "id": 770,
+    "upazilla_id": 460,
+    "name": "Nakla",
+    "postcode": "2150"
+  },
+  {
+    "id": 771,
+    "upazilla_id": 458,
+    "name": "Hatibandha",
+    "postcode": "2111"
+  },
+  {
+    "id": 772,
+    "upazilla_id": 458,
+    "name": "Nalitabari",
+    "postcode": "2110"
+  },
+  {
+    "id": 773,
+    "upazilla_id": 457,
+    "name": "Sherpur Shadar",
+    "postcode": "2100"
+  },
+  {
+    "id": 774,
+    "upazilla_id": 459,
+    "name": "Shribardi",
+    "postcode": "2130"
+  },
+  {
+    "id": 775,
+    "upazilla_id": 333,
+    "name": "Basail",
+    "postcode": "1920"
+  },
+  {
+    "id": 776,
+    "upazilla_id": 334,
+    "name": "Bhuapur",
+    "postcode": "1960"
+  },
+  {
+    "id": 777,
+    "upazilla_id": 335,
+    "name": "Delduar",
+    "postcode": "1910"
+  },
+  {
+    "id": 778,
+    "upazilla_id": 335,
+    "name": "Elasin",
+    "postcode": "1913"
+  },
+  {
+    "id": 779,
+    "upazilla_id": 335,
+    "name": "Hinga Nagar",
+    "postcode": "1914"
+  },
+  {
+    "id": 780,
+    "upazilla_id": 335,
+    "name": "Jangalia",
+    "postcode": "1911"
+  },
+  {
+    "id": 781,
+    "upazilla_id": 335,
+    "name": "Lowhati",
+    "postcode": "1915"
+  },
+  {
+    "id": 782,
+    "upazilla_id": 335,
+    "name": "Patharail",
+    "postcode": "1912"
+  },
+  {
+    "id": 783,
+    "upazilla_id": 336,
+    "name": "D. Pakutia",
+    "postcode": "1982"
+  },
+  {
+    "id": 784,
+    "upazilla_id": 336,
+    "name": "Dhalapara",
+    "postcode": "1983"
+  },
+  {
+    "id": 785,
+    "upazilla_id": 336,
+    "name": "Ghatial",
+    "postcode": "1980"
+  },
+  {
+    "id": 786,
+    "upazilla_id": 336,
+    "name": "Lohani",
+    "postcode": "1984"
+  },
+  {
+    "id": 787,
+    "upazilla_id": 336,
+    "name": "Zahidganj",
+    "postcode": "1981"
+  },
+  {
+    "id": 788,
+    "upazilla_id": 337,
+    "name": "Gopalpur",
+    "postcode": "1990"
+  },
+  {
+    "id": 789,
+    "upazilla_id": 337,
+    "name": "Hemnagar",
+    "postcode": "1992"
+  },
+  {
+    "id": 790,
+    "upazilla_id": 337,
+    "name": "Jhowail",
+    "postcode": "1991"
+  },
+  {
+    "id": 791,
+    "upazilla_id": 343,
+    "name": "Ballabazar",
+    "postcode": "1973"
+  },
+  {
+    "id": 792,
+    "upazilla_id": 343,
+    "name": "Elinga",
+    "postcode": "1974"
+  },
+  {
+    "id": 793,
+    "upazilla_id": 343,
+    "name": "Kalihati",
+    "postcode": "1970"
+  },
+  {
+    "id": 794,
+    "upazilla_id": 343,
+    "name": "Nagarbari",
+    "postcode": "1977"
+  },
+  {
+    "id": 795,
+    "upazilla_id": 343,
+    "name": "Nagarbari SO",
+    "postcode": "1976"
+  },
+  {
+    "id": 796,
+    "upazilla_id": 343,
+    "name": "Nagbari",
+    "postcode": "1972"
+  },
+  {
+    "id": 797,
+    "upazilla_id": 343,
+    "name": "Palisha",
+    "postcode": "1975"
+  },
+  {
+    "id": 798,
+    "upazilla_id": 343,
+    "name": "Rajafair",
+    "postcode": "1971"
+  },
+  {
+    "id": 799,
+    "upazilla_id": 343,
+    "name": "Kashkawlia",
+    "postcode": "1930"
+  },
+  {
+    "id": 800,
+    "upazilla_id": 338,
+    "name": "Dhobari",
+    "postcode": "1997"
+  },
+  {
+    "id": 801,
+    "upazilla_id": 338,
+    "name": "Madhupur",
+    "postcode": "1996"
+  },
+  {
+    "id": 802,
+    "upazilla_id": 339,
+    "name": "Gorai",
+    "postcode": "1941"
+  },
+  {
+    "id": 803,
+    "upazilla_id": 339,
+    "name": "Jarmuki",
+    "postcode": "1944"
+  },
+  {
+    "id": 804,
+    "upazilla_id": 339,
+    "name": "M.C. College",
+    "postcode": "1942"
+  },
+  {
+    "id": 805,
+    "upazilla_id": 339,
+    "name": "Mirzapur",
+    "postcode": "1940"
+  },
+  {
+    "id": 806,
+    "upazilla_id": 339,
+    "name": "Mohera",
+    "postcode": "1945"
+  },
+  {
+    "id": 807,
+    "upazilla_id": 339,
+    "name": "Warri paikpara",
+    "postcode": "1943"
+  },
+  {
+    "id": 808,
+    "upazilla_id": 340,
+    "name": "Dhuburia",
+    "postcode": "1937"
+  },
+  {
+    "id": 809,
+    "upazilla_id": 340,
+    "name": "Nagarpur",
+    "postcode": "1936"
+  },
+  {
+    "id": 810,
+    "upazilla_id": 340,
+    "name": "Salimabad",
+    "postcode": "1938"
+  },
+  {
+    "id": 811,
+    "upazilla_id": 341,
+    "name": "Kochua",
+    "postcode": "1951"
+  },
+  {
+    "id": 812,
+    "upazilla_id": 341,
+    "name": "Sakhipur",
+    "postcode": "1950"
+  },
+  {
+    "id": 813,
+    "upazilla_id": 342,
+    "name": "Kagmari",
+    "postcode": "1901"
+  },
+  {
+    "id": 814,
+    "upazilla_id": 342,
+    "name": "Korotia",
+    "postcode": "1903"
+  },
+  {
+    "id": 815,
+    "upazilla_id": 342,
+    "name": "Purabari",
+    "postcode": "1904"
+  },
+  {
+    "id": 816,
+    "upazilla_id": 342,
+    "name": "Santosh",
+    "postcode": "1902"
+  },
+  {
+    "id": 817,
+    "upazilla_id": 342,
+    "name": "Tangail Sadar",
+    "postcode": "1900"
+  },
+  {
+    "id": 818,
+    "upazilla_id": 216,
+    "name": "Bagerhat Sadar",
+    "postcode": "9300"
+  },
+  {
+    "id": 819,
+    "upazilla_id": 216,
+    "name": "P.C College",
+    "postcode": "9301"
+  },
+  {
+    "id": 820,
+    "upazilla_id": 216,
+    "name": "Rangdia",
+    "postcode": "9302"
+  },
+  {
+    "id": 821,
+    "upazilla_id": 223,
+    "name": "Chalna Ankorage",
+    "postcode": "9350"
+  },
+  {
+    "id": 822,
+    "upazilla_id": 223,
+    "name": "Mongla Port",
+    "postcode": "9351"
+  },
+  {
+    "id": 823,
+    "upazilla_id": 223,
+    "name": "Barabaria",
+    "postcode": "9361"
+  },
+  {
+    "id": 824,
+    "upazilla_id": 223,
+    "name": "Chitalmari",
+    "postcode": "9360"
+  },
+  {
+    "id": 825,
+    "upazilla_id": 215,
+    "name": "Bhanganpar Bazar",
+    "postcode": "9372"
+  },
+  {
+    "id": 826,
+    "upazilla_id": 215,
+    "name": "Fakirhat",
+    "postcode": "9370"
+  },
+  {
+    "id": 827,
+    "upazilla_id": 215,
+    "name": "Mansa",
+    "postcode": "9371"
+  },
+  {
+    "id": 828,
+    "upazilla_id": 221,
+    "name": "Kachua",
+    "postcode": "9310"
+  },
+  {
+    "id": 829,
+    "upazilla_id": 221,
+    "name": "Sonarkola",
+    "postcode": "9311"
+  },
+  {
+    "id": 830,
+    "upazilla_id": 217,
+    "name": "Charkulia",
+    "postcode": "9383"
+  },
+  {
+    "id": 831,
+    "upazilla_id": 217,
+    "name": "Dariala",
+    "postcode": "9382"
+  },
+  {
+    "id": 832,
+    "upazilla_id": 217,
+    "name": "Kahalpur",
+    "postcode": "9381"
+  },
+  {
+    "id": 833,
+    "upazilla_id": 217,
+    "name": "Mollahat",
+    "postcode": "9380"
+  },
+  {
+    "id": 834,
+    "upazilla_id": 217,
+    "name": "Nagarkandi",
+    "postcode": "9384"
+  },
+  {
+    "id": 835,
+    "upazilla_id": 217,
+    "name": "Pak Gangni",
+    "postcode": "9385"
+  },
+  {
+    "id": 836,
+    "upazilla_id": 220,
+    "name": "Morelganj",
+    "postcode": "9320"
+  },
+  {
+    "id": 837,
+    "upazilla_id": 220,
+    "name": "Sannasi Bazar",
+    "postcode": "9321"
+  },
+  {
+    "id": 838,
+    "upazilla_id": 220,
+    "name": "Telisatee",
+    "postcode": "9322"
+  },
+  {
+    "id": 839,
+    "upazilla_id": 219,
+    "name": "Foylahat",
+    "postcode": "9341"
+  },
+  {
+    "id": 840,
+    "upazilla_id": 219,
+    "name": "Gourambha",
+    "postcode": "9343"
+  },
+  {
+    "id": 841,
+    "upazilla_id": 219,
+    "name": "Rampal",
+    "postcode": "9340"
+  },
+  {
+    "id": 842,
+    "upazilla_id": 219,
+    "name": "Sonatunia",
+    "postcode": "9342"
+  },
+  {
+    "id": 843,
+    "upazilla_id": 219,
+    "name": "Rayenda",
+    "postcode": "9330"
+  },
+  {
+    "id": 844,
+    "upazilla_id": 193,
+    "name": "Alamdanga",
+    "postcode": "7210"
+  },
+  {
+    "id": 845,
+    "upazilla_id": 193,
+    "name": "Hardi",
+    "postcode": "7211"
+  },
+  {
+    "id": 846,
+    "upazilla_id": 192,
+    "name": "Chuadanga Sadar",
+    "postcode": "7200"
+  },
+  {
+    "id": 847,
+    "upazilla_id": 192,
+    "name": "Munshiganj",
+    "postcode": "7201"
+  },
+  {
+    "id": 848,
+    "upazilla_id": 194,
+    "name": "Andulbaria",
+    "postcode": "7222"
+  },
+  {
+    "id": 849,
+    "upazilla_id": 194,
+    "name": "Damurhuda",
+    "postcode": "7220"
+  },
+  {
+    "id": 850,
+    "upazilla_id": 194,
+    "name": "Darshana",
+    "postcode": "7221"
+  },
+  {
+    "id": 851,
+    "upazilla_id": 193,
+    "name": "Doulatganj",
+    "postcode": "7230"
+  },
+  {
+    "id": 852,
+    "upazilla_id": 173,
+    "name": "Bagharpara",
+    "postcode": "7470"
+  },
+  {
+    "id": 853,
+    "upazilla_id": 173,
+    "name": "Gouranagar",
+    "postcode": "7471"
+  },
+  {
+    "id": 854,
+    "upazilla_id": 174,
+    "name": "Chougachha",
+    "postcode": "7410"
+  },
+  {
+    "id": 855,
+    "upazilla_id": 177,
+    "name": "Basundia",
+    "postcode": "7406"
+  },
+  {
+    "id": 856,
+    "upazilla_id": 177,
+    "name": "Chanchra",
+    "postcode": "7402"
+  },
+  {
+    "id": 857,
+    "upazilla_id": 177,
+    "name": "Churamankathi",
+    "postcode": "7407"
+  },
+  {
+    "id": 858,
+    "upazilla_id": 177,
+    "name": "Jessore Airbach",
+    "postcode": "7404"
+  },
+  {
+    "id": 859,
+    "upazilla_id": 177,
+    "name": "Jessore canttonment",
+    "postcode": "7403"
+  },
+  {
+    "id": 860,
+    "upazilla_id": 177,
+    "name": "Jessore Sadar",
+    "postcode": "7400"
+  },
+  {
+    "id": 861,
+    "upazilla_id": 177,
+    "name": "Jessore Upa-Shahar",
+    "postcode": "7401"
+  },
+  {
+    "id": 862,
+    "upazilla_id": 177,
+    "name": "Rupdia",
+    "postcode": "7405"
+  },
+  {
+    "id": 863,
+    "upazilla_id": 175,
+    "name": "Jhikargachha",
+    "postcode": "7420"
+  },
+  {
+    "id": 864,
+    "upazilla_id": 176,
+    "name": "Keshobpur",
+    "postcode": "7450"
+  },
+  {
+    "id": 865,
+    "upazilla_id": 171,
+    "name": "Monirampur",
+    "postcode": "7440"
+  },
+  {
+    "id": 866,
+    "upazilla_id": 173,
+    "name": "Bhugilhat",
+    "postcode": "7462"
+  },
+  {
+    "id": 867,
+    "upazilla_id": 173,
+    "name": "Noapara",
+    "postcode": "7460"
+  },
+  {
+    "id": 868,
+    "upazilla_id": 173,
+    "name": "Rajghat",
+    "postcode": "7461"
+  },
+  {
+    "id": 869,
+    "upazilla_id": 178,
+    "name": "Bag Achra",
+    "postcode": "7433"
+  },
+  {
+    "id": 870,
+    "upazilla_id": 178,
+    "name": "Benapole",
+    "postcode": "7431"
+  },
+  {
+    "id": 871,
+    "upazilla_id": 178,
+    "name": "Jadabpur",
+    "postcode": "7432"
+  },
+  {
+    "id": 872,
+    "upazilla_id": 178,
+    "name": "Sarsa",
+    "postcode": "7430"
+  },
+  {
+    "id": 873,
+    "upazilla_id": 226,
+    "name": "Harinakundu",
+    "postcode": "7310"
+  },
+  {
+    "id": 874,
+    "upazilla_id": 224,
+    "name": "Jinaidaha Cadet College",
+    "postcode": "7301"
+  },
+  {
+    "id": 875,
+    "upazilla_id": 224,
+    "name": "Jinaidaha Sadar",
+    "postcode": "7300"
+  },
+  {
+    "id": 876,
+    "upazilla_id": 228,
+    "name": "Kotchandpur",
+    "postcode": "7330"
+  },
+  {
+    "id": 877,
+    "upazilla_id": 229,
+    "name": "Maheshpur",
+    "postcode": "7340"
+  },
+  {
+    "id": 878,
+    "upazilla_id": 227,
+    "name": "Hatbar Bazar",
+    "postcode": "7351"
+  },
+  {
+    "id": 879,
+    "upazilla_id": 227,
+    "name": "Naldanga",
+    "postcode": "7350"
+  },
+  {
+    "id": 880,
+    "upazilla_id": 225,
+    "name": "Kumiradaha",
+    "postcode": "7321"
+  },
+  {
+    "id": 881,
+    "upazilla_id": 225,
+    "name": "Shailakupa",
+    "postcode": "7320"
+  },
+  {
+    "id": 882,
+    "upazilla_id": 209,
+    "name": "Alaipur",
+    "postcode": "9240"
+  },
+  {
+    "id": 883,
+    "upazilla_id": 209,
+    "name": "Belphulia",
+    "postcode": "9242"
+  },
+  {
+    "id": 884,
+    "upazilla_id": 209,
+    "name": "Rupsha",
+    "postcode": "9241"
+  },
+  {
+    "id": 885,
+    "upazilla_id": 212,
+    "name": "Batiaghat",
+    "postcode": "9260"
+  },
+  {
+    "id": 886,
+    "upazilla_id": 212,
+    "name": "Surkalee",
+    "postcode": "9261"
+  },
+  {
+    "id": 887,
+    "upazilla_id": 213,
+    "name": "Bajua",
+    "postcode": "9272"
+  },
+  {
+    "id": 888,
+    "upazilla_id": 213,
+    "name": "Chalna Bazar",
+    "postcode": "9270"
+  },
+  {
+    "id": 889,
+    "upazilla_id": 213,
+    "name": "Dakup",
+    "postcode": "9271"
+  },
+  {
+    "id": 890,
+    "upazilla_id": 213,
+    "name": "Nalian",
+    "postcode": "9273"
+  },
+  {
+    "id": 891,
+    "upazilla_id": 208,
+    "name": "Chandni Mahal",
+    "postcode": "9221"
+  },
+  {
+    "id": 892,
+    "upazilla_id": 208,
+    "name": "Digalia",
+    "postcode": "9220"
+  },
+  {
+    "id": 893,
+    "upazilla_id": 208,
+    "name": "Gazirhat",
+    "postcode": "9224"
+  },
+  {
+    "id": 894,
+    "upazilla_id": 208,
+    "name": "Ghoshghati",
+    "postcode": "9223"
+  },
+  {
+    "id": 895,
+    "upazilla_id": 208,
+    "name": "Senhati",
+    "postcode": "9222"
+  },
+  {
+    "id": 896,
+    "upazilla_id": 206,
+    "name": "Amadee",
+    "postcode": "9291"
+  },
+  {
+    "id": 897,
+    "upazilla_id": 206,
+    "name": "Madinabad",
+    "postcode": "9290"
+  },
+  {
+    "id": 898,
+    "upazilla_id": 206,
+    "name": "Chandkhali",
+    "postcode": "9284"
+  },
+  {
+    "id": 899,
+    "upazilla_id": 206,
+    "name": "Garaikhali",
+    "postcode": "9285"
+  },
+  {
+    "id": 900,
+    "upazilla_id": 206,
+    "name": "Godaipur",
+    "postcode": "9281"
+  },
+  {
+    "id": 901,
+    "upazilla_id": 206,
+    "name": "Kapilmoni",
+    "postcode": "9282"
+  },
+  {
+    "id": 902,
+    "upazilla_id": 206,
+    "name": "Katipara",
+    "postcode": "9283"
+  },
+  {
+    "id": 903,
+    "upazilla_id": 206,
+    "name": "Paikgachha",
+    "postcode": "9280"
+  },
+  {
+    "id": 904,
+    "upazilla_id": 207,
+    "name": "Phultala",
+    "postcode": "9210"
+  },
+  {
+    "id": 905,
+    "upazilla_id": 206,
+    "name": "Chuknagar",
+    "postcode": "9252"
+  },
+  {
+    "id": 906,
+    "upazilla_id": 206,
+    "name": "Ghonabanda",
+    "postcode": "9251"
+  },
+  {
+    "id": 907,
+    "upazilla_id": 206,
+    "name": "Sajiara",
+    "postcode": "9250"
+  },
+  {
+    "id": 908,
+    "upazilla_id": 206,
+    "name": "Shahapur",
+    "postcode": "9253"
+  },
+  {
+    "id": 909,
+    "upazilla_id": 210,
+    "name": "Pak Barasat",
+    "postcode": "9231"
+  },
+  {
+    "id": 910,
+    "upazilla_id": 210,
+    "name": "Terakhada",
+    "postcode": "9230"
+  },
+  {
+    "id": 911,
+    "upazilla_id": 201,
+    "name": "Allardarga",
+    "postcode": "7042"
+  },
+  {
+    "id": 912,
+    "upazilla_id": 201,
+    "name": "Bheramara",
+    "postcode": "7040"
+  },
+  {
+    "id": 913,
+    "upazilla_id": 201,
+    "name": "Ganges Bheramara",
+    "postcode": "7041"
+  },
+  {
+    "id": 914,
+    "upazilla_id": 199,
+    "name": "Janipur",
+    "postcode": "7020"
+  },
+  {
+    "id": 915,
+    "upazilla_id": 199,
+    "name": "Khoksa",
+    "postcode": "7021"
+  },
+  {
+    "id": 916,
+    "upazilla_id": 197,
+    "name": "Kumarkhali",
+    "postcode": "7010"
+  },
+  {
+    "id": 917,
+    "upazilla_id": 197,
+    "name": "Panti",
+    "postcode": "7011"
+  },
+  {
+    "id": 918,
+    "upazilla_id": 196,
+    "name": "Islami University",
+    "postcode": "7003"
+  },
+  {
+    "id": 919,
+    "upazilla_id": 196,
+    "name": "Jagati",
+    "postcode": "7002"
+  },
+  {
+    "id": 920,
+    "upazilla_id": 196,
+    "name": "Kushtia Mohini",
+    "postcode": "7001"
+  },
+  {
+    "id": 921,
+    "upazilla_id": 196,
+    "name": "Kustia Sadar",
+    "postcode": "7000"
+  },
+  {
+    "id": 922,
+    "upazilla_id": 199,
+    "name": "Amla Sadarpur",
+    "postcode": "7032"
+  },
+  {
+    "id": 923,
+    "upazilla_id": 199,
+    "name": "Mirpur",
+    "postcode": "7030"
+  },
+  {
+    "id": 924,
+    "upazilla_id": 199,
+    "name": "Poradaha",
+    "postcode": "7031"
+  },
+  {
+    "id": 925,
+    "upazilla_id": 200,
+    "name": "Khasmathurapur",
+    "postcode": "7052"
+  },
+  {
+    "id": 926,
+    "upazilla_id": 200,
+    "name": "Rafayetpur",
+    "postcode": "7050"
+  },
+  {
+    "id": 927,
+    "upazilla_id": 200,
+    "name": "Taragunia",
+    "postcode": "7051"
+  },
+  {
+    "id": 928,
+    "upazilla_id": 203,
+    "name": "Arpara",
+    "postcode": "7620"
+  },
+  {
+    "id": 929,
+    "upazilla_id": 204,
+    "name": "Magura Sadar",
+    "postcode": "7600"
+  },
+  {
+    "id": 930,
+    "upazilla_id": 205,
+    "name": "Binodpur",
+    "postcode": "7631"
+  },
+  {
+    "id": 931,
+    "upazilla_id": 205,
+    "name": "Mohammadpur",
+    "postcode": "7630"
+  },
+  {
+    "id": 932,
+    "upazilla_id": 205,
+    "name": "Nahata",
+    "postcode": "7632"
+  },
+  {
+    "id": 933,
+    "upazilla_id": 203,
+    "name": "Langalbadh",
+    "postcode": "7611"
+  },
+  {
+    "id": 934,
+    "upazilla_id": 203,
+    "name": "Nachol",
+    "postcode": "7612"
+  },
+  {
+    "id": 935,
+    "upazilla_id": 203,
+    "name": "Shripur",
+    "postcode": "7610"
+  },
+  {
+    "id": 936,
+    "upazilla_id": 188,
+    "name": "Gangni",
+    "postcode": "7110"
+  },
+  {
+    "id": 937,
+    "upazilla_id": 187,
+    "name": "Amjhupi",
+    "postcode": "7101"
+  },
+  {
+    "id": 938,
+    "upazilla_id": 187,
+    "name": "Amjhupi",
+    "postcode": "7152"
+  },
+  {
+    "id": 939,
+    "upazilla_id": 187,
+    "name": "Meherpur Sadar",
+    "postcode": "7100"
+  },
+  {
+    "id": 940,
+    "upazilla_id": 187,
+    "name": "Mujib Nagar Complex",
+    "postcode": "7102"
+  },
+  {
+    "id": 941,
+    "upazilla_id": 191,
+    "name": "Kalia",
+    "postcode": "7520"
+  },
+  {
+    "id": 942,
+    "upazilla_id": 191,
+    "name": "Baradia",
+    "postcode": "7514"
+  },
+  {
+    "id": 943,
+    "upazilla_id": 191,
+    "name": "Itna",
+    "postcode": "7512"
+  },
+  {
+    "id": 944,
+    "upazilla_id": 191,
+    "name": "Laxmipasha",
+    "postcode": "7510"
+  },
+  {
+    "id": 945,
+    "upazilla_id": 191,
+    "name": "Lohagora",
+    "postcode": "7511"
+  },
+  {
+    "id": 946,
+    "upazilla_id": 191,
+    "name": "Naldi",
+    "postcode": "7513"
+  },
+  {
+    "id": 947,
+    "upazilla_id": 190,
+    "name": "Mohajan",
+    "postcode": "7521"
+  },
+  {
+    "id": 948,
+    "upazilla_id": 189,
+    "name": "Narail Sadar",
+    "postcode": "7500"
+  },
+  {
+    "id": 949,
+    "upazilla_id": 189,
+    "name": "Ratanganj",
+    "postcode": "7501"
+  },
+  {
+    "id": 950,
+    "upazilla_id": 179,
+    "name": "Ashashuni",
+    "postcode": "9460"
+  },
+  {
+    "id": 951,
+    "upazilla_id": 179,
+    "name": "Baradal",
+    "postcode": "9461"
+  },
+  {
+    "id": 952,
+    "upazilla_id": 180,
+    "name": "Debbhata",
+    "postcode": "9430"
+  },
+  {
+    "id": 953,
+    "upazilla_id": 180,
+    "name": "Gurugram",
+    "postcode": "9431"
+  },
+  {
+    "id": 954,
+    "upazilla_id": 181,
+    "name": "Chandanpur",
+    "postcode": "9415"
+  },
+  {
+    "id": 955,
+    "upazilla_id": 181,
+    "name": "Hamidpur",
+    "postcode": "9413"
+  },
+  {
+    "id": 956,
+    "upazilla_id": 181,
+    "name": "Jhaudanga",
+    "postcode": "9412"
+  },
+  {
+    "id": 957,
+    "upazilla_id": 181,
+    "name": "kalaroa",
+    "postcode": "9410"
+  },
+  {
+    "id": 958,
+    "upazilla_id": 181,
+    "name": "Khordo",
+    "postcode": "9414"
+  },
+  {
+    "id": 959,
+    "upazilla_id": 181,
+    "name": "Murarikati",
+    "postcode": "9411"
+  },
+  {
+    "id": 960,
+    "upazilla_id": 185,
+    "name": "Kaliganj UPO",
+    "postcode": "9440"
+  },
+  {
+    "id": 961,
+    "upazilla_id": 185,
+    "name": "Nalta Mubaroknagar",
+    "postcode": "9441"
+  },
+  {
+    "id": 962,
+    "upazilla_id": 185,
+    "name": "Ratanpur",
+    "postcode": "9442"
+  },
+  {
+    "id": 963,
+    "upazilla_id": 183,
+    "name": "Buri Goalini",
+    "postcode": "9453"
+  },
+  {
+    "id": 964,
+    "upazilla_id": 183,
+    "name": "Gabura",
+    "postcode": "9454"
+  },
+  {
+    "id": 965,
+    "upazilla_id": 183,
+    "name": "Habinagar",
+    "postcode": "9455"
+  },
+  {
+    "id": 966,
+    "upazilla_id": 183,
+    "name": "Nakipur",
+    "postcode": "9450"
+  },
+  {
+    "id": 967,
+    "upazilla_id": 183,
+    "name": "Naobeki",
+    "postcode": "9452"
+  },
+  {
+    "id": 968,
+    "upazilla_id": 183,
+    "name": "Noornagar",
+    "postcode": "9451"
+  },
+  {
+    "id": 969,
+    "upazilla_id": 182,
+    "name": "Budhhat",
+    "postcode": "9403"
+  },
+  {
+    "id": 970,
+    "upazilla_id": 182,
+    "name": "Gunakar kati",
+    "postcode": "9402"
+  },
+  {
+    "id": 971,
+    "upazilla_id": 182,
+    "name": "Satkhira Islamia Acc",
+    "postcode": "9401"
+  },
+  {
+    "id": 972,
+    "upazilla_id": 182,
+    "name": "Satkhira Sadar",
+    "postcode": "9400"
+  },
+  {
+    "id": 973,
+    "upazilla_id": 184,
+    "name": "Patkelghata",
+    "postcode": "9421"
+  },
+  {
+    "id": 974,
+    "upazilla_id": 184,
+    "name": "Taala",
+    "postcode": "9420"
+  },
+  {
+    "id": 975,
+    "upazilla_id": 127,
+    "name": "Adamdighi",
+    "postcode": "5890"
+  },
+  {
+    "id": 976,
+    "upazilla_id": 127,
+    "name": "Nasharatpur",
+    "postcode": "5892"
+  },
+  {
+    "id": 977,
+    "upazilla_id": 127,
+    "name": "Santahar",
+    "postcode": "5891"
+  },
+  {
+    "id": 978,
+    "upazilla_id": 123,
+    "name": "Bogra Canttonment",
+    "postcode": "5801"
+  },
+  {
+    "id": 979,
+    "upazilla_id": 123,
+    "name": "Bogra Sadar",
+    "postcode": "5800"
+  },
+  {
+    "id": 980,
+    "upazilla_id": 130,
+    "name": "Dhunat",
+    "postcode": "5850"
+  },
+  {
+    "id": 981,
+    "upazilla_id": 130,
+    "name": "Gosaibari",
+    "postcode": "5851"
+  },
+  {
+    "id": 982,
+    "upazilla_id": 126,
+    "name": "Dupchachia",
+    "postcode": "5880"
+  },
+  {
+    "id": 983,
+    "upazilla_id": 126,
+    "name": "Talora",
+    "postcode": "5881"
+  },
+  {
+    "id": 984,
+    "upazilla_id": 131,
+    "name": "Gabtoli",
+    "postcode": "5820"
+  },
+  {
+    "id": 985,
+    "upazilla_id": 131,
+    "name": "Sukhanpukur",
+    "postcode": "5821"
+  },
+  {
+    "id": 986,
+    "upazilla_id": 122,
+    "name": "Kahalu",
+    "postcode": "5870"
+  },
+  {
+    "id": 987,
+    "upazilla_id": 128,
+    "name": "Nandigram",
+    "postcode": "5860"
+  },
+  {
+    "id": 988,
+    "upazilla_id": 124,
+    "name": "Chandan Baisha",
+    "postcode": "5831"
+  },
+  {
+    "id": 989,
+    "upazilla_id": 124,
+    "name": "Sariakandi",
+    "postcode": "5830"
+  },
+  {
+    "id": 990,
+    "upazilla_id": 132,
+    "name": "Chandaikona",
+    "postcode": "5841"
+  },
+  {
+    "id": 991,
+    "upazilla_id": 132,
+    "name": "Palli Unnyan Accadem",
+    "postcode": "5842"
+  },
+  {
+    "id": 992,
+    "upazilla_id": 132,
+    "name": "Sherpur",
+    "postcode": "5840"
+  },
+  {
+    "id": 993,
+    "upazilla_id": 133,
+    "name": "Shibganj",
+    "postcode": "5810"
+  },
+  {
+    "id": 994,
+    "upazilla_id": 129,
+    "name": "Sonatola",
+    "postcode": "5826"
+  },
+  {
+    "id": 995,
+    "upazilla_id": 158,
+    "name": "Bholahat",
+    "postcode": "6330"
+  },
+  {
+    "id": 996,
+    "upazilla_id": 155,
+    "name": "Amnura",
+    "postcode": "6303"
+  },
+  {
+    "id": 997,
+    "upazilla_id": 155,
+    "name": "Chapinawbganj Sadar",
+    "postcode": "6300"
+  },
+  {
+    "id": 998,
+    "upazilla_id": 155,
+    "name": "Rajarampur",
+    "postcode": "6301"
+  },
+  {
+    "id": 999,
+    "upazilla_id": 155,
+    "name": "Ramchandrapur",
+    "postcode": "6302"
+  },
+  {
+    "id": 1000,
+    "upazilla_id": 157,
+    "name": "Mandumala",
+    "postcode": "6311"
+  },
+  {
+    "id": 1001,
+    "upazilla_id": 157,
+    "name": "Nachol",
+    "postcode": "6310"
+  },
+  {
+    "id": 1002,
+    "upazilla_id": 156,
+    "name": "Gomashtapur",
+    "postcode": "6321"
+  },
+  {
+    "id": 1003,
+    "upazilla_id": 156,
+    "name": "Rohanpur",
+    "postcode": "6320"
+  },
+  {
+    "id": 1004,
+    "upazilla_id": 159,
+    "name": "Kansart",
+    "postcode": "6341"
+  },
+  {
+    "id": 1005,
+    "upazilla_id": 159,
+    "name": "Manaksha",
+    "postcode": "6342"
+  },
+  {
+    "id": 1006,
+    "upazilla_id": 159,
+    "name": "Shibganj U.P.O",
+    "postcode": "6340"
+  },
+  {
+    "id": 1007,
+    "upazilla_id": 150,
+    "name": "Akklepur",
+    "postcode": "5940"
+  },
+  {
+    "id": 1008,
+    "upazilla_id": 150,
+    "name": "jamalganj",
+    "postcode": "5941"
+  },
+  {
+    "id": 1009,
+    "upazilla_id": 150,
+    "name": "Tilakpur",
+    "postcode": "5942"
+  },
+  {
+    "id": 1010,
+    "upazilla_id": 154,
+    "name": "Joypurhat Sadar",
+    "postcode": "5900"
+  },
+  {
+    "id": 1011,
+    "upazilla_id": 151,
+    "name": "kalai",
+    "postcode": "5930"
+  },
+  {
+    "id": 1012,
+    "upazilla_id": 152,
+    "name": "Khetlal",
+    "postcode": "5920"
+  },
+  {
+    "id": 1013,
+    "upazilla_id": 153,
+    "name": "Panchbibi",
+    "postcode": "5910"
+  },
+  {
+    "id": 1014,
+    "upazilla_id": 167,
+    "name": "Ahsanganj",
+    "postcode": "6596"
+  },
+  {
+    "id": 1015,
+    "upazilla_id": 167,
+    "name": "Bandai",
+    "postcode": "6597"
+  },
+  {
+    "id": 1016,
+    "upazilla_id": 161,
+    "name": "Badalgachhi",
+    "postcode": "6570"
+  },
+  {
+    "id": 1017,
+    "upazilla_id": 163,
+    "name": "Dhamuirhat",
+    "postcode": "6580"
+  },
+  {
+    "id": 1018,
+    "upazilla_id": 160,
+    "name": "Mahadebpur",
+    "postcode": "6530"
+  },
+  {
+    "id": 1019,
+    "upazilla_id": 168,
+    "name": "Naogaon Sadar",
+    "postcode": "6500"
+  },
+  {
+    "id": 1020,
+    "upazilla_id": 164,
+    "name": "Niamatpur",
+    "postcode": "6520"
+  },
+  {
+    "id": 1021,
+    "upazilla_id": 164,
+    "name": "Nitpur",
+    "postcode": "6550"
+  },
+  {
+    "id": 1022,
+    "upazilla_id": 164,
+    "name": "Panguria",
+    "postcode": "6552"
+  },
+  {
+    "id": 1023,
+    "upazilla_id": 164,
+    "name": "Porsa",
+    "postcode": "6551"
+  },
+  {
+    "id": 1024,
+    "upazilla_id": 162,
+    "name": "Patnitala",
+    "postcode": "6540"
+  },
+  {
+    "id": 1025,
+    "upazilla_id": 164,
+    "name": "Balihar",
+    "postcode": "6512"
+  },
+  {
+    "id": 1026,
+    "upazilla_id": 164,
+    "name": "Manda",
+    "postcode": "6511"
+  },
+  {
+    "id": 1027,
+    "upazilla_id": 164,
+    "name": "Prasadpur",
+    "postcode": "6510"
+  },
+  {
+    "id": 1028,
+    "upazilla_id": 167,
+    "name": "Kashimpur",
+    "postcode": "6591"
+  },
+  {
+    "id": 1029,
+    "upazilla_id": 167,
+    "name": "Raninagar",
+    "postcode": "6590"
+  },
+  {
+    "id": 1030,
+    "upazilla_id": 170,
+    "name": "Moduhil",
+    "postcode": "6561"
+  },
+  {
+    "id": 1031,
+    "upazilla_id": 170,
+    "name": "Sapahar",
+    "postcode": "6560"
+  },
+  {
+    "id": 1032,
+    "upazilla_id": 147,
+    "name": "Abdulpur",
+    "postcode": "6422"
+  },
+  {
+    "id": 1033,
+    "upazilla_id": 147,
+    "name": "Gopalpur U.P.O",
+    "postcode": "6420"
+  },
+  {
+    "id": 1034,
+    "upazilla_id": 147,
+    "name": "Lalpur S.O",
+    "postcode": "6421"
+  },
+  {
+    "id": 1035,
+    "upazilla_id": 145,
+    "name": "Baraigram",
+    "postcode": "6432"
+  },
+  {
+    "id": 1036,
+    "upazilla_id": 145,
+    "name": "Dayarampur",
+    "postcode": "6431"
+  },
+  {
+    "id": 1037,
+    "upazilla_id": 145,
+    "name": "Harua",
+    "postcode": "6430"
+  },
+  {
+    "id": 1038,
+    "upazilla_id": 148,
+    "name": "Hatgurudaspur",
+    "postcode": "6440"
+  },
+  {
+    "id": 1039,
+    "upazilla_id": 149,
+    "name": "Laxman",
+    "postcode": "6410"
+  },
+  {
+    "id": 1040,
+    "upazilla_id": 143,
+    "name": "Baiddyabal Gharia",
+    "postcode": "6402"
+  },
+  {
+    "id": 1041,
+    "upazilla_id": 143,
+    "name": "Digapatia",
+    "postcode": "6401"
+  },
+  {
+    "id": 1042,
+    "upazilla_id": 143,
+    "name": "Madhnagar",
+    "postcode": "6403"
+  },
+  {
+    "id": 1043,
+    "upazilla_id": 143,
+    "name": "Natore Sadar",
+    "postcode": "6400"
+  },
+  {
+    "id": 1044,
+    "upazilla_id": 144,
+    "name": "Singra",
+    "postcode": "6450"
+  },
+  {
+    "id": 1045,
+    "upazilla_id": 113,
+    "name": "Banwarinagar",
+    "postcode": "6650"
+  },
+  {
+    "id": 1046,
+    "upazilla_id": 117,
+    "name": "Bera",
+    "postcode": "6680"
+  },
+  {
+    "id": 1047,
+    "upazilla_id": 117,
+    "name": "Kashinathpur",
+    "postcode": "6682"
+  },
+  {
+    "id": 1048,
+    "upazilla_id": 117,
+    "name": "Nakalia",
+    "postcode": "6681"
+  },
+  {
+    "id": 1049,
+    "upazilla_id": 117,
+    "name": "Puran Bharenga",
+    "postcode": "6683"
+  },
+  {
+    "id": 1050,
+    "upazilla_id": 115,
+    "name": "Bhangura",
+    "postcode": "6640"
+  },
+  {
+    "id": 1051,
+    "upazilla_id": 119,
+    "name": "Chatmohar",
+    "postcode": "6630"
+  },
+  {
+    "id": 1052,
+    "upazilla_id": 118,
+    "name": "Debottar",
+    "postcode": "6610"
+  },
+  {
+    "id": 1053,
+    "upazilla_id": 114,
+    "name": "Dhapari",
+    "postcode": "6621"
+  },
+  {
+    "id": 1054,
+    "upazilla_id": 114,
+    "name": "Ishwardi",
+    "postcode": "6620"
+  },
+  {
+    "id": 1055,
+    "upazilla_id": 114,
+    "name": "Pakshi",
+    "postcode": "6622"
+  },
+  {
+    "id": 1056,
+    "upazilla_id": 114,
+    "name": "Rajapur",
+    "postcode": "6623"
+  },
+  {
+    "id": 1057,
+    "upazilla_id": 116,
+    "name": "Hamayetpur",
+    "postcode": "6602"
+  },
+  {
+    "id": 1058,
+    "upazilla_id": 116,
+    "name": "Kaliko Cotton Mills",
+    "postcode": "6601"
+  },
+  {
+    "id": 1059,
+    "upazilla_id": 116,
+    "name": "Pabna Sadar",
+    "postcode": "6600"
+  },
+  {
+    "id": 1060,
+    "upazilla_id": 120,
+    "name": "Sathia",
+    "postcode": "6670"
+  },
+  {
+    "id": 1061,
+    "upazilla_id": 113,
+    "name": "Sagarkandi",
+    "postcode": "6661"
+  },
+  {
+    "id": 1062,
+    "upazilla_id": 113,
+    "name": "Sujanagar",
+    "postcode": "6660"
+  },
+  {
+    "id": 1063,
+    "upazilla_id": 139,
+    "name": "Arani",
+    "postcode": "6281"
+  },
+  {
+    "id": 1064,
+    "upazilla_id": 139,
+    "name": "Bagha",
+    "postcode": "6280"
+  },
+  {
+    "id": 1065,
+    "upazilla_id": 142,
+    "name": "Bhabaniganj",
+    "postcode": "6250"
+  },
+  {
+    "id": 1066,
+    "upazilla_id": 142,
+    "name": "Taharpur",
+    "postcode": "6251"
+  },
+  {
+    "id": 1067,
+    "upazilla_id": 137,
+    "name": "Charghat",
+    "postcode": "6270"
+  },
+  {
+    "id": 1068,
+    "upazilla_id": 137,
+    "name": "Sarda",
+    "postcode": "6271"
+  },
+  {
+    "id": 1069,
+    "upazilla_id": 135,
+    "name": "Durgapur",
+    "postcode": "6240"
+  },
+  {
+    "id": 1070,
+    "upazilla_id": 140,
+    "name": "Godagari",
+    "postcode": "6290"
+  },
+  {
+    "id": 1071,
+    "upazilla_id": 140,
+    "name": "Premtoli",
+    "postcode": "6291"
+  },
+  {
+    "id": 1072,
+    "upazilla_id": 136,
+    "name": "Khodmohanpur",
+    "postcode": "6220"
+  },
+  {
+    "id": 1073,
+    "upazilla_id": 139,
+    "name": "Lalitganj",
+    "postcode": "6210"
+  },
+  {
+    "id": 1074,
+    "upazilla_id": 139,
+    "name": "Rajshahi Sugar Mills",
+    "postcode": "6211"
+  },
+  {
+    "id": 1075,
+    "upazilla_id": 139,
+    "name": "Shyampur",
+    "postcode": "6212"
+  },
+  {
+    "id": 1076,
+    "upazilla_id": 138,
+    "name": "Putia",
+    "postcode": "6260"
+  },
+  {
+    "id": 1077,
+    "upazilla_id": 134,
+    "name": "Binodpur Bazar",
+    "postcode": "6206"
+  },
+  {
+    "id": 1078,
+    "upazilla_id": 134,
+    "name": "Ghuramara",
+    "postcode": "6100"
+  },
+  {
+    "id": 1079,
+    "upazilla_id": 134,
+    "name": "Kazla",
+    "postcode": "6204"
+  },
+  {
+    "id": 1080,
+    "upazilla_id": 134,
+    "name": "Rajshahi Canttonment",
+    "postcode": "6202"
+  },
+  {
+    "id": 1081,
+    "upazilla_id": 134,
+    "name": "Rajshahi Court",
+    "postcode": "6201"
+  },
+  {
+    "id": 1082,
+    "upazilla_id": 134,
+    "name": "Rajshahi Sadar",
+    "postcode": "6000"
+  },
+  {
+    "id": 1083,
+    "upazilla_id": 134,
+    "name": "Rajshahi University",
+    "postcode": "6205"
+  },
+  {
+    "id": 1084,
+    "upazilla_id": 134,
+    "name": "Sapura",
+    "postcode": "6203"
+  },
+  {
+    "id": 1085,
+    "upazilla_id": 141,
+    "name": "Tanor",
+    "postcode": "6230"
+  },
+  {
+    "id": 1086,
+    "upazilla_id": 106,
+    "name": "Baiddya Jam Toil",
+    "postcode": "6730"
+  },
+  {
+    "id": 1087,
+    "upazilla_id": 104,
+    "name": "Belkuchi",
+    "postcode": "6740"
+  },
+  {
+    "id": 1088,
+    "upazilla_id": 104,
+    "name": "Enayetpur",
+    "postcode": "6751"
+  },
+  {
+    "id": 1089,
+    "upazilla_id": 104,
+    "name": "Rajapur",
+    "postcode": "6742"
+  },
+  {
+    "id": 1090,
+    "upazilla_id": 104,
+    "name": "Sohagpur",
+    "postcode": "6741"
+  },
+  {
+    "id": 1091,
+    "upazilla_id": 104,
+    "name": "Sthal",
+    "postcode": "6752"
+  },
+  {
+    "id": 1092,
+    "upazilla_id": 111,
+    "name": "Dhangora",
+    "postcode": "6720"
+  },
+  {
+    "id": 1093,
+    "upazilla_id": 111,
+    "name": "Malonga",
+    "postcode": "6721"
+  },
+  {
+    "id": 1094,
+    "upazilla_id": 107,
+    "name": "Gandail",
+    "postcode": "6712"
+  },
+  {
+    "id": 1095,
+    "upazilla_id": 107,
+    "name": "Kazipur",
+    "postcode": "6710"
+  },
+  {
+    "id": 1096,
+    "upazilla_id": 107,
+    "name": "Shuvgachha",
+    "postcode": "6711"
+  },
+  {
+    "id": 1097,
+    "upazilla_id": 109,
+    "name": "Jamirta",
+    "postcode": "6772"
+  },
+  {
+    "id": 1098,
+    "upazilla_id": 109,
+    "name": "Kaijuri",
+    "postcode": "6773"
+  },
+  {
+    "id": 1099,
+    "upazilla_id": 109,
+    "name": "Porjana",
+    "postcode": "6771"
+  },
+  {
+    "id": 1100,
+    "upazilla_id": 109,
+    "name": "Shahjadpur",
+    "postcode": "6770"
+  },
+  {
+    "id": 1101,
+    "upazilla_id": 110,
+    "name": "Raipur",
+    "postcode": "6701"
+  },
+  {
+    "id": 1102,
+    "upazilla_id": 110,
+    "name": "Rashidabad",
+    "postcode": "6702"
+  },
+  {
+    "id": 1103,
+    "upazilla_id": 110,
+    "name": "Sirajganj Sadar",
+    "postcode": "6700"
+  },
+  {
+    "id": 1104,
+    "upazilla_id": 111,
+    "name": "Tarash",
+    "postcode": "6780"
+  },
+  {
+    "id": 1105,
+    "upazilla_id": 112,
+    "name": "Lahiri Mohanpur",
+    "postcode": "6762"
+  },
+  {
+    "id": 1106,
+    "upazilla_id": 112,
+    "name": "Salap",
+    "postcode": "6763"
+  },
+  {
+    "id": 1107,
+    "upazilla_id": 112,
+    "name": "Ullapara",
+    "postcode": "6760"
+  },
+  {
+    "id": 1108,
+    "upazilla_id": 112,
+    "name": "Ullapara R.S",
+    "postcode": "6761"
+  },
+  {
+    "id": 1109,
+    "upazilla_id": 413,
+    "name": "Bangla Hili",
+    "postcode": "5270"
+  },
+  {
+    "id": 1110,
+    "upazilla_id": 415,
+    "name": "Biral",
+    "postcode": "5210"
+  },
+  {
+    "id": 1111,
+    "upazilla_id": 407,
+    "name": "Birampur",
+    "postcode": "5266"
+  },
+  {
+    "id": 1112,
+    "upazilla_id": 405,
+    "name": "Birganj",
+    "postcode": "5220"
+  },
+  {
+    "id": 1113,
+    "upazilla_id": 416,
+    "name": "Chrirbandar",
+    "postcode": "5240"
+  },
+  {
+    "id": 1114,
+    "upazilla_id": 416,
+    "name": "Ranirbandar",
+    "postcode": "5241"
+  },
+  {
+    "id": 1115,
+    "upazilla_id": 412,
+    "name": "Dinajpur Rajbari",
+    "postcode": "5201"
+  },
+  {
+    "id": 1116,
+    "upazilla_id": 412,
+    "name": "Dinajpur Sadar",
+    "postcode": "5200"
+  },
+  {
+    "id": 1117,
+    "upazilla_id": 414,
+    "name": "Khansama",
+    "postcode": "5230"
+  },
+  {
+    "id": 1118,
+    "upazilla_id": 414,
+    "name": "Pakarhat",
+    "postcode": "5231"
+  },
+  {
+    "id": 1119,
+    "upazilla_id": 404,
+    "name": "Maharajganj",
+    "postcode": "5226"
+  },
+  {
+    "id": 1120,
+    "upazilla_id": 404,
+    "name": "Daudpur",
+    "postcode": "5281"
+  },
+  {
+    "id": 1121,
+    "upazilla_id": 404,
+    "name": "Gopalpur",
+    "postcode": "5282"
+  },
+  {
+    "id": 1122,
+    "upazilla_id": 404,
+    "name": "Nababganj",
+    "postcode": "5280"
+  },
+  {
+    "id": 1123,
+    "upazilla_id": 413,
+    "name": "Ghoraghat",
+    "postcode": "5291"
+  },
+  {
+    "id": 1124,
+    "upazilla_id": 413,
+    "name": "Osmanpur",
+    "postcode": "5290"
+  },
+  {
+    "id": 1125,
+    "upazilla_id": 408,
+    "name": "Parbatipur",
+    "postcode": "5250"
+  },
+  {
+    "id": 1126,
+    "upazilla_id": 411,
+    "name": "Phulbari",
+    "postcode": "5260"
+  },
+  {
+    "id": 1127,
+    "upazilla_id": 404,
+    "name": "Setabganj",
+    "postcode": "5216"
+  },
+  {
+    "id": 1128,
+    "upazilla_id": 433,
+    "name": "Bonarpara",
+    "postcode": "5750"
+  },
+  {
+    "id": 1129,
+    "upazilla_id": 433,
+    "name": "saghata",
+    "postcode": "5751"
+  },
+  {
+    "id": 1130,
+    "upazilla_id": 429,
+    "name": "Gaibandha Sadar",
+    "postcode": "5700"
+  },
+  {
+    "id": 1131,
+    "upazilla_id": 432,
+    "name": "Gobindhaganj",
+    "postcode": "5740"
+  },
+  {
+    "id": 1132,
+    "upazilla_id": 432,
+    "name": "Mahimaganj",
+    "postcode": "5741"
+  },
+  {
+    "id": 1133,
+    "upazilla_id": 430,
+    "name": "Palashbari",
+    "postcode": "5730"
+  },
+  {
+    "id": 1134,
+    "upazilla_id": 434,
+    "name": "Bharatkhali",
+    "postcode": "5761"
+  },
+  {
+    "id": 1135,
+    "upazilla_id": 434,
+    "name": "Phulchhari",
+    "postcode": "5760"
+  },
+  {
+    "id": 1136,
+    "upazilla_id": 428,
+    "name": "Naldanga",
+    "postcode": "5711"
+  },
+  {
+    "id": 1137,
+    "upazilla_id": 428,
+    "name": "Saadullapur",
+    "postcode": "5710"
+  },
+  {
+    "id": 1138,
+    "upazilla_id": 433,
+    "name": "Bamandanga",
+    "postcode": "5721"
+  },
+  {
+    "id": 1139,
+    "upazilla_id": 433,
+    "name": "Sundarganj",
+    "postcode": "5720"
+  },
+  {
+    "id": 1140,
+    "upazilla_id": 450,
+    "name": "Bhurungamari",
+    "postcode": "5670"
+  },
+  {
+    "id": 1141,
+    "upazilla_id": 454,
+    "name": "Chilmari",
+    "postcode": "5630"
+  },
+  {
+    "id": 1142,
+    "upazilla_id": 454,
+    "name": "Jorgachh",
+    "postcode": "5631"
+  },
+  {
+    "id": 1143,
+    "upazilla_id": 448,
+    "name": "Kurigram Sadar",
+    "postcode": "5600"
+  },
+  {
+    "id": 1144,
+    "upazilla_id": 448,
+    "name": "Pandul",
+    "postcode": "5601"
+  },
+  {
+    "id": 1145,
+    "upazilla_id": 448,
+    "name": "Phulbari",
+    "postcode": "5680"
+  },
+  {
+    "id": 1146,
+    "upazilla_id": 449,
+    "name": "Nageshwar",
+    "postcode": "5660"
+  },
+  {
+    "id": 1147,
+    "upazilla_id": 452,
+    "name": "Nazimkhan",
+    "postcode": "5611"
+  },
+  {
+    "id": 1148,
+    "upazilla_id": 452,
+    "name": "Rajarhat",
+    "postcode": "5610"
+  },
+  {
+    "id": 1149,
+    "upazilla_id": 456,
+    "name": "Rajibpur",
+    "postcode": "5650"
+  },
+  {
+    "id": 1150,
+    "upazilla_id": 455,
+    "name": "Roumari",
+    "postcode": "5640"
+  },
+  {
+    "id": 1151,
+    "upazilla_id": 453,
+    "name": "Bazarhat",
+    "postcode": "5621"
+  },
+  {
+    "id": 1152,
+    "upazilla_id": 453,
+    "name": "Ulipur",
+    "postcode": "5620"
+  },
+  {
+    "id": 1153,
+    "upazilla_id": 421,
+    "name": "Aditmari",
+    "postcode": "5510"
+  },
+  {
+    "id": 1154,
+    "upazilla_id": 419,
+    "name": "Hatibandha",
+    "postcode": "5530"
+  },
+  {
+    "id": 1155,
+    "upazilla_id": 417,
+    "name": "Kulaghat SO",
+    "postcode": "5502"
+  },
+  {
+    "id": 1156,
+    "upazilla_id": 417,
+    "name": "Lalmonirhat Sadar",
+    "postcode": "5500"
+  },
+  {
+    "id": 1157,
+    "upazilla_id": 417,
+    "name": "Moghalhat",
+    "postcode": "5501"
+  },
+  {
+    "id": 1158,
+    "upazilla_id": 420,
+    "name": "Baura",
+    "postcode": "5541"
+  },
+  {
+    "id": 1159,
+    "upazilla_id": 420,
+    "name": "Burimari",
+    "postcode": "5542"
+  },
+  {
+    "id": 1160,
+    "upazilla_id": 420,
+    "name": "Patgram",
+    "postcode": "5540"
+  },
+  {
+    "id": 1161,
+    "upazilla_id": 419,
+    "name": "Tushbhandar",
+    "postcode": "5520"
+  },
+  {
+    "id": 1162,
+    "upazilla_id": 424,
+    "name": "Dimla",
+    "postcode": "5350"
+  },
+  {
+    "id": 1163,
+    "upazilla_id": 424,
+    "name": "Ghaga Kharibari",
+    "postcode": "5351"
+  },
+  {
+    "id": 1164,
+    "upazilla_id": 423,
+    "name": "Chilahati",
+    "postcode": "5341"
+  },
+  {
+    "id": 1165,
+    "upazilla_id": 423,
+    "name": "Domar",
+    "postcode": "5340"
+  },
+  {
+    "id": 1166,
+    "upazilla_id": 425,
+    "name": "Jaldhaka",
+    "postcode": "5330"
+  },
+  {
+    "id": 1167,
+    "upazilla_id": 426,
+    "name": "Kishoriganj",
+    "postcode": "5320"
+  },
+  {
+    "id": 1168,
+    "upazilla_id": 427,
+    "name": "Nilphamari Sadar",
+    "postcode": "5300"
+  },
+  {
+    "id": 1169,
+    "upazilla_id": 427,
+    "name": "Nilphamari Sugar Mil",
+    "postcode": "5301"
+  },
+  {
+    "id": 1170,
+    "upazilla_id": 422,
+    "name": "Syedpur",
+    "postcode": "5310"
+  },
+  {
+    "id": 1171,
+    "upazilla_id": 422,
+    "name": "Syedpur Upashahar",
+    "postcode": "5311"
+  },
+  {
+    "id": 1172,
+    "upazilla_id": 401,
+    "name": "Boda",
+    "postcode": "5010"
+  },
+  {
+    "id": 1173,
+    "upazilla_id": 402,
+    "name": "Chotto Dab",
+    "postcode": "5040"
+  },
+  {
+    "id": 1174,
+    "upazilla_id": 402,
+    "name": "Mirjapur",
+    "postcode": "5041"
+  },
+  {
+    "id": 1175,
+    "upazilla_id": 400,
+    "name": "Dabiganj",
+    "postcode": "5020"
+  },
+  {
+    "id": 1176,
+    "upazilla_id": 399,
+    "name": "Panchagarh Sadar",
+    "postcode": "5000"
+  },
+  {
+    "id": 1177,
+    "upazilla_id": 403,
+    "name": "Tetulia",
+    "postcode": "5030"
+  },
+  {
+    "id": 1178,
+    "upazilla_id": 443,
+    "name": "Badarganj",
+    "postcode": "5430"
+  },
+  {
+    "id": 1179,
+    "upazilla_id": 443,
+    "name": "Shyampur",
+    "postcode": "5431"
+  },
+  {
+    "id": 1180,
+    "upazilla_id": 441,
+    "name": "Gangachara",
+    "postcode": "5410"
+  },
+  {
+    "id": 1181,
+    "upazilla_id": 446,
+    "name": "Haragachh",
+    "postcode": "5441"
+  },
+  {
+    "id": 1182,
+    "upazilla_id": 446,
+    "name": "Kaunia",
+    "postcode": "5440"
+  },
+  {
+    "id": 1183,
+    "upazilla_id": 444,
+    "name": "Mithapukur",
+    "postcode": "5460"
+  },
+  {
+    "id": 1184,
+    "upazilla_id": 447,
+    "name": "Pirgachha",
+    "postcode": "5450"
+  },
+  {
+    "id": 1185,
+    "upazilla_id": 440,
+    "name": "Alamnagar",
+    "postcode": "5402"
+  },
+  {
+    "id": 1186,
+    "upazilla_id": 440,
+    "name": "Mahiganj",
+    "postcode": "5403"
+  },
+  {
+    "id": 1187,
+    "upazilla_id": 440,
+    "name": "Rangpur Cadet Colleg",
+    "postcode": "5404"
+  },
+  {
+    "id": 1188,
+    "upazilla_id": 440,
+    "name": "Rangpur Carmiecal Col",
+    "postcode": "5405"
+  },
+  {
+    "id": 1189,
+    "upazilla_id": 440,
+    "name": "Rangpur Sadar",
+    "postcode": "5400"
+  },
+  {
+    "id": 1190,
+    "upazilla_id": 440,
+    "name": "Rangpur Upa-Shahar",
+    "postcode": "5401"
+  },
+  {
+    "id": 1191,
+    "upazilla_id": 442,
+    "name": "Taraganj",
+    "postcode": "5420"
+  },
+  {
+    "id": 1192,
+    "upazilla_id": 439,
+    "name": "Baliadangi",
+    "postcode": "5140"
+  },
+  {
+    "id": 1193,
+    "upazilla_id": 439,
+    "name": "Lahiri",
+    "postcode": "5141"
+  },
+  {
+    "id": 1194,
+    "upazilla_id": 438,
+    "name": "Jibanpur",
+    "postcode": "5130"
+  },
+  {
+    "id": 1195,
+    "upazilla_id": 436,
+    "name": "Pirganj",
+    "postcode": "5110"
+  },
+  {
+    "id": 1196,
+    "upazilla_id": 436,
+    "name": "Pirganj",
+    "postcode": "5470"
+  },
+  {
+    "id": 1197,
+    "upazilla_id": 437,
+    "name": "Nekmarad",
+    "postcode": "5121"
+  },
+  {
+    "id": 1198,
+    "upazilla_id": 437,
+    "name": "Rani Sankail",
+    "postcode": "5120"
+  },
+  {
+    "id": 1199,
+    "upazilla_id": 435,
+    "name": "Ruhia",
+    "postcode": "5103"
+  },
+  {
+    "id": 1200,
+    "upazilla_id": 435,
+    "name": "Shibganj",
+    "postcode": "5102"
+  },
+  {
+    "id": 1201,
+    "upazilla_id": 435,
+    "name": "Thakurgaon Road",
+    "postcode": "5101"
+  },
+  {
+    "id": 1202,
+    "upazilla_id": 435,
+    "name": "Thakurgaon Sadar",
+    "postcode": "5100"
+  },
+  {
+    "id": 1203,
+    "upazilla_id": 294,
+    "name": "Azmireeganj",
+    "postcode": "3360"
+  },
+  {
+    "id": 1204,
+    "upazilla_id": 293,
+    "name": "Bahubal",
+    "postcode": "3310"
+  },
+  {
+    "id": 1205,
+    "upazilla_id": 295,
+    "name": "Baniachang",
+    "postcode": "3350"
+  },
+  {
+    "id": 1206,
+    "upazilla_id": 295,
+    "name": "Jatrapasha",
+    "postcode": "3351"
+  },
+  {
+    "id": 1207,
+    "upazilla_id": 295,
+    "name": "Kadirganj",
+    "postcode": "3352"
+  },
+  {
+    "id": 1208,
+    "upazilla_id": 297,
+    "name": "Chandpurbagan",
+    "postcode": "3321"
+  },
+  {
+    "id": 1209,
+    "upazilla_id": 297,
+    "name": "Chunarughat",
+    "postcode": "3320"
+  },
+  {
+    "id": 1210,
+    "upazilla_id": 297,
+    "name": "Narapati",
+    "postcode": "3322"
+  },
+  {
+    "id": 1211,
+    "upazilla_id": 298,
+    "name": "Gopaya",
+    "postcode": "3302"
+  },
+  {
+    "id": 1212,
+    "upazilla_id": 298,
+    "name": "Hobiganj Sadar",
+    "postcode": "3300"
+  },
+  {
+    "id": 1213,
+    "upazilla_id": 298,
+    "name": "Shaestaganj",
+    "postcode": "3301"
+  },
+  {
+    "id": 1214,
+    "upazilla_id": 299,
+    "name": "Kalauk",
+    "postcode": "3340"
+  },
+  {
+    "id": 1215,
+    "upazilla_id": 299,
+    "name": "Lakhai",
+    "postcode": "3341"
+  },
+  {
+    "id": 1216,
+    "upazilla_id": 299,
+    "name": "Itakhola",
+    "postcode": "3331"
+  },
+  {
+    "id": 1217,
+    "upazilla_id": 299,
+    "name": "Madhabpur",
+    "postcode": "3330"
+  },
+  {
+    "id": 1218,
+    "upazilla_id": 299,
+    "name": "Saihamnagar",
+    "postcode": "3333"
+  },
+  {
+    "id": 1219,
+    "upazilla_id": 299,
+    "name": "Shahajibazar",
+    "postcode": "3332"
+  },
+  {
+    "id": 1220,
+    "upazilla_id": 292,
+    "name": "Digalbak",
+    "postcode": "3373"
+  },
+  {
+    "id": 1221,
+    "upazilla_id": 292,
+    "name": "Golduba",
+    "postcode": "3372"
+  },
+  {
+    "id": 1222,
+    "upazilla_id": 292,
+    "name": "Goplarbazar",
+    "postcode": "3371"
+  },
+  {
+    "id": 1223,
+    "upazilla_id": 292,
+    "name": "Inathganj",
+    "postcode": "3374"
+  },
+  {
+    "id": 1224,
+    "upazilla_id": 292,
+    "name": "Nabiganj",
+    "postcode": "3370"
+  },
+  {
+    "id": 1225,
+    "upazilla_id": 285,
+    "name": "Baralekha",
+    "postcode": "3250"
+  },
+  {
+    "id": 1226,
+    "upazilla_id": 285,
+    "name": "Dhakkhinbag",
+    "postcode": "3252"
+  },
+  {
+    "id": 1227,
+    "upazilla_id": 285,
+    "name": "Juri",
+    "postcode": "3251"
+  },
+  {
+    "id": 1228,
+    "upazilla_id": 285,
+    "name": "Purbashahabajpur",
+    "postcode": "3253"
+  },
+  {
+    "id": 1229,
+    "upazilla_id": 286,
+    "name": "Kamalganj",
+    "postcode": "3220"
+  },
+  {
+    "id": 1230,
+    "upazilla_id": 286,
+    "name": "Keramatnaga",
+    "postcode": "3221"
+  },
+  {
+    "id": 1231,
+    "upazilla_id": 286,
+    "name": "Munshibazar",
+    "postcode": "3224"
+  },
+  {
+    "id": 1232,
+    "upazilla_id": 286,
+    "name": "Patrakhola",
+    "postcode": "3222"
+  },
+  {
+    "id": 1233,
+    "upazilla_id": 286,
+    "name": "Shamsher Nagar",
+    "postcode": "3223"
+  },
+  {
+    "id": 1234,
+    "upazilla_id": 287,
+    "name": "Baramchal",
+    "postcode": "3237"
+  },
+  {
+    "id": 1235,
+    "upazilla_id": 287,
+    "name": "Kajaldhara",
+    "postcode": "3234"
+  },
+  {
+    "id": 1236,
+    "upazilla_id": 287,
+    "name": "Karimpur",
+    "postcode": "3235"
+  },
+  {
+    "id": 1237,
+    "upazilla_id": 287,
+    "name": "Kulaura",
+    "postcode": "3230"
+  },
+  {
+    "id": 1238,
+    "upazilla_id": 287,
+    "name": "Langla",
+    "postcode": "3232"
+  },
+  {
+    "id": 1239,
+    "upazilla_id": 287,
+    "name": "Prithimpasha",
+    "postcode": "3233"
+  },
+  {
+    "id": 1240,
+    "upazilla_id": 287,
+    "name": "Tillagaon",
+    "postcode": "3231"
+  },
+  {
+    "id": 1241,
+    "upazilla_id": 288,
+    "name": "Afrozganj",
+    "postcode": "3203"
+  },
+  {
+    "id": 1242,
+    "upazilla_id": 288,
+    "name": "Barakapan",
+    "postcode": "3201"
+  },
+  {
+    "id": 1243,
+    "upazilla_id": 288,
+    "name": "Monumukh",
+    "postcode": "3202"
+  },
+  {
+    "id": 1244,
+    "upazilla_id": 288,
+    "name": "Moulvibazar Sadar",
+    "postcode": "3200"
+  },
+  {
+    "id": 1245,
+    "upazilla_id": 289,
+    "name": "Rajnagar",
+    "postcode": "3240"
+  },
+  {
+    "id": 1246,
+    "upazilla_id": 290,
+    "name": "Kalighat",
+    "postcode": "3212"
+  },
+  {
+    "id": 1247,
+    "upazilla_id": 290,
+    "name": "Khejurichhara",
+    "postcode": "3213"
+  },
+  {
+    "id": 1248,
+    "upazilla_id": 290,
+    "name": "Narain Chora",
+    "postcode": "3211"
+  },
+  {
+    "id": 1249,
+    "upazilla_id": 290,
+    "name": "Satgaon",
+    "postcode": "3214"
+  },
+  {
+    "id": 1250,
+    "upazilla_id": 290,
+    "name": "Srimangal",
+    "postcode": "3210"
+  },
+  {
+    "id": 1251,
+    "upazilla_id": 302,
+    "name": "Bishamsapur",
+    "postcode": "3010"
+  },
+  {
+    "id": 1252,
+    "upazilla_id": 303,
+    "name": "Chhatak",
+    "postcode": "3080"
+  },
+  {
+    "id": 1253,
+    "upazilla_id": 303,
+    "name": "Chhatak Cement Facto",
+    "postcode": "3081"
+  },
+  {
+    "id": 1254,
+    "upazilla_id": 303,
+    "name": "Chhatak Paper Mills",
+    "postcode": "3082"
+  },
+  {
+    "id": 1255,
+    "upazilla_id": 303,
+    "name": "Chourangi Bazar",
+    "postcode": "3893"
+  },
+  {
+    "id": 1256,
+    "upazilla_id": 303,
+    "name": "Gabindaganj",
+    "postcode": "3083"
+  },
+  {
+    "id": 1257,
+    "upazilla_id": 303,
+    "name": "Gabindaganj Natun Ba",
+    "postcode": "3084"
+  },
+  {
+    "id": 1258,
+    "upazilla_id": 303,
+    "name": "Islamabad",
+    "postcode": "3088"
+  },
+  {
+    "id": 1259,
+    "upazilla_id": 303,
+    "name": "jahidpur",
+    "postcode": "3087"
+  },
+  {
+    "id": 1260,
+    "upazilla_id": 303,
+    "name": "Khurma",
+    "postcode": "3085"
+  },
+  {
+    "id": 1261,
+    "upazilla_id": 303,
+    "name": "Moinpur",
+    "postcode": "3086"
+  },
+  {
+    "id": 1262,
+    "upazilla_id": 306,
+    "name": "Dhirai Chandpur",
+    "postcode": "3040"
+  },
+  {
+    "id": 1263,
+    "upazilla_id": 306,
+    "name": "Jagdal",
+    "postcode": "3041"
+  },
+  {
+    "id": 1264,
+    "upazilla_id": 305,
+    "name": "Duara bazar",
+    "postcode": "3070"
+  },
+  {
+    "id": 1265,
+    "upazilla_id": 493,
+    "name": "Ghungiar",
+    "postcode": "3050"
+  },
+  {
+    "id": 1266,
+    "upazilla_id": 304,
+    "name": "Atuajan",
+    "postcode": "3062"
+  },
+  {
+    "id": 1267,
+    "upazilla_id": 304,
+    "name": "Hasan Fatemapur",
+    "postcode": "3063"
+  },
+  {
+    "id": 1268,
+    "upazilla_id": 304,
+    "name": "Jagnnathpur",
+    "postcode": "3060"
+  },
+  {
+    "id": 1269,
+    "upazilla_id": 304,
+    "name": "Rasulganj",
+    "postcode": "3064"
+  },
+  {
+    "id": 1270,
+    "upazilla_id": 304,
+    "name": "Shiramsi",
+    "postcode": "3065"
+  },
+  {
+    "id": 1271,
+    "upazilla_id": 304,
+    "name": "Syedpur",
+    "postcode": "3061"
+  },
+  {
+    "id": 1272,
+    "upazilla_id": 309,
+    "name": "Sachna",
+    "postcode": "3020"
+  },
+  {
+    "id": 1273,
+    "upazilla_id": 300,
+    "name": "Pagla",
+    "postcode": "3001"
+  },
+  {
+    "id": 1274,
+    "upazilla_id": 300,
+    "name": "Patharia",
+    "postcode": "3002"
+  },
+  {
+    "id": 1275,
+    "upazilla_id": 300,
+    "name": "Sunamganj Sadar",
+    "postcode": "3000"
+  },
+  {
+    "id": 1276,
+    "upazilla_id": 306,
+    "name": "Tahirpur",
+    "postcode": "3030"
+  },
+  {
+    "id": 1277,
+    "upazilla_id": 272,
+    "name": "Balaganj",
+    "postcode": "3120"
+  },
+  {
+    "id": 1278,
+    "upazilla_id": 272,
+    "name": "Begumpur",
+    "postcode": "3125"
+  },
+  {
+    "id": 1279,
+    "upazilla_id": 272,
+    "name": "Brahman Shashon",
+    "postcode": "3122"
+  },
+  {
+    "id": 1280,
+    "upazilla_id": 272,
+    "name": "Gaharpur",
+    "postcode": "3128"
+  },
+  {
+    "id": 1281,
+    "upazilla_id": 272,
+    "name": "Goala Bazar",
+    "postcode": "3124"
+  },
+  {
+    "id": 1282,
+    "upazilla_id": 272,
+    "name": "Karua",
+    "postcode": "3121"
+  },
+  {
+    "id": 1283,
+    "upazilla_id": 272,
+    "name": "Kathal Khair",
+    "postcode": "3127"
+  },
+  {
+    "id": 1284,
+    "upazilla_id": 272,
+    "name": "Natun Bazar",
+    "postcode": "3129"
+  },
+  {
+    "id": 1285,
+    "upazilla_id": 272,
+    "name": "Omarpur",
+    "postcode": "3126"
+  },
+  {
+    "id": 1286,
+    "upazilla_id": 272,
+    "name": "Tajpur",
+    "postcode": "3123"
+  },
+  {
+    "id": 1287,
+    "upazilla_id": 273,
+    "name": "Bianibazar",
+    "postcode": "3170"
+  },
+  {
+    "id": 1288,
+    "upazilla_id": 273,
+    "name": "Churkai",
+    "postcode": "3175"
+  },
+  {
+    "id": 1289,
+    "upazilla_id": 273,
+    "name": "jaldup",
+    "postcode": "3171"
+  },
+  {
+    "id": 1290,
+    "upazilla_id": 273,
+    "name": "Kurar bazar",
+    "postcode": "3173"
+  },
+  {
+    "id": 1291,
+    "upazilla_id": 273,
+    "name": "Mathiura",
+    "postcode": "3172"
+  },
+  {
+    "id": 1292,
+    "upazilla_id": 273,
+    "name": "Salia bazar",
+    "postcode": "3174"
+  },
+  {
+    "id": 1293,
+    "upazilla_id": 274,
+    "name": "Bishwanath",
+    "postcode": "3130"
+  },
+  {
+    "id": 1294,
+    "upazilla_id": 274,
+    "name": "Dashghar",
+    "postcode": "3131"
+  },
+  {
+    "id": 1295,
+    "upazilla_id": 274,
+    "name": "Deokalas",
+    "postcode": "3133"
+  },
+  {
+    "id": 1296,
+    "upazilla_id": 274,
+    "name": "Doulathpur",
+    "postcode": "3132"
+  },
+  {
+    "id": 1297,
+    "upazilla_id": 274,
+    "name": "Singer kanch",
+    "postcode": "3134"
+  },
+  {
+    "id": 1298,
+    "upazilla_id": 276,
+    "name": "Fenchuganj",
+    "postcode": "3116"
+  },
+  {
+    "id": 1299,
+    "upazilla_id": 276,
+    "name": "Fenchuganj SareKarkh",
+    "postcode": "3117"
+  },
+  {
+    "id": 1300,
+    "upazilla_id": 279,
+    "name": "Chiknagul",
+    "postcode": "3152"
+  },
+  {
+    "id": 1301,
+    "upazilla_id": 278,
+    "name": "Gowainghat",
+    "postcode": "3150"
+  },
+  {
+    "id": 1302,
+    "upazilla_id": 278,
+    "name": "Jaflong",
+    "postcode": "3151"
+  },
+  {
+    "id": 1303,
+    "upazilla_id": 277,
+    "name": "banigram",
+    "postcode": "3164"
+  },
+  {
+    "id": 1304,
+    "upazilla_id": 277,
+    "name": "Chandanpur",
+    "postcode": "3165"
+  },
+  {
+    "id": 1305,
+    "upazilla_id": 277,
+    "name": "Dakkhin Bhadashore",
+    "postcode": "3162"
+  },
+  {
+    "id": 1306,
+    "upazilla_id": 277,
+    "name": "Dhaka Dakkhin",
+    "postcode": "3161"
+  },
+  {
+    "id": 1307,
+    "upazilla_id": 277,
+    "name": "Gopalgannj",
+    "postcode": "3160"
+  },
+  {
+    "id": 1308,
+    "upazilla_id": 277,
+    "name": "Ranaping",
+    "postcode": "3163"
+  },
+  {
+    "id": 1309,
+    "upazilla_id": 279,
+    "name": "Jaintapur",
+    "postcode": "3156"
+  },
+  {
+    "id": 1310,
+    "upazilla_id": 282,
+    "name": "Ichhamati",
+    "postcode": "3191"
+  },
+  {
+    "id": 1311,
+    "upazilla_id": 282,
+    "name": "Jakiganj",
+    "postcode": "3190"
+  },
+  {
+    "id": 1312,
+    "upazilla_id": 280,
+    "name": "Chatulbazar",
+    "postcode": "3181"
+  },
+  {
+    "id": 1313,
+    "upazilla_id": 280,
+    "name": "Gachbari",
+    "postcode": "3183"
+  },
+  {
+    "id": 1314,
+    "upazilla_id": 280,
+    "name": "Kanaighat",
+    "postcode": "3180"
+  },
+  {
+    "id": 1315,
+    "upazilla_id": 280,
+    "name": "Manikganj",
+    "postcode": "3182"
+  },
+  {
+    "id": 1316,
+    "upazilla_id": 275,
+    "name": "Kompanyganj",
+    "postcode": "3140"
+  },
+  {
+    "id": 1317,
+    "upazilla_id": 281,
+    "name": "Birahimpur",
+    "postcode": "3106"
+  },
+  {
+    "id": 1318,
+    "upazilla_id": 281,
+    "name": "Jalalabad",
+    "postcode": "3107"
+  },
+  {
+    "id": 1319,
+    "upazilla_id": 281,
+    "name": "Jalalabad Cantoment",
+    "postcode": "3104"
+  },
+  {
+    "id": 1320,
+    "upazilla_id": 281,
+    "name": "Kadamtali",
+    "postcode": "3111"
+  },
+  {
+    "id": 1321,
+    "upazilla_id": 281,
+    "name": "Kamalbazer",
+    "postcode": "3112"
+  },
+  {
+    "id": 1322,
+    "upazilla_id": 281,
+    "name": "Khadimnagar",
+    "postcode": "3103"
+  },
+  {
+    "id": 1323,
+    "upazilla_id": 281,
+    "name": "Lalbazar",
+    "postcode": "3113"
+  },
+  {
+    "id": 1324,
+    "upazilla_id": 281,
+    "name": "Mogla",
+    "postcode": "3108"
+  },
+  {
+    "id": 1325,
+    "upazilla_id": 281,
+    "name": "Ranga Hajiganj",
+    "postcode": "3109"
+  },
+  {
+    "id": 1326,
+    "upazilla_id": 281,
+    "name": "Shahajalal Science &",
+    "postcode": "3114"
+  },
+  {
+    "id": 1327,
+    "upazilla_id": 281,
+    "name": "Silam",
+    "postcode": "3105"
+  },
+  {
+    "id": 1328,
+    "upazilla_id": 281,
+    "name": "Sylhe Sadar",
+    "postcode": "3100"
+  },
+  {
+    "id": 1329,
+    "upazilla_id": 281,
+    "name": "Sylhet Biman Bondar",
+    "postcode": "3102"
+  },
+  {
+    "id": 1330,
+    "upazilla_id": 281,
+    "name": "Sylhet Cadet Col",
+    "postcode": "3101"
+  }
+]

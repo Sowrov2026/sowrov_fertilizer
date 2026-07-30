@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Product | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <span class="logo-green">Sowrov</span>
+            <span class="logo-white"> Fertilizer</span>
+
+        </div>
+
+        <ul>
+
+            <li><a href="admin-dashboard.html">🏠 Dashboard</a></li>
+
+            <li class="active"><a href="admin-products.html">📦 Products</a></li>
+
+            <li><a href="admin-gallery.html">🖼 Gallery</a></li>
+
+            <li><a href="admin-reviews.html">⭐ Reviews</a></li>
+
+            <li><a href="admin-orders.html">📋 Orders</a></li>
+
+            <li><a href="admin-users.html">👤 Users</a></li>
+
+            <li><a href="admin-settings.html">⚙ Settings</a></li>
+
+            <li onclick="adminLogout()">🚪 Logout</li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <button id="menuToggle" class="menu-toggle">
+☰
+</button>
+
+            <div>
+
+                <h1>Edit Product</h1>
+                <p>Create a new fertilizer product</p>
+
+            </div>
+
+        </div>
+
+        <div class="form-box">
+
+            <form id="productForm">
+
+                <div class="form-group">
+
+                    <label>Product Name</label>
+
+                    <input
+                    id="productName"
+                    type="text"
+                    placeholder="Enter product name"
+                    required>
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <select id="category" required>
+
+                        <option value="Organic">Organic Fertilizer</option>
+
+                        <option value="Bio">Bio Fertilizer</option>
+
+                        <option value="Compost">Compost</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+    <label>
+
+        Wholesale Price (৳/kg)
+
+    </label>
+
+    <input
+        id="wholesalePrice"
+        type="number"
+        placeholder="15"
+        required>
+
+</div>
+
+<div class="form-group">
+
+    <label>
+
+        Retail Price (৳/kg)
+
+    </label>
+
+    <input
+        id="retailPrice"
+        type="number"
+        placeholder="20"
+        required>
+
+</div>
+
+                <div class="form-group">
+
+    <label>
+
+        Stock (kg)
+
+    </label>
+
+    <input
+        id="stock"
+        type="number"
+        placeholder="1000"
+        required>
+
+</div>
+
+                <div class="form-group">
+
+                 <label>
+
+                 Product Image Path
+
+                 </label>
+
+                 <input
+                  id="image"
+                  type="text"
+                  placeholder="assets/images/products/vermi.png"
+                  required>
+
+                </div>
+               <div class="form-group">
+
+    <label>
+
+        Product Description
+
+    </label>
+
+    <textarea
+        id="description"
+        rows="6"
+        placeholder="Write product description..."
+        required></textarea>
+
+</div>
+
+               <button
+    id="saveProductBtn"
+    type="submit"
+    class="btn">
+
+   Update Product
+
+</button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script type="module" src="assets/js/auth.js"></script>
+<script src="assets/js/admin.js"></script>
+<script type="module" src="assets/js/admin-product-edit.js"></script>
+</body>
+
+</html>

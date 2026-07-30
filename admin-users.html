@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Users | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-layout">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li >
+<span>🏠</span>
+<a href="admin-dashboard.html">Dashboard</a>
+</li>
+
+<li>
+<span>📦</span>
+<a href="admin-products.html">Products</a>
+</li>
+
+<li>
+<span>🖼️</span>
+<a href="admin-gallery.html">Gallery</a>
+</li>
+
+<li>
+<span>💰</span>
+<a href="admin-sales.html">Sales</a>
+</li>
+
+<li>
+<span>⭐</span>
+<a href="admin-reviews.html">Reviews</a>
+</li>
+
+<li>
+<span>📋</span>
+<a href="admin-orders.html">Orders</a>
+</li>
+
+<li class="active">
+<span>👤</span>
+<a href="admin-users.html">Users</a>
+</li>
+
+<li>
+<span>📈</span>
+<a href="admin-reports.html">Reports</a>
+</li>
+
+<li>
+<span>⚙️</span>
+<a href="admin-settings.html">Settings</a>
+</li>
+
+<li onclick="adminLogout()">
+<span>🚪</span>
+Logout
+</li>
+
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main-content">
+
+<div class="topbar">
+
+<button id="menuToggle" class="menu-toggle">
+
+☰
+
+</button>
+
+<div>
+
+<h1>Customer Management</h1>
+
+<p>Manage all registered customers</p>
+
+</div>
+
+</div>
+
+<!-- Dashboard Cards -->
+
+<div class="dashboard-cards">
+
+<div class="card">
+
+<h3>Total Users</h3>
+
+<h2 id="totalUsers">0</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Active Users</h3>
+
+<h2 id="activeUsers">0</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Blocked Users</h3>
+
+<h2 id="blockedUsers">0</h2>
+
+</div>
+
+</div>
+
+<!-- Search -->
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchUser"
+placeholder="Search customer...">
+
+</div>
+
+<!-- Table -->
+
+<div class="table-box">
+
+<table class="dashboard-table">
+
+<thead>
+
+<tr>
+
+<th>Photo</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Phone</th>
+
+<th>Orders</th>
+
+<th>Total Purchase</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="usersTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- User Details Modal -->
+
+<div
+id="userModal"
+class="modal"
+style="display:none;">
+
+<div class="modal-content">
+
+<h2>User Details</h2>
+
+<div id="userDetails">
+
+</div>
+
+<br>
+
+<button id="blockUserBtn">
+
+🚫 Block
+
+</button>
+
+<button id="deleteUserBtn">
+
+🗑 Delete
+
+</button>
+
+<button id="closeUserModal">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</section>
+
+<script src="assets/js/admin.js"></script>
+
+<script type="module"
+src="assets/js/admin-users.js"></script>
+
+</body>
+
+</html>

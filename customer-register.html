@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+
+</head>
+
+<body>
+
+<section class="login-page">
+
+<div class="login-box">
+
+<div class="login-logo">
+
+<img src="assets/images/logo/logo.png" alt="Logo">
+
+<h2>Create Account</h2>
+
+<p>Join Sowrov Fertilizer</p>
+
+</div>
+
+<form id="registerForm">
+
+<div class="form-group">
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="01XXXXXXXXX"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Address</label>
+
+<textarea
+id="address"
+placeholder="Enter your address"
+required></textarea>
+
+</div>
+<div class="form-group">
+
+<label>Profile Photo</label>
+
+<input
+type="file"
+id="photo"
+accept="image/*">
+
+<img
+id="photoPreview"
+src="assets/images/default-user.png"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+margin-top:15px;
+display:block;
+">
+
+</div>
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Create password"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm password"
+required>
+
+</div>
+
+<button
+type="submit"
+class="btn">
+
+Create Account
+
+</button>
+
+</form>
+
+<p style="margin-top:20px;text-align:center;">
+
+Already have an account?
+
+<a href="customer-login.html">
+
+Login
+
+</a>
+
+</p>
+
+</div>
+
+</section>
+
+<script type="module" src="assets/js/register.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Orders | Sowrov Fertilizer</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-layout">
+    <!-- Sidebar -->
+
+    
+    <aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li >
+<span>🏠</span>
+<a href="admin-dashboard.html">Dashboard</a>
+</li>
+
+<li>
+<span>📦</span>
+<a href="admin-products.html">Products</a>
+</li>
+
+<li>
+<span>🖼️</span>
+<a href="admin-gallery.html">Gallery</a>
+</li>
+
+<li>
+<span>💰</span>
+<a href="admin-sales.html">Sales</a>
+</li>
+
+<li>
+<span>⭐</span>
+<a href="admin-reviews.html">Reviews</a>
+</li>
+
+<li class="active">
+<span>📋</span>
+<a href="admin-orders.html">Orders</a>
+</li>
+
+<li>
+<span>👤</span>
+<a href="admin-users.html">Users</a>
+</li>
+
+<li>
+<span>📈</span>
+<a href="admin-reports.html">Reports</a>
+</li>
+
+<li>
+<span>⚙️</span>
+<a href="admin-settings.html">Settings</a>
+</li>
+
+<li onclick="adminLogout()">
+<span>🚪</span>
+Logout
+</li>
+
+
+</ul>
+
+</aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <button id="menuToggle" class="menu-toggle">
+☰
+</button>
+            <button id="exportOrdersBtn">
+
+📥 Export Orders
+
+</button>
+
+            <div>
+
+                <h1>Orders</h1>
+
+                <p>Manage Customer Orders</p>
+
+            </div>
+
+        </div>
+        <div class="order-tools">
+
+<input 
+type="text"
+id="orderSearch"
+placeholder="Search Order ID / Customer / Phone">
+
+<select id="statusFilter">
+
+<option value="All">
+All Status
+</option>
+
+<option value="Pending">
+Pending
+</option>
+
+<option value="Approved">
+Approved
+</option>
+
+<option value="Packed">
+Packed
+</option>
+
+<option value="Shipped">
+Shipped
+</option>
+
+<option value="Delivered">
+Delivered
+</option>
+
+<option value="Cancelled">
+Cancelled
+</option>
+
+</select>
+
+</div>
+
+        <div class="table-box">
+
+            <table class="dashboard-table">
+
+                <thead>
+
+                   <tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Product</th>
+
+<th>Quantity</th>
+
+<th>Total</th>
+
+<th>Payment</th>
+
+<th>Payment Status</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+                </thead>
+
+                <tbody id="ordersTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div id="orderModal" class="modal" style="display:none;">
+
+<div class="modal-content">
+
+<h2>Order Details</h2>
+
+<div id="orderDetails"></div>
+<br>
+
+<button id="printInvoiceBtn">
+
+🖨 Print Invoice
+
+</button>
+<button id="downloadPdfBtn">
+
+📄 Download PDF
+
+</button>
+
+
+<br>
+
+<button onclick="closeOrderModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+    </main>
+
+</div>
+
+</section>
+
+<script type="module" src="assets/js/auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+
+<script type="module" src="assets/js/admin-orders.js"></script>
+
+<script src="assets/js/admin.js"></script>
+
+
+
+</body>
+
+</html>

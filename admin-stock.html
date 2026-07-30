@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stock | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+
+<body>
+<section class="dashboard">
+
+<div class="dashboard-layout">
+
+<aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+<ul>
+
+<li><a href="admin-dashboard.html">🏠 Dashboard</a></li>
+
+<li><a href="admin-products.html">📦 Products</a></li>
+
+<li class="active"><a href="admin-stock.html">📦 Stock</a></li>
+
+<li><a href="admin-sales.html">💰 Sales</a></li>
+
+<li><a href="admin-gallery.html">🖼 Gallery</a></li>
+
+<li><a href="admin-reviews.html">⭐ Reviews</a></li>
+
+<li><a href="admin-orders.html">📋 Orders</a></li>
+
+<li><a href="admin-users.html">👤 Users</a></li>
+
+<li><a href="admin-setting.html">⚙ Settings</a></li>
+
+<li onclick="adminLogout()">🚪 Logout</li>
+
+</ul>
+
+</aside>
+
+<main class="main-content">
+
+<div class="topbar">
+
+<button id="menuToggle" class="menu-toggle">
+
+☰
+
+</button>
+
+<div>
+
+<h1>Stock Management</h1>
+
+<p>Manage Inventory</p>
+
+</div>
+
+</div>
+
+<div class="dashboard-cards">
+
+<div class="card">
+
+<h3>Total Products</h3>
+
+<h2 id="stockProducts">0</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Total Stock</h3>
+
+<h2 id="stockQuantity">0 kg</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Low Stock</h3>
+
+<h2 id="lowStockCount">0</h2>
+
+</div>
+
+</div>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchStock"
+placeholder="Search Product...">
+
+</div>
+
+<div class="table-box">
+
+<table class="dashboard-table">
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+
+<th>Current Stock</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="stockTableBody">
+
+</tbody>
+
+</table>
+<h2 style="margin-top:40px;">Stock History</h2>
+
+<table class="dashboard-table">
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+
+<th>Type</th>
+
+<th>Quantity</th>
+
+<th>Before</th>
+
+<th>After</th>
+
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+<div id="stockModal" class="modal" style="display:none;">
+
+<div class="modal-content">
+
+<h2>Update Stock</h2>
+
+<label>Action</label>
+
+<select id="stockAction">
+
+<option value="ADD">Add Stock</option>
+
+<option value="REMOVE">Remove Stock</option>
+
+</select>
+
+<br><br>
+
+<label>Quantity (kg)</label>
+
+<input
+type="number"
+id="stockQty">
+
+<br><br>
+
+<label>Reason</label>
+
+<input
+type="text"
+id="stockNote"
+placeholder="Reason">
+
+<br><br>
+
+<button id="saveStockBtn">
+
+Save
+
+</button>
+
+<button id="closeStockBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+</section>
+
+<script type="module" src="assets/js/auth.js"></script>
+<script type="module" src="assets/js/admin-stock.js"></script>
+<script src="assets/js/admin.js"></script>
+
+
+
+</body>
+
+</html>

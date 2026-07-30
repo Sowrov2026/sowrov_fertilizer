@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reviews | Sowrov Fertilizer</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+
+</head>
+
+
+<body>
+
+
+<section class="dashboard">
+
+
+<div class="dashboard-layout">
+
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+<span class="logo-white"> Fertilizer</span>
+
+</div>
+
+
+
+<ul class="sidebar-menu">
+
+
+<li>
+<a href="admin-dashboard.html">
+🏠 Dashboard
+</a>
+</li>
+
+
+<li>
+<a href="admin-products.html">
+📦 Products
+</a>
+</li>
+
+
+<li>
+<a href="admin-sales.html">
+💰 Sales
+</a>
+</li>
+
+
+<li>
+<a href="admin-orders.html">
+📋 Orders
+</a>
+</li>
+
+
+<li>
+<a href="admin-users.html">
+👤 Users
+</a>
+</li>
+
+
+<li class="active">
+<a href="admin-reviews.html">
+⭐ Reviews
+</a>
+</li>
+
+
+<li>
+<a href="admin-settings.html">
+⚙ Settings
+</a>
+</li>
+
+
+<li onclick="adminLogout()">
+🚪 Logout
+</li>
+
+
+</ul>
+
+
+</aside>
+
+
+
+<!-- Main -->
+
+
+<main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+
+        <div class="topbar-left">
+
+            <button id="menuToggle" class="menu-toggle">☰</button>
+
+            <div>
+
+                <h1>Review Management</h1>
+
+                <p>Manage customer reviews professionally</p>
+
+            </div>
+
+        </div>
+
+        <div class="topbar-center">
+
+            <div class="search-box">
+
+                🔍
+
+                <input
+                    type="text"
+                    id="searchReview"
+                    placeholder="Search customer...">
+
+            </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <select id="reviewFilter">
+
+                <option value="all">All Reviews</option>
+
+                <option value="approved">Approved</option>
+
+                <option value="pending">Pending</option>
+
+                <option value="rejected">Rejected</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <h2 id="totalReviews">0</h2>
+
+            <p>Total Reviews</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="approvedReviews">0</h2>
+
+            <p>Approved</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="pendingReviews">0</h2>
+
+            <p>Pending</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="rejectedReviews">0</h2>
+
+            <p>Rejected</p>
+
+        </div>
+
+    </div>
+
+    <!-- Reviews Table -->
+
+    <div class="dashboard-section">
+
+        <h2>Customer Reviews</h2>
+
+        <table class="dashboard-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Customer</th>
+
+                    <th>Rating</th>
+
+                    <th>Review</th>
+
+                    <th>Status</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="reviewsTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+
+</div>
+
+<div id="reviewModal" class="modal" style="display:none;">
+
+    <div class="modal-content">
+
+        <h2>Review Details</h2>
+
+        <div id="reviewDetails"></div>
+
+        <br>
+
+        <button id="approveReviewBtn">
+
+            ✅ Approve
+
+        </button>
+
+        <button id="rejectReviewBtn">
+
+            ❌ Reject
+
+        </button>
+
+        <button id="deleteReviewBtn">
+
+            🗑 Delete
+
+        </button>
+
+        <button id="closeReviewModal">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+</section>
+
+
+
+
+<script src="assets/js/admin.js"></script>
+
+<script type="module" src="assets/js/admin-reviews.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Place Order | Sowrov Fertilizer
+
+    </title>
+
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="assets/css/pages.css">
+
+</head>
+
+<body>
+
+<section class="contact-page">
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>
+
+            Place Your Order
+
+        </h2>
+
+        <p>
+
+            Order Organic Fertilizer Easily
+
+        </p>
+
+    </div>
+
+    <div class="form-box">
+
+        <form id="orderForm">
+
+            <div class="form-group">
+
+                <label>
+
+                    Customer Name
+
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Phone Number
+
+                </label>
+
+                <input
+                    type="text"
+                    id="phone"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Product
+
+                </label>
+
+                <select
+                    id="productSelect"
+                    required>
+
+                    <option>
+
+                        Loading Products...
+
+                    </option>
+
+                </select>
+                <div class="form-group">
+
+    <label>Order Type</label>
+
+    <select id="orderType" required>
+
+        <option value="Wholesale">Wholesale</option>
+
+        <option value="Retail">Retail</option>
+
+    </select>
+
+</div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Quantity (kg)
+                    
+
+                </label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    required>
+
+            </div>
+            <small id="stockInfo"></small>
+            <div class="form-group">
+
+    <label>Price Per Kg (৳)</label>
+
+    <input
+        type="number"
+        id="pricePerKg"
+        readonly>
+
+</div>
+
+<div class="form-group">
+
+    <label>Total Amount (৳)</label>
+   
+
+    <input
+        type="number"
+        id="totalAmount"
+        readonly>
+
+</div>
+<div class="form-group">
+
+<label>Payment Method</label>
+
+<select id="paymentMethod" required>
+
+<option value="COD">Cash on Delivery</option>
+
+<option value="bKash">bKash</option>
+
+<option value="Nagad">Nagad</option>
+
+</select>
+
+</div>
+
+<div id="onlinePaymentBox" style="display:none;">
+
+<div class="form-group">
+
+<label>Send Payment To</label>
+
+<input
+type="text"
+id="paymentNumber"
+readonly>
+
+</div>
+
+<div class="form-group">
+
+<label>Transaction ID</label>
+
+<input
+type="text"
+id="transactionId"
+placeholder="Enter Transaction ID">
+
+</div>
+
+</div>
+
+
+            <div class="form-group">
+
+    <label>Division</label>
+
+    <select id="division" required>
+
+        <option value="">Select Division</option>
+
+    </select>
+
+</div>
+
+<div class="form-group">
+
+    <label>District</label>
+
+    <select id="district" required>
+
+        <option value="">Select District</option>
+
+    </select>
+
+</div>
+
+<div class="form-group">
+
+    <label>Upazila</label>
+
+    <select id="upazila" required>
+
+        <option value="">Select Upazila</option>
+
+    </select>
+
+</div>
+
+<div class="form-group">
+
+    <label>Union / Municipality</label>
+
+    <select id="union" required>
+
+        <option value="">Select Union</option>
+
+    </select>
+
+</div>
+<div class="form-group">
+
+    <label>Main Post Office</label>
+
+    <select id="postOffice" required>
+
+        <option value="">Select Main Post Office</option>
+
+    </select>
+
+</div>
+
+<div class="form-group">
+    <label for="village">Village</label>
+    <input
+        type="text"
+        id="village"
+        name="village"
+        placeholder="Enter your village"
+        required
+    >
+</div>
+
+
+
+<div class="form-group">
+
+    <label>House / Road</label>
+
+    <input
+        type="text"
+        id="house"
+        placeholder="House No / Road">
+
+</div>
+
+            <button
+                class="btn"
+                type="submit">
+
+                Place Order
+
+            </button>
+
+        </form>
+        <div id="successBox" class="success-box" style="display:none;">
+
+    <h2>✅ Order Placed Successfully</h2>
+
+    <p id="successMessage"></p>
+
+    <button
+        class="btn"
+        onclick="location.reload()">
+
+        New Order
+
+    </button>
+
+</div>
+
+    </div>
+
+</div>
+
+</section>
+
+<script type="module" src="assets/js/order.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sales | Sowrov Fertilizer</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-layout">
+    <!-- Sidebar -->
+
+    
+    <aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li >
+<span>🏠</span>
+<a href="admin-dashboard.html">Dashboard</a>
+</li>
+
+<li>
+<span>📦</span>
+<a href="admin-products.html">Products</a>
+</li>
+
+<li >
+<span>🖼️</span>
+<a href="admin-gallery.html">Gallery</a>
+</li>
+
+<li class="active">
+<span>💰</span>
+<a href="admin-sales.html">Sales</a>
+</li>
+
+<li>
+<span>⭐</span>
+<a href="admin-reviews.html">Reviews</a>
+</li>
+
+<li>
+<span>📋</span>
+<a href="admin-orders.html">Orders</a>
+</li>
+
+<li>
+<span>👤</span>
+<a href="admin-users.html">Users</a>
+</li>
+
+<li>
+<span>📈</span>
+<a href="admin-reports.html">Reports</a>
+</li>
+
+<li>
+<span>⚙️</span>
+<a href="admin-settings.html">Settings</a>
+</li>
+
+<li onclick="adminLogout()">
+<span>🚪</span>
+Logout
+</li>
+
+
+</ul>
+
+</aside>
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <button id="menuToggle" class="menu-toggle">
+☰
+</button>
+
+            <div>
+
+               <h1>Sales</h1>
+<p>Sales generated automatically from approved customer orders.</p>            </div>
+
+            <a href="admin-product-add.html" class="btn">
+
+                + Add Product
+
+            </a>
+
+        </div>
+        <div class="dashboard-cards">
+
+    <div class="card">
+        <h3>Total Revenue</h3>
+        <h2 id="totalRevenue">৳0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Sales</h3>
+        <h2 id="totalSales">0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Quantity</h3>
+        <h2 id="totalQuantity">0 kg</h2>
+    </div>
+
+</div>
+
+      <!-- <div class="form-box">
+
+    <form id="salesForm">
+
+        <div class="form-group">
+
+            <label>Customer Name</label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter customer name"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Select Product</label>
+
+            <select id="productSelect" required>
+
+                <option value="">Loading Products...</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Sale Type</label>
+
+            <select id="saleType" required>
+
+                <option value="Wholesale">Wholesale</option>
+
+                <option value="Retail">Retail</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Quantity (kg)</label>
+
+            <input
+                type="number"
+                id="quantity"
+                placeholder="Enter quantity"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Total Price (৳)</label>
+
+            <input
+                type="number"
+                id="totalPrice"
+                readonly>
+
+        </div>
+
+        <button
+            type="submit"
+            class="btn">
+
+            Save Sale
+
+        </button>
+
+    </form>
+
+</div> --> 
+<div class="table-box">
+
+    <h2>Sales History</h2>
+    <div class="search-box">
+
+    <input
+        type="text"
+        id="searchSale"
+        placeholder="Search Customer...">
+
+</div> 
+
+    <table class="dashboard-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Customer</th>
+
+                <th>Product</th>
+
+                <th>Type</th>
+
+                <th>Quantity</th>
+
+                <th>Total</th>
+
+                <th>Date</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="salesTableBody">
+
+            <!-- Sales will load here -->
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</section>
+
+    </main>
+
+</section>
+<script type="module" src="assets/js/auth.js"></script>
+
+<script src="assets/js/admin.js"></script>
+
+</body>
+</html>

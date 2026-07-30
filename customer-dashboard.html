@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+
+<title>
+Customer Dashboard | Sowrov Fertilizer
+</title>
+
+
+<link rel="icon"
+href="assets/images/logo/favicon.png">
+
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+
+<link rel="stylesheet"
+href="assets/css/pages.css">
+
+
+</head>
+
+
+<body>
+
+
+<section class="dashboard">
+
+
+<div class="dashboard-layout">
+
+
+<!-- =====================
+        SIDEBAR
+====================== -->
+
+
+<aside class="sidebar">
+
+
+<div class="sidebar-logo">
+
+
+<span class="logo-green">
+Sowrov
+</span>
+
+
+<span class="logo-white">
+Fertilizer
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+
+<ul class="sidebar-menu">
+
+<li class="active">
+<a href="customer-dashboard.html">
+🏠 Dashboard
+</a>
+</li>
+
+<li>
+<a href="profile.html">
+👤 My Profile
+</a>
+</li>
+
+<li>
+<a href="customer-orders.html">
+📦 My Orders
+</a>
+</li>
+
+<li>
+<a href="customer-reviews.html">
+⭐ My Reviews
+</a>
+</li>
+
+<li>
+<a href="wishlist.html">
+❤️ Wishlist
+</a>
+</li>
+
+<li>
+<a href="customer-settings.html">
+⚙ Settings
+</a>
+</li>
+
+<li> 
+        <a href onclick="customerLogout()">
+🚪 Logout
+</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+</aside>
+
+
+
+
+
+<!-- =====================
+        MAIN CONTENT
+====================== -->
+
+
+<main class="main-content">
+
+
+
+<!-- TOPBAR -->
+
+
+<div class="topbar">
+
+
+<button 
+class="menu-toggle"
+id="menuToggle">
+
+☰
+
+</button>
+
+
+
+<div>
+
+
+<h1>
+
+Customer Dashboard
+
+</h1>
+
+
+<p id="welcomeText">
+
+Welcome Back 👋
+
+</p>
+
+
+</div>
+
+
+
+<div class="admin-profile">
+
+
+<img
+src="assets/images/logo/logo.png">
+
+
+<span>
+
+Customer
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- =====================
+        STATISTICS
+====================== -->
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+
+<h2 id="customerOrders">
+
+0
+
+</h2>
+
+
+<p>
+
+Total Orders
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="customerSpent">
+
+৳0
+
+</h2>
+
+
+<p>
+
+Total Spent
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="pendingOrders">
+
+0
+
+</h2>
+
+
+<p>
+
+Pending Orders
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="deliveredOrders">
+
+0
+
+</h2>
+
+
+<p>
+
+Delivered
+
+</p>
+
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="customerReviews">
+
+0
+
+</h2>
+
+<p>
+
+My Reviews
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="wishlistCount">
+
+0
+
+</h2>
+
+<p>
+
+Wishlist
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- PROFILE -->
+
+
+<div class="dashboard-section">
+
+
+<h2>
+
+👤 My Profile
+
+</h2>
+
+
+
+<div class="profile-box">
+
+
+<p>
+
+<b>Name:</b>
+
+<span id="profileName">
+
+-
+
+</span>
+
+</p>
+
+
+
+<p>
+
+<b>Email:</b>
+
+<span id="profileEmail">
+
+-
+
+</span>
+
+</p>
+
+
+
+<p>
+
+<b>Phone:</b>
+
+<span id="profilePhone">
+
+-
+
+</span>
+
+</p>
+
+
+
+<p>
+
+<b>Address:</b>
+
+<span id="profileAddress">
+
+-
+
+</span>
+
+</p>
+
+
+
+</div>
+
+
+</div>
+
+<div class="dashboard-section">
+
+<h2>
+
+Quick Actions
+
+</h2>
+
+<div class="quick-grid">
+
+<a
+href="products.html"
+class="btn">
+
+🛒 Shop Now
+
+</a>
+
+<a
+href="cart.html"
+class="btn">
+
+🛍 Cart
+
+</a>
+
+<a
+href="orders.html"
+class="btn">
+
+📦 Orders
+
+</a>
+
+<a
+href="customer-profile.html"
+class="btn">
+
+👤 Profile
+
+</a>
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- ORDERS -->
+
+
+<div class="dashboard-section">
+
+
+<h2>
+
+📦 Recent Orders
+
+</h2>
+
+
+
+<table class="dashboard-table">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+Order ID
+
+</th>
+
+
+<th>
+
+Product
+
+</th>
+
+
+<th>
+
+Quantity
+
+</th>
+
+
+<th>
+
+Amount
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="customerOrdersBody">
+
+
+</tbody>
+
+
+</table>
+<div class="dashboard-section">
+
+<h2>
+
+⭐ Latest Reviews
+
+</h2>
+
+<div id="latestReviews">
+
+</div>
+
+</div>
+
+
+</div>
+<!-- =====================
+        ORDER TRACKING
+====================== -->
+
+<div
+class="dashboard-section"
+id="trackingBox"
+style="display:none;">
+
+<h2>
+
+📦 Order Tracking
+
+</h2>
+
+<div class="tracking-timeline">
+
+<div id="pendingStep" class="tracking-step">
+
+<div class="circle">1</div>
+
+<p>Pending</p>
+
+</div>
+
+<div id="approvedStep" class="tracking-step">
+
+<div class="circle">2</div>
+
+<p>Approved</p>
+
+</div>
+
+<div id="packedStep" class="tracking-step">
+
+<div class="circle">3</div>
+
+<p>Packed</p>
+
+</div>
+
+<div id="shippedStep" class="tracking-step">
+
+<div class="circle">4</div>
+
+<p>Shipped</p>
+
+</div>
+
+<div id="deliveredStep" class="tracking-step">
+
+<div class="circle">5</div>
+
+<p>Delivered</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Order Details Modal -->
+
+<div id="orderModal" class="modal">
+
+    <div class="modal-content">
+
+        <span id="closeModal" class="close">&times;</span>
+
+        <h2>Order Details</h2>
+
+        <div id="orderDetails"></div>
+
+    </div>
+
+</div>
+
+</main>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<script src="assets/js/admin.js"></script>
+
+
+<script type="module"
+src="assets/js/customer-dashboard.js">
+</script>
+
+
+</body>
+
+
+</html>

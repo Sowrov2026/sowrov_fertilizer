@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Dashboard | Sowrov Fertilizer
+
+    </title>
+
+    <link rel="icon"
+          href="assets/images/logo/favicon.png">
+
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="assets/css/pages.css">
+
+</head>
+
+<body>
+
+<!--==========================
+        DASHBOARD
+===========================-->
+
+<section class="dashboard">
+
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+    <span class="logo-green">Sowrov</span>
+
+    <span class="logo-white">Fertilizer</span>
+
+</div>
+
+       <ul class="sidebar-menu">
+
+    <li class="active">
+        <span>🏠</span>
+        <a href="admin-dashboard.html">Dashboard</a>
+    </li>
+
+    <li>
+        <span>📦</span>
+        <a href="admin-products.html">Products</a>
+    </li>
+
+    <li>
+        <span>🖼️</span>
+        <a href="admin-gallery.html">Gallery</a>
+    </li>
+
+    <li>
+        <span>💰</span>
+        <a href="admin-sales.html">Sales</a>
+    </li>
+
+    <li>
+        <span>⭐</span>
+        <a href="admin-reviews.html">Reviews</a>
+    </li>
+
+    <li>
+        <span>📋</span>
+        <a href="admin-orders.html">Orders</a>
+    </li>
+
+    <li>
+        <span>👤</span>
+        <a href="admin-users.html">Users</a>
+    </li>
+
+    <li>
+        <span>⚙️</span>
+        <a href="admin-settings.html">Settings</a>
+    </li>
+
+    <li onclick="adminLogout()">
+        <span>🚪</span>
+        Logout
+    </li>
+
+</ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+      
+        <!-- Top Header -->
+
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <button id="menuToggle" class="menu-toggle">
+            ☰
+        </button>
+
+        <div>
+            <h1>Dashboard</h1>
+            <p>Welcome back, Admin 👋</p>
+        </div>
+
+    </div>
+
+    <div class="topbar-center">
+
+        <div class="search-box">
+            <span>🔍</span>
+            <input
+                type="text"
+                id="dashboardSearch"
+                placeholder="Search products, orders, users...">
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <button class="header-btn">🌙</button>
+
+        <button
+            id="notificationBtn"
+            class="notification">
+
+            🔔
+
+            <span id="notificationCount">0</span>
+
+        </button>
+
+        <button class="header-btn">🌐</button>
+
+        <div class="admin-profile">
+
+            <img
+                src="assets/images/logo/logo.png"
+                alt="Admin">
+
+            <div>
+
+                <strong>Admin</strong>
+
+                <small>Super Admin</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="overview-banner">
+
+    <div class="overview-left">
+
+        <h2>Good Morning, Admin 👋</h2>
+
+        <p>
+            Here is today's business overview.
+        </p>
+
+    </div>
+
+    <div class="overview-right">
+
+        <div class="overview-box">
+
+            <h3 id="todayRevenueBanner">
+                ৳0
+            </h3>
+
+            <span>Today's Revenue</span>
+
+        </div>
+
+        <div class="overview-box">
+
+            <h3 id="todayOrderBanner">
+                0
+            </h3>
+
+            <span>Today's Orders</span>
+
+        </div>
+
+        <div class="overview-box">
+
+            <h3 id="todaySaleBanner">
+                0
+            </h3>
+
+            <span>Today's Sales</span>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="quick-actions">
+
+   <button id="addProductBtn" type="button">
+    ➕
+    <span>Add Product</span>
+</button>
+
+<button id="addSaleBtn" type="button">
+    💰
+    <span>Add Sale</span>
+</button>
+
+<button id="ordersBtn" type="button">
+    📦
+    <span>Orders</span>
+</button>
+
+<button id="usersBtn" type="button">
+    👥
+    <span>Users</span>
+</button>
+
+<button id="reportsBtn" type="button">
+    📈
+    <span>Reports</span>
+</button>
+</div>
+
+
+<!-- Statistics -->
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <h2 id="totalProducts">0</h2>
+
+        <p>Products</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2 id="totalSales">0</h2>
+
+        <p>Total Sales</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2 id="totalRevenue">৳0</h2>
+
+        <p>Total Revenue</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2 id="totalOrders">0</h2>
+
+        <p>Orders</p>
+
+    </div>
+
+</div>
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h2 id="todaySales">
+
+0
+
+</h2>
+
+<p>Today's Sales</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="todayRevenue">
+
+৳0
+
+</h2>
+
+<p>Today's Revenue</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="monthRevenue">
+
+৳0
+
+</h2>
+
+<p>This Month</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="growthRate">
+
+0%
+
+</h2>
+
+<p>Growth</p>
+
+</div>
+
+</div>
+<div class="dashboard-section">
+
+<h2>
+
+📈 Sales Analytics
+
+</h2>
+
+<div class="chart-container">
+
+<canvas id="salesChart"></canvas>
+
+</div>
+
+</div>
+<div class="dashboard-section">
+
+    <div class="dashboard-two-column">
+
+        <!-- Left -->
+
+        <div class="system-status">
+
+            <h2>🟢 System Status</h2>
+
+            <div class="status-item">
+                <span>Firebase</span>
+                <strong class="online">Connected</strong>
+            </div>
+
+            <div class="status-item">
+                <span>Website</span>
+                <strong class="online">Online</strong>
+            </div>
+
+            <div class="status-item">
+                <span>Orders Today</span>
+                <strong id="todayOrderCount">0</strong>
+            </div>
+
+            <div class="status-item">
+                <span>New Users</span>
+                <strong id="newUsers">0</strong>
+            </div>
+
+            <div class="status-item">
+                <span>Reviews</span>
+                <strong id="newReviews">0</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="dashboard-section">
+
+<h2>
+
+📦 Inventory Analytics
+
+</h2>
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<h2 id="totalStock">
+
+0 kg
+
+</h2>
+
+<p>Total Stock</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<h2 id="inventoryValue">
+
+৳0
+
+</h2>
+
+<p>Inventory Value</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<h2 id="outStock">
+
+0
+
+</h2>
+
+<p>Out Of Stock</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<h2 id="lowStock">
+
+0
+
+</h2>
+
+<p>Low Stock</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+<div class="dashboard-section">
+
+<h2>
+🏆 Sales Performance
+</h2>
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<h2 id="bestProduct">
+
+-
+
+</h2>
+
+<p>Best Selling Product</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h2 id="bestProductQty">
+
+0 kg
+
+</h2>
+
+<p>Total Sold</p>
+
+</div>
+
+
+</div>
+
+</div>
+<div class="dashboard-section">
+
+    <h2>⚠️ Low Stock Products</h2>
+
+    <table class="dashboard-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Product</th>
+
+                <th>Stock</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="lowStockBody">
+
+        </tbody>
+
+    </table>
+
+</div>
+<div class="dashboard-section">
+
+<h2>📦 Order Analytics</h2>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h2 class="warning-number" id="pendingOrders">
+0
+</h2>
+
+<p>Pending Orders</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<h2 class="success-number" id="approvedOrders">
+0
+</h2>
+
+<p>Approved Orders</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<h2 id="deliveredOrders">0</h2>
+
+<p>Delivered Orders</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h2 class="danger-number" id="cancelledOrders">
+0
+</h2>
+
+<p>Cancelled Orders</p>
+
+</div>
+
+
+</div>
+
+</div>
+<!-- ==========================
+Views & Order Status Analytics
+=========================== -->
+
+
+<div class="dashboard-section">
+
+
+<h2>
+📊 Views & Order Status
+</h2>
+
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<h2 id="totalViews">
+0
+</h2>
+
+<p>
+Total Views
+</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h2 id="activeOrders">
+0
+</h2>
+
+<p>
+Active Orders
+</p>
+
+</div>
+
+
+
+
+<div class="stat-card">
+
+<h2 id="shippedOrders">
+0
+</h2>
+
+<p>
+Shipped Orders
+</p>
+
+</div>
+<div class="stat-card">
+    <h2 id="completedOrders">0</h2>
+    <p>Completed Orders</p>
+</div>
+
+
+
+
+
+
+</div>
+
+</div>
+<div class="dashboard-section">
+
+    <h2>🕒 Recent Activities</h2>
+
+    <div class="activity-list" id="activityList">
+
+        <div class="activity-item">
+            <div class="activity-icon">📦</div>
+
+            <div class="activity-content">
+                <strong>Loading activities...</strong>
+                <small>Please wait...</small>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Recent Products -->
+
+<div class="dashboard-section">
+
+<h2>
+
+Recent Products
+
+</h2>
+
+<table class="dashboard-table">
+
+<thead>
+
+<tr>
+
+<th>Image</th>
+
+<th>Name</th>
+
+<th>Price</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="recentProductsBody">
+
+    <!-- Recent Products -->
+
+</tbody>
+
+</table>
+
+</div>
+<div class="dashboard-section">
+
+    
+
+    <div class="stats-grid">
+
+       <div class="stat-card"
+     onclick="window.location.href='admin-products.html'">
+
+    <h2>➕</h2>
+
+    <p>Add Product</p>
+
+</div>
+<div class="stat-card"
+onclick="window.location.href='admin-orders.html'">
+
+<h2>📦</h2>
+
+<p>Manage Orders</p>
+
+</div>
+
+        <div class="stat-card"
+onclick="window.location.href='admin-reviews.html'">
+
+<h2>⭐</h2>
+
+<p>Reviews</p>
+
+</div>
+
+        
+
+        <div class="stat-card"
+onclick="window.location.href='admin-settings.html'">
+
+<h2>⚙️</h2>
+
+<p>Settings</p>
+
+</div>
+
+    </div>
+
+</div>
+<div class="dashboard-section">
+
+    <h2>🌐 Website Information</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h2>Sowrov Fertilizer</h2>
+            <p>Admin Panel</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Version 2.0.1</h2>
+            <p>Current Build</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Firebase</h2>
+            <p>Connected</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Online</h2>
+            <p>Server Status</p>
+        </div>
+
+    </div>
+
+</div>
+<footer class="dashboard-footer">
+
+    <div class="footer-left">
+        <strong>© 2026 Sowrov Fertilizer</strong>
+        <span>Version 2.0.1</span>
+    </div>
+
+    <div class="footer-center">
+        🟢 Firebase Connected
+    </div>
+
+    <div class="footer-right">
+        <a href="#">Privacy</a>
+        <a href="#">Support</a>
+        <a href="#">Documentation</a>
+    </div>
+
+</footer>
+
+</main>
+
+</div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/js/script.js"></script>
+<script type="module"
+src="assets/js/auth.js"></script>
+<script src="assets/js/admin.js"></script>
+<script type="module" src="assets/js/admin-dashboard.js"></script>
+
+</body>
+
+</html>

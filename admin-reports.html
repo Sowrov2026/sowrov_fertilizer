@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+Reports | Sowrov Fertilizer
+</title>
+
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<link rel="stylesheet" href="assets/css/pages.css">
+
+
+</head>
+
+
+<body>
+
+
+<section class="dashboard">
+
+
+<div class="dashboard-layout">
+
+
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<span class="logo-green">Sowrov</span>
+
+<span class="logo-white">Fertilizer</span>
+
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li >
+<span>🏠</span>
+<a href="admin-dashboard.html">Dashboard</a>
+</li>
+
+<li>
+<span>📦</span>
+<a href="admin-products.html">Products</a>
+</li>
+
+<li>
+<span>🖼️</span>
+<a href="admin-gallery.html">Gallery</a>
+</li>
+
+<li>
+<span>💰</span>
+<a href="admin-sales.html">Sales</a>
+</li>
+
+<li>
+<span>⭐</span>
+<a href="admin-reviews.html">Reviews</a>
+</li>
+
+<li>
+<span>📋</span>
+<a href="admin-orders.html">Orders</a>
+</li>
+
+<li>
+<span>👤</span>
+<a href="admin-users.html">Users</a>
+</li>
+
+<li class="active">
+<span>📈</span>
+<a href="admin-reports.html">Reports</a>
+</li>
+
+<li>
+<span>⚙️</span>
+<a href="admin-settings.html">Settings</a>
+</li>
+
+<li onclick="adminLogout()">
+<span>🚪</span>
+Logout
+</li>
+
+
+</ul>
+
+</aside>
+
+
+<!-- Main -->
+
+
+<main class="main-content">
+
+
+
+<div class="topbar">
+
+
+<button id="menuToggle"
+class="menu-toggle">
+
+☰
+
+</button>
+
+
+<div>
+
+<h1>
+Business Reports
+</h1>
+
+<p>
+Analyze your business performance
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- Report Cards -->
+
+
+<div class="dashboard-cards">
+
+
+<div class="card">
+
+<h3>
+Total Sales
+</h3>
+
+<h2 id="reportSales">
+0
+</h2>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Total Revenue
+</h3>
+
+<h2 id="reportRevenue">
+৳0
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Total Orders
+</h3>
+
+<h2 id="reportOrders">
+0
+</h2>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Total Products
+</h3>
+
+<h2 id="reportProducts">
+0
+</h2>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- Chart -->
+
+
+<div class="dashboard-section">
+
+
+<h2>
+📊 Monthly Revenue Report
+</h2>
+
+
+<div class="chart-container">
+
+<canvas id="reportChart"></canvas>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- Export -->
+
+
+<div class="dashboard-section">
+
+
+<h2>
+📄 Export Report
+</h2>
+
+
+<button id="printReport">
+
+🖨 Print Report
+
+</button>
+
+
+</div>
+
+
+
+
+</main>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="assets/js/admin.js"></script>
+
+<script type="module" src="assets/js/admin-reports.js"></script>
+
+
+
+</body>
+
+</html>
