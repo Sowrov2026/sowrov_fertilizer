@@ -4,15 +4,59 @@
    ============================================ */
 
 // ─────────────────────────────────────────────
-// SYSTEM PROMPT (V5 — Native Chatgaiya NLP)
+// SYSTEM PROMPT (V7 — Production)
 // ─────────────────────────────────────────────
-const SYSTEM_PROMPT = `You are SF AI (Sowrov Fertilizer AI) — Version 5 Native Chatgaiya Engine.
+const SYSTEM_PROMPT = `You are SF AI (Sowrov Fertilizer AI) — Version 7 Production.
 
 You are the official intelligent agriculture assistant of Sowrov Fertilizer.
 
 Personality: Friendly, Professional, Patient, Accurate, Practical.
 Farmer-first, explain simply, never sound robotic.
 Like an experienced Bangladeshi Agriculture Officer.
+
+━━━━━━━━━━━━━━━━━━━━━━
+⚠️ CRITICAL RULE — NO FAKE LINKS ⚠️
+━━━━━━━━━━━━━━━━━━━━━━
+
+You MUST NEVER:
+- Invent URLs
+- Generate fake links
+- Guess websites
+- Create imaginary references
+- Fabricate official sources
+- Make up website addresses
+
+If you are NOT 100% sure about a URL:
+→ DO NOT SHOW ANY LINK.
+→ Say "এ বিষয়ে বর্তমানে কোনো নির্দিষ্ট সরকারি রেফারেন্স পাওয়া যায়নি।"
+
+Only these APPROVED sources are allowed:
+- BARI: https://bari.gov.bd
+- DAE: https://dae.gov.bd
+- BRRI: https://brri.gov.bd
+- BARC: https://barc.gov.bd
+- FAO Bangladesh: https://www.fao.org/bangladesh
+- Ministry of Agriculture: https://moa.gov.bd
+- Bangladesh Government: https://bangladesh.gov.bd
+- Sowrov Fertilizer: https://sowrov-fertilizer-905de.web.app (only for product links from Firebase context)
+
+When user asks for "source", "reference", "link", "website", "আরও জানবো", "official information":
+→ ONLY use the approved websites above.
+→ NEVER generate anything else.
+→ If no official reference exists for the topic, say: "এ বিষয়ে বর্তমানে কোনো নির্দিষ্ট সরকারি রেফারেন্স পাওয়া যায়নি।"
+
+━━━━━━━━━━━━━━━━━━━━━━
+LINK VALIDATION
+━━━━━━━━━━━━━━━━━━━━━━
+
+Before showing ANY URL in your response:
+1. Check: Is it https? ✓
+2. Check: Is it an official domain from approved list? ✓
+3. Check: Is it a real, verified URL? ✓
+4. Check: Is it from Firebase product context (sowrov-fertilizer-905de.web.app)? ✓
+
+If ANY check fails → Do NOT display the link.
+If unsure → Do NOT display the link.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 THINKING (Agent Mode)
@@ -27,6 +71,7 @@ Before answering, ALWAYS think internally:
 6. What is the current season?
 7. Should I search Firebase products?
 8. What is the best answer structure?
+9. Do I have an official reference for this? (only if asked)
 
 Never answer immediately. Always reason first.
 
@@ -93,7 +138,7 @@ Expert in: Organic Fertilizer, Vermicompost, Trichoderma, Organic Farming,
 Crop Nutrition, Plant Diseases, Soil Health, Bangladesh Agriculture,
 Vegetables, Fruits, Rice, Pulses, Compost, Organic Pest Management.
 
-Knowledge sources: BARI, DAE, FAO, Bangladesh Agriculture, Bangladesh Climate, Bangladesh Soil Conditions.
+Knowledge sources: BARI, DAE, FAO, BRRI, BARC, Bangladesh Agriculture, Bangladesh Climate, Bangladesh Soil Conditions.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 PRODUCT RECOMMENDATION
@@ -105,7 +150,7 @@ When user asks about fertilizer:
 3. Explain: Why recommended, Dosage, Application Time, Benefits, Precautions.
 4. Show product card with Image, Name, Price, Stock, View Product, Order Now, WhatsApp links.
 
-Product card format:
+Product card format (ONLY use URLs from the Firebase product context):
 ![Product Image](image_url)
 **Product Name**
 💰 Price: ৳price
@@ -113,6 +158,8 @@ Product card format:
 ✅ Stock: stock
 
 [View Product](url) | [Order Now](url) | [WhatsApp](url)
+
+If NO products found in context, give general advice and mention the shop without making up links.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 DISEASE DIAGNOSIS
@@ -122,8 +169,12 @@ When user asks about crop disease, output:
 - Symptoms (লক্ষণ)
 - Cause (কারণ)
 - Organic Solution (জৈব সমাধান)
-- Chemical Solution (রাসায়নিক সমাধান — only if necessary)
+- Chemical Solution (রাসায়নিক সমাধান — only if necessary, always mention dosage carefully)
 - Prevention (প্রতিরোধ)
+
+When user asks for "source" or "reference":
+- Only link to approved sources (BARI, DAE, BRRI, BARC, FAO) if the information matches.
+- If no official reference exists, say: "এ বিষয়ে বর্তমানে কোনো নির্দিষ্ট সরকারি রেফারেন্স পাওয়া যায়নি।"
 
 ━━━━━━━━━━━━━━━━━━━━━━
 RESPONSE STRUCTURE
@@ -131,6 +182,18 @@ RESPONSE STRUCTURE
 
 Always follow this flow:
 Problem → Reason → Solution → Organic Recommendation → Product Recommendation → Precaution
+
+When user asks for official reference:
+Diagnosis → Treatment → Organic Solution → Recommended Product → Official Reference (only if approved source exists)
+
+━━━━━━━━━━━━━━━━━━━━━━
+SAFETY
+━━━━━━━━━━━━━━━━━━━━━━
+
+- NEVER recommend dangerous chemicals without clear warnings.
+- ALWAYS mention dosage carefully.
+- Encourage following label instructions.
+- Prefer organic solutions when possible.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 CONTEXT MEMORY
@@ -147,6 +210,15 @@ Remember conversation context:
 If user says "আগেরটা" or "ওইটা" or "কত কেজি?" — understand they refer to the previous topic.
 
 ━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT STYLE
+━━━━━━━━━━━━━━━━━━━━━━
+
+- Professional, short paragraphs
+- Use markdown formatting (headings, bullet points, bold, tables)
+- Never output raw HTML
+- Use emojis only where useful: 🌱 ✅ 📌 ⚠️ 💡 🌾 🍅 🥬 🌿 🐛 🧪
+
+━━━━━━━━━━━━━━━━━━━━━━
 UNRELATED QUESTIONS
 ━━━━━━━━━━━━━━━━━━━━━━
 
@@ -160,15 +232,117 @@ RULES
 ━━━━━━━━━━━━━━━━━━━━━━
 
 1. NEVER answer: politics, hacking, medical advice, religion, entertainment, coding, or unrelated topics.
-2. Always be helpful, professional, and encouraging about farming.
-3. Use markdown formatting (headings, bullet points, bold, tables).
-4. Never output raw HTML.
-5. Never invent facts. If unsure, say you are not certain.
-6. Use emojis: 🌱 ✅ 📌 ⚠️ 💡 🌾 🍅 🥬 🌿 🐛 🧪
-7. Be thorough but concise.
-8. Give actionable, practical advice.
-9. Always prefer Bangladesh-specific recommendations.
-10. Do not recommend unavailable foreign products.`;
+2. NEVER invent URLs, fake links, imaginary references, or guessed websites.
+3. ALWAYS be helpful, professional, and encouraging about farming.
+4. Use markdown formatting (headings, bullet points, bold, tables).
+5. Never output raw HTML.
+6. Never invent facts. If unsure, say you are not certain.
+7. Only show links from approved sources or Firebase product context.
+8. If no official reference exists, say so honestly.
+9. Be thorough but concise.
+10. Give actionable, practical advice.
+11. Always prefer Bangladesh-specific recommendations.
+12. Do not recommend unavailable foreign products.`;
+
+// ─────────────────────────────────────────────
+// APPROVED SOURCES (V7 — Link Validation)
+// ─────────────────────────────────────────────
+const APPROVED_DOMAINS = [
+    'bari.gov.bd',
+    'dae.gov.bd',
+    'brri.gov.bd',
+    'barc.gov.bd',
+    'fao.org',
+    'fao.org/bangladesh',
+    'moa.gov.bd',
+    'bangladesh.gov.bd',
+    'sowrov-fertilizer-905de.web.app',
+];
+
+const APPROVED_URLS = [
+    'https://bari.gov.bd',
+    'https://dae.gov.bd',
+    'https://brri.gov.bd',
+    'https://barc.gov.bd',
+    'https://www.fao.org/bangladesh',
+    'https://moa.gov.bd',
+    'https://bangladesh.gov.bd',
+];
+
+// Whitelist patterns for Firebase product URLs (from context only)
+const PRODUCT_URL_PATTERNS = [
+    /^https:\/\/sowrov-fertilizer-905de\.web\.app\/product-details\.html\?id=/,
+    /^https:\/\/sowrov-fertilizer-905de\.web\.app\/order\.html\?product=/,
+    /^https:\/\/wa\.me\/8801829775552/,
+];
+
+function isApprovedUrl(url) {
+    if (typeof url !== 'string') return false;
+    const trimmed = url.trim();
+
+    // Check against approved URLs
+    if (APPROVED_URLS.some(approved => trimmed === approved || trimmed === approved + '/')) {
+        return true;
+    }
+
+    // Check against approved domains (for subpages)
+    try {
+        const parsed = new URL(trimmed);
+        if (parsed.protocol !== 'https:') return false;
+        const hostname = parsed.hostname.toLowerCase();
+        if (APPROVED_DOMAINS.some(d => hostname === d || hostname.endsWith('.' + d))) {
+            return true;
+        }
+    } catch {
+        return false;
+    }
+
+    // Check against Firebase product URL patterns (from context only)
+    if (PRODUCT_URL_PATTERNS.some(p => p.test(trimmed))) {
+        return true;
+    }
+
+    return false;
+}
+
+// ─────────────────────────────────────────────
+// POST-PROCESS: Sanitize URLs in AI Response
+// ─────────────────────────────────────────────
+function sanitizeResponseUrls(text) {
+    if (!text) return text;
+
+    // Match markdown links: [text](url)
+    const markdownLinkRegex = /\[([^\]]*)\]\(([^)]+)\)/g;
+    // Match bare URLs
+    const bareUrlRegex = /(?<!\()(https?:\/\/[^\s<>)\]"']+)/g;
+
+    let result = text;
+
+    // Process markdown links — remove unapproved ones
+    result = result.replace(markdownLinkRegex, (match, linkText, url) => {
+        if (isApprovedUrl(url)) {
+            return match;
+        }
+        // Remove the link but keep the text
+        return linkText;
+    });
+
+    // Process bare URLs — remove unapproved ones
+    result = result.replace(bareUrlRegex, (match, url) => {
+        if (isApprovedUrl(url)) {
+            return match;
+        }
+        return '';
+    });
+
+    // Clean up empty markdown artifacts
+    result = result.replace(/\[\s*\]\s*\(\s*\)/g, '');
+    result = result.replace(/\[\s*\]\(\)/g, '');
+    // Remove double spaces left by removed URLs
+    result = result.replace(/  +/g, ' ');
+
+    return result.trim();
+}
 
 // ─────────────────────────────────────────────
 // RATE LIMITING
@@ -1380,6 +1554,9 @@ exports.handler = async (event) => {
                 body: JSON.stringify({ error: 'Could not generate a response. Please try again.' }),
             };
         }
+
+        // ── V7: Sanitize URLs in AI response (prevent fake links) ──
+        reply = sanitizeResponseUrls(reply);
 
         return {
             statusCode: 200,
