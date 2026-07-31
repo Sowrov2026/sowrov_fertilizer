@@ -1,9 +1,9 @@
 /**
- * Response Cache — V8 RAG Engine
- * Caches retrieved documents and frequent question answers
+ * Response Cache — V11 Enterprise Architecture
+ * Caches: Knowledge, Products, Popular Questions
  */
 
-const CACHE_MAX_SIZE = 200;
+const CACHE_MAX_SIZE = 500;
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
 class ResponseCache {
@@ -27,7 +27,6 @@ class ResponseCache {
             this.accessOrder = this.accessOrder.filter(k => k !== key);
             return null;
         }
-        // Move to end (most recently used)
         this.accessOrder = this.accessOrder.filter(k => k !== key);
         this.accessOrder.push(key);
         return entry.value;
@@ -54,11 +53,13 @@ class ResponseCache {
     }
 }
 
-// Singleton cache instance
-const queryCache = new ResponseCache();
+// Separate cache instances for different types
+const knowledgeCache = new ResponseCache();
+const productCache = new ResponseCache();
+const questionCache = new ResponseCache();
 
 /**
- * Generate cache key from query + options
+ * Generate cache key
  */
 function getCacheKey(query, options = {}) {
     const normalized = (query || '').toLowerCase().trim().replace(/\s+/g, ' ');
@@ -66,10 +67,62 @@ function getCacheKey(query, options = {}) {
     if (options.crop) parts.push(`crop:${options.crop}`);
     if (options.disease) parts.push(`disease:${options.disease}`);
     if (options.season) parts.push(`season:${options.season}`);
+    if (options.type) parts.push(`type:${options.type}`);
     return parts.join('|');
 }
 
+/**
+ * Get from knowledge cache
+ */
+function getCachedKnowledge(key) {
+    return knowledgeCache.get(key);
+}
+
+/**
+ * Set knowledge cache
+ */
+function setCachedKnowledge(key, value) {
+    knowledgeCache.set(key, value);
+}
+
+/**
+ * Get from product cache
+ */
+function getCachedProducts(key) {
+    return productCache.get(key);
+}
+
+/**
+ * Set product cache
+ */
+function setCachedProducts(key, value) {
+    productCache.set(key, value);
+}
+
+/**
+ * Get from question cache (popular questions)
+ */
+function getCachedQuestion(key) {
+    return questionCache.get(key);
+}
+
+/**
+ * Set question cache
+ */
+function setCachedQuestion(key, value) {
+    questionCache.set(key, value);
+}
+
 module.exports = {
-    queryCache,
+    ResponseCache,
+    knowledgeCache,
+    productCache,
+    questionCache,
     getCacheKey,
+    getCachedKnowledge,
+    setCachedKnowledge,
+    getCachedProducts,
+    setCachedProducts,
+    getCachedQuestion,
+    setCachedQuestion,
 };
