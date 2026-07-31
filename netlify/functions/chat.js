@@ -1,12 +1,15 @@
 /* ============================================
-   SF AI Assistant v5 — Chatgaiya Native Engine
+   SF AI Assistant v8 — RAG Engine
    Netlify Serverless Function | OpenRouter API
    ============================================ */
+
+const { searchKnowledgeBase, buildRAGContext } = require('./knowledge');
+const { queryCache, getCacheKey } = require('./cache');
 
 // ─────────────────────────────────────────────
 // SYSTEM PROMPT (V7 — Production)
 // ─────────────────────────────────────────────
-const SYSTEM_PROMPT = `You are SF AI (Sowrov Fertilizer AI) — Version 7 Production.
+const SYSTEM_PROMPT = `You are SF AI (Sowrov Fertilizer AI) — Version 8 RAG Engine.
 
 You are the official intelligent agriculture assistant of Sowrov Fertilizer.
 
@@ -74,6 +77,36 @@ Before answering, ALWAYS think internally:
 9. Do I have an official reference for this? (only if asked)
 
 Never answer immediately. Always reason first.
+
+━━━━━━━━━━━━━━━━━━━━━━
+📚 RAG (Retrieval-Augmented Generation)
+━━━━━━━━━━━━━━━━━━━━━━
+
+Official agriculture documents have been RETRIEVED and provided in the context.
+
+Before answering:
+1. READ the retrieved documents carefully.
+2. Use ONLY information from retrieved documents when available.
+3. If retrieved documents answer the question, base your answer on them.
+4. If no retrieved documents are relevant, use your general knowledge but clearly state you are not citing an official source.
+5. NEVER invent documents or references that are not in the retrieved context.
+
+Answer format when documents are retrieved:
+- Diagnosis (লক্ষণ)
+- Cause (কারণ)
+- Solution (সমাধান)
+- Organic Solution (জৈব সমাধান)
+- Recommended SF Product (প্রস্তাবিত পণ্য)
+- Government Reference (সরকারি রেফারেন্স) — only from retrieved documents
+
+━━━━━━━━━━━━━━━━━━━━━━
+CONFIDENCE
+━━━━━━━━━━━━━━━━━━━━━━
+
+If your confidence is below 70%:
+- Say: "I am not fully certain about this."
+- Do not guess.
+- Recommend the user consult a local agriculture officer.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 LANGUAGE INTELLIGENCE
@@ -1322,7 +1355,7 @@ function formatProductsForPrompt(products) {
 // ─────────────────────────────────────────────
 // BUILD OPENROUTER API REQUEST
 // ─────────────────────────────────────────────
-function buildOpenRouterRequest(messages, imageDataUrl, productContext, conversationContext) {
+function buildOpenRouterRequest(messages, imageDataUrl, productContext, conversationContext, ragContext) {
     const apiMessages = [];
     const recentMessages = messages.slice(-20);
 
@@ -1338,6 +1371,11 @@ function buildOpenRouterRequest(messages, imageDataUrl, productContext, conversa
         if (conversationContext.season) {
             contextInjection += `\nCurrent season mentioned: ${conversationContext.season}`;
         }
+    }
+
+    // Inject RAG context (retrieved documents)
+    if (ragContext) {
+        contextInjection += ragContext;
     }
 
     const finalSystemPrompt = SYSTEM_PROMPT + contextInjection;
@@ -1458,7 +1496,31 @@ exports.handler = async (event) => {
         if (intent.location) conversationContext.location = intent.location;
         if (intent.season) conversationContext.season = intent.season;
 
-        // Step 7: Search Firebase products if needed
+        // Step 7: RAG — Search Knowledge Base (with caching)
+        let ragContext = '';
+        const cacheKey = getCacheKey(normalizedText, {
+            crop: intent.cropName,
+            disease: null,
+            season: intent.season,
+        });
+
+        const cachedRAG = queryCache.get(cacheKey);
+        if (cachedRAG) {
+            ragContext = cachedRAG;
+        } else {
+            const retrievedDocs = searchKnowledgeBase(normalizedText, {
+                crop: intent.cropName,
+                disease: null,
+                season: intent.season,
+                limit: 5,
+            });
+            ragContext = buildRAGContext(retrievedDocs);
+            if (ragContext) {
+                queryCache.set(cacheKey, ragContext);
+            }
+        }
+
+        // Step 8: Search Firebase products if needed
         let productContext = '';
         if (intent.isFertilizerQuery || intent.isProductQuery || intent.cropName) {
             const searchTerms = [];
@@ -1483,8 +1545,8 @@ exports.handler = async (event) => {
             productContext = formatProductsForPrompt(allProducts.slice(0, 5));
         }
 
-        // Step 8: Build and send request
-        const requestBody = buildOpenRouterRequest(messages, image, productContext, conversationContext);
+        // Step 9: Build and send request
+        const requestBody = buildOpenRouterRequest(messages, image, productContext, conversationContext, ragContext);
         const siteUrl = event.headers.origin || 'https://sowrov-fertilizer-905de.web.app';
 
         const fetchOptions = {
