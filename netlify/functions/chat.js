@@ -1,6 +1,6 @@
 /* ============================================
    SF AI Assistant - Netlify Serverless Function
-   Google Gemini 2.5 Flash API | Backend Only
+   OpenRouter API | Backend Only
    ============================================ */
 
 const SYSTEM_PROMPT = `You are SF AI Assistant, the official AI assistant of Sowrov Fertilizer.
@@ -184,54 +184,45 @@ function formatProductsForPrompt(products) {
 }
 
 // ============================================
-// Build Gemini API Request
+// Build OpenRouter API Request (OpenAI-compatible)
 // ============================================
-function buildGeminiRequest(messages, imageDataUrl, productContext) {
-    const contents = [];
+function buildOpenRouterRequest(messages, imageDataUrl, productContext) {
+    const apiMessages = [];
     const recentMessages = messages.slice(-20);
+
+    // System message
+    apiMessages.push({ role: 'system', content: SYSTEM_PROMPT });
 
     for (let i = 0; i < recentMessages.length; i++) {
         const msg = recentMessages[i];
-        const role = msg.role === 'assistant' ? 'model' : 'user';
+        const role = msg.role === 'assistant' ? 'assistant' : 'user';
         const content = sanitizeInput(msg.content || '');
         if (!content) continue;
 
         const isLastUserMsg = role === 'user' && i === recentMessages.length - 1;
 
         if (isLastUserMsg && imageDataUrl && isValidImageDataUrl(imageDataUrl)) {
-            const base64Data = imageDataUrl.replace(/^data:image\/\w+;base64,/, '');
-            const mimeType = imageDataUrl.match(/^data:(image\/\w+);/)?.[1] || 'image/jpeg';
+            const textContent = productContext ? content + productContext : content;
 
-            const parts = [];
-            if (productContext) {
-                parts.push({ text: content + productContext });
-            } else {
-                parts.push({ text: content });
-            }
-            parts.push({
-                inlineData: {
-                    mimeType: mimeType,
-                    data: base64Data,
-                },
+            apiMessages.push({
+                role: 'user',
+                content: [
+                    { type: 'text', text: textContent },
+                    { type: 'image_url', image_url: { url: imageDataUrl } },
+                ],
             });
-
-            contents.push({ role: 'user', parts });
         } else if (isLastUserMsg && productContext) {
-            contents.push({ role: 'user', parts: [{ text: content + productContext }] });
+            apiMessages.push({ role: 'user', content: content + productContext });
         } else {
-            contents.push({ role, parts: [{ text: content }] });
+            apiMessages.push({ role, content });
         }
     }
 
     return {
-        contents,
-        systemInstruction: {
-            parts: [{ text: SYSTEM_PROMPT }],
-        },
-        generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 2048,
-        },
+        model: 'google/gemini-2.5-flash',
+        messages: apiMessages,
+        max_tokens: 2048,
+        temperature: 0.7,
     };
 }
 
@@ -263,13 +254,13 @@ exports.handler = async (event) => {
         };
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
-        console.error('GEMINI_API_KEY is not configured');
+        console.error('OPENROUTER_API_KEY is not configured');
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: 'AI service is not configured. Please contact support.' }),
+            body: JSON.stringify({ error: 'OPENROUTER_API_KEY is not configured.' }),
         };
     }
 
@@ -318,20 +309,24 @@ exports.handler = async (event) => {
             }
         }
 
-        const requestBody = buildGeminiRequest(messages, image, productContext);
+        const requestBody = buildOpenRouterRequest(messages, image, productContext);
 
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-            }
-        );
+        const siteUrl = event.headers.origin || 'https://sowrov-fertilizer-905de.web.app';
+
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+                'HTTP-Referer': siteUrl,
+                'X-Title': 'Sowrov Fertilizer',
+            },
+            body: JSON.stringify(requestBody),
+        });
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => null);
-            console.error('Gemini API error:', response.status, errorData);
+            console.error('OpenRouter API error:', response.status, errorData);
 
             if (response.status === 429) {
                 return {
@@ -341,28 +336,28 @@ exports.handler = async (event) => {
                 };
             }
 
-            if (response.status === 403) {
+            if (response.status === 401 || response.status === 403) {
                 return {
                     statusCode: 500,
                     headers,
-                    body: JSON.stringify({ error: 'AI service authentication failed. Please contact support.' }),
+                    body: JSON.stringify({ error: 'AI service authentication failed. Please check OPENROUTER_API_KEY.' }),
                 };
             }
 
+            const detail = errorData?.error?.message || 'AI service is temporarily unavailable. Please try again.';
             return {
                 statusCode: 502,
                 headers,
-                body: JSON.stringify({ error: 'AI service is temporarily unavailable. Please try again.' }),
+                body: JSON.stringify({ error: detail }),
             };
         }
 
         const data = await response.json();
 
-        // Extract reply from Gemini response
+        // Extract reply from OpenAI-compatible response
         let reply = '';
-        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-            const parts = data.candidates[0].content.parts || [];
-            reply = parts.map(p => p.text || '').join('');
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+            reply = data.choices[0].message.content || '';
         }
 
         if (!reply) {
