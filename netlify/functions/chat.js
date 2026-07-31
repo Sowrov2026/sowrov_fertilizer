@@ -1,9 +1,8 @@
 /* ============================================
    SF AI Assistant - Netlify Serverless Function
-   OpenAI Responses API | Backend Only
+   Google Gemini 2.5 Flash API | Backend Only
    ============================================ */
 
-// System Prompt for Sowrov Fertilizer AI
 const SYSTEM_PROMPT = `You are SF AI Assistant, the official AI assistant of Sowrov Fertilizer.
 
 You are an expert Agricultural Consultant. You answer ONLY agriculture related questions.
@@ -18,12 +17,26 @@ CORE EXPERTISE:
 - Bangladesh Agriculture & Plant Care
 - Seed Treatment & Composting
 - Agricultural Technology
+- Sustainable Farming
 
 RULES:
 1. If user asks anything UNRELATED to agriculture, politely refuse. Say: "I'm sorry, I can only help with agriculture-related questions. Please ask me about farming, crops, fertilizers, or plant care! 🌱"
 2. NEVER answer: politics, hacking, medical advice, religion, entertainment, coding, or unrelated topics.
 3. Always be helpful, professional, and encouraging about farming.
 4. Use beautiful formatting with emojis: 🌱 ✅ 📌 ⚠️ 💡 🌾 🍅 🥬 🌿 🐛 🧪
+
+PRODUCT RECOMMENDATION:
+When users ask about fertilizer for any crop, you have access to Sowrov Fertilizer's product catalog. Recommend matching products from the catalog. Format each product as:
+
+![Product Image](image_url)
+**Product Name**
+💰 Price: ৳retailPrice
+📝 description
+✅ Stock: stock数量
+
+[View Product](product_url) | [Order Now](order_url) | [WhatsApp](whatsapp_url)
+
+If no matching products are found, provide general fertilizer advice and mention the user can browse the shop.
 
 FERTILIZER RECOMMENDATIONS - When users ask about best fertilizer for any crop, ALWAYS provide:
 - Recommended fertilizer name
@@ -54,29 +67,24 @@ RESPONSE STYLE:
 - Be thorough but concise.
 - Give actionable, practical advice.`;
 
-// In-memory rate limiting (resets on cold start)
+// ============================================
+// Rate Limiting
+// ============================================
 const rateLimitMap = new Map();
 const RATE_LIMIT_MAX = 15;
-const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const RATE_LIMIT_WINDOW_MS = 60000;
 
 function checkRateLimit(ip) {
     const now = Date.now();
     const record = rateLimitMap.get(ip);
-
     if (!record || now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
         rateLimitMap.set(ip, { windowStart: now, count: 1 });
         return true;
     }
-
     record.count++;
-    if (record.count > RATE_LIMIT_MAX) {
-        return false;
-    }
-
-    return true;
+    return record.count <= RATE_LIMIT_MAX;
 }
 
-// Clean up old entries periodically
 setInterval(() => {
     const now = Date.now();
     for (const [ip, record] of rateLimitMap) {
@@ -86,83 +94,151 @@ setInterval(() => {
     }
 }, 120000);
 
-// Input sanitization
+// ============================================
+// Input Sanitization
+// ============================================
 function sanitizeInput(text) {
     if (typeof text !== 'string') return '';
-    // Remove potential injection patterns
-    let cleaned = text
+    return text
         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
         .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
         .replace(/javascript:/gi, '')
         .replace(/on\w+\s*=/gi, '')
         .replace(/\x00/g, '')
         .trim();
-    return cleaned;
 }
 
-// Validate image data URL
 function isValidImageDataUrl(dataUrl) {
     if (typeof dataUrl !== 'string') return false;
     const regex = /^data:image\/(jpeg|jpg|png|webp|gif);base64,[A-Za-z0-9+/]+=*$/;
     if (!regex.test(dataUrl)) return false;
-    // Max 20MB base64 string roughly
     if (dataUrl.length > 28000000) return false;
     return true;
 }
 
-// Build OpenAI Responses API request
-function buildRequestBody(messages, imageDataUrl) {
-    const input = [];
+// ============================================
+// Firebase Product Search (REST API)
+// ============================================
+const FIREBASE_PROJECT_ID = 'sowrov-fertilizer-905de';
+const SITE_BASE_URL = 'https://sowrov-fertilizer-905de.web.app';
 
-    // System instructions
-    input.push({
-        role: 'developer',
-        content: SYSTEM_PROMPT,
+async function searchProducts(keyword) {
+    try {
+        const url = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents/products`;
+        const response = await fetch(url);
+        if (!response.ok) return [];
+
+        const data = await response.json();
+        if (!data.documents) return [];
+
+        const products = data.documents.map(doc => {
+            const fields = doc.fields || {};
+            return {
+                name: fields.name?.stringValue || '',
+                category: fields.category?.stringValue || '',
+                description: fields.description?.stringValue || '',
+                retailPrice: fields.retailPrice?.integerValue || fields.retailPrice?.doubleValue || 0,
+                wholesalePrice: fields.wholesalePrice?.integerValue || fields.wholesalePrice?.doubleValue || 0,
+                stock: fields.stock?.integerValue || 0,
+                image: fields.image?.stringValue || '',
+                docId: doc.name?.split('/').pop() || '',
+            };
+        });
+
+        const lowerKeyword = keyword.toLowerCase();
+        return products.filter(p =>
+            p.name.toLowerCase().includes(lowerKeyword) ||
+            p.category.toLowerCase().includes(lowerKeyword) ||
+            p.description.toLowerCase().includes(lowerKeyword)
+        );
+    } catch (error) {
+        console.error('Product search error:', error);
+        return [];
+    }
+}
+
+function formatProductsForPrompt(products) {
+    if (!products || products.length === 0) return '';
+
+    let text = '\n\n📦 SOUROV FERTILIZER PRODUCTS FOUND:\n\n';
+
+    products.forEach((p, i) => {
+        const productUrl = `${SITE_BASE_URL}/product-details.html?id=${p.docId}`;
+        const orderUrl = `${SITE_BASE_URL}/order.html?product=${p.docId}`;
+        const whatsappUrl = `https://wa.me/8801829775552?text=I%20want%20to%20order%20${encodeURIComponent(p.name)}`;
+
+        text += `Product ${i + 1}:\n`;
+        text += `- Name: ${p.name}\n`;
+        text += `- Category: ${p.category}\n`;
+        text += `- Description: ${p.description}\n`;
+        text += `- Retail Price: ৳${p.retailPrice}\n`;
+        text += `- Wholesale Price: ৳${p.wholesalePrice}\n`;
+        text += `- Stock: ${p.stock}\n`;
+        text += `- Image: ${p.image}\n`;
+        text += `- Product URL: ${productUrl}\n`;
+        text += `- Order URL: ${orderUrl}\n`;
+        text += `- WhatsApp: ${whatsappUrl}\n\n`;
     });
 
-    // Conversation history (keep last 20 messages to control token usage)
+    return text;
+}
+
+// ============================================
+// Build Gemini API Request
+// ============================================
+function buildGeminiRequest(messages, imageDataUrl, productContext) {
+    const contents = [];
     const recentMessages = messages.slice(-20);
 
-    for (const msg of recentMessages) {
-        const role = msg.role === 'assistant' ? 'assistant' : 'user';
+    for (let i = 0; i < recentMessages.length; i++) {
+        const msg = recentMessages[i];
+        const role = msg.role === 'assistant' ? 'model' : 'user';
         const content = sanitizeInput(msg.content || '');
-
         if (!content) continue;
 
-        if (role === 'user' && imageDataUrl && isValidImageDataUrl(imageDataUrl)) {
-            // Last user message with image
-            input.push({
-                role: 'user',
-                content: [
-                    {
-                        type: 'input_image',
-                        image_url: imageDataUrl,
-                    },
-                    {
-                        type: 'input_text',
-                        text: content,
-                    },
-                ],
+        const isLastUserMsg = role === 'user' && i === recentMessages.length - 1;
+
+        if (isLastUserMsg && imageDataUrl && isValidImageDataUrl(imageDataUrl)) {
+            const base64Data = imageDataUrl.replace(/^data:image\/\w+;base64,/, '');
+            const mimeType = imageDataUrl.match(/^data:(image\/\w+);/)?.[1] || 'image/jpeg';
+
+            const parts = [];
+            if (productContext) {
+                parts.push({ text: content + productContext });
+            } else {
+                parts.push({ text: content });
+            }
+            parts.push({
+                inlineData: {
+                    mimeType: mimeType,
+                    data: base64Data,
+                },
             });
+
+            contents.push({ role: 'user', parts });
+        } else if (isLastUserMsg && productContext) {
+            contents.push({ role: 'user', parts: [{ text: content + productContext }] });
         } else {
-            input.push({
-                role: role,
-                content: content,
-            });
+            contents.push({ role, parts: [{ text: content }] });
         }
     }
 
     return {
-        model: 'gpt-4o',
-        input: input,
-        max_output_tokens: 2048,
-        temperature: 0.7,
+        contents,
+        systemInstruction: {
+            parts: [{ text: SYSTEM_PROMPT }],
+        },
+        generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 2048,
+        },
     };
 }
 
-// Main handler
+// ============================================
+// Main Handler
+// ============================================
 exports.handler = async (event) => {
-    // CORS headers
     const headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
@@ -170,161 +246,130 @@ exports.handler = async (event) => {
         'Content-Type': 'application/json',
     };
 
-    // Handle preflight
     if (event.httpMethod === 'OPTIONS') {
-        return {
-            statusCode: 204,
-            headers,
-            body: '',
-        };
+        return { statusCode: 204, headers, body: '' };
     }
 
-    // Only POST allowed
     if (event.httpMethod !== 'POST') {
-        return {
-            statusCode: 405,
-            headers,
-            body: JSON.stringify({ error: 'Method not allowed' }),
-        };
+        return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
     }
 
-    // Rate limiting
     const clientIP = event.headers['client-ip'] || event.headers['x-forwarded-for'] || 'unknown';
     if (!checkRateLimit(clientIP)) {
         return {
             statusCode: 429,
             headers,
-            body: JSON.stringify({
-                error: 'Too many requests. Please wait a moment and try again.',
-            }),
+            body: JSON.stringify({ error: 'Too many requests. Please wait a moment and try again.' }),
         };
     }
 
-    // Validate API key
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-        console.error('OPENAI_API_KEY is not configured');
+        console.error('GEMINI_API_KEY is not configured');
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({
-                error: 'AI service is not configured. Please contact support.',
-            }),
+            body: JSON.stringify({ error: 'AI service is not configured. Please contact support.' }),
         };
     }
 
     try {
-        // Parse request body
         let body;
         try {
             body = JSON.parse(event.body || '{}');
         } catch (e) {
-            return {
-                statusCode: 400,
-                headers,
-                body: JSON.stringify({ error: 'Invalid request body' }),
-            };
+            return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
         }
 
         const { messages, image } = body;
 
-        // Validate messages
         if (!Array.isArray(messages) || messages.length === 0) {
-            return {
-                statusCode: 400,
-                headers,
-                body: JSON.stringify({ error: 'Messages array is required' }),
-            };
+            return { statusCode: 400, headers, body: JSON.stringify({ error: 'Messages array is required' }) };
         }
 
-        // Validate image if provided
         if (image && !isValidImageDataUrl(image)) {
-            return {
-                statusCode: 400,
-                headers,
-                body: JSON.stringify({ error: 'Invalid image data' }),
-            };
+            return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid image data' }) };
         }
 
-        // Build request
-        const requestBody = buildRequestBody(messages, image);
+        // Search for relevant products based on last user message
+        const lastUserMsg = messages.filter(m => m.role === 'user').pop();
+        let productContext = '';
+        if (lastUserMsg) {
+            const lowerMsg = lastUserMsg.content.toLowerCase();
+            const productKeywords = ['fertilizer', 'product', 'buy', 'price', 'cost', 'shop', 'order',
+                'সার', 'কিনুন', 'দাম', 'মূল্য', 'পণ্য'];
+            const isProductQuery = productKeywords.some(kw => lowerMsg.includes(kw));
 
-        // Call OpenAI Responses API
-        const response = await fetch('https://api.openai.com/v1/responses', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify(requestBody),
-        });
+            if (isProductQuery) {
+                const words = lowerMsg.split(/\s+/).filter(w => w.length > 2);
+                let allProducts = [];
+                for (const word of words.slice(0, 3)) {
+                    const found = await searchProducts(word);
+                    allProducts = allProducts.concat(found);
+                }
+                // Deduplicate by name
+                const seen = new Set();
+                allProducts = allProducts.filter(p => {
+                    if (seen.has(p.name)) return false;
+                    seen.add(p.name);
+                    return true;
+                });
+                productContext = formatProductsForPrompt(allProducts.slice(0, 5));
+            }
+        }
+
+        const requestBody = buildGeminiRequest(messages, image, productContext);
+
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+            }
+        );
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => null);
-            console.error('OpenAI API error:', response.status, errorData);
+            console.error('Gemini API error:', response.status, errorData);
 
             if (response.status === 429) {
                 return {
                     statusCode: 429,
                     headers,
-                    body: JSON.stringify({
-                        error: 'AI service is busy. Please try again in a moment.',
-                    }),
+                    body: JSON.stringify({ error: 'AI service is busy. Please try again in a moment.' }),
                 };
             }
 
-            if (response.status === 401) {
+            if (response.status === 403) {
                 return {
                     statusCode: 500,
                     headers,
-                    body: JSON.stringify({
-                        error: 'AI service authentication failed. Please contact support.',
-                    }),
+                    body: JSON.stringify({ error: 'AI service authentication failed. Please contact support.' }),
                 };
             }
 
             return {
                 statusCode: 502,
                 headers,
-                body: JSON.stringify({
-                    error: 'AI service is temporarily unavailable. Please try again.',
-                }),
+                body: JSON.stringify({ error: 'AI service is temporarily unavailable. Please try again.' }),
             };
         }
 
         const data = await response.json();
 
-        // Extract response text from Responses API format
+        // Extract reply from Gemini response
         let reply = '';
-
-        if (data.output && Array.isArray(data.output)) {
-            for (const item of data.output) {
-                if (item.type === 'message' && item.content) {
-                    for (const content of item.content) {
-                        if (content.type === 'output_text' && content.text) {
-                            reply += content.text;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (!reply) {
-            // Fallback: try other response formats
-            if (data.choices && data.choices[0]) {
-                reply = data.choices[0].message?.content || '';
-            } else if (data.result) {
-                reply = typeof data.result === 'string' ? data.result : '';
-            }
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            const parts = data.candidates[0].content.parts || [];
+            reply = parts.map(p => p.text || '').join('');
         }
 
         if (!reply) {
             return {
                 statusCode: 502,
                 headers,
-                body: JSON.stringify({
-                    error: 'Could not generate a response. Please try again.',
-                }),
+                body: JSON.stringify({ error: 'Could not generate a response. Please try again.' }),
             };
         }
 
@@ -338,9 +383,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({
-                error: 'An unexpected error occurred. Please try again later.',
-            }),
+            body: JSON.stringify({ error: 'An unexpected error occurred. Please try again later.' }),
         };
     }
 };
