@@ -34,10 +34,14 @@ Examples of equivalent meanings you MUST understand:
 - টমেটোতে কি সার দিব
 - টমেটুতে কি দিমু
 - tomato te ki dibo
-- ধানে কি দিব
+- টমেটো fertilizer
 - বেগুনে পাতা হলুদ
+- মরিচের পাতা কুকড়াইছে
+- ধানে ইউরিয়া কত দিব
+- ধানে কি দিমু
+- ট্রাইকোডার্মা কিভাবে ব্যবহার করবো
 
-All of the above mean the same thing. Understand them all.
+All of the above are valid user queries. Understand them all. They may ask about fertilizer, disease, dosage, or technique — detect the intent.
 
 Always detect language automatically.
 Always reply in the SAME language the user writes in.
@@ -46,6 +50,7 @@ If Bangla:
 - Reply in beautiful natural Bangla.
 - Write like a native Bangladeshi farmer's friend.
 - Never translate literally from English.
+- Never sound robotic or overly formal.
 - Never use unnecessary English words in Bangla response.
 - Use natural Bangla sentence structure, idioms, and expressions.
 
@@ -76,14 +81,24 @@ You are an expert in:
 - Organic Pest Management
 
 ━━━━━━━━━━━━━━━━━━━━━━
+THINKING APPROACH
+━━━━━━━━━━━━━━━━━━━━━━
+
+Always think step-by-step before answering.
+Never hallucinate facts.
+If unsure, say you are not certain.
+Always prefer Bangladesh-specific recommendations.
+Do not recommend unavailable foreign products.
+
+━━━━━━━━━━━━━━━━━━━━━━
 PRODUCT RECOMMENDATION
 ━━━━━━━━━━━━━━━━━━━━━━
 
-When user asks which fertilizer is best for a crop:
+When user asks which fertilizer is best (e.g. "কোন সার দিব", "Best fertilizer", "কি ব্যবহার করবো"):
 1. Search Firebase products first.
-2. Recommend matching products.
+2. Recommend best matching products.
 3. Explain: Why, Dosage, Application Time, Benefits, Precautions.
-4. Show: Product Image, Price, View Product link, Order Now link, WhatsApp link.
+4. Show: Product Image, Price, Stock, View Product link, Order Now link, WhatsApp link.
 
 If no matching products found, give general advice and mention the shop.
 
@@ -92,6 +107,7 @@ Format each product as:
 **Product Name**
 💰 Price: ৳price
 📝 description
+✅ Stock: stock数量
 
 [View Product](url) | [Order Now](url) | [WhatsApp](url)
 
@@ -99,12 +115,26 @@ Format each product as:
 DISEASE DIAGNOSIS
 ━━━━━━━━━━━━━━━━━━━━━━
 
-When user asks about crop disease:
+When user asks about crop disease (e.g. "পাতা হলুদ", "পাতা কুকড়াইছে"):
+Always output:
 - Symptoms
 - Cause
 - Organic Solution
 - Chemical Solution (only if necessary)
 - Prevention
+
+━━━━━━━━━━━━━━━━━━━━━━
+FEW-SHOT EXAMPLES
+━━━━━━━━━━━━━━━━━━━━━━
+
+User: টমেটুতে কি দিমু?
+Assistant: Understands this means "টমেটোতে কী সার দেব?" and answers accordingly.
+
+User: ধানে কি দিমু
+Assistant: Understands this asks about rice fertilizer and answers with rice-specific advice.
+
+User: মরিচের পাতা কুকড়াইছে
+Assistant: Understands this describes chili leaf curl disease and provides diagnosis.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 UNRELATED QUESTIONS
@@ -176,6 +206,190 @@ function isValidImageDataUrl(dataUrl) {
     if (!regex.test(dataUrl)) return false;
     if (dataUrl.length > 28000000) return false;
     return true;
+}
+
+// ============================================
+// Bangla Text Normalization Layer
+// ============================================
+
+// Common Bangla spelling corrections: wrong → correct
+const BANGLA_SPELLING_FIXES = {
+    'টমেটু': 'টমেটো',
+    'টমেটূ': 'টমেটো',
+    'টমেটুতে': 'টমেটোতে',
+    'টমেটূতে': 'টমেটোতে',
+    'দিমু': 'দিব',
+    'দিমো': 'দিব',
+    'দিমুন': 'দিব',
+    'কিমু': 'কি',
+    'কিমুন': 'কি',
+    'মরিচ্যা': 'মরিচ',
+    'মরিচে': 'মরিচ',
+    'বেগুন্যা': 'বেগুন',
+    'বেগুনে': 'বেগুন',
+    'বাঁধাকপি': 'বাঁধাকপি',
+    'পাতা হলদে': 'পাতা হলুদ',
+    'পাতায় হলুদ': 'পাতা হলুদ',
+    'কুকড়াইছে': 'কুকড়ে গেছে',
+    'কুকড়ানো': 'কুকড়ে গেছে',
+    'ফলং': 'ফল',
+    'সবজি': 'সবজি',
+    'ধানে': 'ধান',
+    'ধানতে': 'ধানে',
+    'কত দিব': 'কতটুকু দিব',
+    'কত দিমু': 'কতটুকু দিব',
+    'কিভাবে': 'কিভাবে',
+    'কিভাবে ব্যবহার': 'কিভাবে ব্যবহার',
+    'ব্যবহার করবো': 'ব্যবহার করব',
+    'ব্যবহার করবো': 'ব্যবহার করব',
+    'করোনা': 'করুন',
+    'দাওয়া': 'দেওয়া',
+    'দেওয়া': 'দেওয়া',
+    'হইছে': 'হয়েছে',
+    'হইছে': 'হয়েছে',
+    'ইউরীয়া': 'ইউরিয়া',
+    'ইউরিয়া': 'ইউরিয়া',
+    'ডিএপি': 'ডিএপি',
+    'জিপসাম': 'জিপসাম',
+    'পটাশ': 'পটাশ',
+    'সার': 'সার',
+    'ভাজি': 'ভাজি',
+    'সুন্দর': 'সুন্দর',
+};
+
+// Common Banglish → Bangla mappings
+const BANGLISH_MAP = {
+    'ami': 'আমি',
+    'tumi': 'তুমি',
+    'apni': 'আপনি',
+    'ki': 'কি',
+    'dibo': 'দিব',
+    'dibo?': 'দিব?',
+    'dibo na': 'দিব না',
+    'kemon': 'কেমন',
+    'ache': 'আছে',
+    'nai': 'নেই',
+    'hobe': 'হবে',
+    'korte': 'করতে',
+    'korse': 'করেছে',
+    'korlam': 'করলাম',
+    'jante': 'জানতে',
+    'valo': 'ভালো',
+    'bhalo': 'ভালো',
+    'khub': 'খুব',
+    'onek': 'অনেক',
+    'tomato': 'টমেটো',
+    'begun': 'বেগুন',
+    'morich': 'মরিচ',
+    'dhan': 'ধান',
+    'shak': 'শাক',
+    'pata': 'পাতা',
+    'phol': 'ফল',
+    'fusfol': 'ফসল',
+    'foshol': 'ফসল',
+    'sar': 'সার',
+    'ken': 'কেন',
+    'kivabe': 'কিভাবে',
+    'kobe': 'কখন',
+    'kothay': 'কোথায়',
+    'koto': 'কত',
+    'amar': 'আমার',
+    'tomar': 'তোমার',
+    'amar jonno': 'আমার জন্য',
+    'dite': 'দিতে',
+    'lagbe': 'লাগবে',
+    'lagena': 'লাগেনি',
+    'lagse': 'লাগেছে',
+    'hoyeche': 'হয়েছে',
+    'hocche': 'হচ্ছে',
+    'dekhchi': 'দেখছি',
+    'pachi': 'পাচ্ছি',
+    'chai': 'চাই',
+    'nai': 'নেই',
+    'ache': 'আছে',
+    'nasta': 'নষ্ট',
+    'shuru': 'শুরু',
+    'sesh': 'শেষ',
+    'prochur': 'প্রচুর',
+    'valo': 'ভালো',
+    'kharap': 'খারাপ',
+    'thik': 'ঠিক',
+    'dorkar': 'দরকার',
+    'joss': 'জোর',
+    'jore': 'জোরে',
+};
+
+// Normalization rules: order matters (longer matches first)
+const BANGLA_NORMALIZATION_RULES = [
+    // Fix common verb endings
+    [/করবো/g, 'করব'],
+    [/দিবো/g, 'দিব'],
+    [/হবো/g, 'হব'],
+    [/বলবো/g, 'বলব'],
+    [/যাবো/g, 'যাব'],
+    [/আসবো/g, 'আসব'],
+    [/যাচ্ছো/g, 'যাচ্ছ'],
+    [/করছো/g, 'করছ'],
+    [/দিচ্ছো/g, 'দিচ্ছ'],
+
+    // Fix দিমু pattern → দিব
+    [/দিমু/g, 'দিব'],
+    [/দিমো/g, 'দিব'],
+
+    // Fix কি দিব variations
+    [/কি\s+দিমু/g, 'কি দিব'],
+    [/কি\s+দিমো/g, 'কি দিব'],
+
+    // Fix common spelling
+    [/টমেটু/g, 'টমেটো'],
+    [/টমেটূ/g, 'টমেটো'],
+    [/বেগুন্যা/g, 'বেগুন'],
+    [/মরিচ্যা/g, 'মরিচ'],
+
+    // Fix কুকড়ানো
+    [/কুকড়াইছে/g, 'কুকড়ে গেছে'],
+    [/কুকড়ানো/g, 'কুকড়ে গেছে'],
+
+    // Normalize whitespace
+    [/\s+/g, ' '],
+];
+
+function normalizeBanglaText(text) {
+    if (!text) return text;
+
+    let normalized = text.trim();
+
+    // Check if text contains Bangla characters
+    const hasBangla = /[\u0980-\u09FF]/.test(normalized);
+
+    // Check if text is Banglish (Latin chars that look like Banglish)
+    const isBanglish = /^[a-zA-Z\s]+$/.test(normalized) &&
+        Object.keys(BANGLISH_MAP).some(kw => normalized.toLowerCase().includes(kw));
+
+    if (isBanglish) {
+        // Convert Banglish words to Bangla where possible
+        let result = normalized;
+        const sortedBanglish = Object.keys(BANGLISH_MAP).sort((a, b) => b.length - a.length);
+        for (const banglish of sortedBanglish) {
+            const regex = new RegExp('\\b' + banglish + '\\b', 'gi');
+            result = result.replace(regex, BANGLISH_MAP[banglish]);
+        }
+        return result;
+    }
+
+    if (hasBangla) {
+        // Apply spelling corrections
+        for (const [wrong, correct] of Object.entries(BANGLA_SPELLING_FIXES)) {
+            normalized = normalized.split(wrong).join(correct);
+        }
+
+        // Apply normalization rules
+        for (const [pattern, replacement] of BANGLA_NORMALIZATION_RULES) {
+            normalized = normalized.replace(pattern, replacement);
+        }
+    }
+
+    return normalized;
 }
 
 // ============================================
@@ -258,8 +472,13 @@ function buildOpenRouterRequest(messages, imageDataUrl, productContext) {
     for (let i = 0; i < recentMessages.length; i++) {
         const msg = recentMessages[i];
         const role = msg.role === 'assistant' ? 'assistant' : 'user';
-        const content = sanitizeInput(msg.content || '');
+        let content = sanitizeInput(msg.content || '');
         if (!content) continue;
+
+        // Normalize user messages (Bangla spelling fixes, Banglish conversion)
+        if (role === 'user') {
+            content = normalizeBanglaText(content);
+        }
 
         const isLastUserMsg = role === 'user' && i === recentMessages.length - 1;
 
@@ -283,8 +502,8 @@ function buildOpenRouterRequest(messages, imageDataUrl, productContext) {
     return {
         model: 'google/gemini-2.5-pro',
         messages: apiMessages,
-        max_tokens: 2048,
-        temperature: 0.3,
+        max_tokens: 2500,
+        temperature: 0.25,
         top_p: 0.9,
     };
 }
@@ -349,7 +568,8 @@ exports.handler = async (event) => {
         const lastUserMsg = messages.filter(m => m.role === 'user').pop();
         let productContext = '';
         if (lastUserMsg) {
-            const lowerMsg = lastUserMsg.content.toLowerCase();
+            const normalizedMsg = normalizeBanglaText(lastUserMsg.content || '');
+            const lowerMsg = normalizedMsg.toLowerCase();
             const productKeywords = ['fertilizer', 'product', 'buy', 'price', 'cost', 'shop', 'order',
                 'সার', 'কিনুন', 'দাম', 'মূল্য', 'পণ্য', 'ki dibo', 'kemon', 'kichu', 'sar'];
             const isProductQuery = productKeywords.some(kw => lowerMsg.includes(kw));
