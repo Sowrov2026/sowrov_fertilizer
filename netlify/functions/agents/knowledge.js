@@ -54,12 +54,18 @@ function buildFullKnowledgeContext(query, options = {}) {
 /**
  * Verify that references in the response are valid
  * Only allows references that exist in our knowledge base
+ * V33 FIX: Use hostname check instead of startsWith to prevent domain spoofing
  */
 function verifyReferences(responseText) {
     if (!responseText) return { valid: true, text: responseText };
 
     const { ALL_DOCUMENTS } = require('../knowledge/index');
     const approvedUrls = ALL_DOCUMENTS.filter(d => d.url).map(d => d.url);
+
+    // V33 FIX: Extract hostnames from approved URLs for proper comparison
+    const approvedHostnames = approvedUrls.map(url => {
+        try { return new URL(url).hostname; } catch { return null; }
+    }).filter(Boolean);
 
     // Check for any URLs in the response
     const urlRegex = /https?:\/\/[^\s<>)\]"']+/g;
@@ -69,7 +75,18 @@ function verifyReferences(responseText) {
     let hasInvalid = false;
 
     for (const url of urls) {
-        const isValid = approvedUrls.some(approved => url.startsWith(approved));
+        let isValid = false;
+        try {
+            const parsed = new URL(url);
+            const hostname = parsed.hostname.toLowerCase();
+            // V33 FIX: Exact hostname match or subdomain match
+            isValid = approvedHostnames.some(approved =>
+                hostname === approved || hostname.endsWith('.' + approved)
+            );
+        } catch {
+            isValid = false;
+        }
+
         if (!isValid) {
             // Remove invalid URL but keep text
             text = text.replace(url, '').trim();
