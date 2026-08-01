@@ -1,15 +1,25 @@
 /**
- * Product Agent — V11 Enterprise
+ * Product Agent — V33 Enterprise
  * Responsibilities: Search Firebase, Rank products, Recommend best product, Generate product card
  */
 
 const FIREBASE_PROJECT_ID = 'sowrov-fertilizer-905de';
 const SITE_BASE_URL = 'https://sowrov-fertilizer-905de.web.app';
 
+// V33 FIX: Cache all products to avoid N+1 queries
+let allProductsCache = null;
+let allProductsCacheTime = 0;
+const PRODUCTS_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 /**
- * Search Firebase products
+ * Fetch ALL products from Firebase (cached)
  */
-async function searchFirebaseProducts(keyword) {
+async function fetchAllProducts() {
+    const now = Date.now();
+    if (allProductsCache && (now - allProductsCacheTime) < PRODUCTS_CACHE_TTL) {
+        return allProductsCache;
+    }
+
     try {
         const url = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents/products`;
         const response = await fetch(url);
@@ -18,7 +28,7 @@ async function searchFirebaseProducts(keyword) {
         const data = await response.json();
         if (!data.documents) return [];
 
-        const products = data.documents.map(doc => {
+        allProductsCache = data.documents.map(doc => {
             const fields = doc.fields || {};
             return {
                 name: fields.name?.stringValue || '',
@@ -31,17 +41,27 @@ async function searchFirebaseProducts(keyword) {
                 docId: doc.name?.split('/').pop() || '',
             };
         });
+        allProductsCacheTime = now;
 
-        const lowerKeyword = keyword.toLowerCase();
-        return products.filter(p =>
-            p.name.toLowerCase().includes(lowerKeyword) ||
-            p.category.toLowerCase().includes(lowerKeyword) ||
-            p.description.toLowerCase().includes(lowerKeyword)
-        );
+        return allProductsCache;
     } catch (error) {
-        console.error('Product search error:', error);
-        return [];
+        console.error('Product fetch error:', error);
+        return allProductsCache || []; // Return stale cache on error
     }
+}
+
+/**
+ * Search Firebase products (V33: Single fetch + in-memory filter)
+ */
+async function searchFirebaseProducts(keyword) {
+    const allProducts = await fetchAllProducts();
+    const lowerKeyword = keyword.toLowerCase();
+
+    return allProducts.filter(p =>
+        p.name.toLowerCase().includes(lowerKeyword) ||
+        p.category.toLowerCase().includes(lowerKeyword) ||
+        p.description.toLowerCase().includes(lowerKeyword)
+    );
 }
 
 /**

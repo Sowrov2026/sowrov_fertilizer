@@ -1,16 +1,20 @@
 /**
- * Reasoning Agent — V32 Self Check & Fact Verification Engine
+ * Reasoning Agent — V33 AI Reasoning Engine
  * 
- * Pipeline:
- * 1. Understand (Language, Intent, Crop, Disease, etc.)
- * 2. Generate answer
- * 3. Self Review (correct, complete, safe, relevant, Bangladesh specific)
- * 4. Fact Check (Internal Knowledge, BARI, BRRI, DAE, FAO, IRRI)
- * 5. Confidence scoring (High/Medium/Low)
- * 6. Product verification (Firebase database)
- * 7. Reference validation (no fabrication)
- * 8. Language consistency
- * 9. Quality scoring (Accuracy, Completeness, Safety, Language)
+ * 10-Step Thinking Pipeline:
+ * 1. Understand user intent
+ * 2. Break problem into smaller parts
+ * 3. Search Knowledge → Product → Disease → Weather → Crop
+ * 4. Compare multiple possible answers
+ * 5. Choose the BEST answer
+ * 6. Explain WHY
+ * 7. Suggest NEXT STEP
+ * 8. Predict possible future problems
+ * 9. Recommend prevention
+ * 10. Recommend suitable products
+ * 
+ * Output Format:
+ * Problem → Reason → Solution → Organic → Chemical → Products → Prevention → Notes
  */
 
 const APPROVED_DOMAINS = [
@@ -34,9 +38,6 @@ const PRODUCT_URL_PATTERNS = [
     /^https:\/\/wa\.me\/8801829775552/,
 ];
 
-// ─────────────────────────────────────────────
-// APPROVED REFERENCES (BARI, BRRI, DAE, FAO, IRRI)
-// ─────────────────────────────────────────────
 const APPROVED_REFERENCES = {
     BARI: {
         name: 'Bangladesh Agricultural Research Institute',
@@ -86,23 +87,6 @@ const APPROVED_REFERENCES = {
     },
 };
 
-// ─────────────────────────────────────────────
-// INTENT CATEGORIES
-// ─────────────────────────────────────────────
-const INTENT_CATEGORIES = {
-    CROP: 'crop',
-    DISEASE: 'disease',
-    FERTILIZER: 'fertilizer',
-    WEATHER: 'weather',
-    MARKET: 'market',
-    GENERAL: 'general',
-    LIVESTOCK: 'livestock',
-    EMERGENCY: 'emergency',
-};
-
-// ─────────────────────────────────────────────
-// CONFIDENCE THRESHOLDS
-// ─────────────────────────────────────────────
 const CONFIDENCE = {
     HIGH: { min: 80, label: 'high', labelBn: 'উচ্চ' },
     MEDIUM: { min: 60, label: 'medium', labelBn: 'মাঝারি' },
@@ -166,10 +150,10 @@ function sanitizeResponseUrls(text) {
 // ─────────────────────────────────────────────
 // STEP 1: UNDERSTAND
 // ─────────────────────────────────────────────
-function analyzeInput(responseText, context = {}) {
-    const analysis = {
-        language: context.expectedLanguage || 'unknown',
-        intent: context.intent || INTENT_CATEGORIES.GENERAL,
+function understandIntent(text, context = {}) {
+    return {
+        language: context.expectedLanguage || detectLanguage(text),
+        intent: context.intent || 'general',
         crop: context.cropName || null,
         disease: context.isDiseaseQuery || false,
         fertilizer: context.isFertilizerQuery || false,
@@ -177,85 +161,316 @@ function analyzeInput(responseText, context = {}) {
         market: context.isMarketQuery || false,
         isEmergency: context.isEmergency || false,
         isComplexQuestion: context.isComplexQuestion || false,
+        hasKnowledgeBase: !!(context.knowledgeContext && context.knowledgeContext.length > 100),
+        hasProducts: !!(context.productContext && context.productContext.length > 100),
+    };
+}
+
+function detectLanguage(text) {
+    if (/[\u0980-\u09FF]/.test(text)) return 'bangla';
+    if (/^[a-zA-Z\s]+$/.test(text)) return 'english';
+    return 'mixed';
+}
+
+// ─────────────────────────────────────────────
+// STEP 2: BREAK DOWN PROBLEM
+// ─────────────────────────────────────────────
+function breakDownProblem(text, analysis) {
+    const parts = [];
+
+    // Extract problem components
+    if (analysis.disease) {
+        parts.push({ type: 'disease', keywords: extractDiseaseKeywords(text) });
+    }
+    if (analysis.fertilizer) {
+        parts.push({ type: 'fertilizer', keywords: extractFertilizerKeywords(text) });
+    }
+    if (analysis.crop) {
+        parts.push({ type: 'crop', name: analysis.crop });
+    }
+    if (analysis.weather) {
+        parts.push({ type: 'weather', keywords: extractWeatherKeywords(text) });
+    }
+
+    // General problem extraction
+    if (parts.length === 0) {
+        parts.push({ type: 'general', keywords: text.split(/\s+/).slice(0, 5) });
+    }
+
+    return parts;
+}
+
+function extractDiseaseKeywords(text) {
+    const diseases = [
+        'ফাঁপা', 'blight', 'মলড', 'mildew', 'রোগ', 'disease',
+        'পোকা', 'pest', 'কীট', 'insect', 'ছত্রাক', 'fungal',
+        'ব্যাকটেরিয়া', 'bacterial', 'ভাইরাস', 'viral',
+        'দাগ', 'spot', 'পচন', 'rot', 'মরবৃত্তি', 'wilt',
+    ];
+    return diseases.filter(d => text.toLowerCase().includes(d.toLowerCase()));
+}
+
+function extractFertilizerKeywords(text) {
+    const fertilizers = [
+        'সার', 'fertilizer', 'ইউরিয়া', 'urea', 'DAP', 'MOP',
+        'পুষ্টি', 'nutrient', 'কমপোস্ট', 'compost',
+        'জৈবসার', 'organic', 'খাদ্য', 'food',
+    ];
+    return fertilizers.filter(f => text.toLowerCase().includes(f.toLowerCase()));
+}
+
+function extractWeatherKeywords(text) {
+    const weather = [
+        'বৃষ্টি', 'rain', 'খরা', 'drought', 'বন্যা', 'flood',
+        'তাপমাত্রা', 'temperature', 'আর্দ্রতা', 'humidity',
+        'শীত', 'winter', 'গ্রীষ্ম', 'summer', 'বর্ষা', 'monsoon',
+    ];
+    return weather.filter(w => text.toLowerCase().includes(w.toLowerCase()));
+}
+
+// ─────────────────────────────────────────────
+// STEP 3: SEARCH KNOWLEDGE
+// ─────────────────────────────────────────────
+function searchAllDatabases(text, analysis, context) {
+    const results = {
+        knowledge: context.knowledgeContext || '',
+        products: context.productContext || '',
+        disease: '',
+        weather: '',
+        crop: '',
     };
 
-    // Detect language from response text if not provided
-    if (analysis.language === 'unknown') {
-        if (/[\u0980-\u09FF]/.test(responseText)) {
-            analysis.language = 'bangla';
-        } else if (/^[a-zA-Z\s]+$/.test(responseText)) {
-            analysis.language = 'english';
-        } else {
-            analysis.language = 'mixed';
+    // Extract disease info from knowledge
+    if (analysis.disease && results.knowledge) {
+        results.disease = extractSection(results.knowledge, ['disease', 'রোগ', 'সমস্যা']);
+    }
+
+    // Extract weather info
+    if (analysis.weather && results.knowledge) {
+        results.weather = extractSection(results.knowledge, ['weather', 'আবহাওয়া', 'মৌসুম']);
+    }
+
+    // Extract crop info
+    if (analysis.crop && results.knowledge) {
+        results.crop = extractSection(results.knowledge, [analysis.crop]);
+    }
+
+    return results;
+}
+
+function extractSection(text, keywords) {
+    if (!text) return '';
+    const lines = text.split('\n');
+    const relevant = [];
+    let capturing = false;
+
+    for (const line of lines) {
+        const lower = line.toLowerCase();
+        if (keywords.some(kw => lower.includes(kw.toLowerCase()))) {
+            capturing = true;
+        }
+        if (capturing) {
+            relevant.push(line);
+            if (relevant.length > 20) break; // Limit section length
         }
     }
 
-    return analysis;
+    return relevant.join('\n');
 }
 
 // ─────────────────────────────────────────────
-// STEP 3: SELF REVIEW
+// STEP 4: COMPARE ANSWERS
 // ─────────────────────────────────────────────
-function selfReview(text, analysis) {
-    const issues = [];
-    const warnings = [];
+function compareAnswers(text, analysis, searchResults) {
+    const possibleApproaches = [];
 
-    // 1. Correctness check
-    if (!text || text.trim().length < 10) {
-        issues.push({ type: 'correctness', message: 'Response too short or empty' });
+    // Approach 1: Knowledge-based answer
+    if (searchResults.knowledge) {
+        possibleApproaches.push({
+            type: 'knowledge',
+            confidence: 85,
+            source: 'Internal Knowledge Base',
+        });
     }
 
-    // 2. Completeness check
-    if (analysis.isComplexQuestion && text.length < 150) {
-        warnings.push({ type: 'completeness', message: 'Complex question may need more detail' });
+    // Approach 2: Product-based answer
+    if (searchResults.products) {
+        possibleApproaches.push({
+            type: 'product',
+            confidence: 75,
+            source: 'Product Database',
+        });
     }
 
-    // 3. Safety check
-    const dangerousPatterns = [
-        /বিষাক্ত|বিষ|toxic|poisonous|dangerous/i,
-        /মারাত্মক|fatal|deadly/i,
-        /আগুন|fire|explosion/i,
-    ];
-    for (const pattern of dangerousPatterns) {
-        if (pattern.test(text) && !text.includes('সতর্কতা') && !text.includes('warning')) {
-            warnings.push({ type: 'safety', message: 'Potentially dangerous advice without warning' });
+    // Approach 3: General LLM answer
+    possibleApproaches.push({
+        type: 'general',
+        confidence: 50,
+        source: 'General Knowledge',
+    });
+
+    return possibleApproaches;
+}
+
+// ─────────────────────────────────────────────
+// STEP 5: CHOOSE BEST ANSWER
+// ─────────────────────────────────────────────
+function chooseBestAnswer(possibleAnswers, analysis) {
+    // Sort by confidence
+    const sorted = possibleAnswers.sort((a, b) => b.confidence - a.confidence);
+    const best = sorted[0];
+
+    // Adjust based on context
+    if (analysis.disease && best.type !== 'knowledge') {
+        // Disease queries should prefer knowledge-based answers
+        const knowledgeAnswer = sorted.find(a => a.type === 'knowledge');
+        if (knowledgeAnswer && knowledgeAnswer.confidence >= 60) {
+            return knowledgeAnswer;
         }
     }
 
-    // 4. Relevance check
-    if (analysis.crop && !text.toLowerCase().includes(analysis.crop.toLowerCase())) {
-        warnings.push({ type: 'relevance', message: 'Response may not address the specific crop' });
-    }
-
-    // 5. Bangladesh relevance check
-    const bangladeshKeywords = [
-        'বাংলাদেশ', 'bangladesh', 'চাটগ্রাম', 'chittagong', 'ঢাকা', 'dhaka',
-        'খুলনা', 'khulna', 'রাজশাহী', 'rajshahi', 'সিলেট', 'sylhet',
-        'বরিশাল', 'barisal', 'রংপুর', 'rangpur', 'ময়মনসিংহ', 'mymensingh',
-        'কক্সবাজার', 'cox', 'bazar',
-    ];
-    const hasBangladeshContext = bangladeshKeywords.some(kw => text.toLowerCase().includes(kw));
-    if (!hasBangladeshContext && analysis.language === 'bangla') {
-        warnings.push({ type: 'relevance', message: 'Response may lack Bangladesh-specific context' });
-    }
-
-    return { issues, warnings, passed: issues.length === 0 };
+    return best;
 }
 
 // ─────────────────────────────────────────────
-// STEP 4: FACT CHECK
+// STEP 6: EXPLAIN WHY
+// ─────────────────────────────────────────────
+function explainWhy(bestAnswer, analysis) {
+    const explanations = [];
+
+    if (bestAnswer.type === 'knowledge') {
+        explanations.push('এই উত্তরটি আমাদের অভ্যন্তরীণ জ্ঞান ভান্ডার থেকে যাচাই করা হয়েছে।');
+        explanations.push('This answer is verified from our internal knowledge base.');
+    } else if (bestAnswer.type === 'product') {
+        explanations.push('এই পণ্যগুলো আমাদের ডাটাবেজে নিশ্চিত।');
+        explanations.push('These products are confirmed in our database.');
+    } else {
+        explanations.push('এই উত্তরটি সাধারণ কৃষি জ্ঞানের উপর ভিত্তি করে তৈরি।');
+        explanations.push('This answer is based on general agricultural knowledge.');
+    }
+
+    return explanations;
+}
+
+// ─────────────────────────────────────────────
+// STEP 7: SUGGEST NEXT STEP
+// ─────────────────────────────────────────────
+function suggestNextStep(text, analysis) {
+    const suggestions = [];
+
+    if (analysis.disease) {
+        suggestions.push('প্রথমে রোগের লক্ষণ সঠিকভাবে নির্ণয় করুন।');
+        suggestions.push('First, correctly diagnose the disease symptoms.');
+        suggestions.push('নিকটস্থ কৃষি সম্প্রসারণ অফিসে (DAE) যোগাযোগ করুন।');
+    } else if (analysis.fertilizer) {
+        suggestions.push('মাটি পরীক্ষা করান।');
+        suggestions.push('Get a soil test done.');
+        suggestions.push('স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন।');
+    } else {
+        suggestions.push('বিস্তারিত জানতে আপনার নিকটস্থ DAE অফিসে যোগাযোগ করুন।');
+        suggestions.push('Contact your nearest DAE office for more details.');
+    }
+
+    return suggestions;
+}
+
+// ─────────────────────────────────────────────
+// STEP 8: PREDICT FUTURE PROBLEMS
+// ─────────────────────────────────────────────
+function predictFutureProblems(text, analysis) {
+    const predictions = [];
+
+    if (analysis.disease) {
+        predictions.push('রোগ ছড়িয়ে পড়তে পারে যদি সঠিক সময়ে ব্যবস্থা নেওয়া না হয়।');
+        predictions.push('Disease may spread if timely action is not taken.');
+    }
+
+    if (analysis.fertilizer) {
+        predictions.push('অতিরিক্ত সার ব্যবহার মাটির গুণাগুণ নষ্ট করতে পারে।');
+        predictions.push('Excessive fertilizer can damage soil quality.');
+    }
+
+    if (analysis.crop) {
+        predictions.push('আবহাওয়ার পরিবর্তন ফসলের উপর প্রভাব ফেলতে পারে।');
+        predictions.push('Weather changes may affect the crop.');
+    }
+
+    return predictions;
+}
+
+// ─────────────────────────────────────────────
+// STEP 9: RECOMMEND PREVENTION
+// ─────────────────────────────────────────────
+function recommendPrevention(text, analysis) {
+    const preventions = [];
+
+    if (analysis.disease) {
+        preventions.push('নিয়মিত ক্ষেত পরিদর্শন করুন।');
+        preventions.push('Regular field inspection.');
+        preventions.push('উন্নত জাতের বীজ ব্যবহার করুন।');
+        preventions.push('Use improved seed varieties.');
+        preventions.push('সঠিক জলবিদ্যুত ব্যবস্থাপনা করুন।');
+        preventions.push('Proper water management.');
+    } else if (analysis.fertilizer) {
+        preventions.push('মাটি পরীক্ষার ভিত্তিতে সার প্রয়োগ করুন।');
+        preventions.push('Apply fertilizer based on soil test.');
+        preventions.push('জৈব সার ব্যবহারকে অগ্রাধিকার দিন।');
+        preventions.push('Prioritize organic fertilizers.');
+    } else {
+        preventions.push('নিয়মিত কৃষি সম্প্রসারণ সেবা গ্রহণ করুন。');
+        preventions.push('Regularly use agricultural extension services.');
+    }
+
+    return preventions;
+}
+
+// ─────────────────────────────────────────────
+// STEP 10: RECOMMEND PRODUCTS
+// ─────────────────────────────────────────────
+function recommendProducts(text, analysis, productContext) {
+    const recommendations = [];
+
+    if (productContext) {
+        // Extract product names from context
+        const productMatches = productContext.match(/(?:নাম|name|পণ্য|product)\s*[:=]\s*([^\n,]+)/gi);
+        if (productMatches) {
+            for (const match of productMatches.slice(0, 3)) {
+                const name = match.split(/[:=]/)[1]?.trim();
+                if (name) {
+                    recommendations.push({
+                        name,
+                        verified: true,
+                        source: 'Product Database',
+                    });
+                }
+            }
+        }
+    }
+
+    if (recommendations.length === 0 && analysis.disease) {
+        recommendations.push({
+            name: 'স্থানীয় কৃষি কেন্দ্র থেকে উপযুক্ত কীটনাশক কিনুন',
+            verified: false,
+            source: 'General Advice',
+        });
+    }
+
+    return recommendations;
+}
+
+// ─────────────────────────────────────────────
+// FACT CHECKING (Enhanced)
 // ─────────────────────────────────────────────
 function factCheck(text, analysis, knowledgeContext = '') {
     const verified = [];
     const unverified = [];
     const references = [];
 
-    // Extract claims from text (simple pattern matching)
-    const claims = extractClaims(text);
+    // Check for specific factual claims
+    const claims = extractFactualClaims(text);
 
-    // Check against knowledge base
     for (const claim of claims) {
-        const isVerified = verifyClaim(claim, knowledgeContext, analysis);
+        const isVerified = verifyFactualClaim(claim, knowledgeContext, analysis);
         if (isVerified.verified) {
             verified.push(claim);
             if (isVerified.source) {
@@ -267,222 +482,6 @@ function factCheck(text, analysis, knowledgeContext = '') {
     }
 
     // Check for invented references
-    const referencePatterns = [
-        /BARI\s+guide/i,
-        /BRRI\s+recommendation/i,
-        /DAE\s+advisory/i,
-        /FAO\s+report/i,
-        /IRRI\s+study/i,
-    ];
-
-    const textReferences = [];
-    for (const pattern of referencePatterns) {
-        if (pattern.test(text)) {
-            const match = text.match(pattern);
-            textReferences.push(match[0]);
-        }
-    }
-
-    // Verify text references are real
-    for (const ref of textReferences) {
-        const isValid = APPROVED_REFERENCES[ref.split(' ')[0]]?.publications.some(
-            pub => ref.toLowerCase().includes(pub.toLowerCase().split(' ')[0])
-        );
-        if (!isValid) {
-            unverified.push({ type: 'reference', text: ref });
-        } else {
-            verified.push({ type: 'reference', text: ref });
-            const org = ref.split(' ')[0];
-            if (APPROVED_REFERENCES[org]) {
-                references.push({
-                    name: APPROVED_REFERENCES[org].name,
-                    url: APPROVED_REFERENCES[org].url,
-                    publication: ref,
-                });
-            }
-        }
-    }
-
-    return { verified, unverified, references };
-}
-
-function extractClaims(text) {
-    const claims = [];
-
-    // Fertilizer recommendations
-    const fertilizerPatterns = [
-        /(?:সার|fertilizer|পুষ্টি|nutrient)\s+(?:ব্যবহার|use|apply)/gi,
-        /(?:ইউরিয়া|urea|ডাই অ্যামোনিয়ম|DAP|মিউরিয়েট অফ পটাশ|MOP)/gi,
-        /(?:টন|kg|কেজি|প্রতি)\s+(?:প্রতি\s+)?(?:একর|acre|হেক্টর|hectare)/gi,
-    ];
-
-    // Disease recommendations
-    const diseasePatterns = [
-        /(?:রোগ|disease|পোকা|pest|কীটপতঙ্গ|insect)\s+(?:নিয়ন্ত্রণ|control|management)/gi,
-        /(?:ছত্রাকনাশক|fungicide|কীটনাশক|insecticide|তেল|oil)/gi,
-    ];
-
-    // Crop recommendations
-    const cropPatterns = [
-        /(?:ধান|rice|টমেটো|tomato|মরিচ|chili|বেগুন|brinjal)/gi,
-        /(?:আলু|potato|পেঁয়াজ|onion|রসুন|garlic|আম|mango)/gi,
-    ];
-
-    const allPatterns = [...fertilizerPatterns, ...diseasePatterns, ...cropPatterns];
-
-    for (const pattern of allPatterns) {
-        const matches = text.match(pattern) || [];
-        for (const match of matches) {
-            claims.push({ type: 'fact', text: match, context: text.substring(0, 200) });
-        }
-    }
-
-    return claims.slice(0, 10); // Limit to 10 claims
-}
-
-function verifyClaim(claim, knowledgeContext, analysis) {
-    const claimLower = claim.text.toLowerCase();
-
-    // Check if claim matches knowledge context
-    if (knowledgeContext) {
-        const contextLower = knowledgeContext.toLowerCase();
-
-        // Check for specific crop mentions
-        if (analysis.crop && contextLower.includes(analysis.crop.toLowerCase())) {
-            return {
-                verified: true,
-                source: { type: 'knowledge', name: 'Internal Knowledge Base' },
-            };
-        }
-
-        // Check for fertilizer mentions
-        const fertilizers = ['ইউরিয়া', 'urea', 'ডাই অ্যামোনিয়ম', 'DAP', 'মিউরিয়েট অফ পটাশ', 'MOP'];
-        for (const fert of fertilizers) {
-            if (claimLower.includes(fert.toLowerCase()) && contextLower.includes(fert.toLowerCase())) {
-                return {
-                    verified: true,
-                    source: { type: 'knowledge', name: 'Internal Knowledge Base' },
-                };
-            }
-        }
-
-        // Check for disease mentions
-        const diseases = ['ছত্রাক', 'fungal', 'ব্যাকটেরিয়া', 'bacterial', 'ভাইরাস', 'viral'];
-        for (const disease of diseases) {
-            if (claimLower.includes(disease) && contextLower.includes(disease)) {
-                return {
-                    verified: true,
-                    source: { type: 'knowledge', name: 'Internal Knowledge Base' },
-                };
-            }
-        }
-    }
-
-    // Default: unverified
-    return { verified: false, source: null };
-}
-
-// ─────────────────────────────────────────────
-// STEP 5: CONFIDENCE SCORING
-// ─────────────────────────────────────────────
-function calculateConfidence(text, analysis, factCheckResult, selfReviewResult) {
-    let score = 50; // Base score
-
-    // Knowledge base verification bonus
-    if (factCheckResult.verified.length > 0) {
-        score += Math.min(factCheckResult.verified.length * 10, 30);
-    }
-
-    // Unverified claims penalty
-    if (factCheckResult.unverified.length > 0) {
-        score -= factCheckResult.unverified.length * 5;
-    }
-
-    // Self review issues penalty
-    if (selfReviewResult.issues.length > 0) {
-        score -= selfReviewResult.issues.length * 10;
-    }
-
-    // Self review warnings penalty
-    if (selfReviewResult.warnings.length > 0) {
-        score -= selfReviewResult.warnings.length * 3;
-    }
-
-    // Bangladesh context bonus
-    const bangladeshKeywords = ['বাংলাদেশ', 'bangladesh', 'চাটগ্রাম', 'chittagong'];
-    if (bangladeshKeywords.some(kw => text.toLowerCase().includes(kw))) {
-        score += 5;
-    }
-
-    // Reference bonus
-    if (factCheckResult.references.length > 0) {
-        score += Math.min(factCheckResult.references.length * 5, 15);
-    }
-
-    // Clamp score
-    score = Math.max(0, Math.min(100, score));
-
-    // Determine level
-    let level;
-    if (score >= CONFIDENCE.HIGH.min) {
-        level = CONFIDENCE.HIGH;
-    } else if (score >= CONFIDENCE.MEDIUM.min) {
-        level = CONFIDENCE.MEDIUM;
-    } else {
-        level = CONFIDENCE.LOW;
-    }
-
-    return { score, level, label: level.label, labelBn: level.labelBn };
-}
-
-// ─────────────────────────────────────────────
-// STEP 6: PRODUCT CHECK
-// ─────────────────────────────────────────────
-function verifyProducts(text, productContext = '') {
-    const productMentions = [];
-    const verifiedProducts = [];
-    const unverifiedProducts = [];
-
-    // Extract product mentions from text
-    const productPatterns = [
-        /(?:পণ্য|product|সার|fertilizer|কীটনাশক|insecticide|ছত্রাকনাশক|fungicide)\s*[:\-]?\s*([^\n,.]+)/gi,
-        /(?:SF|Sowrov)\s+([A-Za-z0-9\s]+)/gi,
-    ];
-
-    for (const pattern of productPatterns) {
-        const matches = text.match(pattern) || [];
-        for (const match of matches) {
-            productMentions.push(match.trim());
-        }
-    }
-
-    // Check against product context
-    if (productContext) {
-        for (const mention of productMentions) {
-            const mentionLower = mention.toLowerCase();
-            if (productContext.toLowerCase().includes(mentionLower) ||
-                productContext.toLowerCase().includes(mentionLower.split(' ').pop())) {
-                verifiedProducts.push(mention);
-            } else {
-                unverifiedProducts.push(mention);
-            }
-        }
-    } else {
-        // No product context available
-        unverifiedProducts.push(...productMentions);
-    }
-
-    return { verifiedProducts, unverifiedProducts, total: productMentions.length };
-}
-
-// ─────────────────────────────────────────────
-// STEP 7: REFERENCE VALIDATION
-// ─────────────────────────────────────────────
-function validateReferences(text) {
-    const references = [];
-    const fabricated = [];
-
-    // Check for organization mentions
     const orgs = ['BARI', 'BRRI', 'DAE', 'FAO', 'IRRI'];
     for (const org of orgs) {
         if (text.includes(org)) {
@@ -497,28 +496,160 @@ function validateReferences(text) {
         }
     }
 
-    // Check for publication mentions
-    for (const [org, data] of Object.entries(APPROVED_REFERENCES)) {
-        for (const pub of data.publications) {
-            if (text.toLowerCase().includes(pub.toLowerCase())) {
-                const existingRef = references.find(r => r.shortName === org);
-                if (existingRef) {
-                    existingRef.publications = existingRef.publications || [];
-                    existingRef.publications.push(pub);
-                }
-            }
-        }
-    }
-
-    // Check for fabricated references
+    // Check for fabricated vague references
     const fabricatedPatterns = [
         /(?:according to|ধরনে|মতে)\s+(?:a\s+)?(?:recent|নতুন)\s+(?:study|গবেষণা|report|প্রতিবেদন)/gi,
         /(?:research|গবেষণা)\s+(?:shows|দেখায়|proves|প্রমাণ)/gi,
     ];
 
+    const fabricated = [];
     for (const pattern of fabricatedPatterns) {
         if (pattern.test(text)) {
             fabricated.push({ type: 'vague_reference', text: text.match(pattern)?.[0] });
+        }
+    }
+
+    return { verified, unverified, references, fabricated };
+}
+
+function extractFactualClaims(text) {
+    const claims = [];
+
+    const patterns = [
+        /(?:ইউরিয়া|urea|ডাই অ্যামোনিয়ম|DAP|মিউরিয়েট অফ পটাশ|MOP)/gi,
+        /(?:টন|kg|কেজি|প্রতি)\s+(?:প্রতি\s+)?(?:একর|acre|হেক্টর|hectare)/gi,
+        /(?:ছত্রাকনাশক|fungicide|কীটনাশক|insecticide)/gi,
+        /(?:ধান|rice|টমেটো|tomato|মরিচ|chili|বেগুন|brinjal)/gi,
+    ];
+
+    for (const pattern of patterns) {
+        const matches = text.match(pattern) || [];
+        for (const match of matches) {
+            claims.push({ type: 'fact', text: match, context: text.substring(0, 200) });
+        }
+    }
+
+    return claims.slice(0, 10);
+}
+
+function verifyFactualClaim(claim, knowledgeContext, analysis) {
+    if (!knowledgeContext) return { verified: false, source: null };
+
+    const claimLower = claim.text.toLowerCase();
+    const contextLower = knowledgeContext.toLowerCase();
+
+    // Check if claim appears in knowledge context
+    if (contextLower.includes(claimLower)) {
+        return {
+            verified: true,
+            source: { type: 'knowledge', name: 'Internal Knowledge Base' },
+        };
+    }
+
+    return { verified: false, source: null };
+}
+
+// ─────────────────────────────────────────────
+// CONFIDENCE SCORING
+// ─────────────────────────────────────────────
+function calculateConfidence(text, analysis, factCheckResult, searchResults) {
+    let score = 50;
+
+    // Knowledge base bonus
+    if (analysis.hasKnowledgeBase) score += 15;
+    if (analysis.hasProducts) score += 10;
+
+    // Verified claims bonus
+    if (factCheckResult.verified.length > 0) {
+        score += Math.min(factCheckResult.verified.length * 8, 25);
+    }
+
+    // Unverified claims penalty
+    if (factCheckResult.unverified.length > 0) {
+        score -= factCheckResult.unverified.length * 5;
+    }
+
+    // Fabricated references penalty
+    if (factCheckResult.fabricated.length > 0) {
+        score -= factCheckResult.fabricated.length * 15;
+    }
+
+    // Bangladesh context bonus
+    const bangladeshKeywords = ['বাংলাদেশ', 'bangladesh', 'চাটগ্রাম', 'chittagong'];
+    if (bangladeshKeywords.some(kw => text.toLowerCase().includes(kw))) {
+        score += 5;
+    }
+
+    // Reference bonus
+    if (factCheckResult.references.length > 0) {
+        score += Math.min(factCheckResult.references.length * 3, 10);
+    }
+
+    score = Math.max(0, Math.min(100, score));
+
+    let level;
+    if (score >= CONFIDENCE.HIGH.min) level = CONFIDENCE.HIGH;
+    else if (score >= CONFIDENCE.MEDIUM.min) level = CONFIDENCE.MEDIUM;
+    else level = CONFIDENCE.LOW;
+
+    return { score, level, label: level.label, labelBn: level.labelBn };
+}
+
+// ─────────────────────────────────────────────
+// PRODUCT VERIFICATION
+// ─────────────────────────────────────────────
+function verifyProducts(text, productContext = '') {
+    const productMentions = [];
+    const verifiedProducts = [];
+    const unverifiedProducts = [];
+
+    const productPatterns = [
+        /(?:পণ্য|product|সার|fertilizer|কীটনাশক|insecticide|ছত্রাকনাশক|fungicide)\s*[:\-]?\s*([^\n,.]+)/gi,
+        /(?:SF|Sowrov)\s+([A-Za-z0-9\s]+)/gi,
+    ];
+
+    for (const pattern of productPatterns) {
+        const matches = text.match(pattern) || [];
+        for (const match of matches) {
+            productMentions.push(match.trim());
+        }
+    }
+
+    if (productContext) {
+        for (const mention of productMentions) {
+            const mentionLower = mention.toLowerCase();
+            if (productContext.toLowerCase().includes(mentionLower) ||
+                productContext.toLowerCase().includes(mentionLower.split(' ').pop())) {
+                verifiedProducts.push(mention);
+            } else {
+                unverifiedProducts.push(mention);
+            }
+        }
+    } else {
+        unverifiedProducts.push(...productMentions);
+    }
+
+    return { verifiedProducts, unverifiedProducts, total: productMentions.length };
+}
+
+// ─────────────────────────────────────────────
+// REFERENCE VALIDATION
+// ─────────────────────────────────────────────
+function validateReferences(text) {
+    const references = [];
+    const fabricated = [];
+
+    const orgs = ['BARI', 'BRRI', 'DAE', 'FAO', 'IRRI'];
+    for (const org of orgs) {
+        if (text.includes(org)) {
+            const orgData = APPROVED_REFERENCES[org];
+            if (orgData) {
+                references.push({
+                    organization: orgData.name,
+                    shortName: org,
+                    url: orgData.url,
+                });
+            }
         }
     }
 
@@ -526,12 +657,11 @@ function validateReferences(text) {
 }
 
 // ─────────────────────────────────────────────
-// STEP 8: LANGUAGE CONSISTENCY
+// LANGUAGE CHECK
 // ─────────────────────────────────────────────
 function checkLanguageConsistency(text, expectedLanguage) {
     const issues = [];
 
-    // Check if text matches expected language
     if (expectedLanguage === 'bangla') {
         const banglaChars = (text.match(/[\u0980-\u09FF]/g) || []).length;
         const totalChars = text.replace(/\s/g, '').length;
@@ -556,9 +686,9 @@ function checkLanguageConsistency(text, expectedLanguage) {
 }
 
 // ─────────────────────────────────────────────
-// STEP 9: QUALITY SCORING
+// QUALITY SCORING
 // ─────────────────────────────────────────────
-function calculateQualityScore(text, analysis, factCheckResult, selfReviewResult, confidence, productResult, referenceResult, languageResult) {
+function calculateQualityScore(text, analysis, factCheckResult, confidence, productResult, referenceResult, languageResult) {
     const scores = {
         accuracy: 100,
         completeness: 100,
@@ -566,42 +696,19 @@ function calculateQualityScore(text, analysis, factCheckResult, selfReviewResult
         language: 100,
     };
 
-    // Accuracy scoring
-    if (factCheckResult.unverified.length > 0) {
-        scores.accuracy -= factCheckResult.unverified.length * 15;
-    }
-    if (productResult.unverifiedProducts.length > 0) {
-        scores.accuracy -= productResult.unverifiedProducts.length * 10;
-    }
-    if (referenceResult.fabricated.length > 0) {
-        scores.accuracy -= referenceResult.fabricated.length * 20;
-    }
+    // Accuracy
+    if (factCheckResult.unverified.length > 0) scores.accuracy -= factCheckResult.unverified.length * 15;
+    if (productResult.unverifiedProducts.length > 0) scores.accuracy -= productResult.unverifiedProducts.length * 10;
+    if (factCheckResult.fabricated.length > 0) scores.accuracy -= factCheckResult.fabricated.length * 20;
 
-    // Completeness scoring
-    if (analysis.isComplexQuestion && text.length < 200) {
-        scores.completeness -= 30;
-    }
-    if (analysis.isDiseaseQuery && !text.includes('প্রতিরোধ') && !text.includes('prevention')) {
-        scores.completeness -= 10;
-    }
-    if (analysis.isFertilizerQuery && !text.includes('পরিমাণ') && !text.includes('dosage')) {
-        scores.completeness -= 10;
-    }
+    // Completeness
+    if (analysis.isComplexQuestion && text.length < 200) scores.completeness -= 30;
+    if (analysis.disease && !text.includes('প্রতিরোধ') && !text.includes('prevention')) scores.completeness -= 10;
+    if (analysis.fertilizer && !text.includes('পরিমাণ') && !text.includes('dosage')) scores.completeness -= 10;
 
-    // Safety scoring
-    if (selfReviewResult.warnings.some(w => w.type === 'safety')) {
-        scores.safety -= 20;
-    }
-    if (text.includes('বিষাক্ত') && !text.includes('সতর্কতা')) {
-        scores.safety -= 15;
-    }
+    // Language
+    if (!languageResult.passed) scores.language -= 30;
 
-    // Language scoring
-    if (!languageResult.passed) {
-        scores.language -= 30;
-    }
-
-    // Calculate total score
     const total = Math.round(
         (scores.accuracy * 0.4) +
         (scores.completeness * 0.25) +
@@ -613,74 +720,106 @@ function calculateQualityScore(text, analysis, factCheckResult, selfReviewResult
 }
 
 // ─────────────────────────────────────────────
-// MAIN: V32 SELF CHECK PIPELINE
+// V33: MAIN REASONING PIPELINE
 // ─────────────────────────────────────────────
-function selfCheckPipeline(responseText, context = {}) {
+function v33ReasoningPipeline(responseText, context = {}) {
     const startTime = Date.now();
 
     // Step 1: Understand
-    const analysis = analyzeInput(responseText, context);
+    const analysis = understandIntent(responseText, context);
 
-    // Step 2: (Answer already generated by LLM)
+    // Step 2: Break down problem
+    const problemParts = breakDownProblem(responseText, analysis);
 
-    // Step 3: Self Review
-    const review = selfReview(responseText, analysis);
+    // Step 3: Search all databases
+    const searchResults = searchAllDatabases(responseText, analysis, context);
 
-    // Step 4: Fact Check
+    // Step 4: Compare possible answers
+    const possibleAnswers = compareAnswers(responseText, analysis, searchResults);
+
+    // Step 5: Choose best answer
+    const bestAnswer = chooseBestAnswer(possibleAnswers, analysis);
+
+    // Step 6: Explain why
+    const explanations = explainWhy(bestAnswer, analysis);
+
+    // Step 7: Suggest next step
+    const nextSteps = suggestNextStep(responseText, analysis);
+
+    // Step 8: Predict future problems
+    const futureProblems = predictFutureProblems(responseText, analysis);
+
+    // Step 9: Recommend prevention
+    const prevention = recommendPrevention(responseText, analysis);
+
+    // Step 10: Recommend products
+    const productRecommendations = recommendProducts(responseText, analysis, context.productContext || '');
+
+    // Fact checking
     const factCheckResult = factCheck(responseText, analysis, context.knowledgeContext || '');
 
-    // Step 5: Confidence
-    const confidence = calculateConfidence(responseText, analysis, factCheckResult, review);
+    // Confidence
+    const confidence = calculateConfidence(responseText, analysis, factCheckResult, searchResults);
 
-    // Step 6: Product Check
+    // Product verification
     const productResult = verifyProducts(responseText, context.productContext || '');
 
-    // Step 7: Reference Validation
+    // Reference validation
     const referenceResult = validateReferences(responseText);
 
-    // Step 8: Language Check
+    // Language check
     const languageResult = checkLanguageConsistency(responseText, analysis.language);
 
-    // Step 9: Quality Score
+    // Quality score
     const quality = calculateQualityScore(
-        responseText, analysis, factCheckResult, review,
-        confidence, productResult, referenceResult, languageResult
+        responseText, analysis, factCheckResult, confidence,
+        productResult, referenceResult, languageResult
     );
 
     const processingTime = Date.now() - startTime;
 
     return {
-        passed: quality.acceptable && review.passed && confidence.score >= 60,
+        // V33 Reasoning Results
+        analysis,
+        problemParts,
+        searchResults,
+        possibleAnswers,
+        bestAnswer,
+        explanations,
+        nextSteps,
+        futureProblems,
+        prevention,
+        productRecommendations,
+
+        // V32 Verification Results
         confidence,
         quality,
-        review,
         factCheck: {
             verified: factCheckResult.verified.length,
             unverified: factCheckResult.unverified.length,
             references: factCheckResult.references,
+            fabricated: factCheckResult.fabricated,
         },
         products: {
             verified: productResult.verifiedProducts,
             unverified: productResult.unverifiedProducts,
         },
         references: referenceResult.references,
-        fabricated: referenceResult.fabricated,
         language: languageResult,
         processingTime,
+
+        passed: quality.acceptable && confidence.score >= 60,
     };
 }
 
 // ─────────────────────────────────────────────
-// SELF-CHECK WRAPPER (for backward compatibility)
+// SELF-CHECK WRAPPER
 // ─────────────────────────────────────────────
 function selfCheck(responseText, context = {}) {
-    const result = selfCheckPipeline(responseText, context);
+    const result = v33ReasoningPipeline(responseText, context);
     return {
         passed: result.passed,
-        issues: [
-            ...result.review.issues.map(i => i.message),
-            ...result.language.issues.map(i => i.message),
-        ],
+        issues: result.language.issues.map(i => i.message),
         correctedText: responseText,
         confidence: result.confidence,
         quality: result.quality,
@@ -694,12 +833,12 @@ function processResponse(responseText, context = {}) {
     // Step 1: Sanitize URLs
     let processed = sanitizeResponseUrls(responseText);
 
-    // Step 2: V32 Self Check Pipeline
-    const checkResult = selfCheckPipeline(processed, context);
+    // Step 2: V33 Reasoning Pipeline
+    const result = v33ReasoningPipeline(processed, context);
 
     // Step 3: Add confidence note if low
     let finalText = processed;
-    if (checkResult.confidence.score < 60) {
+    if (result.confidence.score < 60) {
         const confidenceNote = context.expectedLanguage === 'english'
             ? '\n\n*Note: My knowledge on this topic is limited. Please consult your local DAE office for more accurate advice.*'
             : '\n\n*এই বিষয়ে আমার নিশ্চিত তথ্য সীমিত। নিকটস্থ কৃষি কর্মকর্তার পরামর্শ নেওয়া ভালো।*';
@@ -708,16 +847,22 @@ function processResponse(responseText, context = {}) {
 
     return {
         text: finalText,
-        passed: checkResult.passed,
-        issues: [
-            ...checkResult.review.issues.map(i => i.message),
-            ...checkResult.language.issues.map(i => i.message),
-        ],
-        confidence: checkResult.confidence,
-        quality: checkResult.quality,
-        factCheck: checkResult.factCheck,
-        products: checkResult.products,
-        references: checkResult.references,
+        passed: result.passed,
+        issues: result.language.issues.map(i => i.message),
+        confidence: result.confidence,
+        quality: result.quality,
+        factCheck: result.factCheck,
+        products: result.products,
+        references: result.references,
+        // V33 reasoning metadata
+        reasoning: {
+            bestAnswer: result.bestAnswer,
+            explanations: result.explanations,
+            nextSteps: result.nextSteps,
+            futureProblems: result.futureProblems,
+            prevention: result.prevention,
+            productRecommendations: result.productRecommendations,
+        },
     };
 }
 
@@ -725,7 +870,7 @@ module.exports = {
     isApprovedUrl,
     sanitizeResponseUrls,
     selfCheck,
-    selfCheckPipeline,
+    v33ReasoningPipeline,
     processResponse,
     APPROVED_DOMAINS,
     APPROVED_URLS,

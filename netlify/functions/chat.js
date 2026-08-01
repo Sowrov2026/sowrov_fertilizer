@@ -188,7 +188,8 @@ exports.handler = async (event) => {
 
     // Rate limiting (with lazy cleanup)
     cleanupRateLimits();
-    const clientIP = event.headers['client-ip'] || event.context?.ip || 'unknown';
+    // V33 FIX: Only use Netlify-provided trusted IP, not user-controlled headers
+    const clientIP = event.context?.ip || 'unknown';
     if (!checkRateLimit(clientIP)) {
         return {
             statusCode: 429,
@@ -234,6 +235,7 @@ exports.handler = async (event) => {
 
         const { messages, image } = body;
 
+        // V33 FIX: Input size limits to prevent abuse
         if (!Array.isArray(messages) || messages.length === 0) {
             return {
                 statusCode: 400,
@@ -241,6 +243,30 @@ exports.handler = async (event) => {
                 body: JSON.stringify({
                     error: 'বার্তা প্রয়োজন।',
                     errorEn: 'Messages array is required.',
+                }),
+            };
+        }
+
+        if (messages.length > 50) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({
+                    error: 'অনেক বেশি বার্তা পাঠানো হয়েছে।',
+                    errorEn: 'Too many messages. Maximum 50 allowed.',
+                }),
+            };
+        }
+
+        // Check total content size
+        const totalContentSize = messages.reduce((sum, m) => sum + (m.content?.length || 0), 0);
+        if (totalContentSize > 100000) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({
+                    error: 'বার্তার মাপ অনেক বড়।',
+                    errorEn: 'Message content too large. Maximum 100KB allowed.',
                 }),
             };
         }
@@ -264,9 +290,17 @@ exports.handler = async (event) => {
         const lastUserMsg = messages.filter(m => m.role === 'user').pop();
         const rawInput = lastUserMsg ? lastUserMsg.content || '' : '';
 
-        // ── Check answer cache first ──
-        const intent初步 = detectIntent(rawInput, { language: 'auto' });
-        const answerCacheKey = getAnswerCacheKey(rawInput, intent初步);
+        // V33 FIX: Inline memory cleanup (setInterval never fires in serverless)
+        smartMemory.cleanup();
+
+        // ── AGENT 1: Language Agent ──
+        const languageResult = processLanguage(rawInput);
+
+        // ── AGENT 2: Intent Agent (single call, normalized input) ──
+        const intent = detectIntent(languageResult.normalized, languageResult);
+
+        // ── Check answer cache (using normalized input + real intent) ──
+        const answerCacheKey = getAnswerCacheKey(languageResult.normalized, intent);
         const cachedAnswer = getCachedAnswer(answerCacheKey);
         if (cachedAnswer) {
             return {
@@ -275,12 +309,6 @@ exports.handler = async (event) => {
                 body: JSON.stringify({ reply: cachedAnswer }),
             };
         }
-
-        // ── AGENT 1: Language Agent ──
-        const languageResult = processLanguage(rawInput);
-
-        // ── AGENT 2: Intent Agent ──
-        const intent = detectIntent(languageResult.normalized, languageResult);
 
         // ── Smart Memory: Update & Get Context ──
         smartMemory.updateFromMessage(sessionId, rawInput, intent, languageResult);
@@ -422,15 +450,18 @@ exports.handler = async (event) => {
             },
             body: JSON.stringify({
                 reply: processed.text,
-                _meta: {
-                    provider: result.provider,
-                    model: result.model,
-                    latency: result.latency,
-                    confidence: processed.confidence?.score,
-                    quality: processed.quality?.total,
-                    verified: processed.factCheck?.verified || 0,
-                    references: processed.references?.length || 0,
-                },
+                // V33 FIX: Only include _meta in development, strip from production
+                ...(process.env.NODE_ENV !== 'production' && {
+                    _meta: {
+                        provider: result.provider,
+                        model: result.model,
+                        latency: result.latency,
+                        confidence: processed.confidence?.score,
+                        quality: processed.quality?.total,
+                        verified: processed.factCheck?.verified || 0,
+                        references: processed.references?.length || 0,
+                    },
+                }),
             }),
         };
     } catch (error) {

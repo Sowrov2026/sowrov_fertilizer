@@ -400,12 +400,15 @@ async function callGemini(messages, systemPrompt, options = {}) {
         }
     }
 
-    const url = PROVIDERS.gemini.url.replace('{model}', model) + `?key=${apiKey}`;
+    const url = PROVIDERS.gemini.url.replace('{model}', model);
 
     const startTime = Date.now();
     const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': apiKey,
+        },
         body: JSON.stringify({
             system_instruction: { parts: [{ text: systemPrompt }] },
             contents,

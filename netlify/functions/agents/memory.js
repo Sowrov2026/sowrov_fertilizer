@@ -140,7 +140,7 @@ class SmartMemory {
 // Singleton instance
 const smartMemory = new SmartMemory();
 
-// Cleanup every 30 minutes
-setInterval(() => smartMemory.cleanup(), 30 * 60 * 1000);
+// V33 FIX: Remove setInterval - never fires in Netlify Functions
+// Cleanup is now called inline at the start of each request in chat.js
 
 module.exports = { smartMemory };
