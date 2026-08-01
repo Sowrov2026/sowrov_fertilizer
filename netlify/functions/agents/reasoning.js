@@ -417,7 +417,7 @@ function recommendPrevention(text, analysis) {
         preventions.push('জৈব সার ব্যবহারকে অগ্রাধিকার দিন।');
         preventions.push('Prioritize organic fertilizers.');
     } else {
-        preventions.push('নিয়মিত কৃষি সম্প্রসারণ সেবা গ্রহণ করুন。');
+        preventions.push('নিয়মিত কৃষি সম্প্রসারণ সেবা গ্রহণ করুন।');
         preventions.push('Regularly use agricultural extension services.');
     }
 
