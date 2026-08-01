@@ -1035,3 +1035,169 @@
     .v15-action-btn span { display: none; }
     .v15-action-btn { padding: 6px 10px; }
 }
+
+/* ============================================
+   SF AI V16 — Enterprise Intelligence Styles
+   ============================================ */
+
+/* ---------- Voice Button ---------- */
+.voice-btn {
+    color: var(--emerald-400);
+}
+.voice-btn.recording {
+    color: #ef4444;
+    animation: pulse-red 1s infinite;
+}
+@keyframes pulse-red {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+}
+
+/* ---------- OCR/PDF Buttons ---------- */
+.ocr-btn { color: #fbbf24; }
+.pdf-btn { color: #f87171; }
+
+/* ---------- V16 Panels ---------- */
+.v16-ocr-result pre,
+.v16-pdf-result pre {
+    background: var(--dark-900);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    max-height: 300px;
+    overflow: auto;
+    color: var(--dark-200);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.v16-ocr-result h4,
+.v16-pdf-result h4 {
+    color: var(--emerald-300);
+    margin: 8px 0 4px;
+    font-size: 13px;
+}
+
+/* ---------- Voice UI ---------- */
+.sf-voice-ui {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(30, 41, 59, 0.9);
+    border-radius: 12px;
+    margin: 8px 0;
+}
+.sf-voice-mic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--emerald-500);
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--emerald-400);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+.sf-voice-mic:hover { background: rgba(16, 185, 129, 0.2); }
+.sf-voice-mic.listening {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    animation: pulse-red 1s infinite;
+}
+.sf-voice-status {
+    font-size: 12px;
+    color: var(--dark-300);
+    font-family: var(--font-bengali);
+}
+
+/* ---------- Offline Banner ---------- */
+.sf-offline-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    font-family: var(--font-bengali);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.sf-offline-banner.hidden { display: none; }
+
+/* ---------- Toast Notifications ---------- */
+.sf-toast {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 10001;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: var(--font-bengali);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    animation: toast-in 0.3s ease;
+    max-width: 350px;
+}
+.sf-toast-error {
+    background: rgba(239, 68, 68, 0.95);
+    color: white;
+    border-left: 4px solid #dc2626;
+}
+.sf-toast-success {
+    background: rgba(16, 185, 129, 0.95);
+    color: white;
+    border-left: 4px solid #059669;
+}
+.sf-toast-info {
+    background: rgba(59, 130, 246, 0.95);
+    color: white;
+    border-left: 4px solid #2563eb;
+}
+@keyframes toast-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* ---------- Memory Badge ---------- */
+.v16-memory-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+    font-size: 10px;
+    color: var(--emerald-400);
+    margin: 2px 0;
+}
+.v16-memory-badge i { font-size: 10px; }
+
+/* ---------- Analytics Dashboard ---------- */
+.v16-analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 8px 0;
+}
+.v16-analytics-card {
+    padding: 10px;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 8px;
+    text-align: center;
+}
+.v16-analytics-card .value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--emerald-300);
+}
+.v16-analytics-card .label {
+    font-size: 10px;
+    color: var(--dark-400);
+    margin-top: 2px;
+}
