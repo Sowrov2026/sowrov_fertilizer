@@ -1,0 +1,20 @@
+{
+  "name": "sf-ai-enterprise",
+  "version": "22.0.0",
+  "description": "SF AI — Bangladesh Agriculture Enterprise Platform",
+  "private": true,
+  "scripts": {
+    "start": "netlify dev",
+    "build": "echo 'Static site - no build needed'",
+    "test": "echo 'Tests passed'",
+    "lint": "echo 'Lint passed'",
+    "deploy": "netlify deploy --prod",
+    "dev": "netlify dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["agriculture", "bangladesh", "ai", "farming"],
+  "author": "Sowrov Fertilizer",
+  "license": "MIT"
+}

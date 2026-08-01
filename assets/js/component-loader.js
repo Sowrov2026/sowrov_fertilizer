@@ -1,6 +1,6 @@
 // ======================================
 // Component Loader
-// Sowrov Fertilizer — V21 Knowledge Universe
+// Sowrov Fertilizer — V22 Enterprise Platform
 // ======================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loadV19Modules();
             loadV20Modules();
             loadV21Modules();
+            loadV22Modules();
         };
         document.body.appendChild(script);
     }
@@ -97,5 +98,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(v21Script);
     }
 
-    console.log("Component Loader Loaded — V21 Knowledge Universe");
+    // Load V22 Enterprise Platform
+    function loadV22Modules() {
+        if (document.getElementById("v22-module")) return;
+        const v22Script = document.createElement("script");
+        v22Script.id = "v22-module";
+        v22Script.type = "module";
+        v22Script.src = "assets/js/v22-integration.js";
+        v22Script.onload = () => console.log("V22 Enterprise Platform Loaded");
+        document.body.appendChild(v22Script);
+    }
+
+    console.log("Component Loader Loaded — V22 Enterprise Platform");
 });
