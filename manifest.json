@@ -1,0 +1,29 @@
+{
+  "name": "SF AI — Smart Agriculture Assistant",
+  "short_name": "SF AI",
+  "description": "Bangladesh's Smartest Agriculture AI — Crop Management, Disease Diagnosis, Fertilizer Recommendation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "bn",
+  "dir": "ltr",
+  "categories": ["agriculture", "business", "utilities"],
+  "icons": [
+    { "src": "assets/images/logo/logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/images/logo/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    { "name": "AI Chat", "short_name": "Chat", "url": "/#chat", "icons": [{ "src": "assets/images/icons/sf-ai.png", "sizes": "96x96" }] },
+    { "name": "Products", "short_name": "Products", "url": "/products.html", "icons": [{ "src": "assets/images/icons/home.png", "sizes": "96x96" }] },
+    { "name": "Contact", "short_name": "Contact", "url": "/contact.html" }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": { "title": "name", "text": "description", "url": "link" }
+  }
+}

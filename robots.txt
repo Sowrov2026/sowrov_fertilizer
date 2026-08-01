@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /netlify/
+Disallow: /assets/admin/
+Disallow: /*.json$
+Disallow: /sw.js
+
+Sitemap: https://sowrov2026.github.io/sowrov_fertilizer/sitemap.xml
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

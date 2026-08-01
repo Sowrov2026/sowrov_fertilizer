@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SF AI — Smart Agriculture Assistant",
+  "url": "https://sowrov2026.github.io/sowrov_fertilizer/",
+  "description": "Bangladesh's Smartest Agriculture AI — Crop Management, Disease Diagnosis, Fertilizer Recommendation in Bangla",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BDT" },
+  "author": { "@type": "Organization", "name": "Sowrov Fertilizer", "url": "https://sowrov2026.github.io/sowrov_fertilizer/" },
+  "inLanguage": ["bn", "en"],
+  "featureList": ["AI Chat", "Disease Diagnosis", "Fertilizer Calculator", "Market Prices", "Weather Alerts", "Voice Input"]
+}
