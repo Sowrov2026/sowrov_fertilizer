@@ -1,6 +1,6 @@
 // ======================================
 // Component Loader
-// Sowrov Fertilizer — V19 Self-Evolving AI
+// Sowrov Fertilizer — V20 Commercial Ecosystem
 // ======================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loadV16Modules();
             loadV17Modules();
             loadV19Modules();
+            loadV20Modules();
         };
         document.body.appendChild(script);
     }
@@ -73,5 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(v19Script);
     }
 
-    console.log("Component Loader Loaded — V19 Self-Evolving AI");
+    // Load V20 Commercial Ecosystem
+    function loadV20Modules() {
+        if (document.getElementById("v20-module")) return;
+        const v20Script = document.createElement("script");
+        v20Script.id = "v20-module";
+        v20Script.type = "module";
+        v20Script.src = "assets/js/v20-integration.js";
+        v20Script.onload = () => console.log("V20 Commercial Ecosystem Loaded");
+        document.body.appendChild(v20Script);
+    }
+
+    console.log("Component Loader Loaded — V20 Commercial Ecosystem");
 });
