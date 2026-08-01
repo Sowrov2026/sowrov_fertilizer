@@ -1,5 +1,5 @@
 /* ============================================
-   SF AI Assistant — V31 Multi-Provider Edition
+   SF AI Assistant — V32 Self Check Edition
    Netlify Serverless Function | Provider Router
    Multi-Agent Agriculture Intelligence System
    ============================================ */
@@ -9,7 +9,7 @@ const { processLanguage } = require('./agents/language');
 const { detectIntent } = require('./agents/intent');
 const { buildFullKnowledgeContext, verifyReferences } = require('./agents/knowledge');
 const { searchAndRankProducts } = require('./agents/product');
-const { processResponse, sanitizeResponseUrls, selfCheck } = require('./agents/reasoning');
+const { processResponse, sanitizeResponseUrls, selfCheck, selfCheckPipeline } = require('./agents/reasoning');
 const { smartMemory } = require('./agents/memory');
 
 // ── Cache Imports ──
@@ -388,17 +388,26 @@ exports.handler = async (event) => {
             };
         }
 
-        // ── Self-Check & Sanitize ──
+        // ── V32: Self-Check & Fact Verification ──
         const processed = processResponse(reply, {
             expectedLanguage: languageResult.language,
             isComplexQuestion: intent.confidence < 5,
+            isDiseaseQuery: intent.isDiseaseQuery,
+            isFertilizerQuery: intent.isFertilizerQuery,
+            isProductQuery: intent.isProductQuery,
+            isWeatherQuery: intent.isWeatherQuery,
+            isMarketQuery: intent.isMarketQuery,
+            isEmergency: intent.isEmergency,
+            cropName: intent.cropName,
+            knowledgeContext,
+            productContext,
         });
 
         // ── Cache the answer ──
         setCachedAnswer(answerCacheKey, processed.text, result.provider);
 
-        // ── Log usage ──
-        console.log(`V31: ${result.provider}/${result.model} | ${result.latency}ms | tokens: ${result.usage?.total_tokens || '?'} | lang: ${languageResult.language} | intent: ${intent.primaryIntent} | attempts: ${result.attempts || 1}`);
+        // ── Log usage with V32 verification info ──
+        console.log(`V32: ${result.provider}/${result.model} | ${result.latency}ms | tokens: ${result.usage?.total_tokens || '?'} | lang: ${languageResult.language} | intent: ${intent.primaryIntent} | confidence: ${processed.confidence?.score || '?'} | quality: ${processed.quality?.total || '?'} | attempts: ${result.attempts || 1}`);
 
         return {
             statusCode: 200,
@@ -408,6 +417,8 @@ exports.handler = async (event) => {
                 'X-Provider': result.provider,
                 'X-Model': result.model,
                 'X-Latency': String(result.latency),
+                'X-Confidence': String(processed.confidence?.score || 0),
+                'X-Quality': String(processed.quality?.total || 0),
             },
             body: JSON.stringify({
                 reply: processed.text,
@@ -415,6 +426,10 @@ exports.handler = async (event) => {
                     provider: result.provider,
                     model: result.model,
                     latency: result.latency,
+                    confidence: processed.confidence?.score,
+                    quality: processed.quality?.total,
+                    verified: processed.factCheck?.verified || 0,
+                    references: processed.references?.length || 0,
                 },
             }),
         };
