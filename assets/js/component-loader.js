@@ -1,6 +1,6 @@
 // ======================================
 // Component Loader
-// Sowrov Fertilizer — V20 Commercial Ecosystem
+// Sowrov Fertilizer — V21 Knowledge Universe
 // ======================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loadV17Modules();
             loadV19Modules();
             loadV20Modules();
+            loadV21Modules();
         };
         document.body.appendChild(script);
     }
@@ -85,5 +86,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(v20Script);
     }
 
-    console.log("Component Loader Loaded — V20 Commercial Ecosystem");
+    // Load V21 Knowledge Universe
+    function loadV21Modules() {
+        if (document.getElementById("v21-module")) return;
+        const v21Script = document.createElement("script");
+        v21Script.id = "v21-module";
+        v21Script.type = "module";
+        v21Script.src = "assets/js/v21-integration.js";
+        v21Script.onload = () => console.log("V21 Knowledge Universe Loaded");
+        document.body.appendChild(v21Script);
+    }
+
+    console.log("Component Loader Loaded — V21 Knowledge Universe");
 });
