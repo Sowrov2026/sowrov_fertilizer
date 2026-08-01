@@ -3,7 +3,10 @@
 
 const crypto = require('crypto');
 
-const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex');
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    console.error('FATAL: JWT_SECRET environment variable is not set');
+}
 const JWT_EXPIRY = '15m';
 const REFRESH_EXPIRY = '7d';
 
@@ -75,7 +78,8 @@ function verifyToken(token) {
     try {
         const [header, body, signature] = token.split('.');
         const expectedSig = crypto.createHmac('sha256', JWT_SECRET).update(`${header}.${body}`).digest('base64url');
-        if (signature !== expectedSig) return null;
+        // Constant-time comparison to prevent timing attacks
+        if (!crypto.timingSafeEqual(Buffer.from(signature || ''), Buffer.from(expectedSig))) return null;
         const payload = JSON.parse(Buffer.from(body, 'base64url').toString());
         if (payload.exp < Math.floor(Date.now() / 1000)) return null;
         return payload;

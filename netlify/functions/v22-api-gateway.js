@@ -2,6 +2,7 @@
 // Production-ready API gateway with rate limiting, API keys, and OpenAPI documentation
 
 const crypto = require('crypto');
+const { verifyToken, hasPermission } = require('./v22-auth');
 
 // API Keys storage (in production, use database)
 const apiKeys = new Map();
@@ -338,7 +339,7 @@ function apiMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
 
     // CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'https://sowrov2026.github.io');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-API-Key');
 
@@ -358,12 +359,12 @@ function apiMiddleware(req, res, next) {
         req.authMethod = 'api_key';
     } else if (authHeader && authHeader.startsWith('Bearer ')) {
         const token = authHeader.split(' ')[1];
-        // JWT verification would happen here
-        // For now, accept any valid-looking token
-        if (!token || token.length < 10) {
-            return res.status(401).json({ error: 'Invalid token', code: 'INVALID_TOKEN' });
+        // Actually verify JWT token
+        const decoded = verifyToken(token);
+        if (!decoded) {
+            return res.status(401).json({ error: 'Invalid or expired token', code: 'INVALID_TOKEN' });
         }
-        req.user = { id: 'jwt_user', permissions: ['read', 'write'] };
+        req.user = decoded;
         req.authMethod = 'jwt';
     } else {
         // Allow unauthenticated access to public endpoints

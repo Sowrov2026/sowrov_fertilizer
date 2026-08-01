@@ -420,7 +420,7 @@ function buildOpenRouterRequest(messages, imageDataUrl, productContext, memoryCo
 // ─────────────────────────────────────────────
 exports.handler = async (event) => {
     const headers = {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://sowrov2026.github.io',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
         'Content-Type': 'application/json',
@@ -434,7 +434,8 @@ exports.handler = async (event) => {
         return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
     }
 
-    const clientIP = event.headers['client-ip'] || event.headers['x-forwarded-for'] || 'unknown';
+    // Use Netlify's trusted client-ip header (set by Netlify, cannot be spoofed by clients)
+    const clientIP = event.headers['client-ip'] || event.context?.ip || 'unknown';
     if (!checkRateLimit(clientIP)) {
         return {
             statusCode: 429,

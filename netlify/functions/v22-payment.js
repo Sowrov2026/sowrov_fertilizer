@@ -123,15 +123,21 @@ async function initStripe(payment) {
     return payment;
 }
 
-// Verify payment
+// Verify payment — NEVER trust client-side confirmation
+// Must verify with provider API (SSLCommerz IPN, bKash verification, etc.)
 async function verifyPayment(paymentId, providerData) {
-    // Verify with provider API
-    return { verified: true, transactionId: providerData.transactionId };
+    // WARNING: This is a stub. In production, you MUST verify with the payment provider API.
+    // SSLCommerz: POST to https://sandbox.sslcommerz.com/validator/api/validationserver
+    // bKash: POST to https://tokenized.sandbox.bkash.com/v1.0.0-beta/checkout/payment/execute
+    // Never trust client-side payment confirmation.
+    console.warn('PAYMENT VERIFICATION STUB — Implement actual provider verification before production!');
+    return { verified: false, error: 'Payment verification not implemented. Configure provider API keys.' };
 }
 
-// Refund
+// Refund — MUST verify with provider before processing
 async function refundPayment(paymentId, amount) {
-    return { refunded: true, amount };
+    console.warn('REFUND STUB — Implement actual provider refund before production!');
+    return { refunded: false, error: 'Refund not implemented. Configure provider API keys.' };
 }
 
 // Get payment
