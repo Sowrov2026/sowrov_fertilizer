@@ -34,8 +34,8 @@ async function fetchAllProducts() {
                 name: fields.name?.stringValue || '',
                 category: fields.category?.stringValue || '',
                 description: fields.description?.stringValue || '',
-                retailPrice: fields.retailPrice?.integerValue || fields.retailPrice?.doubleValue || 0,
-                wholesalePrice: fields.wholesalePrice?.integerValue || fields.wholesalePrice?.doubleValue || 0,
+                retailPrice: fields.retailPrice?.integerValue ?? fields.retailPrice?.doubleValue ?? 0,
+                wholesalePrice: fields.wholesalePrice?.integerValue ?? fields.wholesalePrice?.doubleValue ?? 0,
                 stock: fields.stock?.integerValue || 0,
                 image: fields.image?.stringValue || '',
                 docId: doc.name?.split('/').pop() || '',
@@ -124,12 +124,23 @@ function generateProductContext(products) {
 
 /**
  * Full product search pipeline
+ * V33 FIX: Prioritize disease/symptom terms over crop terms
  */
 async function searchAndRankProducts(query, cropName, intent) {
     const searchTerms = [];
-    if (cropName) searchTerms.push(cropName);
     const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 2);
-    searchTerms.push(...words.slice(0, 3));
+
+    // V33 FIX: Prioritize disease/symptom terms (last 2-3 words) over crop terms
+    if (words.length > 3) {
+        searchTerms.push(...words.slice(-3)); // Last 3 words (usually disease/symptom)
+    } else {
+        searchTerms.push(...words);
+    }
+
+    // Add crop name separately (handled by ranking)
+    if (cropName && !searchTerms.some(t => cropName.toLowerCase().includes(t))) {
+        searchTerms.unshift(cropName);
+    }
 
     let allProducts = [];
     for (const term of searchTerms) {
