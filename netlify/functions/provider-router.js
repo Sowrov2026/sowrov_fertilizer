@@ -656,30 +656,10 @@ async function sendMessage(messages, systemPrompt, options = {}) {
 
             console.warn(`Provider ${config.name} failed:`, error.message, `status: ${error.status}`);
 
-            // If rate limited, queue and retry
+            // V33 FIX: On 429, skip queue (never fires in serverless) and try next provider
             if (error.status === 429) {
-                try {
-                    console.log(`Queueing request for ${config.name} after rate limit`);
-                    const queuedResult = await enqueueRequest(providerId, () =>
-                        caller(messages, systemPrompt, { ...options, maxTokens })
-                    );
-                    if (queuedResult.ok && queuedResult.reply) {
-                        recordSuccess(providerId);
-                        recordProviderSuccess(providerId, queuedResult.latency);
-                        return {
-                            ok: true,
-                            reply: queuedResult.reply,
-                            provider: providerId,
-                            model: queuedResult.model,
-                            latency: queuedResult.latency,
-                            usage: queuedResult.usage,
-                            attempts: attempt + 1,
-                            queued: true,
-                        };
-                    }
-                } catch (queueError) {
-                    console.warn(`Queued request also failed for ${config.name}:`, queueError.message);
-                }
+                console.log(`Rate limited by ${config.name}, trying next provider...`);
+                // Continue to next provider immediately
             }
 
             // Continue to next provider
