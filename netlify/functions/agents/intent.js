@@ -34,6 +34,9 @@ function detectIntent(text, languageResult = {}) {
         soil: 0,
         government: 0,
         faq: 0,
+        organic: 0,
+        pest: 0,
+        crop: 0,
         general: 1,
     };
 
@@ -83,6 +86,26 @@ function detectIntent(text, languageResult = {}) {
         'সরকার', 'অধিদপ্তর', 'গবেষণা', 'নীতিমালা'];
     intents.isGovernmentQuery = govKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isGovernmentQuery) intentScores.government = 8;
+
+    // Organic keywords
+    const organicKeywords = ['জৈব', 'organic', 'কমপোস্ট', 'compost', 'ভার্মিকমপোস্ট', 'vermicompost',
+        'জৈব সার', 'জৈব কৃষি', 'প্রাকৃতিক', 'natural', 'নীম', 'neem', 'পাতা খাদ্য',
+        'বর্মি', 'পংক্তি চাষ', 'মিশ্র চাষ', 'সবুজ সার'];
+    intents.isOrganicQuery = organicKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+    if (intents.isOrganicQuery) intentScores.organic = 9;
+
+    // Pest-specific keywords
+    const pestKeywords = ['পোকা', 'পোকা মারা', 'পোকা নিয়ন্ত্রণ', 'insect', 'pest', 'bug',
+        'অ্যাফিড', 'aphid', 'মশা', 'whitefly', 'সাদা মাছি', 'তেলাপোকা',
+        'লাল মাকড়', 'spider mite', 'কীটপতঙ্গ'];
+    intents.isPestQuery = pestKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+    if (intents.isPestQuery) intentScores.pest = 9;
+
+    // Crop identification keywords
+    const cropIdKeywords = ['চেনা', 'পরিচয়', 'identify', 'কী ফসল', 'কোন ফসল', 'নাম',
+        'কি ধরনের', 'কোন জাত', 'জাত'];
+    intents.isCropIdQuery = cropIdKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+    if (intents.isCropIdQuery) intentScores.crop = 9;
 
     // FAQ keywords
     const faqKeywords = ['কীভাবে', 'কিভাবে', 'how', 'কোথায়', 'where', 'কখন', 'when',

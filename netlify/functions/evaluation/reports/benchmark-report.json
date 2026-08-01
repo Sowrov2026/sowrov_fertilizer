@@ -1,0 +1,1170 @@
+{
+  "version": "SF AI V14 Benchmark",
+  "timestamp": "2026-08-01T10:48:37.886Z",
+  "summary": {
+    "totalTestCases": 4500,
+    "totalPassed": 3425,
+    "totalFailed": 1075,
+    "overallAccuracy": 0.7611111111111111,
+    "avgLatency": 3.6224444444444446,
+    "hallucinationRate": 0,
+    "avgLanguageAccuracy": 0.7984000000000004
+  },
+  "datasets": [
+    {
+      "dataset": "bangla",
+      "aggregation": {
+        "total": 1000,
+        "passed": 863,
+        "failed": 137,
+        "accuracy": 0.863,
+        "avgScore": 0.7443266666666697,
+        "avgLatency": 4.078,
+        "hallucinationRate": 0,
+        "avgLanguageScore": 0.888,
+        "avgIntentScore": 0.578,
+        "avgCropScore": 0.98,
+        "avgRAGScore": 0.273933333333334,
+        "avgSourceScore": 1,
+        "byCategory": {
+          "crop_identification": {
+            "total": 125,
+            "passed": 125,
+            "accuracy": 1,
+            "avgScore": 0.7569066666666663
+          },
+          "disease_diagnosis": {
+            "total": 125,
+            "passed": 125,
+            "accuracy": 1,
+            "avgScore": 0.8890133333333339
+          },
+          "fertilizer_recommendation": {
+            "total": 125,
+            "passed": 125,
+            "accuracy": 1,
+            "avgScore": 0.8136933333333339
+          },
+          "organic_farming": {
+            "total": 125,
+            "passed": 125,
+            "accuracy": 1,
+            "avgScore": 0.7809200000000012
+          },
+          "soil_health": {
+            "total": 125,
+            "passed": 125,
+            "accuracy": 1,
+            "avgScore": 0.7780000000000014
+          },
+          "pest_control": {
+            "total": 125,
+            "passed": 119,
+            "accuracy": 0.952,
+            "avgScore": 0.6913866666666669
+          },
+          "weather_advice": {
+            "total": 125,
+            "passed": 116,
+            "accuracy": 0.928,
+            "avgScore": 0.7751333333333332
+          },
+          "product_recommendation": {
+            "total": 125,
+            "passed": 3,
+            "accuracy": 0.024,
+            "avgScore": 0.4695599999999994
+          }
+        },
+        "byLanguage": {
+          "bangla": {
+            "total": 888,
+            "passed": 855,
+            "accuracy": 0.9628378378378378,
+            "avgScore": 0.7786501501501512
+          },
+          "mixed": {
+            "total": 112,
+            "passed": 8,
+            "accuracy": 0.07142857142857142,
+            "avgScore": 0.47219047619047555
+          }
+        },
+        "byDifficulty": {
+          "easy": {
+            "total": 374,
+            "passed": 241,
+            "accuracy": 0.6443850267379679,
+            "avgScore": 0.6719518716577553
+          },
+          "medium": {
+            "total": 483,
+            "passed": 481,
+            "accuracy": 0.9958592132505176,
+            "avgScore": 0.7863630089717049
+          },
+          "hard": {
+            "total": 143,
+            "passed": 141,
+            "accuracy": 0.986013986013986,
+            "avgScore": 0.7916317016317014
+          }
+        },
+        "byIntent": {
+          "crop": {
+            "total": 11,
+            "passed": 11,
+            "accuracy": 1,
+            "avgScore": 0.8628787878787879
+          },
+          "faq": {
+            "total": 82,
+            "passed": 64,
+            "accuracy": 0.7804878048780488,
+            "avgScore": 0.688963414634146
+          },
+          "general": {
+            "total": 88,
+            "passed": 86,
+            "accuracy": 0.9772727272727273,
+            "avgScore": 0.7048674242424247
+          },
+          "soil": {
+            "total": 121,
+            "passed": 121,
+            "accuracy": 1,
+            "avgScore": 0.7783746556473843
+          },
+          "fertilizer": {
+            "total": 287,
+            "passed": 173,
+            "accuracy": 0.6027874564459931,
+            "avgScore": 0.6540580720092923
+          },
+          "weather": {
+            "total": 104,
+            "passed": 104,
+            "accuracy": 1,
+            "avgScore": 0.8106089743589742
+          },
+          "disease": {
+            "total": 179,
+            "passed": 177,
+            "accuracy": 0.9888268156424581,
+            "avgScore": 0.8289608938547494
+          },
+          "organic": {
+            "total": 106,
+            "passed": 105,
+            "accuracy": 0.9905660377358491,
+            "avgScore": 0.7956572327044035
+          },
+          "product": {
+            "total": 3,
+            "passed": 3,
+            "accuracy": 1,
+            "avgScore": 0.8522222222222222
+          },
+          "pest": {
+            "total": 19,
+            "passed": 19,
+            "accuracy": 1,
+            "avgScore": 0.7805263157894738
+          }
+        }
+      }
+    },
+    {
+      "dataset": "english",
+      "aggregation": {
+        "total": 1000,
+        "passed": 893,
+        "failed": 107,
+        "accuracy": 0.893,
+        "avgScore": 0.7111469801587361,
+        "avgLatency": 3.679,
+        "hallucinationRate": 0,
+        "avgLanguageScore": 0.946,
+        "avgIntentScore": 0.45480000000000054,
+        "avgCropScore": 0.959,
+        "avgRAGScore": 0.18497380952380896,
+        "avgSourceScore": 0.9725,
+        "byCategory": {
+          "crop_identification": {
+            "total": 101,
+            "passed": 90,
+            "accuracy": 0.8910891089108911,
+            "avgScore": 0.7087128712871295
+          },
+          "disease_diagnosis": {
+            "total": 113,
+            "passed": 108,
+            "accuracy": 0.9557522123893806,
+            "avgScore": 0.7613508217446271
+          },
+          "fertilizer_recommendation": {
+            "total": 101,
+            "passed": 98,
+            "accuracy": 0.9702970297029703,
+            "avgScore": 0.7388281471004241
+          },
+          "organic_farming": {
+            "total": 96,
+            "passed": 95,
+            "accuracy": 0.9895833333333334,
+            "avgScore": 0.7631443452380952
+          },
+          "soil_health": {
+            "total": 96,
+            "passed": 96,
+            "accuracy": 1,
+            "avgScore": 0.7497549603174604
+          },
+          "pest_control": {
+            "total": 117,
+            "passed": 109,
+            "accuracy": 0.9316239316239316,
+            "avgScore": 0.6846536426536427
+          },
+          "weather_advice": {
+            "total": 97,
+            "passed": 79,
+            "accuracy": 0.8144329896907216,
+            "avgScore": 0.6730104320078548
+          },
+          "product_recommendation": {
+            "total": 84,
+            "passed": 28,
+            "accuracy": 0.3333333333333333,
+            "avgScore": 0.59771485260771
+          },
+          "general": {
+            "total": 195,
+            "passed": 190,
+            "accuracy": 0.9743589743589743,
+            "avgScore": 0.7081016687016687
+          }
+        },
+        "byLanguage": {
+          "banglish": {
+            "total": 54,
+            "passed": 45,
+            "accuracy": 0.8333333333333334,
+            "avgScore": 0.6784272486772486
+          },
+          "english": {
+            "total": 946,
+            "passed": 848,
+            "accuracy": 0.8964059196617337,
+            "avgScore": 0.713014702674591
+          }
+        },
+        "byDifficulty": {
+          "easy": {
+            "total": 147,
+            "passed": 115,
+            "accuracy": 0.782312925170068,
+            "avgScore": 0.6752278101716874
+          },
+          "hard": {
+            "total": 73,
+            "passed": 67,
+            "accuracy": 0.9178082191780822,
+            "avgScore": 0.7135070667536421
+          },
+          "medium": {
+            "total": 780,
+            "passed": 711,
+            "accuracy": 0.9115384615384615,
+            "avgScore": 0.7176954822954851
+          }
+        },
+        "byIntent": {
+          "crop": {
+            "total": 62,
+            "passed": 62,
+            "accuracy": 1,
+            "avgScore": 0.7629650537634408
+          },
+          "general": {
+            "total": 206,
+            "passed": 180,
+            "accuracy": 0.8737864077669902,
+            "avgScore": 0.6765649560795193
+          },
+          "weather": {
+            "total": 43,
+            "passed": 43,
+            "accuracy": 1,
+            "avgScore": 0.7365960686600221
+          },
+          "faq": {
+            "total": 142,
+            "passed": 132,
+            "accuracy": 0.9295774647887324,
+            "avgScore": 0.68994243237201
+          },
+          "disease": {
+            "total": 125,
+            "passed": 122,
+            "accuracy": 0.976,
+            "avgScore": 0.7501797142857147
+          },
+          "fertilizer": {
+            "total": 163,
+            "passed": 107,
+            "accuracy": 0.656441717791411,
+            "avgScore": 0.6726686629662068
+          },
+          "product": {
+            "total": 52,
+            "passed": 41,
+            "accuracy": 0.7884615384615384,
+            "avgScore": 0.6481533882783881
+          },
+          "soil": {
+            "total": 98,
+            "passed": 98,
+            "accuracy": 1,
+            "avgScore": 0.7469924279235503
+          },
+          "organic": {
+            "total": 68,
+            "passed": 67,
+            "accuracy": 0.9852941176470589,
+            "avgScore": 0.7909138655462185
+          },
+          "pest": {
+            "total": 13,
+            "passed": 13,
+            "accuracy": 1,
+            "avgScore": 0.7716410256410255
+          },
+          "government": {
+            "total": 28,
+            "passed": 28,
+            "accuracy": 1,
+            "avgScore": 0.7387551020408162
+          }
+        }
+      }
+    },
+    {
+      "dataset": "banglish",
+      "aggregation": {
+        "total": 1000,
+        "passed": 332,
+        "failed": 668,
+        "accuracy": 0.332,
+        "avgScore": 0.5536076666666638,
+        "avgLatency": 3.087,
+        "hallucinationRate": 0,
+        "avgLanguageScore": 0.7206999999999991,
+        "avgIntentScore": 0.24579999999999977,
+        "avgCropScore": 0.286,
+        "avgRAGScore": 0.057550000000000025,
+        "avgSourceScore": 0.995,
+        "byCategory": {
+          "organic_farming": {
+            "total": 100,
+            "passed": 34,
+            "accuracy": 0.34,
+            "avgScore": 0.5472500000000001
+          },
+          "soil_health": {
+            "total": 100,
+            "passed": 9,
+            "accuracy": 0.09,
+            "avgScore": 0.51095
+          },
+          "government": {
+            "total": 100,
+            "passed": 98,
+            "accuracy": 0.98,
+            "avgScore": 0.6587933333333335
+          },
+          "general": {
+            "total": 100,
+            "passed": 74,
+            "accuracy": 0.74,
+            "avgScore": 0.6683000000000006
+          },
+          "disease_diagnosis": {
+            "total": 100,
+            "passed": 32,
+            "accuracy": 0.32,
+            "avgScore": 0.5778250000000003
+          },
+          "pest_control": {
+            "total": 100,
+            "passed": 9,
+            "accuracy": 0.09,
+            "avgScore": 0.5008000000000004
+          },
+          "fertilizer_recommendation": {
+            "total": 100,
+            "passed": 53,
+            "accuracy": 0.53,
+            "avgScore": 0.5707250000000006
+          },
+          "product_recommendation": {
+            "total": 100,
+            "passed": 3,
+            "accuracy": 0.03,
+            "avgScore": 0.4648699999999999
+          },
+          "weather_advice": {
+            "total": 100,
+            "passed": 17,
+            "accuracy": 0.17,
+            "avgScore": 0.5370300000000001
+          },
+          "crop_identification": {
+            "total": 100,
+            "passed": 3,
+            "accuracy": 0.03,
+            "avgScore": 0.4995333333333334
+          }
+        },
+        "byLanguage": {
+          "banglish": {
+            "total": 352,
+            "passed": 193,
+            "accuracy": 0.5482954545454546,
+            "avgScore": 0.5976065340909072
+          },
+          "mixed": {
+            "total": 149,
+            "passed": 33,
+            "accuracy": 0.2214765100671141,
+            "avgScore": 0.5355816554809838
+          },
+          "english": {
+            "total": 499,
+            "passed": 106,
+            "accuracy": 0.2124248496993988,
+            "avgScore": 0.5279529058116246
+          }
+        },
+        "byDifficulty": {
+          "medium": {
+            "total": 404,
+            "passed": 137,
+            "accuracy": 0.33910891089108913,
+            "avgScore": 0.5570928217821786
+          },
+          "hard": {
+            "total": 217,
+            "passed": 75,
+            "accuracy": 0.3456221198156682,
+            "avgScore": 0.5497811059907822
+          },
+          "easy": {
+            "total": 379,
+            "passed": 120,
+            "accuracy": 0.316622691292876,
+            "avgScore": 0.5520835532102025
+          }
+        },
+        "byIntent": {
+          "faq": {
+            "total": 150,
+            "passed": 71,
+            "accuracy": 0.47333333333333333,
+            "avgScore": 0.5813266666666669
+          },
+          "general": {
+            "total": 690,
+            "passed": 149,
+            "accuracy": 0.21594202898550724,
+            "avgScore": 0.5329966183574849
+          },
+          "weather": {
+            "total": 8,
+            "passed": 2,
+            "accuracy": 0.25,
+            "avgScore": 0.5087499999999999
+          },
+          "fertilizer": {
+            "total": 86,
+            "passed": 68,
+            "accuracy": 0.7906976744186046,
+            "avgScore": 0.6192732558139539
+          },
+          "product": {
+            "total": 6,
+            "passed": 0,
+            "accuracy": 0,
+            "avgScore": 0.531
+          },
+          "organic": {
+            "total": 15,
+            "passed": 13,
+            "accuracy": 0.8666666666666667,
+            "avgScore": 0.6639999999999999
+          },
+          "disease": {
+            "total": 35,
+            "passed": 23,
+            "accuracy": 0.6571428571428571,
+            "avgScore": 0.6247142857142858
+          },
+          "pest": {
+            "total": 7,
+            "passed": 3,
+            "accuracy": 0.42857142857142855,
+            "avgScore": 0.6003571428571429
+          },
+          "government": {
+            "total": 3,
+            "passed": 3,
+            "accuracy": 1,
+            "avgScore": 0.6999999999999998
+          }
+        }
+      }
+    },
+    {
+      "dataset": "chatgaiya",
+      "aggregation": {
+        "total": 1000,
+        "passed": 905,
+        "failed": 95,
+        "accuracy": 0.905,
+        "avgScore": 0.7036279999999978,
+        "avgLatency": 3.6,
+        "hallucinationRate": 0,
+        "avgLanguageScore": 0.6986000000000063,
+        "avgIntentScore": 0.4832000000000004,
+        "avgCropScore": 0.989,
+        "avgRAGScore": 0.2615000000000009,
+        "avgSourceScore": 0.996,
+        "byCategory": {
+          "crop_identification": {
+            "total": 100,
+            "passed": 88,
+            "accuracy": 0.88,
+            "avgScore": 0.6587000000000003
+          },
+          "disease_diagnosis": {
+            "total": 99,
+            "passed": 99,
+            "accuracy": 1,
+            "avgScore": 0.7382828282828279
+          },
+          "fertilizer_recommendation": {
+            "total": 92,
+            "passed": 92,
+            "accuracy": 1,
+            "avgScore": 0.7737137681159415
+          },
+          "organic_farming": {
+            "total": 91,
+            "passed": 90,
+            "accuracy": 0.989010989010989,
+            "avgScore": 0.7351465201465204
+          },
+          "soil_health": {
+            "total": 79,
+            "passed": 79,
+            "accuracy": 1,
+            "avgScore": 0.7675105485232064
+          },
+          "pest_control": {
+            "total": 107,
+            "passed": 97,
+            "accuracy": 0.9065420560747663,
+            "avgScore": 0.6597196261682242
+          },
+          "weather_advice": {
+            "total": 80,
+            "passed": 80,
+            "accuracy": 1,
+            "avgScore": 0.7127500000000003
+          },
+          "product_recommendation": {
+            "total": 80,
+            "passed": 29,
+            "accuracy": 0.3625,
+            "avgScore": 0.5838708333333332
+          },
+          "government": {
+            "total": 127,
+            "passed": 107,
+            "accuracy": 0.84251968503937,
+            "avgScore": 0.6760104986876637
+          },
+          "general": {
+            "total": 145,
+            "passed": 144,
+            "accuracy": 0.993103448275862,
+            "avgScore": 0.7295287356321832
+          }
+        },
+        "byLanguage": {
+          "bangla": {
+            "total": 998,
+            "passed": 904,
+            "accuracy": 0.905811623246493,
+            "avgScore": 0.7036653306613205
+          },
+          "mixed": {
+            "total": 2,
+            "passed": 1,
+            "accuracy": 0.5,
+            "avgScore": 0.685
+          }
+        },
+        "byDifficulty": {
+          "easy": {
+            "total": 120,
+            "passed": 97,
+            "accuracy": 0.8083333333333333,
+            "avgScore": 0.6959666666666665
+          },
+          "medium": {
+            "total": 695,
+            "passed": 639,
+            "accuracy": 0.9194244604316547,
+            "avgScore": 0.7088997601918466
+          },
+          "hard": {
+            "total": 185,
+            "passed": 169,
+            "accuracy": 0.9135135135135135,
+            "avgScore": 0.6887927927927927
+          }
+        },
+        "byIntent": {
+          "crop": {
+            "total": 36,
+            "passed": 33,
+            "accuracy": 0.9166666666666666,
+            "avgScore": 0.7027777777777778
+          },
+          "faq": {
+            "total": 202,
+            "passed": 153,
+            "accuracy": 0.7574257425742574,
+            "avgScore": 0.6219603960396028
+          },
+          "general": {
+            "total": 183,
+            "passed": 155,
+            "accuracy": 0.8469945355191257,
+            "avgScore": 0.7102331511839693
+          },
+          "product": {
+            "total": 15,
+            "passed": 13,
+            "accuracy": 0.8666666666666667,
+            "avgScore": 0.6660666666666667
+          },
+          "soil": {
+            "total": 70,
+            "passed": 70,
+            "accuracy": 1,
+            "avgScore": 0.7690952380952378
+          },
+          "fertilizer": {
+            "total": 185,
+            "passed": 177,
+            "accuracy": 0.9567567567567568,
+            "avgScore": 0.7143243243243236
+          },
+          "disease": {
+            "total": 158,
+            "passed": 157,
+            "accuracy": 0.9936708860759493,
+            "avgScore": 0.7156329113924057
+          },
+          "weather": {
+            "total": 68,
+            "passed": 64,
+            "accuracy": 0.9411764705882353,
+            "avgScore": 0.7068382352941176
+          },
+          "government": {
+            "total": 42,
+            "passed": 42,
+            "accuracy": 1,
+            "avgScore": 0.7875396825396825
+          },
+          "organic": {
+            "total": 41,
+            "passed": 41,
+            "accuracy": 1,
+            "avgScore": 0.7934146341463412
+          }
+        }
+      }
+    },
+    {
+      "dataset": "maheshkhali",
+      "aggregation": {
+        "total": 500,
+        "passed": 432,
+        "failed": 68,
+        "accuracy": 0.864,
+        "avgScore": 0.7059806666666687,
+        "avgLatency": 3.714,
+        "hallucinationRate": 0,
+        "avgLanguageScore": 0.6789999999999938,
+        "avgIntentScore": 0.582,
+        "avgCropScore": 0.8772000000000005,
+        "avgRAGScore": 0.2613333333333335,
+        "avgSourceScore": 1,
+        "byCategory": {
+          "crop_identification": {
+            "total": 50,
+            "passed": 32,
+            "accuracy": 0.64,
+            "avgScore": 0.6142333333333335
+          },
+          "disease_diagnosis": {
+            "total": 50,
+            "passed": 46,
+            "accuracy": 0.92,
+            "avgScore": 0.7867666666666667
+          },
+          "fertilizer_recommendation": {
+            "total": 50,
+            "passed": 49,
+            "accuracy": 0.98,
+            "avgScore": 0.7637000000000006
+          },
+          "weather_advice": {
+            "total": 50,
+            "passed": 50,
+            "accuracy": 1,
+            "avgScore": 0.7079999999999997
+          },
+          "soil_health": {
+            "total": 50,
+            "passed": 50,
+            "accuracy": 1,
+            "avgScore": 0.7233333333333332
+          },
+          "product_recommendation": {
+            "total": 50,
+            "passed": 26,
+            "accuracy": 0.52,
+            "avgScore": 0.59662
+          },
+          "pest_control": {
+            "total": 50,
+            "passed": 29,
+            "accuracy": 0.58,
+            "avgScore": 0.5578200000000003
+          },
+          "organic_farming": {
+            "total": 50,
+            "passed": 50,
+            "accuracy": 1,
+            "avgScore": 0.7646666666666669
+          },
+          "government": {
+            "total": 50,
+            "passed": 50,
+            "accuracy": 1,
+            "avgScore": 0.8725999999999999
+          },
+          "general": {
+            "total": 50,
+            "passed": 50,
+            "accuracy": 1,
+            "avgScore": 0.6720666666666673
+          }
+        },
+        "byLanguage": {
+          "bangla": {
+            "total": 485,
+            "passed": 418,
+            "accuracy": 0.8618556701030928,
+            "avgScore": 0.706019243986256
+          },
+          "mixed": {
+            "total": 15,
+            "passed": 14,
+            "accuracy": 0.9333333333333333,
+            "avgScore": 0.7047333333333333
+          }
+        },
+        "byDifficulty": {
+          "medium": {
+            "total": 167,
+            "passed": 144,
+            "accuracy": 0.8622754491017964,
+            "avgScore": 0.6939321357285427
+          },
+          "hard": {
+            "total": 167,
+            "passed": 144,
+            "accuracy": 0.8622754491017964,
+            "avgScore": 0.7060738522954085
+          },
+          "easy": {
+            "total": 166,
+            "passed": 144,
+            "accuracy": 0.8674698795180723,
+            "avgScore": 0.7180080321285135
+          }
+        },
+        "byIntent": {
+          "general": {
+            "total": 65,
+            "passed": 43,
+            "accuracy": 0.6615384615384615,
+            "avgScore": 0.6715333333333334
+          },
+          "disease": {
+            "total": 70,
+            "passed": 53,
+            "accuracy": 0.7571428571428571,
+            "avgScore": 0.6875428571428573
+          },
+          "fertilizer": {
+            "total": 80,
+            "passed": 79,
+            "accuracy": 0.9875,
+            "avgScore": 0.7335625000000005
+          },
+          "weather": {
+            "total": 45,
+            "passed": 45,
+            "accuracy": 1,
+            "avgScore": 0.7199999999999996
+          },
+          "soil": {
+            "total": 60,
+            "passed": 60,
+            "accuracy": 1,
+            "avgScore": 0.7047222222222221
+          },
+          "product": {
+            "total": 40,
+            "passed": 26,
+            "accuracy": 0.65,
+            "avgScore": 0.6167916666666667
+          },
+          "government": {
+            "total": 25,
+            "passed": 25,
+            "accuracy": 1,
+            "avgScore": 0.9187999999999998
+          },
+          "crop": {
+            "total": 30,
+            "passed": 28,
+            "accuracy": 0.9333333333333333,
+            "avgScore": 0.6324222222222224
+          },
+          "faq": {
+            "total": 65,
+            "passed": 53,
+            "accuracy": 0.8153846153846154,
+            "avgScore": 0.6691794871794874
+          },
+          "organic": {
+            "total": 20,
+            "passed": 20,
+            "accuracy": 1,
+            "avgScore": 0.8866666666666667
+          }
+        }
+      }
+    }
+  ],
+  "weakAreas": [
+    {
+      "type": "category",
+      "name": "product_recommendation",
+      "accuracy": 0.024,
+      "avgScore": 0.4695599999999994,
+      "total": 125,
+      "passed": 3
+    },
+    {
+      "type": "language",
+      "name": "mixed",
+      "accuracy": 0.07142857142857142,
+      "avgScore": 0.47219047619047555,
+      "total": 112,
+      "passed": 8
+    },
+    {
+      "type": "category",
+      "name": "product_recommendation",
+      "accuracy": 0.3333333333333333,
+      "avgScore": 0.59771485260771,
+      "total": 84,
+      "passed": 28
+    },
+    {
+      "type": "category",
+      "name": "product_recommendation",
+      "accuracy": 0.03,
+      "avgScore": 0.4648699999999999,
+      "total": 100,
+      "passed": 3
+    },
+    {
+      "type": "category",
+      "name": "crop_identification",
+      "accuracy": 0.03,
+      "avgScore": 0.4995333333333334,
+      "total": 100,
+      "passed": 3
+    },
+    {
+      "type": "category",
+      "name": "soil_health",
+      "accuracy": 0.09,
+      "avgScore": 0.51095,
+      "total": 100,
+      "passed": 9
+    },
+    {
+      "type": "category",
+      "name": "pest_control",
+      "accuracy": 0.09,
+      "avgScore": 0.5008000000000004,
+      "total": 100,
+      "passed": 9
+    },
+    {
+      "type": "category",
+      "name": "weather_advice",
+      "accuracy": 0.17,
+      "avgScore": 0.5370300000000001,
+      "total": 100,
+      "passed": 17
+    },
+    {
+      "type": "language",
+      "name": "english",
+      "accuracy": 0.2124248496993988,
+      "avgScore": 0.5279529058116246,
+      "total": 499,
+      "passed": 106
+    },
+    {
+      "type": "language",
+      "name": "mixed",
+      "accuracy": 0.2214765100671141,
+      "avgScore": 0.5355816554809838,
+      "total": 149,
+      "passed": 33
+    },
+    {
+      "type": "difficulty",
+      "name": "easy",
+      "accuracy": 0.316622691292876,
+      "avgScore": 0.5520835532102025,
+      "total": 379,
+      "passed": 120
+    },
+    {
+      "type": "category",
+      "name": "disease_diagnosis",
+      "accuracy": 0.32,
+      "avgScore": 0.5778250000000003,
+      "total": 100,
+      "passed": 32
+    },
+    {
+      "type": "difficulty",
+      "name": "medium",
+      "accuracy": 0.33910891089108913,
+      "avgScore": 0.5570928217821786,
+      "total": 404,
+      "passed": 137
+    },
+    {
+      "type": "category",
+      "name": "organic_farming",
+      "accuracy": 0.34,
+      "avgScore": 0.5472500000000001,
+      "total": 100,
+      "passed": 34
+    },
+    {
+      "type": "difficulty",
+      "name": "hard",
+      "accuracy": 0.3456221198156682,
+      "avgScore": 0.5497811059907822,
+      "total": 217,
+      "passed": 75
+    },
+    {
+      "type": "category",
+      "name": "fertilizer_recommendation",
+      "accuracy": 0.53,
+      "avgScore": 0.5707250000000006,
+      "total": 100,
+      "passed": 53
+    },
+    {
+      "type": "language",
+      "name": "banglish",
+      "accuracy": 0.5482954545454546,
+      "avgScore": 0.5976065340909072,
+      "total": 352,
+      "passed": 193
+    },
+    {
+      "type": "category",
+      "name": "product_recommendation",
+      "accuracy": 0.3625,
+      "avgScore": 0.5838708333333332,
+      "total": 80,
+      "passed": 29
+    },
+    {
+      "type": "language",
+      "name": "mixed",
+      "accuracy": 0.5,
+      "avgScore": 0.685,
+      "total": 2,
+      "passed": 1
+    },
+    {
+      "type": "category",
+      "name": "product_recommendation",
+      "accuracy": 0.52,
+      "avgScore": 0.59662,
+      "total": 50,
+      "passed": 26
+    },
+    {
+      "type": "category",
+      "name": "pest_control",
+      "accuracy": 0.58,
+      "avgScore": 0.5578200000000003,
+      "total": 50,
+      "passed": 29
+    }
+  ],
+  "suggestions": [
+    {
+      "area": "product_recommendation",
+      "issue": "Accuracy 2.4% on product recommendation",
+      "suggestion": "Improve product-crop matching in product agent. Add more product metadata.",
+      "priority": "high"
+    },
+    {
+      "area": "product_recommendation",
+      "issue": "Accuracy 33.3% on product recommendation",
+      "suggestion": "Improve product-crop matching in product agent. Add more product metadata.",
+      "priority": "high"
+    },
+    {
+      "area": "product_recommendation",
+      "issue": "Accuracy 3.0% on product recommendation",
+      "suggestion": "Improve product-crop matching in product agent. Add more product metadata.",
+      "priority": "high"
+    },
+    {
+      "area": "difficulty_hard",
+      "issue": "Accuracy 34.6% on hard questions",
+      "suggestion": "Add more knowledge entries for hard-level questions.",
+      "priority": "high"
+    },
+    {
+      "area": "fertilizer_recommendation",
+      "issue": "Accuracy 53.0% on fertilizer recommendation",
+      "suggestion": "Add more fertilizer-crop mapping data. Include seasonal fertilizer schedules.",
+      "priority": "high"
+    },
+    {
+      "area": "banglish_detection",
+      "issue": "Accuracy 54.8% on Banglish detection",
+      "suggestion": "Improve Banglish word list in language.js. Add more romanized Bangla words.",
+      "priority": "high"
+    },
+    {
+      "area": "product_recommendation",
+      "issue": "Accuracy 36.3% on product recommendation",
+      "suggestion": "Improve product-crop matching in product agent. Add more product metadata.",
+      "priority": "high"
+    },
+    {
+      "area": "product_recommendation",
+      "issue": "Accuracy 52.0% on product recommendation",
+      "suggestion": "Improve product-crop matching in product agent. Add more product metadata.",
+      "priority": "high"
+    },
+    {
+      "area": "pest_control",
+      "issue": "Accuracy 58.0% on pest control",
+      "suggestion": "Expand pest identification data. Add seasonal pest patterns.",
+      "priority": "high"
+    },
+    {
+      "area": "mixed_language",
+      "issue": "Accuracy 7.1% on mixed language handling",
+      "suggestion": "Improve mixed language detection logic. Handle code-switching better.",
+      "priority": "medium"
+    },
+    {
+      "area": "soil_health",
+      "issue": "Accuracy 9.0% on soil health",
+      "suggestion": "Add regional soil data for Chattogram/Maheshkhali coastal areas.",
+      "priority": "medium"
+    },
+    {
+      "area": "weather_advice",
+      "issue": "Accuracy 17.0% on weather advice",
+      "suggestion": "Add seasonal weather-crop mapping. Include Kharif/Rabi season data.",
+      "priority": "medium"
+    },
+    {
+      "area": "mixed_language",
+      "issue": "Accuracy 22.1% on mixed language handling",
+      "suggestion": "Improve mixed language detection logic. Handle code-switching better.",
+      "priority": "medium"
+    },
+    {
+      "area": "difficulty_easy",
+      "issue": "Accuracy 31.7% on easy questions",
+      "suggestion": "Add more knowledge entries for easy-level questions.",
+      "priority": "medium"
+    },
+    {
+      "area": "difficulty_medium",
+      "issue": "Accuracy 33.9% on medium questions",
+      "suggestion": "Add more knowledge entries for medium-level questions.",
+      "priority": "medium"
+    },
+    {
+      "area": "organic_farming",
+      "issue": "Accuracy 34.0% on organic farming",
+      "suggestion": "Expand organic farming knowledge base. Add more organic method entries.",
+      "priority": "medium"
+    },
+    {
+      "area": "mixed_language",
+      "issue": "Accuracy 50.0% on mixed language handling",
+      "suggestion": "Improve mixed language detection logic. Handle code-switching better.",
+      "priority": "medium"
+    },
+    {
+      "area": "crop_identification",
+      "issue": "Accuracy 3.0% on crop identification",
+      "suggestion": "Improve crop alias mapping in intent.js. Add more Chatgaiya/Banglish crop name aliases.",
+      "priority": "critical"
+    },
+    {
+      "area": "pest_control",
+      "issue": "Accuracy 9.0% on pest control",
+      "suggestion": "Expand pest identification data. Add seasonal pest patterns.",
+      "priority": "critical"
+    },
+    {
+      "area": "disease_diagnosis",
+      "issue": "Accuracy 32.0% on disease diagnosis",
+      "suggestion": "Expand disease symptom keywords in knowledge base. Add more Bangla disease terminology.",
+      "priority": "critical"
+    }
+  ]
+}
