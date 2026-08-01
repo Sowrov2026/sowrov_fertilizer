@@ -1,6 +1,6 @@
 // ======================================
 // Component Loader
-// Sowrov Fertilizer
+// Sowrov Fertilizer — V15 Smart Agriculture
 // ======================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,9 +21,24 @@ document.addEventListener("DOMContentLoaded", () => {
         script.src = "assets/js/ai.js";
         script.onload = () => {
             console.log("AI Assistant Loaded");
+            // Load V15 modules after AI is ready
+            loadV15Modules();
         };
         document.body.appendChild(script);
     }
 
-    console.log("Component Loader Loaded");
+    // Load V15 Module Integration
+    function loadV15Modules() {
+        if (document.getElementById("v15-module")) return;
+        const v15Script = document.createElement("script");
+        v15Script.id = "v15-module";
+        v15Script.type = "module";
+        v15Script.src = "assets/js/v15-integration.js";
+        v15Script.onload = () => {
+            console.log("V15 Smart Agriculture Modules Loaded");
+        };
+        document.body.appendChild(v15Script);
+    }
+
+    console.log("Component Loader Loaded — V15");
 });

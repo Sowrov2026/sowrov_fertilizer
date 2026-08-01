@@ -803,3 +803,235 @@
         display: none !important;
     }
 }
+
+/* ============================================
+   SF AI V15 — Smart Agriculture Styles
+   ============================================ */
+
+/* ---------- Quick Action Buttons ---------- */
+.v15-quick-actions {
+    display: flex;
+    gap: 6px;
+    padding: 8px 12px;
+    overflow-x: auto;
+    border-top: 1px solid rgba(16, 185, 129, 0.15);
+    background: rgba(15, 23, 42, 0.6);
+    scrollbar-width: none;
+}
+.v15-quick-actions::-webkit-scrollbar { display: none; }
+
+.v15-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--emerald-300);
+    font-size: 11px;
+    font-family: var(--font-bengali);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+.v15-action-btn:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: var(--emerald-400);
+    transform: translateY(-1px);
+}
+.v15-action-btn i { font-size: 13px; }
+
+/* ---------- V15 Panels ---------- */
+.v15-panel {
+    margin: 8px 12px;
+    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    overflow: hidden;
+}
+.v15-panel-header {
+    padding: 10px 14px;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--emerald-300);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-bengali);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+}
+.v15-panel-header i { margin-right: 6px; }
+.v15-panel-body {
+    padding: 12px 14px;
+    color: var(--dark-200);
+    font-size: 13px;
+    font-family: var(--font-bengali);
+    line-height: 1.6;
+}
+
+/* ---------- Upload Zone ---------- */
+.v15-upload-zone {
+    border: 2px dashed rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--emerald-400);
+}
+.v15-upload-zone:hover,
+.v15-upload-zone.dragover {
+    border-color: var(--emerald-400);
+    background: rgba(16, 185, 129, 0.05);
+}
+.v15-upload-zone i { font-size: 36px; margin-bottom: 10px; display: block; }
+.v15-upload-hint { font-size: 11px; color: var(--dark-400); margin-top: 4px; }
+
+/* ---------- Vision Preview ---------- */
+.v15-vision-preview { margin-top: 10px; text-align: center; }
+.v15-preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 10px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.v15-vision-diagnosis { margin-top: 10px; }
+.v15-vision-diagnosis h4 { color: var(--emerald-300); margin-bottom: 6px; }
+.v15-vision-diagnosis p { margin-bottom: 4px; }
+.v15-vision-diagnosis ul { padding-left: 18px; margin: 4px 0; }
+.v15-vision-diagnosis li { margin-bottom: 2px; }
+
+/* ---------- Confidence Badge ---------- */
+.v15-confidence-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 4px 0;
+}
+.confidence-high { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.confidence-medium { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+.confidence-low { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.confidence-very-low { background: rgba(127, 29, 29, 0.3); color: #dc2626; }
+.v15-confidence-container { margin-top: 6px; }
+.v15-more-info-tip {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(16, 185, 129, 0.08);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--emerald-300);
+    border-left: 3px solid var(--emerald-500);
+}
+.v15-more-info-tip i { margin-right: 6px; }
+
+/* ---------- Weather ---------- */
+.v15-weather-info p { margin-bottom: 4px; }
+.v15-weather-advice {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(16, 185, 129, 0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--emerald-500);
+}
+.v15-weather-advice h4 { margin-bottom: 6px; color: var(--emerald-300); }
+
+/* ---------- Calendar ---------- */
+.v15-calendar-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+}
+.v15-calendar-section {
+    padding: 8px;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 8px;
+}
+.v15-calendar-section h5 {
+    font-size: 12px;
+    color: var(--emerald-400);
+    margin-bottom: 4px;
+}
+.v15-calendar-section ul {
+    list-style: none;
+    padding: 0;
+    font-size: 12px;
+}
+.v15-calendar-section li {
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.08);
+}
+
+/* ---------- Reminder ---------- */
+.v15-reminder-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+.v15-reminder-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 6px;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+.v15-reminder-date { color: var(--emerald-400); font-size: 11px; }
+
+/* ---------- Buttons ---------- */
+.v15-btn {
+    padding: 8px 16px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--emerald-300);
+    font-size: 12px;
+    font-family: var(--font-bengali);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.v15-btn:hover { background: rgba(16, 185, 129, 0.2); }
+.v15-btn-sm { padding: 5px 10px; font-size: 11px; }
+
+.v15-select {
+    padding: 6px 10px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    background: var(--dark-800);
+    color: var(--dark-200);
+    font-size: 12px;
+    font-family: var(--font-bengali);
+    margin: 6px 0;
+}
+
+/* ---------- Loading / Error ---------- */
+.v15-loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--emerald-400);
+    font-size: 13px;
+}
+.v15-loading i { margin-right: 6px; }
+.v15-error {
+    padding: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 8px;
+    color: #f87171;
+    font-size: 12px;
+    border-left: 3px solid #ef4444;
+}
+.v15-rate-limit {
+    text-align: center;
+    color: #fbbf24;
+    padding: 10px;
+    font-size: 12px;
+}
+
+@media (max-width: 480px) {
+    .v15-calendar-items { grid-template-columns: 1fr; }
+    .v15-action-btn span { display: none; }
+    .v15-action-btn { padding: 6px 10px; }
+}
