@@ -13,9 +13,12 @@ class ResponseCache {
     }
 
     _evictOldest() {
-        if (this.accessOrder.length > CACHE_MAX_SIZE) {
+        // V33 FIX: Evict before insert to prevent off-by-one
+        while (this.cache.size >= CACHE_MAX_SIZE) {
             const oldest = this.accessOrder.shift();
-            this.cache.delete(oldest);
+            if (oldest !== undefined) {
+                this.cache.delete(oldest);
+            }
         }
     }
 
@@ -27,6 +30,7 @@ class ResponseCache {
             this.accessOrder = this.accessOrder.filter(k => k !== key);
             return null;
         }
+        // Move to end (most recently accessed)
         this.accessOrder = this.accessOrder.filter(k => k !== key);
         this.accessOrder.push(key);
         return entry.value;
@@ -39,8 +43,11 @@ class ResponseCache {
         this.accessOrder.push(key);
     }
 
+    // V33 FIX: has() should not modify access order (read-only check)
     has(key) {
-        return this.get(key) !== null;
+        const entry = this.cache.get(key);
+        if (!entry) return false;
+        return Date.now() - entry.timestamp <= CACHE_TTL_MS;
     }
 
     clear() {
