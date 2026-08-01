@@ -113,18 +113,32 @@
 
     // ========================================
     // Inject marked + DOMPurify if missing
+    // V33 FIX: Wait for scripts to load before resolving
     // ========================================
     function ensureDependencies() {
+        const promises = [];
+
         if (typeof marked === 'undefined') {
             const s = document.createElement('script');
             s.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
-            document.head.appendChild(s);
+            promises.push(new Promise((resolve) => {
+                s.onload = resolve;
+                s.onerror = resolve; // Don't block on failure
+                document.head.appendChild(s);
+            }));
         }
+
         if (typeof DOMPurify === 'undefined') {
             const s = document.createElement('script');
             s.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js';
-            document.head.appendChild(s);
+            promises.push(new Promise((resolve) => {
+                s.onload = resolve;
+                s.onerror = resolve;
+                document.head.appendChild(s);
+            }));
         }
+
+        return promises.length > 0 ? Promise.all(promises) : Promise.resolve();
     }
 
     // ========================================
@@ -341,7 +355,7 @@
         state.lastSendTime = now;
 
         if (text.length > CONFIG.MAX_INPUT_LENGTH) {
-            addMessage('bot', 'Your message is too long. Please keep it under 2000 characters.');
+            addMessage('bot', 'আপনার বার্তা অনেক বড়। ২০০০ অক্ষরের কম রাখুন।\nYour message is too long. Please keep it under 2000 characters.');
             return;
         }
 
@@ -360,11 +374,18 @@
             const payload = { messages: state.conversationHistory };
             if (imageDataUrl) payload.image = imageDataUrl;
 
+            // V33 FIX: Add fetch timeout to prevent infinite loading
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s timeout
+
             const response = await fetch(CONFIG.API_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
+                signal: controller.signal,
             });
+
+            clearTimeout(timeoutId);
 
             if (!response.ok) {
                 const errData = await response.json().catch(() => null);
@@ -382,11 +403,13 @@
             let msg = 'দুঃখিত, কিছু সমস্যা হয়েছে। ';
             if (!navigator.onLine) {
                 msg = 'ইন্টারনেট সংযোগ চেক করুন এবং আবার চেষ্টা করুন।';
-            } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            } else if (error.name === 'AbortError') {
+                msg = 'সার্ভিসে সময় বেশি লাচ্ছে। কিছুক্ষণ পর আবার চেষ্টা করুন।';
+            } else if (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError') || error.name === 'TypeError') {
                 msg = 'নেটওয়ার্ক সমস্যা। কিছুক্ষণ পর আবার চেষ্টা করুন।';
-            } else if (error.message.includes('429') || error.message.includes('busy')) {
+            } else if (error.message?.includes('429') || error.message?.includes('busy')) {
                 msg = 'AI সার্ভিস এখন ব্যস্ত। কিছুক্ষণ পর আবার চেষ্টা করুন।';
-            } else if (error.message.includes('500') || error.message.includes('502')) {
+            } else if (error.message?.includes('500') || error.message?.includes('502')) {
                 msg = 'সার্ভিসে সমস্যা হচ্ছে। পরে আবার চেষ্টা করুন।';
             } else {
                 msg += 'আবার চেষ্টা করুন।';
