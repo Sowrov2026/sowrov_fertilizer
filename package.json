@@ -1,6 +1,6 @@
 {
   "name": "sf-ai-enterprise",
-  "version": "33.0.0",
+  "version": "33.1.0",
   "description": "SF AI — Bangladesh Agriculture Enterprise Platform",
   "private": true,
   "dependencies": {
