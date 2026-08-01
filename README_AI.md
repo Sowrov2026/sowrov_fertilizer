@@ -57,7 +57,7 @@ SF AI is a multi-language agriculture intelligence platform for Bangladeshi farm
 - Backend: Netlify Functions (Node.js)
 - Database: Firebase Firestore
 - Storage: Firebase Storage
-- AI: OpenRouter API (Gemini 2.5 Pro/Flash)
+- AI: Groq API (llama-3.3-70b-versatile)
 - Weather: Open-Meteo API (free)
 - OCR: Tesseract.js
 - PDF: PDF.js

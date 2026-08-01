@@ -379,13 +379,17 @@
             Storage.save(state.conversationHistory);
         } catch (error) {
             console.error('Chat error:', error);
-            let msg = 'Sorry, something went wrong. ';
+            let msg = 'দুঃখিত, কিছু সমস্যা হয়েছে। ';
             if (!navigator.onLine) {
-                msg += 'Please check your internet connection and try again.';
+                msg = 'ইন্টারনেট সংযোগ চেক করুন এবং আবার চেষ্টা করুন।';
             } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                msg += 'Network error. Please try again in a moment.';
+                msg = 'নেটওয়ার্ক সমস্যা। কিছুক্ষণ পর আবার চেষ্টা করুন।';
+            } else if (error.message.includes('429') || error.message.includes('busy')) {
+                msg = 'AI সার্ভিস এখন ব্যস্ত। কিছুক্ষণ পর আবার চেষ্টা করুন।';
+            } else if (error.message.includes('500') || error.message.includes('502')) {
+                msg = 'সার্ভিসে সমস্যা হচ্ছে। পরে আবার চেষ্টা করুন।';
             } else {
-                msg += error.message || 'Please try again later.';
+                msg += 'আবার চেষ্টা করুন।';
             }
             addMessage('bot', msg);
         } finally {

@@ -1,8 +1,11 @@
 {
   "name": "sf-ai-enterprise",
-  "version": "22.0.0",
+  "version": "23.0.0",
   "description": "SF AI — Bangladesh Agriculture Enterprise Platform",
   "private": true,
+  "dependencies": {
+    "groq-sdk": "^0.12.0"
+  },
   "scripts": {
     "start": "netlify dev",
     "build": "echo 'Static site - no build needed'",
@@ -14,7 +17,12 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["agriculture", "bangladesh", "ai", "farming"],
+  "keywords": [
+    "agriculture",
+    "bangladesh",
+    "ai",
+    "farming"
+  ],
   "author": "Sowrov Fertilizer",
   "license": "MIT"
 }
