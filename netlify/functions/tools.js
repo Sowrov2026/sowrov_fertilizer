@@ -59,8 +59,13 @@ function sanitizeInput(text) {
     return text
         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
         .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+        .replace(/<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi, '')
+        .replace(/<embed\b[^<]*>/gi, '')
+        .replace(/<applet\b[^<]*(?:(?!<\/applet>)<[^<]*)*<\/applet>/gi, '')
         .replace(/javascript:/gi, '')
+        .replace(/data:text\/html/gi, '')
         .replace(/on\w+\s*=/gi, '')
+        .replace(/expression\(/gi, '')
         .replace(/\x00/g, '')
         .trim();
 }
@@ -72,7 +77,8 @@ function isValidImageDataUrl(dataUrl) {
     if (typeof dataUrl !== 'string') return false;
     const regex = /^data:image\/(jpeg|jpg|png|webp|gif);base64,[A-Za-z0-9+/]+=*$/;
     if (!regex.test(dataUrl)) return false;
-    if (dataUrl.length > 28000000) return false;
+    // V34 FIX: Netlify Functions have ~6MB limit, use 5MB as safe threshold
+    if (dataUrl.length > 5000000) return false;
     return true;
 }
 

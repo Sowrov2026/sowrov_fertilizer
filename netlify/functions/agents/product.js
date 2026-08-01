@@ -34,9 +34,10 @@ async function fetchAllProducts() {
                 name: fields.name?.stringValue || '',
                 category: fields.category?.stringValue || '',
                 description: fields.description?.stringValue || '',
-                retailPrice: fields.retailPrice?.integerValue ?? fields.retailPrice?.doubleValue ?? 0,
-                wholesalePrice: fields.wholesalePrice?.integerValue ?? fields.wholesalePrice?.doubleValue ?? 0,
-                stock: fields.stock?.integerValue || 0,
+                // V33 FIX: Firestore REST API returns strings, parse to numbers
+                retailPrice: Number(fields.retailPrice?.integerValue || fields.retailPrice?.doubleValue) || 0,
+                wholesalePrice: Number(fields.wholesalePrice?.integerValue || fields.wholesalePrice?.doubleValue) || 0,
+                stock: Number(fields.stock?.integerValue) || 0,
                 image: fields.image?.stringValue || '',
                 docId: doc.name?.split('/').pop() || '',
             };
@@ -130,11 +131,15 @@ async function searchAndRankProducts(query, cropName, intent) {
     const searchTerms = [];
     const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 2);
 
+    // V33 FIX: Filter out common Bengali verbs/particles that don't help product search
+    const stopWords = ['হয়েছে', 'হয়', 'করে', 'করা', 'হবে', 'দিতে', 'দিয়ে', 'নিয়ে', 'আছে', 'ছিল', 'কি', 'কী', 'এবং', 'বা', 'তাই', 'যে', 'যা', 'তো', 'তার', 'এই', 'সেই', 'ও', 'আর', 'কিন্তু'];
+    const meaningfulWords = words.filter(w => !stopWords.includes(w) && w.length > 2);
+
     // V33 FIX: Prioritize disease/symptom terms (last 2-3 words) over crop terms
-    if (words.length > 3) {
-        searchTerms.push(...words.slice(-3)); // Last 3 words (usually disease/symptom)
+    if (meaningfulWords.length > 3) {
+        searchTerms.push(...meaningfulWords.slice(-3)); // Last 3 words (usually disease/symptom)
     } else {
-        searchTerms.push(...words);
+        searchTerms.push(...meaningfulWords);
     }
 
     // Add crop name separately (handled by ranking)

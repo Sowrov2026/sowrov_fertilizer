@@ -167,8 +167,9 @@ function understandIntent(text, context = {}) {
 }
 
 function detectLanguage(text) {
+    if (!text || typeof text !== 'string') return 'unknown';
     if (/[\u0980-\u09FF]/.test(text)) return 'bangla';
-    if (/^[a-zA-Z\s]+$/.test(text)) return 'english';
+    if (/^[a-zA-Z0-9\s.,!?;:'"()-]+$/.test(text)) return 'english';
     return 'mixed';
 }
 
@@ -316,8 +317,8 @@ function compareAnswers(text, analysis, searchResults) {
 // STEP 5: CHOOSE BEST ANSWER
 // ─────────────────────────────────────────────
 function chooseBestAnswer(possibleAnswers, analysis) {
-    // Sort by confidence
-    const sorted = possibleAnswers.sort((a, b) => b.confidence - a.confidence);
+    // Sort by confidence (create copy to avoid mutating input)
+    const sorted = [...possibleAnswers].sort((a, b) => b.confidence - a.confidence);
     const best = sorted[0];
 
     // Adjust based on context
@@ -496,10 +497,10 @@ function factCheck(text, analysis, knowledgeContext = '') {
         }
     }
 
-    // Check for fabricated vague references
+    // Check for fabricated vague references (reset lastIndex to avoid stale state)
     const fabricatedPatterns = [
-        /(?:according to|ধরনে|মতে)\s+(?:a\s+)?(?:recent|নতুন)\s+(?:study|গবেষণা|report|প্রতিবেদন)/gi,
-        /(?:research|গবেষণা)\s+(?:shows|দেখায়|proves|প্রমাণ)/gi,
+        /(?:according to|ধরনে|মতে)\s+(?:a\s+)?(?:recent|নতুন)\s+(?:study|গবেষণা|report|প্রতিবেদন)/i,
+        /(?:research|গবেষণা)\s+(?:shows|দেখায়|proves|প্রমাণ)/i,
     ];
 
     const fabricated = [];

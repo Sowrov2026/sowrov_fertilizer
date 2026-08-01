@@ -270,8 +270,15 @@ exports.handler = async (event) => {
             };
         }
 
-        // Check total content size
-        const totalContentSize = messages.reduce((sum, m) => sum + (m.content?.length || 0), 0);
+        // Check total content size (handle both string and array content)
+        const totalContentSize = messages.reduce((sum, m) => {
+            const content = m.content;
+            if (typeof content === 'string') return sum + content.length;
+            if (Array.isArray(content)) {
+                return sum + content.reduce((s, part) => s + (part.text?.length || 0), 0);
+            }
+            return sum;
+        }, 0);
         if (totalContentSize > 100000) {
             return {
                 statusCode: 400,
@@ -384,14 +391,18 @@ exports.handler = async (event) => {
 
         // Build messages for provider (include product context in last user message)
         const providerMessages = messages.slice(-20).map(m => ({
-            role: m.role,
-            content: sanitizeInput(m.content || ''),
+            role: m.role === 'system' ? 'user' : m.role,
+            content: typeof m.content === 'string'
+                ? sanitizeInput(m.content)
+                : (Array.isArray(m.content) ? m.content : sanitizeInput(m.content || '')),
         }));
 
-        // Inject product context into last user message
+        // Inject product context into last user message (not last message)
         if (productContext && providerMessages.length > 0) {
-            const lastUserIdx = providerMessages.length - 1;
-            providerMessages[lastUserIdx].content += productContext;
+            const lastUserIdx = providerMessages.findLastIndex(m => m.role === 'user');
+            if (lastUserIdx >= 0) {
+                providerMessages[lastUserIdx].content += productContext;
+            }
         }
 
         const maxTokens = getAdaptiveMaxTokens(rawInput, intent);
@@ -463,7 +474,8 @@ exports.handler = async (event) => {
             body: JSON.stringify({
                 reply: processed.text,
                 // V33 FIX: Only include _meta in development, strip from production
-                ...(process.env.NODE_ENV !== 'production' && {
+                // Use Netlify's CONTEXT env var since NODE_ENV is not set by default
+                ...(process.env.CONTEXT !== 'production' && process.env.NODE_ENV !== 'production' && {
                     _meta: {
                         provider: result.provider,
                         model: result.model,

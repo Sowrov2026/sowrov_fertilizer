@@ -185,65 +185,6 @@ function recordCacheMiss(providerId) {
 }
 
 // ─────────────────────────────────────────────
-// REQUEST QUEUE (for rate limit handling)
-// ─────────────────────────────────────────────
-const requestQueues = {};
-
-function getQueue(providerId) {
-    if (!requestQueues[providerId]) {
-        requestQueues[providerId] = [];
-    }
-    return requestQueues[providerId];
-}
-
-function enqueueRequest(providerId, requestFn) {
-    return new Promise((resolve, reject) => {
-        const queue = getQueue(providerId);
-        queue.push({ requestFn, resolve, reject, timestamp: Date.now() });
-
-        // Process queue if not already processing
-        if (queue.length === 1) {
-            processQueue(providerId);
-        }
-    });
-}
-
-async function processQueue(providerId) {
-    const queue = getQueue(providerId);
-    if (queue.length === 0) return;
-
-    const item = queue[0];
-
-    // Skip stale requests (>30s old)
-    if (Date.now() - item.timestamp > 30000) {
-        queue.shift();
-        item.reject(new Error('Request expired in queue'));
-        processQueue(providerId);
-        return;
-    }
-
-    try {
-        const result = await item.requestFn();
-        queue.shift();
-        item.resolve(result);
-    } catch (error) {
-        if (error.status === 429) {
-            // Re-queue with delay
-            const retryAfter = error.retryAfter || 2000;
-            setTimeout(() => processQueue(providerId), retryAfter);
-            return;
-        }
-        queue.shift();
-        item.reject(error);
-    }
-
-    // Process next
-    if (queue.length > 0) {
-        setTimeout(() => processQueue(providerId), 100);
-    }
-}
-
-// ─────────────────────────────────────────────
 // SMART ANSWER CACHE (24 hours)
 // ─────────────────────────────────────────────
 const answerCache = new Map();
@@ -390,11 +331,26 @@ async function callGemini(messages, systemPrompt, options = {}) {
     const model = options.model || PROVIDERS.gemini.model;
     const maxTokens = options.maxTokens || 2500;
 
-    // Build Gemini-format request
+    // Build Gemini-format request (supports vision)
     const contents = [];
     for (const msg of messages) {
         if (msg.role === 'user') {
-            contents.push({ role: 'user', parts: [{ text: msg.content || '' }] });
+            const parts = [];
+            // V34 FIX: Add image support for Gemini (vision model)
+            if (options.image && parts.length === 0) {
+                // Extract base64 data from data URL
+                const match = options.image.match(/^data:([^;]+);base64,(.+)$/);
+                if (match) {
+                    parts.push({
+                        inlineData: {
+                            mimeType: match[1],
+                            data: match[2],
+                        },
+                    });
+                }
+            }
+            parts.push({ text: msg.content || '' });
+            contents.push({ role: 'user', parts });
         } else if (msg.role === 'assistant') {
             contents.push({ role: 'model', parts: [{ text: msg.content || '' }] });
         }
@@ -699,10 +655,6 @@ function getHealthReport() {
         uptime: process.uptime(),
         providers,
         cache: cacheStats,
-        queues: Object.entries(requestQueues).map(([id, queue]) => ({
-            provider: id,
-            pending: queue.length,
-        })),
         summary: {
             totalProviders: totalCount,
             healthyProviders: healthyCount,

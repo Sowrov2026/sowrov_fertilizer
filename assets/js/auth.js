@@ -28,9 +28,18 @@ if (loginForm) {
       window.location.href = "admin-dashboard.html";
 
     } catch (error) {
-
-      alert(error.message);
-
+      // V34 FIX: Show user-friendly error instead of raw Firebase error
+      let msg = 'লগইন ব্যর্থ হয়েছে।';
+      if (error.code === 'auth/user-not-found') {
+        msg = 'এই ইমেইল দিয়ে কোনো অ্যাকাউন্ট পাওয়া যায়নি।';
+      } else if (error.code === 'auth/wrong-password') {
+        msg = 'পাসওয়ার্ড সঠিক নয়।';
+      } else if (error.code === 'auth/too-many-requests') {
+        msg = 'অনেক বেশি চেষ্টা করা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।';
+      } else if (error.code === 'auth/invalid-email') {
+        msg = 'ইমেইল ঠিক নয়।';
+      }
+      alert(msg);
     }
 
   });
@@ -39,20 +48,13 @@ if (loginForm) {
 
 // =========================
 // Protect All Admin Pages
+// V34 FIX: Check for admin- prefix instead of listing each page
 // =========================
 
 const currentPage = window.location.pathname;
+const isAdminPage = currentPage.includes("admin-") && !currentPage.includes("admin-login");
 
-if (
-    currentPage.includes("admin-dashboard") ||
-    currentPage.includes("admin-products") ||
-    currentPage.includes("admin-product-add") ||
-    currentPage.includes("admin-gallery") ||
-    currentPage.includes("admin-orders") ||
-    currentPage.includes("admin-users") ||
-    currentPage.includes("admin-settings") ||
-    currentPage.includes("admin-reviews")
-) {
+if (isAdminPage) {
 
     onAuthStateChanged(auth, (user) => {
 
@@ -68,12 +70,17 @@ if (
 
 // =========================
 // Logout
+// V34 FIX: Add error handling
 // =========================
 
 window.adminLogout = async function () {
 
-  await signOut(auth);
-
-  window.location.href = "admin-login.html";
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error('Logout error:', error);
+  } finally {
+    window.location.href = "admin-login.html";
+  }
 
 };

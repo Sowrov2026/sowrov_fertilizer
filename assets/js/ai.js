@@ -362,6 +362,12 @@
         addMessage('user', text || 'Please analyze this crop image.', imageDataUrl);
         state.conversationHistory.push({ role: 'user', content: text || 'Please analyze this crop image.' });
 
+        // V34 FIX: Limit conversation history to prevent unbounded growth
+        const MAX_HISTORY = 40;
+        if (state.conversationHistory.length > MAX_HISTORY) {
+            state.conversationHistory = state.conversationHistory.slice(-MAX_HISTORY);
+        }
+
         DOM.chatInput.value = '';
         DOM.chatInput.style.height = 'auto';
         DOM.btnSend.disabled = true;
@@ -457,6 +463,10 @@
         removeExistingPreview();
         state.selectedImageBase64 = null;
         if (DOM.fileInput) DOM.fileInput.value = '';
+        // V34 FIX: Update send button state after clearing image
+        if (DOM.btnSend) {
+            DOM.btnSend.disabled = !DOM.chatInput.value.trim();
+        }
     }
 
     function removeExistingPreview() {

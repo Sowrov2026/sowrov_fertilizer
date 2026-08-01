@@ -66,9 +66,10 @@ function detectIntent(text, languageResult = {}) {
     };
 
     // ── V33 FIX: Emergency keywords (highest priority) ──
+    // V34 FIX: Removed generic urgency words 'দ্রুত' and 'এখনই' that cause false positives
     const emergencyKeywords = ['জরুরি', 'emergency', 'অতি জরুরি', 'তাৎক্ষণিক', 'urgent',
-        'দ্রুত', 'এখনই', 'সঙ্গে সঙ্গে', 'ছড়িয়ে পড়ছে', 'সব মরে গেছে',
-        'তাৎক্ষণিক ব্যবস্থা', 'urgent action'];
+        'সঙ্গে সঙ্গে', 'ছড়িয়ে পড়ছে', 'সব মরে গেছে',
+        'তাৎক্ষণিক ব্যবস্থা', 'urgent action', 'মরে গেছে', 'পচে গেছে'];
     intents.isEmergency = emergencyKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isEmergency) intentScores.emergency = 20;
 
@@ -140,9 +141,10 @@ function detectIntent(text, languageResult = {}) {
     intents.isCropIdQuery = cropIdKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isCropIdQuery) intentScores.crop = 6;
 
-    // ── FAQ keywords ──
-    const faqKeywords = ['কীভাবে', 'কিভাবে', 'how', 'কোথায়', 'where', 'কখন', 'when',
-        'কেন', 'why', 'কত', 'how much', 'কোন', 'which'];
+    // ── FAQ keywords (V34 FIX: More specific to avoid false positives) ──
+    const faqKeywords = ['কীভাবে', 'কিভাবে', 'how to', 'কোথায় পাই', 'কোথায় পাব', 'where to',
+        'কখন দিব', 'কখন লাগাব', 'when to', 'কেন হয়', 'why does',
+        'কত টাকা', 'কত দাম', 'how much', 'কোনটি ভালো', 'which is better'];
     intents.isFaqQuery = faqKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isFaqQuery) intentScores.faq = 3;
 

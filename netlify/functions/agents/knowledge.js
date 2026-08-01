@@ -4,7 +4,7 @@
  * Search Order: Internal Knowledge → Government Knowledge → Firebase Products → LLM (last resort)
  */
 
-const { searchKnowledge, buildKnowledgeContext } = require('../knowledge/index');
+const { searchKnowledge, buildKnowledgeContext, ALL_DOCUMENTS } = require('../knowledge/index');
 
 /**
  * Search internal knowledge base
@@ -59,7 +59,6 @@ function buildFullKnowledgeContext(query, options = {}) {
 function verifyReferences(responseText) {
     if (!responseText) return { valid: true, text: responseText };
 
-    const { ALL_DOCUMENTS } = require('../knowledge/index');
     const approvedUrls = ALL_DOCUMENTS.filter(d => d.url).map(d => d.url);
 
     // V33 FIX: Extract hostnames from approved URLs for proper comparison
