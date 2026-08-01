@@ -1,6 +1,6 @@
 /* ============================================
-   SF AI Assistant — Groq Edition
-   Netlify Serverless Function | Groq API
+   SF AI Assistant — V31 Multi-Provider Edition
+   Netlify Serverless Function | Provider Router
    Multi-Agent Agriculture Intelligence System
    ============================================ */
 
@@ -18,53 +18,64 @@ const { getCacheKey, getCachedKnowledge, setCachedKnowledge, getCachedProducts, 
 // ── Tools ──
 const { sanitizeInput, isValidImageDataUrl } = require('./tools');
 
+// ── V31: Provider Router ──
+const {
+    sendMessage,
+    getAnswerCacheKey,
+    getCachedAnswer,
+    setCachedAnswer,
+    getAnswerCacheStats,
+} = require('./provider-router');
+
 // ─────────────────────────────────────────────
-// GROQ CONFIGURATION
+// CONFIGURATION
 // ─────────────────────────────────────────────
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
-const GROQ_FALLBACK_MODEL = 'llama-3.1-8b-instant';
 const MAX_TOKENS_DEFAULT = 2500;
 const MAX_TOKENS_SHORT = 1000;
-const TEMPERATURE = 0.15;
-const TOP_P = 0.9;
-const MAX_RETRIES = 2;
-const RETRY_DELAY_MS = 1000;
 
 // ─────────────────────────────────────────────
-// ANSWER CACHE (for repeated questions)
+// RATE LIMITING
 // ─────────────────────────────────────────────
-const answerCache = new Map();
-const ANSWER_CACHE_TTL = 30 * 60 * 1000; // 30 minutes
-const ANSWER_CACHE_MAX = 500;
+const rateLimitMap = new Map();
+const RATE_LIMIT_MAX = 15;
+const RATE_LIMIT_WINDOW_MS = 60000;
 
-function getCachedAnswer(key) {
-    const entry = answerCache.get(key);
-    if (!entry) return null;
-    if (Date.now() - entry.timestamp > ANSWER_CACHE_TTL) {
-        answerCache.delete(key);
-        return null;
+function checkRateLimit(ip) {
+    const now = Date.now();
+    const record = rateLimitMap.get(ip);
+    if (!record || now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
+        rateLimitMap.set(ip, { windowStart: now, count: 1 });
+        return true;
     }
-    return entry.answer;
+    record.count++;
+    return record.count <= RATE_LIMIT_MAX;
 }
 
-function setCachedAnswer(key, answer) {
-    if (answerCache.size >= ANSWER_CACHE_MAX) {
-        const oldest = answerCache.keys().next().value;
-        answerCache.delete(oldest);
+function cleanupRateLimits() {
+    const now = Date.now();
+    if (rateLimitMap.size > 1000) {
+        for (const [ip, record] of rateLimitMap) {
+            if (now - record.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
+                rateLimitMap.delete(ip);
+            }
+        }
     }
-    answerCache.set(key, { answer, timestamp: Date.now() });
-}
-
-function getAnswerCacheKey(rawInput, intent) {
-    const normalized = rawInput.trim().toLowerCase();
-    const crop = intent?.cropName || '';
-    const type = intent?.primaryIntent || '';
-    return `${normalized}::${crop}::${type}`;
 }
 
 // ─────────────────────────────────────────────
-// SYSTEM PROMPT (Groq-Optimized)
+// ADAPTIVE MAX TOKENS
+// ─────────────────────────────────────────────
+function getAdaptiveMaxTokens(rawInput, intent) {
+    const inputLength = rawInput.length;
+    if (inputLength < 20) return MAX_TOKENS_SHORT;
+    if (intent?.isDiseaseQuery) return MAX_TOKENS_DEFAULT;
+    if (intent?.isFertilizerQuery) return MAX_TOKENS_DEFAULT;
+    if (intent?.isProductQuery) return 1500;
+    return MAX_TOKENS_DEFAULT;
+}
+
+// ─────────────────────────────────────────────
+// SYSTEM PROMPT
 // ─────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are SF AI (Sowrov Fertilizer AI) — Enterprise Agriculture Expert for Bangladesh.
 
@@ -157,219 +168,7 @@ Think like an agriculture expert, not a generic chatbot.
 Use internal knowledge base first, LLM last.`;
 
 // ─────────────────────────────────────────────
-// RATE LIMITING
-// ─────────────────────────────────────────────
-const rateLimitMap = new Map();
-const RATE_LIMIT_MAX = 15;
-const RATE_LIMIT_WINDOW_MS = 60000;
-
-function checkRateLimit(ip) {
-    const now = Date.now();
-    const record = rateLimitMap.get(ip);
-    if (!record || now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
-        rateLimitMap.set(ip, { windowStart: now, count: 1 });
-        return true;
-    }
-    record.count++;
-    return record.count <= RATE_LIMIT_MAX;
-}
-
-// Cleanup old rate limit entries (lazy, no setInterval in serverless)
-function cleanupRateLimits() {
-    const now = Date.now();
-    if (rateLimitMap.size > 1000) {
-        for (const [ip, record] of rateLimitMap) {
-            if (now - record.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
-                rateLimitMap.delete(ip);
-            }
-        }
-    }
-}
-
-// ─────────────────────────────────────────────
-// ADAPTIVE MAX TOKENS
-// ─────────────────────────────────────────────
-function getAdaptiveMaxTokens(rawInput, intent) {
-    const inputLength = rawInput.length;
-
-    // Short questions get shorter answers
-    if (inputLength < 20) return MAX_TOKENS_SHORT;
-
-    // Complex questions get longer answers
-    if (intent?.isDiseaseQuery) return MAX_TOKENS_DEFAULT;
-    if (intent?.isFertilizerQuery) return MAX_TOKENS_DEFAULT;
-    if (intent?.isProductQuery) return 1500;
-
-    // Default
-    return MAX_TOKENS_DEFAULT;
-}
-
-// ─────────────────────────────────────────────
-// BUILD GROQ API REQUEST
-// ─────────────────────────────────────────────
-function buildGroqRequest(messages, imageDataUrl, productContext, memoryContext, knowledgeContext, rawInput, intent) {
-    const apiMessages = [];
-    const recentMessages = messages.slice(-20);
-
-    let contextInjection = '';
-    if (memoryContext) contextInjection += `\n${memoryContext}`;
-    if (knowledgeContext) contextInjection += knowledgeContext;
-
-    const finalSystemPrompt = SYSTEM_PROMPT + contextInjection;
-    apiMessages.push({ role: 'system', content: finalSystemPrompt });
-
-    for (let i = 0; i < recentMessages.length; i++) {
-        const msg = recentMessages[i];
-        const role = msg.role === 'assistant' ? 'assistant' : 'user';
-        let content = sanitizeInput(msg.content || '');
-        if (!content) continue;
-
-        const isLastUserMsg = role === 'user' && i === recentMessages.length - 1;
-
-        if (isLastUserMsg && imageDataUrl && isValidImageDataUrl(imageDataUrl)) {
-            // Groq supports vision with llama-3.2-90b-vision, but for now send text only
-            const textContent = productContext ? content + productContext : content;
-            apiMessages.push({ role: 'user', content: textContent });
-        } else if (isLastUserMsg && productContext) {
-            apiMessages.push({ role: 'user', content: content + productContext });
-        } else {
-            apiMessages.push({ role, content });
-        }
-    }
-
-    const maxTokens = getAdaptiveMaxTokens(rawInput, intent);
-
-    return {
-        model: GROQ_MODEL,
-        messages: apiMessages,
-        max_tokens: maxTokens,
-        temperature: TEMPERATURE,
-        top_p: TOP_P,
-        stream: false,
-    };
-}
-
-// ─────────────────────────────────────────────
-// GROQ API CALL WITH RETRY
-// ─────────────────────────────────────────────
-async function callGroqAPI(requestBody, apiKey) {
-    let lastError = null;
-
-    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-        try {
-            const response = await fetch(GROQ_API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`,
-                },
-                body: JSON.stringify(requestBody),
-            });
-
-            // Handle 429 (rate limit) with retry
-            if (response.status === 429) {
-                const retryAfter = response.headers.get('retry-after');
-                const delay = retryAfter ? parseInt(retryAfter) * 1000 : RETRY_DELAY_MS * (attempt + 1);
-                console.warn(`Groq 429 rate limit, retry ${attempt + 1}/${MAX_RETRIES} after ${delay}ms`);
-
-                if (attempt < MAX_RETRIES) {
-                    await new Promise(r => setTimeout(r, delay));
-                    continue;
-                }
-
-                // Final attempt failed with 429
-                return {
-                    ok: false,
-                    status: 429,
-                    error: 'AI service is busy. Please try again in a moment.',
-                };
-            }
-
-            // Handle other errors
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => null);
-                console.error('Groq API error:', response.status, errorData);
-
-                // Try fallback model on 404
-                if (response.status === 404 && requestBody.model !== GROQ_FALLBACK_MODEL) {
-                    console.warn(`Model ${requestBody.model} unavailable, trying ${GROQ_FALLBACK_MODEL}`);
-                    requestBody.model = GROQ_FALLBACK_MODEL;
-                    continue;
-                }
-
-                return {
-                    ok: false,
-                    status: response.status,
-                    error: errorData?.error?.message || 'AI service is temporarily unavailable.',
-                };
-            }
-
-            const data = await response.json();
-            return {
-                ok: true,
-                data,
-                model: requestBody.model,
-            };
-        } catch (error) {
-            lastError = error;
-            console.error(`Groq API attempt ${attempt + 1} failed:`, error.message);
-
-            if (attempt < MAX_RETRIES) {
-                await new Promise(r => setTimeout(r, RETRY_DELAY_MS * (attempt + 1)));
-            }
-        }
-    }
-
-    return {
-        ok: false,
-        status: 500,
-        error: 'AI service is temporarily unavailable. Please try again later.',
-    };
-}
-
-// ─────────────────────────────────────────────
-// STREAMING GROQ API CALL
-// ─────────────────────────────────────────────
-async function callGroqAPIStreaming(requestBody, apiKey) {
-    try {
-        requestBody.stream = true;
-
-        const response = await fetch(GROQ_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => null);
-            return {
-                ok: false,
-                status: response.status,
-                error: errorData?.error?.message || 'Streaming failed',
-                stream: null,
-            };
-        }
-
-        return {
-            ok: true,
-            stream: response.body,
-            status: 200,
-        };
-    } catch (error) {
-        return {
-            ok: false,
-            status: 500,
-            error: error.message,
-            stream: null,
-        };
-    }
-}
-
-// ─────────────────────────────────────────────
-// MAIN HANDLER — GROQ EDITION
+// MAIN HANDLER — V31 MULTI-PROVIDER EDITION
 // ─────────────────────────────────────────────
 exports.handler = async (event) => {
     const headers = {
@@ -401,9 +200,13 @@ exports.handler = async (event) => {
         };
     }
 
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-        console.error('GROQ_API_KEY is not configured');
+    // Check if any provider is configured
+    const hasGroq = !!process.env.GROQ_API_KEY;
+    const hasGemini = !!process.env.GEMINI_API_KEY;
+    const hasHuggingFace = !!process.env.HUGGINGFACE_API_KEY;
+
+    if (!hasGroq && !hasGemini && !hasHuggingFace) {
+        console.error('No AI provider API keys configured');
         return {
             statusCode: 500,
             headers,
@@ -468,7 +271,7 @@ exports.handler = async (event) => {
         if (cachedAnswer) {
             return {
                 statusCode: 200,
-                headers: { ...headers, 'X-Cache': 'HIT' },
+                headers: { ...headers, 'X-Cache': 'HIT', 'X-Provider': 'cache' },
                 body: JSON.stringify({ reply: cachedAnswer }),
             };
         }
@@ -532,11 +335,34 @@ exports.handler = async (event) => {
             }
         }
 
-        // ── AGENT 5: Reasoning Agent — Build & Send Request ──
-        const requestBody = buildGroqRequest(messages, image, productContext, memoryContext, knowledgeContext, rawInput, intent);
+        // ── AGENT 5: Build Context & Send via Router ──
+        let contextInjection = '';
+        if (memoryContext) contextInjection += `\n${memoryContext}`;
+        if (knowledgeContext) contextInjection += knowledgeContext;
 
-        // Call Groq API with retry
-        const result = await callGroqAPI(requestBody, apiKey);
+        const finalSystemPrompt = SYSTEM_PROMPT + contextInjection;
+
+        // Build messages for provider (include product context in last user message)
+        const providerMessages = messages.slice(-20).map(m => ({
+            role: m.role,
+            content: sanitizeInput(m.content || ''),
+        }));
+
+        // Inject product context into last user message
+        if (productContext && providerMessages.length > 0) {
+            const lastUserIdx = providerMessages.length - 1;
+            providerMessages[lastUserIdx].content += productContext;
+        }
+
+        const maxTokens = getAdaptiveMaxTokens(rawInput, intent);
+
+        // ══════════════════════════════════════════
+        // V31: MULTI-PROVIDER ROUTER
+        // ══════════════════════════════════════════
+        const result = await sendMessage(providerMessages, finalSystemPrompt, {
+            maxTokens,
+            image,
+        });
 
         if (!result.ok) {
             return {
@@ -544,15 +370,12 @@ exports.handler = async (event) => {
                 headers,
                 body: JSON.stringify({
                     error: result.error,
-                    errorEn: result.error,
+                    errorEn: result.errorEn || result.error,
                 }),
             };
         }
 
-        let reply = '';
-        if (result.data.choices && result.data.choices[0] && result.data.choices[0].message) {
-            reply = result.data.choices[0].message.content || '';
-        }
+        let reply = result.reply;
 
         if (!reply) {
             return {
@@ -572,15 +395,28 @@ exports.handler = async (event) => {
         });
 
         // ── Cache the answer ──
-        setCachedAnswer(answerCacheKey, processed.text);
+        setCachedAnswer(answerCacheKey, processed.text, result.provider);
 
         // ── Log usage ──
-        console.log(`Groq: ${result.model} | tokens: ${result.data.usage?.total_tokens || '?'} | lang: ${languageResult.language} | intent: ${intent.primaryIntent}`);
+        console.log(`V31: ${result.provider}/${result.model} | ${result.latency}ms | tokens: ${result.usage?.total_tokens || '?'} | lang: ${languageResult.language} | intent: ${intent.primaryIntent} | attempts: ${result.attempts || 1}`);
 
         return {
             statusCode: 200,
-            headers: { ...headers, 'X-Cache': 'MISS', 'X-Model': result.model },
-            body: JSON.stringify({ reply: processed.text }),
+            headers: {
+                ...headers,
+                'X-Cache': 'MISS',
+                'X-Provider': result.provider,
+                'X-Model': result.model,
+                'X-Latency': String(result.latency),
+            },
+            body: JSON.stringify({
+                reply: processed.text,
+                _meta: {
+                    provider: result.provider,
+                    model: result.model,
+                    latency: result.latency,
+                },
+            }),
         };
     } catch (error) {
         console.error('Function error:', error);

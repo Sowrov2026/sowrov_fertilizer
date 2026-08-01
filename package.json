@@ -1,6 +1,6 @@
 {
   "name": "sf-ai-enterprise",
-  "version": "23.0.0",
+  "version": "31.0.0",
   "description": "SF AI — Bangladesh Agriculture Enterprise Platform",
   "private": true,
   "dependencies": {
@@ -17,12 +17,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": [
-    "agriculture",
-    "bangladesh",
-    "ai",
-    "farming"
-  ],
+  "keywords": ["agriculture", "bangladesh", "ai", "farming"],
   "author": "Sowrov Fertilizer",
   "license": "MIT"
 }

@@ -10,6 +10,11 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
