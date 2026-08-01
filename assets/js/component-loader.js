@@ -1,6 +1,6 @@
 // ======================================
 // Component Loader
-// Sowrov Fertilizer — V17 Ultimate Production
+// Sowrov Fertilizer — V19 Self-Evolving AI
 // ======================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loadV15Modules();
             loadV16Modules();
             loadV17Modules();
+            loadV19Modules();
         };
         document.body.appendChild(script);
     }
@@ -61,5 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(v17Script);
     }
 
-    console.log("Component Loader Loaded — V17 Ultimate Production");
+    // Load V19 Self-Evolving AI
+    function loadV19Modules() {
+        if (document.getElementById("v19-module")) return;
+        const v19Script = document.createElement("script");
+        v19Script.id = "v19-module";
+        v19Script.type = "module";
+        v19Script.src = "assets/js/v19-integration.js";
+        v19Script.onload = () => console.log("V19 Self-Evolving AI Loaded");
+        document.body.appendChild(v19Script);
+    }
+
+    console.log("Component Loader Loaded — V19 Self-Evolving AI");
 });
