@@ -164,7 +164,7 @@ loadCart();
 
 }
 
-clearCart.onclick=()=>{
+if(clearCart) clearCart.onclick=()=>{
 
 if(confirm("Clear Cart?")){
 

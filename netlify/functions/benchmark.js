@@ -5,9 +5,9 @@
  * Body: { "dataset": "bangla|english|banglish|chatgaiya|maheshkhali|all", "maxCases": 100 }
  */
 
-const { runBenchmark, ensureDirs } = require('./runner');
-const { generateBenchmarkReport, generateMarkdownReport, generateDashboardSummary } = require('./reports');
-const { ALL_DOCUMENTS } = require('../knowledge/index');
+const { runBenchmark, ensureDirs } = require('./evaluation/runner');
+const { generateBenchmarkReport, generateMarkdownReport, generateDashboardSummary } = require('./evaluation/reports');
+const { ALL_DOCUMENTS } = require('./knowledge/index');
 
 const headers = {
     'Access-Control-Allow-Origin': '*',

@@ -92,8 +92,6 @@ onAuthStateChanged(auth, async (user) => {
 
         profileStatus.textContent =
             data.status || "active";
-            profileStatus.textContent =
-data.status || "active";
 
 document.getElementById("profileLoading").style.display = "none";
 

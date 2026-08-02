@@ -17,8 +17,7 @@ import {
 // ======================================
 
 const stars = document.querySelectorAll(".star");
-
-
+const reviewRating = document.getElementById("reviewRating");
 
 let selectedRating = 0;
 stars.forEach((star) => {
@@ -109,7 +108,6 @@ document.querySelector(".star-rating")
 const reviewName = document.getElementById("reviewName");
 const reviewEmail = document.getElementById("reviewEmail");
 const reviewProduct = document.getElementById("reviewProduct");
-const reviewRating = document.getElementById("reviewRating");
 const reviewMessage = document.getElementById("reviewMessage");
 const submitReviewBtn = document.getElementById("submitReviewBtn");
 

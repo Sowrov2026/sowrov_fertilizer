@@ -37,13 +37,15 @@ let currentProduct=null;
 // Quantity
 // ======================================
 
-document.getElementById("plusQty").onclick=()=>{
+const plusBtn = document.getElementById("plusQty");
+const minusBtn = document.getElementById("minusQty");
+if(plusBtn) plusBtn.onclick=()=>{
 
 qty.value=Number(qty.value)+1;
 
 }
 
-document.getElementById("minusQty").onclick=()=>{
+if(minusBtn) minusBtn.onclick=()=>{
 
 if(Number(qty.value)>1){
 

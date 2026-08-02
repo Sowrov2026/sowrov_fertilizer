@@ -1,10 +1,12 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 // =========================
 // Admin Login
@@ -56,12 +58,22 @@ const isAdminPage = currentPage.includes("admin-") && !currentPage.includes("adm
 
 if (isAdminPage) {
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
 
         if (!user) {
-
             window.location.href = "admin-login.html";
+            return;
+        }
 
+        try {
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            const userData = userDoc.exists() ? userDoc.data() : null;
+            if (!userData || (userData.role !== "admin" && userData.role !== "super_admin")) {
+                await signOut(auth);
+                window.location.href = "admin-login.html";
+            }
+        } catch (e) {
+            console.error("Admin role check failed:", e);
         }
 
     });

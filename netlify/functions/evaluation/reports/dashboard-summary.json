@@ -1,13 +1,13 @@
 {
   "version": "SF AI V14",
-  "generated": "2026-08-01T10:48:37.889Z",
+  "generated": "2026-08-02T16:43:35.042Z",
   "status": "PASS",
-  "overall_accuracy": 0.7611111111111111,
-  "avg_response_time": 3.6224444444444446,
+  "overall_accuracy": 0.7684444444444445,
+  "avg_response_time": 3.751333333333333,
   "hallucination_rate": 0,
   "language_accuracy": 0.7984000000000004,
   "total_tests": 4500,
-  "pass_rate": 0.7611111111111111,
+  "pass_rate": 0.7684444444444445,
   "weak_areas": [
     {
       "name": "product_recommendation",
