@@ -4,7 +4,7 @@
    ============================================ */
 
 const { sendMessage, getAnswerCacheKey, getCachedAnswer, setCachedAnswer, buildKnowledgeFallback, getProviderStatus } = require('./provider-router');
-const { detectLanguage } = require('./agents/language');
+const { processLanguage } = require('./agents/language');
 const { detectIntent } = require('./agents/intent');
 const { searchAndRankProducts } = require('./agents/product');
 const { buildFullKnowledgeContext, searchRawDocuments, generateKnowledgeAnswer } = require('./agents/knowledge');
@@ -32,22 +32,24 @@ async function handleChatRequest(body) {
     const lastUserMsg = messages.filter(m => m.role === 'user').pop();
     const rawInput = lastUserMsg?.content || '';
 
-    const language = detectLanguage(rawInput);
-    const intent = detectIntent(rawInput, { language });
+    const languageResult = processLanguage(rawInput);
+    const intent = detectIntent(rawInput, languageResult);
+
+    const lang = languageResult.language;
 
     let productResults = { products: [], context: '' };
-    if (intent.needsProduct || intent.type === 'product' || intent.type === 'fertilizer') {
-        productResults = await searchAndRankProducts(rawInput, intent, { language });
+    if (intent.isProductQuery || intent.isFertilizerQuery || intent.primaryIntent === 'product' || intent.primaryIntent === 'fertilizer') {
+        productResults = await searchAndRankProducts(rawInput, intent, { language: lang });
     }
 
     const knowledgeContext = buildFullKnowledgeContext(rawInput, {
-        crop: intent.cropName, disease: intent.diseaseName, season: intent.season, intent: intent.type, limit: 6,
+        crop: intent.cropName, disease: null, season: intent.season, intent: intent.primaryIntent, limit: 6,
     });
 
     const cacheKey = getAnswerCacheKey(rawInput, intent);
     const cachedAnswer = getCachedAnswer(cacheKey);
 
-    const systemPrompt = buildSystemPrompt(language);
+    const systemPrompt = buildSystemPrompt(lang);
 
     let userContext = rawInput;
     if (knowledgeContext && knowledgeContext.length > 50) userContext += `\n\n[KNOWLEDGE]:\n${knowledgeContext}`;
@@ -69,23 +71,23 @@ async function handleChatRequest(body) {
     if (response.reply && response.reply.trim()) {
         finalAnswer = response.reply.trim();
     } else {
-        const rawDocs = searchRawDocuments(rawInput, { crop: intent.cropName, disease: intent.diseaseName, season: intent.season, intent: intent.type, limit: 5 });
-        finalAnswer = generateKnowledgeAnswer(rawInput, rawDocs, productResults.context || '', language);
+        const rawDocs = searchRawDocuments(rawInput, { crop: intent.cropName, disease: null, season: intent.season, intent: intent.primaryIntent, limit: 5 });
+        finalAnswer = generateKnowledgeAnswer(rawInput, rawDocs, productResults.context || '', lang);
     }
 
     // LAST RESORT: Never return empty
     if (!finalAnswer || !finalAnswer.trim()) {
-        finalAnswer = getEmergencyFallback(language);
+        finalAnswer = getEmergencyFallback(lang);
     }
 
     const session = smartMemory.getSession(sessionId);
-    smartMemory.updateSession(sessionId, { lastIntent: intent.type, crop: intent.cropName || session.crop, language, lastActivity: Date.now() });
+    smartMemory.updateSession(sessionId, { lastIntent: intent.primaryIntent, crop: intent.cropName || session.crop, language: lang, lastActivity: Date.now() });
 
     if (!cachedAnswer && response.ok) setCachedAnswer(cacheKey, finalAnswer, response.provider || 'knowledge');
 
     return {
         reply: finalAnswer,
-        language,
+        language: lang,
         provider: response.provider || 'knowledge',
         model: response.model || 'knowledge-base',
         latency: response.latency || 0,

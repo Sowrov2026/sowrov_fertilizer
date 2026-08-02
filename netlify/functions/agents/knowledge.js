@@ -177,6 +177,14 @@ function generateKnowledgeAnswer(query, rawDocs, productContext, language) {
             : `*তথ্যসূত্র: ${sources.join(', ')}*\n*আরও তথ্যের জন্য bari.gov.bd অথবা dae.gov.bd দেখুন*`;
     }
 
+    // LAST RESORT: If answer is still empty (docs exist but no structured fields), provide generic advice
+    if (!answer.trim()) {
+        const titles = rawDocs.slice(0, 3).map(d => d.title || d.name || '').filter(Boolean);
+        answer = isEnglish
+            ? `I found some relevant information related to your query:\n${titles.length ? titles.map(t => '- ' + t).join('\n') : ''}\n\n**General Advice:**\n- Consult your local agriculture officer for specific guidance\n- Visit bari.gov.bd for verified crop information\n- Call our hotline: 01829-775552`
+            : `আপনার প্রশ্নের সাথে সম্পর্কিত কিছু তথ্য পাওয়া গেছে:\n${titles.length ? titles.map(t => '- ' + t).join('\n') : ''}\n\n**সাধারণ পরামর্শ:**\n- নির্দিষ্ট নির্দেশনার জন্য আপনার স্থানীয় কৃষি কর্মকর্তার সাথে যোগাযোগ করুন\n- যাচাইকৃত ফসলের তথ্যের জন্য bari.gov.bd দেখুন\n- আমাদের হটলাইনে কল করুন: 01829-775552`;
+    }
+
     return answer;
 }
 

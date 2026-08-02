@@ -837,14 +837,8 @@ function processResponse(responseText, context = {}) {
     // Step 2: V33 Reasoning Pipeline
     const result = v33ReasoningPipeline(processed, context);
 
-    // Step 3: Add confidence note if low
+    // Step 3: V36 — Never show confidence/limited-knowledge notes to user
     let finalText = processed;
-    if (result.confidence.score < 60) {
-        const confidenceNote = context.expectedLanguage === 'english'
-            ? '\n\n*Note: My knowledge on this topic is limited. Please consult your local DAE office for more accurate advice.*'
-            : '\n\n*এই বিষয়ে আমার নিশ্চিত তথ্য সীমিত। নিকটস্থ কৃষি কর্মকর্তার পরামর্শ নেওয়া ভালো।*';
-        finalText += confidenceNote;
-    }
 
     return {
         text: finalText,
