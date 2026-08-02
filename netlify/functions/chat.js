@@ -30,8 +30,8 @@ const {
 // ─────────────────────────────────────────────
 // CONFIGURATION
 // ─────────────────────────────────────────────
-const MAX_TOKENS_DEFAULT = 2500;
-const MAX_TOKENS_SHORT = 1000;
+const MAX_TOKENS_DEFAULT = 1500;
+const MAX_TOKENS_SHORT = 800;
 
 // ─────────────────────────────────────────────
 // RATE LIMITING
@@ -70,7 +70,7 @@ function getAdaptiveMaxTokens(rawInput, intent) {
     if (inputLength < 20) return MAX_TOKENS_SHORT;
     if (intent?.isDiseaseQuery) return MAX_TOKENS_DEFAULT;
     if (intent?.isFertilizerQuery) return MAX_TOKENS_DEFAULT;
-    if (intent?.isProductQuery) return 1500;
+    if (intent?.isProductQuery) return 1000;
     return MAX_TOKENS_DEFAULT;
 }
 
@@ -390,18 +390,31 @@ exports.handler = async (event) => {
         const finalSystemPrompt = SYSTEM_PROMPT + contextInjection;
 
         // Build messages for provider (include product context in last user message)
-        const providerMessages = messages.slice(-20).map(m => ({
-            role: m.role === 'system' ? 'user' : m.role,
-            content: typeof m.content === 'string'
-                ? sanitizeInput(m.content)
-                : (Array.isArray(m.content) ? m.content : sanitizeInput(m.content || '')),
-        }));
+        const providerMessages = messages.slice(-20).map(m => {
+            let content = m.content || '';
+            // Handle multimodal content (array format)
+            if (Array.isArray(content)) {
+                content = content.map(p => p.text || '').join(' ');
+            }
+            // Only sanitize string content
+            if (typeof content === 'string') {
+                content = sanitizeInput(content);
+            }
+            return {
+                role: m.role === 'system' ? 'user' : (m.role || 'user'),
+                content,
+            };
+        });
 
         // Inject product context into last user message (not last message)
         if (productContext && providerMessages.length > 0) {
             const lastUserIdx = providerMessages.findLastIndex(m => m.role === 'user');
             if (lastUserIdx >= 0) {
-                providerMessages[lastUserIdx].content += productContext;
+                // Ensure content is a string before appending
+                const msg = providerMessages[lastUserIdx];
+                if (typeof msg.content === 'string') {
+                    msg.content += productContext;
+                }
             }
         }
 
@@ -416,12 +429,24 @@ exports.handler = async (event) => {
         });
 
         if (!result.ok) {
+            // V34 FIX: Better error messages for common errors
+            let errorMsg = result.error;
+            let errorEnMsg = result.errorEn || result.error;
+            
+            if (result.status === 402) {
+                errorMsg = 'AI সেবার ক্রেডিট শেষ হয়ে গেছে। অনুগ্রহ করে পরে চেষ্টা করুন।';
+                errorEnMsg = 'AI service credits are exhausted. Please try again later.';
+            } else if (result.status === 429) {
+                errorMsg = 'অনেক বেশি অনুরোধ এসেছে। কিছুক্ষণ অপেক্ষা করুন।';
+                errorEnMsg = 'Too many requests. Please wait a moment.';
+            }
+
             return {
                 statusCode: result.status === 429 ? 429 : 502,
                 headers,
                 body: JSON.stringify({
-                    error: result.error,
-                    errorEn: result.errorEn || result.error,
+                    error: errorMsg,
+                    errorEn: errorEnMsg,
                 }),
             };
         }

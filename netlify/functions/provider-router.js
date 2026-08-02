@@ -329,7 +329,7 @@ async function callGemini(messages, systemPrompt, options = {}) {
     if (!apiKey) throw { status: 401, message: 'GEMINI_API_KEY not configured' };
 
     const model = options.model || PROVIDERS.gemini.model;
-    const maxTokens = options.maxTokens || 2500;
+    const maxTokens = options.maxTokens || 1500;
 
     // Build Gemini-format request (supports vision)
     const contents = [];
@@ -424,7 +424,7 @@ async function callHuggingFace(messages, systemPrompt, options = {}) {
     if (!apiKey) throw { status: 401, message: 'HUGGINGFACE_API_KEY not configured' };
 
     const model = options.model || PROVIDERS.huggingface.model;
-    const maxTokens = options.maxTokens || 2000;
+    const maxTokens = options.maxTokens || 1200;
 
     // Build HuggingFace messages format
     const formattedMessages = [
@@ -573,7 +573,7 @@ async function sendMessage(messages, systemPrompt, options = {}) {
         };
     }
 
-    const maxTokens = options.maxTokens || 2500;
+    const maxTokens = options.maxTokens || 1500;
     let lastError = null;
 
     for (let attempt = 0; attempt < available.length; attempt++) {
@@ -582,11 +582,18 @@ async function sendMessage(messages, systemPrompt, options = {}) {
         const caller = PROVIDER_CALLERS[providerId];
 
         try {
+            // V34 FIX: On quota error, try with fewer tokens
+            let currentMaxTokens = maxTokens;
+            if (lastError?.status === 402) {
+                currentMaxTokens = Math.floor(maxTokens * 0.6);
+                console.log(`Reducing maxTokens to ${currentMaxTokens} due to quota error`);
+            }
+
             console.log(`Trying provider: ${config.name} (attempt ${attempt + 1}/${available.length})`);
 
             const result = await caller(messages, systemPrompt, {
                 ...options,
-                maxTokens,
+                maxTokens: currentMaxTokens,
             });
 
             if (result.ok && result.reply) {
