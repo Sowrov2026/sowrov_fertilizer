@@ -150,11 +150,13 @@ window.location.href="customer-login.html";
 // ======================================
 
 window.customerLogout = async ()=>{
-
+try{
 await signOut(auth);
-
 window.location.href="customer-login.html";
-
+}catch(error){
+console.error("Logout error:",error);
+alert("Logout failed. Please try again.");
+}
 };
 // ======================================
 // Google Login

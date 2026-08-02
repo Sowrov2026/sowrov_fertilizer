@@ -5203,3 +5203,97 @@ background:#616161;
     color:#fff;
 
 }
+
+/*=====================================
+    RC-1: ANNOUNCEMENT & COMMITMENT BOX
+=======================================*/
+
+.announcement-box{
+
+    background:linear-gradient(135deg,#ECFDF5,#F0FDF4);
+
+    border:2px solid #A7F3D0;
+
+    border-radius:var(--radius);
+
+    padding:1.5rem 2rem;
+
+    margin:1.5rem 0;
+
+}
+
+.announcement-box h3{
+
+    font-size:1.2rem;
+
+    color:#065F46;
+
+    margin-bottom:0.8rem;
+
+}
+
+.announcement-box ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+.announcement-box li{
+
+    padding:0.4rem 0;
+
+    font-size:0.95rem;
+
+    color:#1E293B;
+
+    line-height:1.6;
+
+}
+
+.commitment-box{
+
+    background:#FFFBEB;
+
+    border:2px solid #FCD34D;
+
+    border-radius:var(--radius);
+
+    padding:1.5rem 2rem;
+
+    margin:1rem 0 1.5rem;
+
+}
+
+.commitment-box h3{
+
+    font-size:1.1rem;
+
+    color:#92400E;
+
+    margin-bottom:0.6rem;
+
+}
+
+.commitment-box p{
+
+    font-size:0.95rem;
+
+    color:#1E293B;
+
+    line-height:1.7;
+
+    margin-bottom:0.5rem;
+
+}
+
+.commitment-box .tagline{
+
+    font-size:1rem;
+
+    color:#065F46;
+
+    margin-top:0.8rem;
+
+}

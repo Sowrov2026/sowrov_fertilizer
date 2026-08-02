@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Sowrov Fertilizer</title>
+    <link rel="icon" href="assets/images/logo/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Sowrov <span>Fertilizer</span></a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="customer-login.html" class="btn btn-login-nav">Login</a></li>
+                </ul>
+                <div class="mobile-toggle">☰</div>
+            </nav>
+        </div>
+    </header>
+    <section class="faq" style="padding-top:7rem;">
+        <div class="container">
+            <div class="section-header">
+                <span class="hero-badge">❓ Frequently Asked Questions</span>
+                <h2 class="section-title">Have Questions? We Have Answers</h2>
+                <p class="section-subtitle">Here are some common questions about our organic fertilizer products and services.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <button class="faq-question">What products does Sowrov Fertilizer manufacture?<span>−</span></button>
+                    <div class="faq-answer"><p>We currently manufacture premium Vermicompost and Trichoderma organic fertilizers for sustainable farming.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do you provide wholesale supply?<span>+</span></button>
+                    <div class="faq-answer"><p>Yes. We provide wholesale and retail supply throughout Bangladesh.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Are your products 100% organic?<span>+</span></button>
+                    <div class="faq-answer"><p>Yes. Our fertilizers are prepared using natural and environmentally friendly ingredients.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How can I place an order?<span>+</span></button>
+                    <div class="faq-answer"><p>You can contact us by phone, WhatsApp or Facebook, or visit our location in Maheshkhali.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Where are you located?<span>+</span></button>
+                    <div class="faq-answer"><p>Maheshkhali, Cox's Bazar, Bangladesh.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do you offer customer support?<span>+</span></button>
+                    <div class="faq-answer"><p>Yes. Our support team is always ready to assist our customers before and after purchase.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container"><div class="copyright">© 2022 - 2026 <strong>Sowrov Fertilizer</strong>. All Rights Reserved.</div></div>
+    </footer>
+    <a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp">
+        <img src="assets/images/icons/whatsapp.png" alt="WhatsApp">
+    </a>
+    <script src="assets/js/script.js"></script>
+    <script>
+    document.querySelectorAll('.faq-question').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+            const item=btn.parentElement;
+            const isOpen=item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('active'));
+            if(!isOpen) item.classList.add('active');
+        });
+    });
+    </script>
+</body>
+</html>

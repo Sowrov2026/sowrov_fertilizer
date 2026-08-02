@@ -275,11 +275,13 @@ alert(error.message);
 // ======================================
 
 window.customerLogout = async () => {
-
-    await signOut(auth);
-
-    window.location.href = "customer-login.html";
-
+    try {
+        await signOut(auth);
+        window.location.href = "customer-login.html";
+    } catch (error) {
+        console.error("Logout error:", error);
+        alert("Logout failed. Please try again.");
+    }
 };
 
 console.log("Customer Profile Loaded");
