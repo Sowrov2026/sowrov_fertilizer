@@ -5119,3 +5119,87 @@ background:#E53935;
 background:#616161;
 
 }
+
+/*=====================================
+    V35: WHATSAPP-ONLY FLOATING BUTTON
+=======================================*/
+
+.whatsapp-btn-only{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    background:#25D366;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    z-index:9999;
+
+    box-shadow:0 10px 25px rgba(37,211,102,.4);
+
+    transition:.35s;
+
+}
+
+.whatsapp-btn-only img{
+
+    width:49px;
+
+    height:49px;
+
+}
+
+.whatsapp-btn-only:hover{
+
+    transform:scale(1.1);
+
+    box-shadow:0 0 20px rgba(37,211,102,.7);
+
+}
+
+/*=====================================
+    V35: LOGIN NAV BUTTON
+=======================================*/
+
+.btn-login-nav{
+
+    background:transparent;
+
+    border:2px solid var(--primary);
+
+    color:var(--primary);
+
+    padding:8px 20px;
+
+    border-radius:25px;
+
+    font-weight:600;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+.btn-login-nav:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}

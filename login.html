@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Sowrov Fertilizer</title>
+    <link rel="icon" href="assets/images/favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#10b981">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%);
+            padding: 2rem 1rem;
+        }
+        .auth-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.08);
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 420px;
+        }
+        .auth-card .logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .auth-card .logo a {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #2E7D32;
+        }
+        .auth-card .logo a span {
+            color: #1B5E20;
+        }
+        .auth-card h2 {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #1E293B;
+        }
+        .auth-card .subtitle {
+            text-align: center;
+            color: #64748B;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #1E293B;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: border-color .3s;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #2E7D32;
+        }
+        .auth-card .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+        .auth-links {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748B;
+        }
+        .auth-links a {
+            color: #2E7D32;
+            font-weight: 600;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #94A3B8;
+            font-size: 0.85rem;
+        }
+        .back-home {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .back-home a {
+            color: #64748B;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-page">
+        <div class="auth-card">
+            <div class="logo">
+                <a href="index.html">Sowrov <span>Fertilizer</span></a>
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Login to your account</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <div class="auth-links">
+                <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+                <p style="margin-top:0.5rem;"><a href="forgot-password.html">Forgot Password?</a></p>
+            </div>
+
+            <div class="back-home">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

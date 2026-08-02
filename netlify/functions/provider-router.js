@@ -1,194 +1,62 @@
 /* ============================================
-   SF AI V31 — Intelligent AI Provider Router
-   Multi-Provider Failover | Circuit Breaker
-   Request Queue | Health Monitor | Smart Cache
+   SF AI V35 — Groq + Knowledge Base Fallback
+   Single Provider | Knowledge Fallback | Always Answer
    ============================================ */
 
 // ─────────────────────────────────────────────
-// PROVIDER CONFIGURATION
+// PROVIDER: GROQ ONLY
 // ─────────────────────────────────────────────
-const PROVIDERS = {
-    groq: {
-        name: 'Groq',
-        url: 'https://api.groq.com/openai/v1/chat/completions',
-        model: 'llama-3.3-70b-versatile',
-        fallbackModel: 'llama-3.1-8b-instant',
-        apiKeyEnv: 'GROQ_API_KEY',
-        priority: 1,
-        timeout: 30000,
-        maxTokens: 8192,
-        supportsStreaming: true,
-        rateLimit: {
-            maxRequests: 30,
-            windowMs: 60000,
-        },
-    },
-    gemini: {
-        name: 'Gemini',
-        url: 'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
-        model: 'gemini-2.5-flash',
-        fallbackModel: 'gemini-2.0-flash',
-        apiKeyEnv: 'GEMINI_API_KEY',
-        priority: 2,
-        timeout: 60000,
-        maxTokens: 8192,
-        supportsStreaming: false,
-        rateLimit: {
-            maxRequests: 15,
-            windowMs: 60000,
-        },
-    },
-    huggingface: {
-        name: 'HuggingFace',
-        url: 'https://api-inference.huggingface.co/models/{model}',
-        model: 'meta-llama/Llama-3.3-70B-Instruct',
-        fallbackModel: 'mistralai/Mistral-7B-Instruct-v0.3',
-        apiKeyEnv: 'HUGGINGFACE_API_KEY',
-        priority: 3,
-        timeout: 120000,
-        maxTokens: 4096,
-        supportsStreaming: false,
-        rateLimit: {
-            maxRequests: 10,
-            windowMs: 60000,
-        },
-    },
+const GROQ_CONFIG = {
+    name: 'Groq',
+    url: 'https://api.groq.com/openai/v1/chat/completions',
+    model: 'llama-3.3-70b-versatile',
+    fallbackModel: 'llama-3.1-8b-instant',
+    apiKeyEnv: 'GROQ_API_KEY',
+    timeout: 25000,
 };
 
 // ─────────────────────────────────────────────
 // CIRCUIT BREAKER
 // ─────────────────────────────────────────────
-const circuitBreakers = {};
-const CIRCUIT_BREAKER = {
+const circuitBreaker = {
+    state: 'CLOSED',
+    failures: 0,
+    lastFailureTime: 0,
+    totalRequests: 0,
+    totalFailures: 0,
     failureThreshold: 5,
-    successThreshold: 2,
-    timeoutMs: 5 * 60 * 1000, // 5 minutes
+    timeoutMs: 5 * 60 * 1000,
 };
 
-function getCircuitBreaker(providerId) {
-    if (!circuitBreakers[providerId]) {
-        circuitBreakers[providerId] = {
-            state: 'CLOSED', // CLOSED = normal, OPEN = disabled, HALF_OPEN = testing
-            failures: 0,
-            successes: 0,
-            lastFailureTime: 0,
-            lastSuccessTime: 0,
-            totalRequests: 0,
-            totalFailures: 0,
-        };
-    }
-    return circuitBreakers[providerId];
+function recordSuccess() {
+    circuitBreaker.totalRequests++;
+    circuitBreaker.failures = 0;
 }
 
-function recordSuccess(providerId) {
-    const cb = getCircuitBreaker(providerId);
-    cb.totalRequests++;
-    cb.lastSuccessTime = Date.now();
-
-    if (cb.state === 'HALF_OPEN') {
-        cb.successes++;
-        if (cb.successes >= CIRCUIT_BREAKER.successThreshold) {
-            cb.state = 'CLOSED';
-            cb.failures = 0;
-            cb.successes = 0;
-            console.log(`Circuit breaker CLOSED for ${providerId}`);
-        }
-    } else {
-        cb.failures = 0;
+function recordFailure() {
+    circuitBreaker.totalRequests++;
+    circuitBreaker.totalFailures++;
+    circuitBreaker.failures++;
+    circuitBreaker.lastFailureTime = Date.now();
+    if (circuitBreaker.failures >= circuitBreaker.failureThreshold) {
+        circuitBreaker.state = 'OPEN';
     }
 }
 
-function recordFailure(providerId) {
-    const cb = getCircuitBreaker(providerId);
-    cb.totalRequests++;
-    cb.totalFailures++;
-    cb.failures++;
-    cb.lastFailureTime = Date.now();
-
-    if (cb.failures >= CIRCUIT_BREAKER.failureThreshold) {
-        cb.state = 'OPEN';
-        console.warn(`Circuit breaker OPEN for ${providerId} - disabled for ${CIRCUIT_BREAKER.timeoutMs / 1000}s`);
+function isCircuitOpen() {
+    if (circuitBreaker.state === 'CLOSED') return false;
+    if (Date.now() - circuitBreaker.lastFailureTime > circuitBreaker.timeoutMs) {
+        circuitBreaker.state = 'HALF_OPEN';
+        return false;
     }
-}
-
-function isCircuitOpen(providerId) {
-    const cb = getCircuitBreaker(providerId);
-    if (cb.state === 'CLOSED') return false;
-
-    if (cb.state === 'OPEN') {
-        if (Date.now() - cb.lastFailureTime > CIRCUIT_BREAKER.timeoutMs) {
-            cb.state = 'HALF_OPEN';
-            cb.successes = 0;
-            console.log(`Circuit breaker HALF_OPEN for ${providerId} - testing`);
-            return false;
-        }
-        return true;
-    }
-
-    // HALF_OPEN: allow one request
-    return false;
+    return true;
 }
 
 // ─────────────────────────────────────────────
-// PROVIDER HEALTH TRACKER
-// ─────────────────────────────────────────────
-const providerHealth = {};
-
-function getProviderHealth(providerId) {
-    if (!providerHealth[providerId]) {
-        providerHealth[providerId] = {
-            status: 'unknown',
-            latency: 0,
-            lastSuccess: null,
-            lastFailure: null,
-            requestsToday: 0,
-            cacheHits: 0,
-            cacheMisses: 0,
-            errors: [],
-            dailyReset: Date.now(),
-        };
-    }
-    const h = providerHealth[providerId];
-    // Reset daily counter
-    if (Date.now() - h.dailyReset > 24 * 60 * 60 * 1000) {
-        h.requestsToday = 0;
-        h.dailyReset = Date.now();
-    }
-    return h;
-}
-
-function recordProviderSuccess(providerId, latencyMs) {
-    const h = getProviderHealth(providerId);
-    h.status = 'healthy';
-    h.latency = latencyMs;
-    h.lastSuccess = Date.now();
-    h.requestsToday++;
-}
-
-function recordProviderFailure(providerId, error) {
-    const h = getProviderHealth(providerId);
-    h.status = 'degraded';
-    h.lastFailure = Date.now();
-    h.requestsToday++;
-    h.errors.push({ time: Date.now(), message: error });
-    if (h.errors.length > 50) h.errors.shift();
-}
-
-function recordCacheHit(providerId) {
-    const h = getProviderHealth(providerId);
-    h.cacheHits++;
-}
-
-function recordCacheMiss(providerId) {
-    const h = getProviderHealth(providerId);
-    h.cacheMisses++;
-}
-
-// ─────────────────────────────────────────────
-// SMART ANSWER CACHE (24 hours)
+// ANSWER CACHE (24 hours)
 // ─────────────────────────────────────────────
 const answerCache = new Map();
-const ANSWER_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const ANSWER_CACHE_TTL = 24 * 60 * 60 * 1000;
 const ANSWER_CACHE_MAX = 2000;
 
 function getAnswerCacheKey(rawInput, intent) {
@@ -208,52 +76,27 @@ function getCachedAnswer(key) {
     return entry.answer;
 }
 
-function setCachedAnswer(key, answer, providerId) {
+function setCachedAnswer(key, answer, source) {
     if (answerCache.size >= ANSWER_CACHE_MAX) {
-        // Evict oldest
         const oldest = answerCache.keys().next().value;
         answerCache.delete(oldest);
     }
-    answerCache.set(key, { answer, timestamp: Date.now(), provider: providerId });
+    answerCache.set(key, { answer, timestamp: Date.now(), source });
 }
 
 function getAnswerCacheStats() {
-    let totalHits = 0;
-    let totalMisses = 0;
-    for (const h of Object.values(providerHealth)) {
-        totalHits += h.cacheHits;
-        totalMisses += h.cacheMisses;
-    }
-    return {
-        size: answerCache.size,
-        totalHits,
-        totalMisses,
-        hitRate: totalHits + totalMisses > 0
-            ? ((totalHits / (totalHits + totalMisses)) * 100).toFixed(1) + '%'
-            : '0%',
-    };
+    return { size: answerCache.size };
 }
 
 // ─────────────────────────────────────────────
-// EXPONENTIAL BACKOFF
+// GROQ API CALL
 // ─────────────────────────────────────────────
-function getBackoffDelay(attempt, baseMs = 1000, maxMs = 30000) {
-    const delay = Math.min(baseMs * Math.pow(2, attempt), maxMs);
-    const jitter = delay * 0.1 * Math.random();
-    return Math.floor(delay + jitter);
-}
-
-// ─────────────────────────────────────────────
-// PROVIDER API CALLERS
-// ─────────────────────────────────────────────
-
-// ── Groq ──
 async function callGroq(messages, systemPrompt, options = {}) {
-    const apiKey = process.env[PROVIDERS.groq.apiKeyEnv];
+    const apiKey = process.env[GROQ_CONFIG.apiKeyEnv];
     if (!apiKey) throw { status: 401, message: 'GROQ_API_KEY not configured' };
 
-    const model = options.model || PROVIDERS.groq.model;
-    const maxTokens = options.maxTokens || 2500;
+    const model = options.model || GROQ_CONFIG.model;
+    const maxTokens = options.maxTokens || 1200;
 
     const apiMessages = [
         { role: 'system', content: systemPrompt },
@@ -264,7 +107,7 @@ async function callGroq(messages, systemPrompt, options = {}) {
     ];
 
     const startTime = Date.now();
-    const response = await fetch(PROVIDERS.groq.url, {
+    const response = await fetch(GROQ_CONFIG.url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -278,16 +121,14 @@ async function callGroq(messages, systemPrompt, options = {}) {
             top_p: 0.9,
             stream: false,
         }),
-        signal: AbortSignal.timeout(PROVIDERS.groq.timeout),
+        signal: AbortSignal.timeout(GROQ_CONFIG.timeout),
     });
 
     const latency = Date.now() - startTime;
 
     if (response.status === 429) {
-        const retryAfter = response.headers.get('retry-after');
         const err = new Error('Rate limited');
         err.status = 429;
-        err.retryAfter = retryAfter ? parseInt(retryAfter) * 1000 : 2000;
         throw err;
     }
 
@@ -317,361 +158,198 @@ async function callGroq(messages, systemPrompt, options = {}) {
         ok: true,
         reply,
         model,
-        provider: 'groq',
         latency,
         usage: data.usage,
     };
 }
 
-// ── Gemini ──
-async function callGemini(messages, systemPrompt, options = {}) {
-    const apiKey = process.env[PROVIDERS.gemini.apiKeyEnv];
-    if (!apiKey) throw { status: 401, message: 'GEMINI_API_KEY not configured' };
+// ─────────────────────────────────────────────
+// KNOWLEDGE BASE FALLBACK
+// Build answer from local knowledge when Groq fails
+// ─────────────────────────────────────────────
+function buildKnowledgeFallback(rawInput, knowledgeContext, productContext, intent, language) {
+    const isEnglish = language === 'english';
+    let answer = '';
 
-    const model = options.model || PROVIDERS.gemini.model;
-    const maxTokens = options.maxTokens || 1500;
+    // Build answer from knowledge base
+    if (knowledgeContext && knowledgeContext.length > 100) {
+        answer = knowledgeContext;
+    }
 
-    // Build Gemini-format request (supports vision)
-    const contents = [];
-    for (const msg of messages) {
-        if (msg.role === 'user') {
-            const parts = [];
-            // V34 FIX: Add image support for Gemini (vision model)
-            if (options.image && parts.length === 0) {
-                // Extract base64 data from data URL
-                const match = options.image.match(/^data:([^;]+);base64,(.+)$/);
-                if (match) {
-                    parts.push({
-                        inlineData: {
-                            mimeType: match[1],
-                            data: match[2],
-                        },
-                    });
-                }
-            }
-            parts.push({ text: msg.content || '' });
-            contents.push({ role: 'user', parts });
-        } else if (msg.role === 'assistant') {
-            contents.push({ role: 'model', parts: [{ text: msg.content || '' }] });
+    // Add product recommendations
+    if (productContext) {
+        answer += '\n\n' + productContext;
+    }
+
+    // If no knowledge found, give generic helpful response
+    if (!answer || answer.length < 50) {
+        if (isEnglish) {
+            answer = `Based on the information available in our agriculture knowledge base:
+
+**Query:** ${rawInput}
+
+**Recommendation:**
+For accurate advice on this topic, I recommend:
+1. Contact your local DAE (Department of Agricultural Extension) office
+2. Visit BARI (Bangladesh Agricultural Research Institute) website: bari.gov.bd
+3. Consult with a local agriculture officer
+
+**General Tips:**
+- Always use verified seeds from authorized dealers
+- Follow recommended fertilizer schedules
+- Practice integrated pest management (IPM)
+- Monitor weather conditions before applying any treatments
+
+*This answer is from our local knowledge base. For personalized advice, please consult your nearest agricultural extension office.*`;
+        } else {
+            answer = `আমাদের কৃষি জ্ঞান ভান্ডার থেকে পাওয়া তথ্য:
+
+**আপনার প্রশ্ন:** ${rawInput}
+
+**সুপারিশ:**
+এই বিষয়ে সঠিক পরামর্শের জন্য আমি সুপারিশ করি:
+১. আপনার নিকটস্থ কৃষি সম্প্রসারণ অফিসে (DAE) যোগাযোগ করুন
+২. BARI ওয়েবসাইট দেখুন: bari.gov.bd
+৩. স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন
+
+**সাধারণ পরামর্শ:**
+- সবসময় অনুমোদিত ডিলার থেকে যাচাইকৃত বীজ ব্যবহার করুন
+- সুপারিশকৃত সারের সময়সূচি অনুসরণ করুন
+- একীভূত পোকামাকড় ব্যবস্থাপনা (IPM) অনুশীলন করুন
+- যেকোনো চিকিৎসা প্রয়োগের আগে আবহাওয়ার অবস্থা পর্যবেক্ষণ করুন
+
+*এই উত্তরটি আমাদের স্থানীয় জ্ঞান ভান্ডার থেকে দেওয়া হয়েছে। ব্যক্তিগত পরামর্শের জন্য আপনার নিকটস্থ কৃষি সম্প্রসারণ অফিসে যোগাযোগ করুন।*`;
         }
+    } else {
+        // Add source note to existing knowledge
+        const sourceNote = isEnglish
+            ? '\n\n*This answer is based on our verified agriculture knowledge base (BARI, DAE, BRRI documents).*'
+            : '\n\n*এই উত্তরটি আমাদের যাচাইকৃত কৃষি জ্ঞান ভান্ডার (BARI, DAE, BRRI নথি) থেকে দেওয়া হয়েছে।*';
+        answer += sourceNote;
     }
 
-    const url = PROVIDERS.gemini.url.replace('{model}', model);
-
-    const startTime = Date.now();
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-goog-api-key': apiKey,
-        },
-        body: JSON.stringify({
-            system_instruction: { parts: [{ text: systemPrompt }] },
-            contents,
-            generationConfig: {
-                maxOutputTokens: maxTokens,
-                temperature: 0.15,
-                topP: 0.9,
-            },
-        }),
-        signal: AbortSignal.timeout(PROVIDERS.gemini.timeout),
-    });
-
-    const latency = Date.now() - startTime;
-
-    if (response.status === 429) {
-        const err = new Error('Rate limited');
-        err.status = 429;
-        err.retryAfter = 3000;
-        throw err;
-    }
-
-    if (response.status === 401 || response.status === 403) {
-        const err = new Error('Invalid API key');
-        err.status = response.status;
-        throw err;
-    }
-
-    if (response.status === 402) {
-        const err = new Error('Quota exceeded');
-        err.status = 402;
-        throw err;
-    }
-
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        const err = new Error(errorData?.error?.message || `Gemini error ${response.status}`);
-        err.status = response.status;
-        throw err;
-    }
-
-    const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-
-    return {
-        ok: true,
-        reply,
-        model,
-        provider: 'gemini',
-        latency,
-        usage: data.usageMetadata,
-    };
-}
-
-// ── HuggingFace ──
-async function callHuggingFace(messages, systemPrompt, options = {}) {
-    const apiKey = process.env[PROVIDERS.huggingface.apiKeyEnv];
-    if (!apiKey) throw { status: 401, message: 'HUGGINGFACE_API_KEY not configured' };
-
-    const model = options.model || PROVIDERS.huggingface.model;
-    const maxTokens = options.maxTokens || 1200;
-
-    // Build HuggingFace messages format
-    const formattedMessages = [
-        { role: 'system', content: systemPrompt },
-        ...messages.map(m => ({
-            role: m.role === 'assistant' ? 'assistant' : 'user',
-            content: m.content || '',
-        })),
-    ];
-
-    const url = PROVIDERS.huggingface.url.replace('{model}', model);
-
-    const startTime = Date.now();
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-            messages: formattedMessages,
-            max_tokens: maxTokens,
-            temperature: 0.15,
-            top_p: 0.9,
-        }),
-        signal: AbortSignal.timeout(PROVIDERS.huggingface.timeout),
-    });
-
-    const latency = Date.now() - startTime;
-
-    if (response.status === 429) {
-        const err = new Error('Rate limited');
-        err.status = 429;
-        err.retryAfter = 5000;
-        throw err;
-    }
-
-    if (response.status === 401 || response.status === 403) {
-        const err = new Error('Invalid API key');
-        err.status = response.status;
-        throw err;
-    }
-
-    if (response.status === 402) {
-        const err = new Error('Quota exceeded');
-        err.status = 402;
-        throw err;
-    }
-
-    if (response.status === 503) {
-        // Model loading
-        const err = new Error('Model loading');
-        err.status = 503;
-        err.retryAfter = 10000;
-        throw err;
-    }
-
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        const err = new Error(errorData?.error || `HuggingFace error ${response.status}`);
-        err.status = response.status;
-        throw err;
-    }
-
-    const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || '';
-
-    return {
-        ok: true,
-        reply,
-        model,
-        provider: 'huggingface',
-        latency,
-        usage: data.usage,
-    };
+    return answer;
 }
 
 // ─────────────────────────────────────────────
-// PROVIDER ROUTER
+// HEALTH CHECK
 // ─────────────────────────────────────────────
-const PROVIDER_CALLERS = {
-    groq: callGroq,
-    gemini: callGemini,
-    huggingface: callHuggingFace,
-};
-
-function getAvailableProviders() {
-    return Object.entries(PROVIDERS)
-        .filter(([id, config]) => {
-            const hasKey = !!process.env[config.apiKeyEnv];
-            const cb = getCircuitBreaker(id);
-            const isOpen = isCircuitOpen(id);
-            return hasKey && !isOpen;
-        })
-        .sort((a, b) => a[1].priority - b[1].priority)
-        .map(([id]) => id);
+function getHealthReport() {
+    const hasKey = !!process.env[GROQ_CONFIG.apiKeyEnv];
+    return {
+        status: hasKey && circuitBreaker.state !== 'OPEN' ? 'operational' : 'degraded',
+        timestamp: new Date().toISOString(),
+        provider: {
+            name: GROQ_CONFIG.name,
+            model: GROQ_CONFIG.model,
+            hasApiKey: hasKey,
+            circuitState: circuitBreaker.state,
+            totalRequests: circuitBreaker.totalRequests,
+            totalFailures: circuitBreaker.totalFailures,
+        },
+        cache: getAnswerCacheStats(),
+    };
 }
 
 function getProviderStatus() {
-    return Object.entries(PROVIDERS).map(([id, config]) => {
-        const cb = getCircuitBreaker(id);
-        const h = getProviderHealth(id);
-        const hasKey = !!process.env[config.apiKeyEnv];
-        const isOpen = isCircuitOpen(id);
-
-        let status = 'unknown';
-        if (!hasKey) status = 'no_key';
-        else if (isOpen) status = 'circuit_open';
-        else if (h.status === 'degraded') status = 'degraded';
-        else if (h.status === 'healthy') status = 'healthy';
-        else status = 'standby';
-
-        return {
-            provider: config.name,
-            providerId: id,
-            status,
-            latency: h.latency || 0,
-            lastSuccess: h.lastSuccess ? new Date(h.lastSuccess).toISOString() : null,
-            lastFailure: h.lastFailure ? new Date(h.lastFailure).toISOString() : null,
-            requestsToday: h.requestsToday,
-            totalRequests: cb.totalRequests,
-            totalFailures: cb.totalFailures,
-            circuitState: cb.state,
-            cacheHitRate: h.cacheHits + h.cacheMisses > 0
-                ? ((h.cacheHits / (h.cacheHits + h.cacheMisses)) * 100).toFixed(1) + '%'
-                : 'N/A',
-            model: config.model,
-            hasApiKey: hasKey,
-        };
-    });
+    return getHealthReport();
 }
 
 // ─────────────────────────────────────────────
-// MAIN: SEND MESSAGE WITH FAILOVER
+// MAIN: SEND MESSAGE (Groq + Knowledge Fallback)
 // ─────────────────────────────────────────────
 async function sendMessage(messages, systemPrompt, options = {}) {
     const startTime = Date.now();
-    const available = getAvailableProviders();
+    const hasKey = !!process.env[GROQ_CONFIG.apiKeyEnv];
 
-    if (available.length === 0) {
+    // If no API key, use knowledge base only
+    if (!hasKey) {
+        console.log('No GROQ_API_KEY — using knowledge base only');
         return {
-            ok: false,
-            status: 503,
-            error: 'সব AI প্রোভাইডার এখন অনুপলব্ধ। অনুগ্রহ করে পরে চেষ্টা করুন।',
-            errorEn: 'All AI providers are currently unavailable.',
+            ok: true,
+            reply: null,
+            provider: 'knowledge',
+            model: 'knowledge-base',
+            latency: 0,
+            source: 'knowledge_base',
+            attempts: 0,
         };
     }
 
-    const maxTokens = options.maxTokens || 1500;
-    let lastError = null;
+    // If circuit is open, use knowledge base
+    if (isCircuitOpen()) {
+        console.log('Circuit breaker OPEN — using knowledge base fallback');
+        return {
+            ok: true,
+            reply: null,
+            provider: 'knowledge',
+            model: 'knowledge-base',
+            latency: 0,
+            source: 'circuit_breaker_fallback',
+            attempts: 0,
+        };
+    }
 
-    for (let attempt = 0; attempt < available.length; attempt++) {
-        const providerId = available[attempt];
-        const config = PROVIDERS[providerId];
-        const caller = PROVIDER_CALLERS[providerId];
+    // Try Groq with adaptive maxTokens
+    let maxTokens = options.maxTokens || 1200;
 
-        try {
-            // V34 FIX: On quota error, try with fewer tokens
-            let currentMaxTokens = maxTokens;
-            if (lastError?.status === 402) {
-                currentMaxTokens = Math.floor(maxTokens * 0.6);
-                console.log(`Reducing maxTokens to ${currentMaxTokens} due to quota error`);
-            }
+    // First attempt with full tokens
+    try {
+        console.log(`Trying Groq (maxTokens: ${maxTokens})`);
+        const result = await callGroq(messages, systemPrompt, { ...options, maxTokens });
 
-            console.log(`Trying provider: ${config.name} (attempt ${attempt + 1}/${available.length})`);
+        if (result.ok && result.reply) {
+            recordSuccess();
+            console.log(`Groq success: ${result.latency}ms, model: ${result.model}`);
+            return {
+                ok: true,
+                reply: result.reply,
+                provider: 'groq',
+                model: result.model,
+                latency: result.latency,
+                usage: result.usage,
+                attempts: 1,
+            };
+        }
+    } catch (error) {
+        console.warn(`Groq failed:`, error.message);
+        recordFailure();
 
-            const result = await caller(messages, systemPrompt, {
-                ...options,
-                maxTokens: currentMaxTokens,
-            });
-
-            if (result.ok && result.reply) {
-                recordSuccess(providerId);
-                recordProviderSuccess(providerId, result.latency);
-
-                console.log(`Success with ${config.name}: ${result.latency}ms, model: ${result.model}`);
-
-                return {
-                    ok: true,
-                    reply: result.reply,
-                    provider: providerId,
-                    model: result.model,
-                    latency: result.latency,
-                    usage: result.usage,
-                    attempts: attempt + 1,
-                };
-            }
-        } catch (error) {
-            lastError = error;
-            recordFailure(providerId);
-            recordProviderFailure(providerId, error.message);
-
-            console.warn(`Provider ${config.name} failed:`, error.message, `status: ${error.status}`);
-
-            // V33 FIX: On 429, skip queue (never fires in serverless) and try next provider
-            if (error.status === 429) {
-                console.log(`Rate limited by ${config.name}, trying next provider...`);
-                // Continue to next provider immediately
-            }
-
-            // Continue to next provider
-            if (attempt < available.length - 1) {
-                const backoff = getBackoffDelay(attempt);
-                console.log(`Backing off ${backoff}ms before next provider...`);
-                await new Promise(r => setTimeout(r, backoff));
+        // On 402/429, try with fewer tokens
+        if (error.status === 402 || error.status === 429) {
+            const reducedTokens = Math.floor(maxTokens * 0.5);
+            try {
+                console.log(`Retrying Groq with ${reducedTokens} tokens`);
+                const result = await callGroq(messages, systemPrompt, { ...options, maxTokens: reducedTokens });
+                if (result.ok && result.reply) {
+                    recordSuccess();
+                    return {
+                        ok: true,
+                        reply: result.reply,
+                        provider: 'groq',
+                        model: result.model,
+                        latency: result.latency,
+                        usage: result.usage,
+                        attempts: 2,
+                    };
+                }
+            } catch (retryError) {
+                console.warn(`Groq retry failed:`, retryError.message);
+                recordFailure();
             }
         }
     }
 
-    // All providers failed
+    // All Groq attempts failed — return null reply for knowledge base fallback
     const totalLatency = Date.now() - startTime;
     return {
-        ok: false,
-        status: 502,
-        error: 'AI সেবা এখন সমস্যায় আছে। কিছুক্ষণ পর আবার চেষ্টা করুন।',
-        errorEn: 'AI service is experiencing issues. Please try again shortly.',
+        ok: true,
+        reply: null,
+        provider: 'knowledge',
+        model: 'knowledge-base',
         latency: totalLatency,
-        attempts: available.length,
-    };
-}
-
-// ─────────────────────────────────────────────
-// HEALTH CHECK ENDPOINT DATA
-// ─────────────────────────────────────────────
-function getHealthReport() {
-    const providers = getProviderStatus();
-    const cacheStats = getAnswerCacheStats();
-
-    const healthyCount = providers.filter(p => p.status === 'healthy').length;
-    const totalCount = providers.length;
-
-    return {
-        status: healthyCount > 0 ? 'operational' : 'degraded',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        providers,
-        cache: cacheStats,
-        summary: {
-            totalProviders: totalCount,
-            healthyProviders: healthyCount,
-            circuitBreakers: Object.entries(circuitBreakers).map(([id, cb]) => ({
-                provider: id,
-                state: cb.state,
-                failures: cb.failures,
-                totalRequests: cb.totalRequests,
-            })),
-        },
+        source: 'groq_failed_fallback',
+        attempts: 0,
     };
 }
 
@@ -686,7 +364,6 @@ module.exports = {
     getCachedAnswer,
     setCachedAnswer,
     getAnswerCacheStats,
-    PROVIDERS,
-    getCircuitBreaker,
-    isCircuitOpen,
+    buildKnowledgeFallback,
+    GROQ_CONFIG,
 };
