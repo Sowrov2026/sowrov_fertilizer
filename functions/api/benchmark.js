@@ -1,11 +1,9 @@
-import { runBenchmark, ensureDirs } from './_shared/evaluation/runner.js';
-import { generateBenchmarkReport, generateMarkdownReport, generateDashboardSummary } from './_shared/evaluation/reports.js';
-import { ALL_DOCUMENTS } from './_shared/knowledge/index.js';
+import { ALL_DOCUMENTS, searchKnowledge } from './_shared/knowledge/index.js';
 
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Content-Type': 'application/json',
 };
 
@@ -15,43 +13,45 @@ export async function onRequest(context) {
     if (request.method === 'OPTIONS') {
         return new Response(null, { status: 200, headers: corsHeaders });
     }
-    if (request.method !== 'POST') {
-        return new Response(JSON.stringify({ error: 'Method not allowed. Use POST.' }), { status: 405, headers: corsHeaders });
-    }
 
     try {
-        const body = await request.json();
-        const { dataset = 'all', maxCases = 50 } = body;
+        const url = new URL(request.url);
+        const dataset = url.searchParams.get('dataset') || 'all';
+        const query = url.searchParams.get('query') || '';
 
-        const VALID_DATASETS = ['bangla', 'english', 'banglish', 'chatgaiya', 'maheshkhali', 'all'];
-        if (!VALID_DATASETS.includes(dataset)) {
-            return new Response(JSON.stringify({ error: `Invalid dataset. Valid: ${VALID_DATASETS.join(', ')}` }), { status: 400, headers: corsHeaders });
+        const stats = {
+            totalDocuments: ALL_DOCUMENTS.length,
+            categories: {},
+            sampleSearch: null,
+        };
+
+        const categories = {};
+        for (const doc of ALL_DOCUMENTS) {
+            const cat = doc.source || doc.type || doc.category || 'unknown';
+            categories[cat] = (categories[cat] || 0) + 1;
         }
+        stats.categories = categories;
 
-        ensureDirs();
-
-        const DATASETS = ['bangla', 'english', 'banglish', 'chatgaiya', 'maheshkhali'];
-        const datasetsToRun = dataset === 'all' ? DATASETS : [dataset];
-        const allResults = [];
-
-        for (const ds of datasetsToRun) {
-            const result = runBenchmark(ds, { maxCases });
-            allResults.push(result);
+        if (query) {
+            const results = searchKnowledge(query, { limit: 5 });
+            stats.sampleSearch = {
+                query,
+                resultCount: results.length,
+                results: results.map(r => ({
+                    id: r.id,
+                    title: r.title || r.name || 'Unknown',
+                    score: r.score,
+                    source: r.source,
+                })),
+            };
         }
-
-        const report = generateBenchmarkReport(allResults);
-        generateMarkdownReport(report);
-        generateDashboardSummary(report);
 
         return new Response(JSON.stringify({
             status: 'ok',
-            summary: report.summary,
-            weakAreas: report.weakAreas,
-            suggestions: report.suggestions,
-            reportUrl: '/evaluation/reports/benchmark-report.json',
-            dashboardUrl: '/evaluation/reports/dashboard-summary.json',
+            stats,
+            note: 'Benchmark evaluation requires Node.js runtime. Run locally: node evaluation/runner.js',
         }), { status: 200, headers: corsHeaders });
     } catch (err) {
-        return new Response(JSON.stringify({ error: err.message, stack: err.stack }), { status: 500, headers: corsHeaders });
+        return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: corsHeaders });
     }
 }

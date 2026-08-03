@@ -30,7 +30,7 @@ async function handleChatRequest(body, env) {
 
     let productResults = { products: [], context: '' };
     if (intent.isProductQuery || intent.isFertilizerQuery || intent.primaryIntent === 'product' || intent.primaryIntent === 'fertilizer') {
-        productResults = await searchAndRankProducts(rawInput, intent, { language: lang });
+        productResults = await searchAndRankProducts(rawInput, intent.cropName, intent.primaryIntent);
     }
 
     const knowledgeContext = buildFullKnowledgeContext(rawInput, {
@@ -70,9 +70,17 @@ async function handleChatRequest(body, env) {
     }
 
     const session = smartMemory.getSession(sessionId);
-    smartMemory.updateSession(sessionId, { lastIntent: intent.primaryIntent, crop: intent.cropName || session.crop, language: lang, lastActivity: Date.now() });
+    try {
+        smartMemory.updateFromMessage(sessionId, rawInput, intent, languageResult);
+    } catch (memErr) {
+        console.warn('Memory update failed:', memErr.message);
+    }
 
-    if (!cachedAnswer && response.ok) setCachedAnswer(cacheKey, finalAnswer, response.provider || 'knowledge');
+    try {
+        if (!cachedAnswer && response.ok) setCachedAnswer(cacheKey, finalAnswer, response.provider || 'knowledge');
+    } catch (cacheErr) {
+        console.warn('Cache write failed:', cacheErr.message);
+    }
 
     return {
         reply: finalAnswer,

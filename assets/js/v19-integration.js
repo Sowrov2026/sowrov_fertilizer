@@ -55,12 +55,11 @@
 
   function hookIntoChat() {
     const origFetch = window.fetch;
-    window.fetch = async function() {
-      const args = arguments;
+    window.fetch = async function(...args) {
       const url = args[0];
       const options = args[1];
 
-      if (typeof url === 'string' && url.includes('/.netlify/functions/chat')) {
+      if (typeof url === 'string' && url.includes('/api/chat')) {
         const startTime = Date.now();
         let requestBody;
         try {

@@ -17,7 +17,15 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["agriculture", "bangladesh", "ai", "farming"],
+  "keywords": [
+    "agriculture",
+    "bangladesh",
+    "ai",
+    "farming"
+  ],
   "author": "Sowrov Fertilizer",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.118.0"
+  }
 }

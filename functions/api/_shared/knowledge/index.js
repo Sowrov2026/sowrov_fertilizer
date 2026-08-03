@@ -94,8 +94,14 @@ function searchKnowledge(query, options = {}) {
         const contentLower = content.toLowerCase();
         const banglaLower = banglaName.toLowerCase();
 
+        // FAQ-specific fields
+        const faqQuestion = doc.question?.bangla || doc.question?.english || doc.question?.chatgaiya || '';
+        const faqAnswer = doc.answer?.bangla || doc.answer?.english || '';
+        const faqKeywords = (doc.keywords || []).join(' ');
+
         // Build searchable text from all fields
         const allText = [title, content, banglaName, englishName, chatgaiyaName,
+            faqQuestion, faqAnswer, faqKeywords,
             doc.cause || '', doc.symptoms?.early || '', doc.symptoms?.late || '',
             ...(doc.organic_control || []), ...(doc.chemical_control || []),
             ...(doc.prevention || []), ...(doc.tips || []),
@@ -109,6 +115,10 @@ function searchKnowledge(query, options = {}) {
 
         // Title exact match (highest score)
         if (titleLower.includes(queryLower) || banglaLower.includes(queryLower)) score += 15;
+
+        // FAQ title/question exact match
+        const faqTitleLower = faqQuestion.toLowerCase();
+        if (faqTitleLower.includes(queryLower)) score += 12;
 
         // Content keyword matching
         for (const word of queryWords) {

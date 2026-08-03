@@ -10,7 +10,7 @@ import {
     runHealthCheck,
 } from './_shared/v19-data.js';
 
-import { processChatResponse, checkUnknownQuestion, handleUnknownQuestion, generateSuggestions } from './_shared/v19-chat.js';
+import { processChatResponse, checkUnknownQuestion } from './_shared/v19-chat.js';
 
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',

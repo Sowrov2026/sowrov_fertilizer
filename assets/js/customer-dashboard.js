@@ -95,7 +95,6 @@ customer.address || "-";
 
 
 
-
         // ==========================
         // Load Orders
         // ==========================
@@ -180,7 +179,6 @@ Number(order.total || 0);
 
 
 
-
           orderBody.innerHTML += `
 <tr>
 
@@ -238,6 +236,7 @@ Invoice
 
 
         });
+
 
 
 
@@ -444,71 +443,11 @@ window.onclick=function(e){
     }
 
 };
-console.log(
-"Customer Dashboard Loaded"
-);
-window.trackOrder = async function(id){
 
+// ======================================
+// Track Order
+// ======================================
 
-const snap =
-await getDoc(
-doc(db,"orders",id)
-);
-
-
-if(!snap.exists()) return;
-
-
-const order =
-snap.data();
-
-
-// window.trackOrder = ...document.getElementById("trackingBox").style.display="block";
-
-
-
-const steps = [
-
-"Pending",
-"Approved",
-"Packed",
-"Shipped",
-"Delivered"
-
-];
-
-
-steps.forEach(step=>{
-
-
-const element =
-document.getElementById(
-step.toLowerCase()+"Step"
-);
-
-
-
-element.classList.remove("active");
-
-
-
-if(
-steps.indexOf(step)
-<=
-steps.indexOf(order.status)
-)
-
-{
-
-element.classList.add("active");
-
-}
-
-
-});
-
-
-}
 window.trackOrder = async function(id){
 
 const snap = await getDoc(doc(db,"orders",id));
@@ -560,6 +499,7 @@ behavior:"smooth"
 });
 
 }
+
 import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -583,3 +523,7 @@ window.customerLogout = async function () {
     }
 
 };
+
+console.log(
+"Customer Dashboard Loaded"
+);

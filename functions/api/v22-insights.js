@@ -147,8 +147,8 @@ function predictCropPrice(crop, history) {
     const momentum = latest7[6] - latest7[0];
     const sorted = [...latest7].sort((a, b) => a - b);
     const support = sorted[1], resistance = sorted[5];
-    const predictedPrice = Math.round(sma7 * 0.3 + ema * 0.4 + momentum * 0.1 + avg * 0.2);
     const sma7 = avg;
+    const predictedPrice = Math.round(sma7 * 0.3 + ema * 0.4 + momentum * 0.1 + avg * 0.2);
     const recentAvg = latest7.slice(0, 3).reduce((a, b) => a + b, 0) / 3;
     const olderAvg = latest7.slice(4).reduce((a, b) => a + b, 0) / 3;
     const trendDirection = olderAvg > 0 ? ((recentAvg - olderAvg) / olderAvg) * 100 : 0;
