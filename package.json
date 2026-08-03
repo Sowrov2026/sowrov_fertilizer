@@ -7,12 +7,12 @@
     "groq-sdk": "^0.12.0"
   },
   "scripts": {
-    "start": "netlify dev",
+    "start": "wrangler pages dev .",
     "build": "echo 'Static site - no build needed'",
     "test": "echo 'Tests passed'",
     "lint": "echo 'Lint passed'",
-    "deploy": "netlify deploy --prod",
-    "dev": "netlify dev"
+    "deploy": "wrangler pages deploy .",
+    "dev": "wrangler pages dev . --port 8788"
   },
   "engines": {
     "node": ">=18.0.0"

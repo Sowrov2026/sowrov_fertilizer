@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  const API_BASE = '/.netlify/functions/v19-api';
+  const API_BASE = '/api/v19-api';
 
   async function loadV19Modules() {
     const modules = [

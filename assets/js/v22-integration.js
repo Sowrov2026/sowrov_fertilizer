@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var API_BASE = '/.netlify/functions';
+  var API_BASE = '/api';
 
   var SFEnterprise = {
 

@@ -282,7 +282,7 @@ function validateFile(file) {
 async function sendToAPI(base64DataUrl, question) {
     const userContent = question || 'এই ছবিটি বিশ্লেষণ করে রোগ নির্ণয় দিন।';
 
-    const res = await fetch('/.netlify/functions/chat', {
+    const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,0 +1,163 @@
+export default [
+  {
+    id: 'nutrient-001',
+    name: 'Nitrogen Deficiency',
+    scientific_name: 'N Deficiency',
+    local_names: { bangla: 'নাইট্রোজেন অভাব', chatgaiya: 'নাইট্রোজেন অভাব', english: 'Nitrogen Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'নিম্ন পাতা হলুদ হয়ে যায়',
+      late: 'সব পাতা হলুদ হয়ে ঝরে যায়, গাছ ছোট থাকে',
+      description: 'মাটিতে নাইট্রোজেন কম থাকলে হয়'
+    },
+    cause: 'মাটিতে নাইট্রোজেন অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['ধান', 'পাট', 'সবজি'],
+    organic_control: ['ইউরিয়া ৫০ কেজি/হেক্টর', 'ডাইঅক্সাইড ২০ কেজি/হেক্টর', 'কম্পোস্ট ৫ টন/হেক্টর'],
+    chemical_control: ['ইউরিয়া ৫০ কেজি/হেক্টর', 'অ্যামোনিয়াম সালফেট ১০০ কেজি/হেক্টর', 'ক্যালসিয়াম অ্যামোনিয়াম নাইট্রেট ৮০ কেজি/হেক্টর'],
+    prevention: ['নাইট্রোজেন সমৃদ্ধ সার ব্যবহার', 'লেগিউম ফসল আবর্তন', 'মাটি পরীক্ষা'],
+    severity: 'high',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  },
+  {
+    id: 'nutrient-002',
+    name: 'Phosphorus Deficiency',
+    scientific_name: 'P Deficiency',
+    local_names: { bangla: 'ফসফরাস অভাব', chatgaiya: 'ফসফরাস অভাব', english: 'Phosphorus Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'পাতা গাঢ় সবুজ-কালো হয়',
+      late: 'পাতা বেগুনি হয়ে ঝরে যায়',
+      description: 'মাটিতে ফসফরাস কম থাকলে হয়'
+    },
+    cause: 'মাটিতে ফসফরাস অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['ধান', 'পাট', 'সবজি'],
+    organic_control: ['টিএসপি ৫০ কেজি/হেক্টর', 'কম্পোস্ট ৫ টন/হেক্টর', 'হাড়ের ময়দা ২০ কেজি/হেক্টর'],
+    chemical_control: ['টিএসপি ৫০ কেজি/হেক্টর', 'ডিএপি ৪০ কেজি/হেক্টর', 'অক্সালিক এসিড ১০ কেজি/হেক্টর'],
+    prevention: ['ফসফরাস সমৃদ্ধ সার ব্যবহার', 'লেগিউম ফসল আবর্তন', 'মাটি পরীক্ষা'],
+    severity: 'high',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  },
+  {
+    id: 'nutrient-003',
+    name: 'Potassium Deficiency',
+    scientific_name: 'K Deficiency',
+    local_names: { bangla: 'পটাশিয়াম অভাব', chatgaiya: 'পটাশিয়াম অভাব', english: 'Potassium Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'পাতার ধারে বাদামি দাগ',
+      late: 'পাতা শুকিয়ে ঝরে যায়',
+      description: 'মাটিতে পটাশিয়াম কম থাকলে হয়'
+    },
+    cause: 'মাটিতে পটাশিয়াম অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['ধান', 'পাট', 'সবজি'],
+    organic_control: ['এমওপি ৪০ কেজি/হেক্টর', 'কম্পোস্ট ৫ টন/হেক্টর', 'বর্জ্য পোড়ানো'],
+    chemical_control: ['এমওপি ৪০ কেজি/হেক্টর', 'কেসিএল ৫০ কেজি/হেক্টর', 'সালফেট অব পটাশ ৩০ কেজি/হেক্টর'],
+    prevention: ['পটাশিয়াম সমৃদ্ধ সার ব্যবহার', 'ফসল আবর্তন', 'মাটি পরীক্ষা'],
+    severity: 'high',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  },
+  {
+    id: 'nutrient-004',
+    name: 'Iron Deficiency',
+    scientific_name: 'Fe Deficiency',
+    local_names: { bangla: 'লোহা অভাব', chatgaiya: 'লোহা অভাব', english: 'Iron Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'নতুন পাতা হলুদ হয়',
+      late: 'পাতা সাদা হয়ে যায়',
+      description: 'মাটিতে লোহা কম থাকলে হয়'
+    },
+    cause: 'মাটিতে লোহা অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['ধান', 'পাট', 'সবজি'],
+    organic_control: ['ফেরাস সালফেট ৫ গ্রাম/লিটার', 'কম্পোস্ট ৫ টন/হেক্টর', 'মাটির pH সমন্বয়'],
+    chemical_control: ['ফেরাস সালফেট ৫ গ্রাম/লিটার', 'ফেরিক অক্সালেট ৩ গ্রাম/লিটার', 'কেলেটেড আয়রন ২ গ্রাম/লিটার'],
+    prevention: ['মাটির pH সমন্বয়', 'লোহা সমৃদ্ধ সার ব্যবহার', 'মাটি পরীক্ষা'],
+    severity: 'medium',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  },
+  {
+    id: 'nutrient-005',
+    name: 'Calcium Deficiency',
+    scientific_name: 'Ca Deficiency',
+    local_names: { bangla: 'ক্যালসিয়াম অভাব', chatgaiya: 'ক্যালসিয়াম অভাব', english: 'Calcium Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'নতুন পাতা কুঁকড়ে যায়',
+      late: 'টমেটোর বুক পচে',
+      description: 'মাটিতে ক্যালসিয়াম কম থাকলে হয়'
+    },
+    cause: 'মাটিতে ক্যালসিয়াম অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['টমেটো', 'মরিচ', 'বেগুন'],
+    organic_control: ['চূণ ২০ কেজি/হেক্টর', 'কম্পোস্ট ৫ টন/হেক্টর', 'হাড়ের ময়দা ২০ কেজি/হেক্টর'],
+    chemical_control: ['ক্যালসিয়াম ক্লোরাইড ৫ গ্রাম/লিটার', 'ক্যালসিয়াম নাইট্রেট ১০ গ্রাম/লিটার', 'চূণ ২০ কেজি/হেক্টর'],
+    prevention: ['মাটির pH সমন্বয়', 'ক্যালসিয়াম সমৃদ্ধ সার ব্যবহার', 'মাটি পরীক্ষা'],
+    severity: 'medium',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  },
+  {
+    id: 'nutrient-006',
+    name: 'Magnesium Deficiency',
+    scientific_name: 'Mg Deficiency',
+    local_names: { bangla: 'ম্যাগনেসিয়াম অভাব', chatgaiya: 'ম্যাগনেসিয়াম অভাব', english: 'Magnesium Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'পাতার মাঝে হলুদ দাগ',
+      late: 'পাতা বেগুনি হয়ে ঝরে যায়',
+      description: 'মাটিতে ম্যাগনেসিয়াম কম থাকলে হয়'
+    },
+    cause: 'মাটিতে ম্যাগনেসিয়াম অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['ধান', 'পাট', 'সবজি'],
+    organic_control: ['ম্যাগনেসিয়াম সালফেট ১০ গ্রাম/লিটার', 'কম্পোস্ট ৫ টন/হেক্টর', 'মাটির pH সমন্বয়'],
+    chemical_control: ['ম্যাগনেসিয়াম সালফেট ১০ গ্রাম/লিটার', 'কেলেটেড ম্যাগনেসিয়াম ৫ গ্রাম/লিটার', 'ডলোমাইট ২০ কেজি/হেক্টর'],
+    prevention: ['মাটির pH সমন্বয়', 'ম্যাগনেসিয়াম সমৃদ্ধ সার ব্যবহার', 'মাটি পরীক্ষা'],
+    severity: 'medium',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  },
+  {
+    id: 'nutrient-007',
+    name: 'Zinc Deficiency',
+    scientific_name: 'Zn Deficiency',
+    local_names: { bangla: 'জিঙ্ক অভাব', chatgaiya: 'জিঙ্ক অভাব', english: 'Zinc Deficiency' },
+    type: 'nutrient',
+    symptoms: {
+      early: 'পাতা ছোট হয়ে যায়',
+      late: 'গাছ ধীরে বৃদ্ধি পায়',
+      description: 'মাটিতে জিঙ্ক কম থাকলে হয়'
+    },
+    cause: 'মাটিতে জিঙ্ক অভাব',
+    spread: 'মাটি, পানি, বীজ',
+    weather: { temperature: 'সর্বকালীন', humidity: 'সর্বকালীন', rainfall: 'সর্বকালীন' },
+    affected_crops: ['ধান', 'পাট', 'সবজি'],
+    organic_control: ['জিঙ্ক সালফেট ৫ গ্রাম/লিটার', 'কম্পোস্ট ৫ টন/হেক্টর', 'মাটির pH সমন্বয়'],
+    chemical_control: ['জিঙ্ক সালফেট ৫ গ্রাম/লিটার', 'কেলেটেড জিঙ্ক ৩ গ্রাম/লিটার', 'জিঙ্ক অক্সাইড ২ গ্রাম/লিটার'],
+    prevention: ['মাটির pH সমন্বয়', 'জিঙ্ক সমৃদ্ধ সার ব্যবহার', 'মাটি পরীক্ষা'],
+    severity: 'medium',
+    season: 'সর্বকালীন',
+    source: 'BARI',
+    url: 'https://bari.gov.bd'
+  }
+];

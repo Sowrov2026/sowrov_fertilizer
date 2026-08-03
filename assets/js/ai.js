@@ -11,7 +11,7 @@
     // Configuration
     // ========================================
     const CONFIG = {
-        API_ENDPOINT: '/.netlify/functions/chat',
+        API_ENDPOINT: '/api/chat',
         MAX_INPUT_LENGTH: 2000,
         MAX_IMAGE_SIZE_MB: 5,
         RATE_LIMIT_MS: 2000,
