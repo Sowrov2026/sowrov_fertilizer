@@ -24,7 +24,7 @@ if (!orderId) {
 
     alert("Invoice not found.");
 
-    window.location.href = "orders.html";
+    window.location.href = "customer-orders.html";
 
 }
 

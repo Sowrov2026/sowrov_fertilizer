@@ -1,2 +1,4 @@
-/api/chat    /api/chat    200
-/api/health  /api/health  200
+# SPA fallback - serve index.html for unknown routes
+# (Cloudflare Pages handles this automatically for static sites)
+
+# API endpoints - no redirects needed, Functions handle them directly

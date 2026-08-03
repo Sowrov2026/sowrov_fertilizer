@@ -1,3 +1,8 @@
 name = "sf-ai-enterprise"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = "."
+
+# Cloudflare Pages Functions configuration
+[functions]
+# Ensure functions can access Node.js compatibility mode if needed
+# node_compat = true
