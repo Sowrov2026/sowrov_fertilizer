@@ -404,6 +404,279 @@ section{
 }
 
 /*=========================================
+        DASHBOARD NAV — TOP NAVBAR
+=========================================*/
+
+.dash-nav{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.dash-nav-home,
+.dash-nav-login{
+    padding:10px 22px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    transition:var(--transition);
+}
+
+.dash-nav-home{
+    color:var(--text);
+    background:transparent;
+}
+
+.dash-nav-home:hover{
+    color:var(--primary);
+    background:var(--light-green);
+}
+
+.dash-nav-login{
+    color:#fff;
+    background:var(--primary);
+}
+
+.dash-nav-login:hover{
+    background:#059669;
+    transform:translateY(-1px);
+}
+
+/* Dashboard Trigger Button */
+.dash-trigger{
+    position:relative;
+}
+
+.dash-trigger-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 22px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    background:transparent;
+    color:var(--text);
+    transition:var(--transition);
+    font-family:inherit;
+}
+
+.dash-trigger-btn:hover{
+    color:var(--primary);
+    background:var(--light-green);
+}
+
+.dash-trigger-btn .arrow{
+    font-size:10px;
+    transition:transform .3s ease;
+    display:inline-block;
+}
+
+.dash-trigger.open .dash-trigger-btn .arrow{
+    transform:rotate(180deg);
+}
+
+/* Desktop Dropdown Panel */
+.dash-dropdown{
+    position:absolute;
+    top:calc(100% + 12px);
+    right:0;
+    width:320px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 20px 60px rgba(0,0,0,.15);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(15px) scale(.97);
+    transition:all .25s cubic-bezier(.4,0,.2,1);
+    z-index:2000;
+    padding:8px 0;
+}
+
+.dash-trigger.open .dash-dropdown{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+}
+
+.dash-dropdown-label{
+    padding:12px 20px 6px;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#94a3b8;
+}
+
+.dash-dropdown a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 20px;
+    color:var(--text);
+    text-decoration:none;
+    font-weight:500;
+    font-size:14px;
+    transition:background .2s, color .2s;
+    border-radius:8px;
+    margin:2px 8px;
+}
+
+.dash-dropdown a:hover{
+    background:var(--light-green);
+    color:var(--primary);
+}
+
+.dash-dropdown a.active-page{
+    background:var(--light-green);
+    color:var(--primary);
+    font-weight:700;
+}
+
+.dash-dropdown .dd-icon{
+    width:20px;
+    text-align:center;
+    font-size:16px;
+    flex-shrink:0;
+}
+
+.dash-dropdown .dd-sep{
+    height:1px;
+    background:#e2e8f0;
+    margin:6px 20px;
+}
+
+/* Scrollbar inside dropdown */
+.dash-dropdown::-webkit-scrollbar{width:6px}
+.dash-dropdown::-webkit-scrollbar-track{background:transparent}
+.dash-dropdown::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+
+/* Mobile Slide Panel */
+.dash-slide-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:3000;
+    opacity:0;
+    transition:opacity .3s ease;
+}
+
+.dash-slide-overlay.open{
+    opacity:1;
+}
+
+.dash-slide-panel{
+    position:fixed;
+    top:0;
+    right:0;
+    width:300px;
+    max-width:85vw;
+    height:100vh;
+    background:#fff;
+    z-index:3001;
+    transform:translateX(100%);
+    transition:transform .35s cubic-bezier(.4,0,.2,1);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.dash-slide-panel.open{
+    transform:translateX(0);
+}
+
+.dash-slide-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 20px;
+    border-bottom:1px solid #e2e8f0;
+    flex-shrink:0;
+}
+
+.dash-slide-header h3{
+    font-size:18px;
+    font-weight:700;
+    color:var(--text);
+    margin:0;
+}
+
+.dash-slide-close{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    border:none;
+    background:#f1f5f9;
+    cursor:pointer;
+    font-size:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s;
+}
+
+.dash-slide-close:hover{
+    background:#e2e8f0;
+}
+
+.dash-slide-body{
+    flex:1;
+    overflow-y:auto;
+    padding:12px 0;
+}
+
+.dash-slide-label{
+    padding:14px 20px 6px;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#94a3b8;
+}
+
+.dash-slide-body a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 20px;
+    color:var(--text);
+    text-decoration:none;
+    font-weight:500;
+    font-size:15px;
+    transition:background .2s, color .2s;
+}
+
+.dash-slide-body a:hover{
+    background:var(--light-green);
+    color:var(--primary);
+}
+
+.dash-slide-body a.active-page{
+    background:var(--light-green);
+    color:var(--primary);
+    font-weight:700;
+}
+
+.dash-slide-body .dd-icon{
+    width:22px;
+    text-align:center;
+    font-size:17px;
+    flex-shrink:0;
+}
+
+.dash-slide-body .dd-sep{
+    height:1px;
+    background:#e2e8f0;
+    margin:6px 20px;
+}
+
+/*=========================================
         HERO SECTION
 =========================================*/
 
@@ -3048,6 +3321,8 @@ textarea.form-control{
 
     font-size:22px;
 
+    border:none;
+
 }
 
 @media(max-width:768px){
@@ -3092,6 +3367,30 @@ textarea.form-control{
 
     height:80px;
 
+}
+
+/* Dashboard nav — hide desktop dropdown, show hamburger */
+.dash-nav-home,
+.dash-nav-login{
+    display:none;
+}
+
+.dash-trigger{
+    display:none;
+}
+
+.mobile-toggle{
+    display:flex;
+}
+
+/* Slide panel becomes visible */
+.dash-slide-overlay{
+    display:block;
+}
+
+/* Desktop dropdown hidden on mobile */
+.dash-dropdown{
+    display:none !important;
 }
 
 .logo h2{
