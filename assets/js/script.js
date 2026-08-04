@@ -138,4 +138,15 @@ document.getElementById("reviewText").value="";
             }
         }
     });
+
+    // Mark active page in dashboard topnav
+    document.querySelectorAll('.dash-topnav a').forEach(function(link) {
+        const href = link.getAttribute('href');
+        if (href && !link.getAttribute('onclick')) {
+            const page = href.split('/').pop();
+            if (page === currentPage || (currentPage === '' && page === 'index.html') || (currentPage === '/' && page === '')) {
+                link.classList.add('topnav-active');
+            }
+        }
+    });
 })();

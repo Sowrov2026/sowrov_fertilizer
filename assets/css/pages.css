@@ -2254,6 +2254,131 @@ color:#64748b;
 font-size:12px;
 
 }
+
+/*==========================
+DASHBOARD TOP NAVIGATION
+=========================*/
+
+.dash-topnav{
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+padding:8px 16px;
+
+background:#fff;
+
+border-radius:14px;
+
+box-shadow:0 2px 12px rgba(0,0,0,.06);
+
+margin-bottom:20px;
+
+flex-wrap:wrap;
+
+}
+
+.dash-topnav a{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:6px;
+
+padding:9px 18px;
+
+border-radius:10px;
+
+font-weight:600;
+
+font-size:14px;
+
+color:#475569;
+
+text-decoration:none;
+
+transition:background .2s, color .2s;
+
+white-space:nowrap;
+
+}
+
+.dash-topnav a:hover{
+
+background:#E8F5E9;
+
+color:#10b981;
+
+}
+
+.dash-topnav a.topnav-active{
+
+background:#10b981;
+
+color:#fff;
+
+}
+
+.dash-topnav a.topnav-home{
+
+background:#E8F5E9;
+
+color:#10b981;
+
+font-weight:700;
+
+}
+
+.dash-topnav a.topnav-home:hover{
+
+background:#10b981;
+
+color:#fff;
+
+}
+
+.dash-topnav .topnav-sep{
+
+width:1px;
+
+height:24px;
+
+background:#e2e8f0;
+
+margin:0 4px;
+
+}
+
+@media(max-width:768px){
+
+.dash-topnav{
+
+padding:6px 10px;
+
+gap:4px;
+
+}
+
+.dash-topnav a{
+
+padding:8px 12px;
+
+font-size:13px;
+
+}
+
+.dash-topnav .topnav-sep{
+
+display:none;
+
+}
+
+}
+
 /*==========================
 Quick Actions
 ==========================*/
