@@ -1,7 +1,6 @@
-const CACHE_VERSION = 'sf-v17';
+const CACHE_VERSION = 'sf-v18';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
-const API_CACHE = `${CACHE_VERSION}-api`;
 
 const STATIC_ASSETS = [
   '/',
@@ -24,9 +23,50 @@ const STATIC_ASSETS = [
   '/manifest.json',
 ];
 
+const CACHEABLE_METHODS = ['GET'];
+const CACHEABLE_CONTENT_TYPES = [
+  'text/html',
+  'text/css',
+  'text/javascript',
+  'application/javascript',
+  'application/json',
+  'image/png',
+  'image/jpeg',
+  'image/gif',
+  'image/svg+xml',
+  'image/webp',
+  'image/x-icon',
+  'font/woff',
+  'font/woff2',
+  'application/font-woff',
+  'application/font-woff2',
+  'application/vnd.ms-fontobject',
+];
+
+function isCacheableRequest(request) {
+  if (!CACHEABLE_METHODS.includes(request.method)) return false;
+  const url = new URL(request.url);
+  if (url.protocol === 'chrome-extension:') return false;
+  if (url.hostname !== self.location.hostname) return false;
+  return true;
+}
+
+function isCacheableResponse(response) {
+  if (!response || !response.ok) return false;
+  if (response.redirected) return false;
+  if (response.type === 'opaqueredirect') return false;
+  const contentType = response.headers.get('content-type') || '';
+  if (contentType.includes('application/octet-stream')) return false;
+  return true;
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then(cache => cache.addAll(STATIC_ASSETS))
+    caches.open(STATIC_CACHE)
+      .then(cache => cache.addAll(STATIC_ASSETS))
+      .catch(err => {
+        console.warn('[SW] Pre-cache failed:', err);
+      })
   );
   self.skipWaiting();
 });
@@ -34,7 +74,8 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
-      keys.filter(k => !k.startsWith(CACHE_VERSION)).map(k => caches.delete(k))
+      keys.filter(k => k !== STATIC_CACHE && k !== DYNAMIC_CACHE)
+        .map(k => caches.delete(k))
     ))
   );
   self.clients.claim();
@@ -42,25 +83,31 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
+
+  if (!isCacheableRequest(request)) {
+    event.respondWith(fetch(request));
+    return;
+  }
+
   const url = new URL(request.url);
 
-  if (url.pathname.startsWith('/api/')) {
-    event.respondWith(networkFirst(request, API_CACHE));
+  if (request.destination === 'document' || url.pathname === '/' || url.pathname.endsWith('.html')) {
+    event.respondWith(staleWhileRevalidate(request, DYNAMIC_CACHE));
     return;
   }
 
-  if (STATIC_ASSETS.some(a => url.pathname === a || url.pathname.endsWith(a))) {
-    event.respondWith(cacheFirst(request, STATIC_CACHE));
-    return;
-  }
-
-  if (request.destination === 'image') {
+  if (request.destination === 'image' || /\.(png|jpe?g|gif|svg|webp|ico)$/i.test(url.pathname)) {
     event.respondWith(cacheFirst(request, DYNAMIC_CACHE));
     return;
   }
 
-  if (request.destination === 'document') {
-    event.respondWith(staleWhileRevalidate(request, DYNAMIC_CACHE));
+  if (/\.(css|js)$/i.test(url.pathname) || url.pathname.startsWith('/assets/')) {
+    event.respondWith(cacheFirst(request, STATIC_CACHE));
+    return;
+  }
+
+  if (url.pathname === '/manifest.json' || url.pathname === '/robots.txt') {
+    event.respondWith(cacheFirst(request, STATIC_CACHE));
     return;
   }
 
@@ -70,20 +117,25 @@ self.addEventListener('fetch', (event) => {
 async function cacheFirst(request, cacheName) {
   const cached = await caches.match(request);
   if (cached) return cached;
-  const response = await fetch(request);
-  if (response.ok) {
-    const cache = await caches.open(cacheName);
-    cache.put(request, response.clone());
+
+  try {
+    const response = await fetch(request);
+    if (isCacheableResponse(response)) {
+      const cache = await caches.open(cacheName);
+      await cache.put(request, response.clone());
+    }
+    return response;
+  } catch (error) {
+    return new Response('Offline', { status: 503, statusText: 'Offline' });
   }
-  return response;
 }
 
 async function networkFirst(request, cacheName) {
   try {
     const response = await fetch(request);
-    if (response.ok) {
+    if (isCacheableResponse(response)) {
       const cache = await caches.open(cacheName);
-      cache.put(request, response.clone());
+      await cache.put(request, response.clone());
     }
     return response;
   } catch (error) {
@@ -98,14 +150,18 @@ async function networkFirst(request, cacheName) {
 
 async function staleWhileRevalidate(request, cacheName) {
   const cached = await caches.match(request);
-  const fetchPromise = fetch(request).then(response => {
-    if (response.ok) {
-      const cache = caches.open(cacheName);
-      cache.then(c => c.put(request, response.clone()));
+
+  try {
+    const response = await fetch(request);
+    if (isCacheableResponse(response)) {
+      const cache = await caches.open(cacheName);
+      await cache.put(request, response.clone());
     }
     return response;
-  }).catch(() => cached);
-  return cached || fetchPromise;
+  } catch (error) {
+    if (cached) return cached;
+    return new Response('Offline', { status: 503, statusText: 'Offline' });
+  }
 }
 
 self.addEventListener('sync', (event) => {
@@ -115,5 +171,5 @@ self.addEventListener('sync', (event) => {
 });
 
 async function syncPendingQuestions() {
-  // Sync any pending data when back online
+  // Placeholder for future sync logic
 }
