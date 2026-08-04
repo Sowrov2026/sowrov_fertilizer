@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Customer Profile
 // Sowrov Fertilizer
 // ======================================
@@ -53,7 +53,7 @@ onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
 
-        window.location.href = "customer-login.html";
+        window.location.href = "/customer-login.html";
 
         return;
 
@@ -275,7 +275,7 @@ alert(error.message);
 window.customerLogout = async () => {
     try {
         await signOut(auth);
-        window.location.href = "customer-login.html";
+        window.location.href = "/customer-login.html";
     } catch (error) {
         console.error("Logout error:", error);
         alert("Logout failed. Please try again.");

@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Edit Product
 // ======================================
 
@@ -20,7 +20,7 @@ if (!productId) {
 
     alert("No Product ID Found!");
 
-    window.location.href = "admin-products.html";
+    window.location.href = "/admin-products.html";
 
 }
 
@@ -121,7 +121,7 @@ form.addEventListener("submit", async (e) => {
 
         alert("✅ Product Updated Successfully!");
 
-        window.location.href = "admin-products.html";
+        window.location.href = "/admin-products.html";
 
     }
 

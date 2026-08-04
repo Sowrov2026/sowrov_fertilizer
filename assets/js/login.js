@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Customer Login
 // Sowrov Fertilizer
 // ======================================
@@ -102,7 +102,7 @@ if(user.status === "blocked"){
 
 alert("✅ Login Successful");
 
-window.location.href="customer-dashboard.html";
+window.location.href = "/customer-dashboard.html";
 }
 
 catch(error){
@@ -149,7 +149,7 @@ onAuthStateChanged(auth,(user)=>{
 
 if(!user){
 
-window.location.href="customer-login.html";
+window.location.href = "/customer-login.html";
 
 }
 
@@ -164,7 +164,7 @@ window.location.href="customer-login.html";
 window.customerLogout = async ()=>{
 try{
 await signOut(auth);
-window.location.href="customer-login.html";
+window.location.href = "/customer-login.html";
 }catch(error){
 console.error("Logout error:",error);
 alert("Logout failed. Please try again.");
@@ -238,7 +238,7 @@ if (googleLoginBtn) {
                 }
             }
 
-            window.location.href = "customer-dashboard.html";
+            window.location.href = "/customer-dashboard.html";
 
         }
 

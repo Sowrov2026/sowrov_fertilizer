@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Customer Register
 // Sowrov Fertilizer
 // ======================================
@@ -116,7 +116,7 @@ form.addEventListener("submit", async (e) => {
 
         alert("✅ Account Created Successfully");
 
-        window.location.href = "customer-login.html";
+        window.location.href = "/customer-login.html";
 
     }
 

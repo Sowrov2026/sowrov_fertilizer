@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Product Details
 // ======================================
 
@@ -289,7 +289,7 @@ document.getElementById("buyNow").onclick=()=>{
 
 document.getElementById("addCart").click();
 
-window.location.href="cart.html";
+window.location.href = "/cart.html";
 
 }
 

@@ -1,4 +1,4 @@
-console.log("admin-dashboard.js loaded");
+﻿console.log("admin-dashboard.js loaded");
 import { db } from "./firebase.js";
 
 import {
@@ -881,7 +881,7 @@ if(addProductBtn){
 
     addProductBtn.onclick = () => {
 
-        window.location.href = "admin-products.html";
+        window.location.href = "/admin-products.html";
 
     };
 
@@ -891,7 +891,7 @@ if(addSaleBtn){
 
     addSaleBtn.onclick = () => {
 
-        window.location.href = "admin-sales.html";
+        window.location.href = "/admin-sales.html";
 
     };
 
@@ -901,7 +901,7 @@ if(ordersBtn){
 
     ordersBtn.onclick = () => {
 
-        window.location.href = "admin-orders.html";
+        window.location.href = "/admin-orders.html";
 
     };
 
@@ -911,7 +911,7 @@ if(usersBtn){
 
     usersBtn.onclick = () => {
 
-        window.location.href = "admin-users.html";
+        window.location.href = "/admin-users.html";
 
     };
 
@@ -921,7 +921,7 @@ if(reportsBtn){
 
     reportsBtn.onclick = () => {
 
-        window.location.href = "admin-reports.html";
+        window.location.href = "/admin-reports.html";
 
     };
 
@@ -932,25 +932,25 @@ if(reportsBtn){
 // ==========================
 
 document.getElementById("addProductBtn")?.addEventListener("click", () => {
-    window.location.href = "admin-products.html";
+    window.location.href = "/admin-products.html";
 });
 
 document.getElementById("addSaleBtn")?.addEventListener("click", () => {
-    window.location.href = "admin-sales.html";
+    window.location.href = "/admin-sales.html";
 });
 
 document.getElementById("ordersBtn")?.addEventListener("click", () => {
-    window.location.href = "admin-orders.html";
+    window.location.href = "/admin-orders.html";
 });
 
 document.getElementById("usersBtn")?.addEventListener("click", () => {
-    window.location.href = "admin-users.html";
+    window.location.href = "/admin-users.html";
 });
 
 document.getElementById("reportsBtn")?.addEventListener("click", () => {
     alert("Reports page is under development.");
     // পরে এটা হবে:
-    // window.location.href = "admin-reports.html";
+    // window.location.href = "/admin-reports.html";
 });
 // ==========================
 // QUICK ACTION BUTTONS
@@ -959,19 +959,19 @@ document.getElementById("reportsBtn")?.addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("addProductBtn")?.addEventListener("click", () => {
-        window.location.href = "admin-products.html";
+        window.location.href = "/admin-products.html";
     });
 
     document.getElementById("addSaleBtn")?.addEventListener("click", () => {
-        window.location.href = "admin-sales.html";
+        window.location.href = "/admin-sales.html";
     });
 
     document.getElementById("ordersBtn")?.addEventListener("click", () => {
-        window.location.href = "admin-orders.html";
+        window.location.href = "/admin-orders.html";
     });
 
     document.getElementById("usersBtn")?.addEventListener("click", () => {
-        window.location.href = "admin-users.html";
+        window.location.href = "/admin-users.html";
     });
 
     document.getElementById("reportsBtn")?.addEventListener("click", () => {

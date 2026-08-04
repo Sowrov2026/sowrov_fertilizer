@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Customer Dashboard
 // Sowrov Fertilizer
 // ======================================
@@ -39,8 +39,7 @@ onAuthStateChanged(auth, async(user)=>{
     if(!user){
 
 
-        window.location.href =
-        "customer-login.html";
+        window.location.href = "/customer-login.html";
 
 
         return;
@@ -512,7 +511,7 @@ window.customerLogout = async function () {
 
         alert("Logged Out Successfully");
 
-        window.location.href = "customer-login.html";
+        window.location.href = "/customer-login.html";
 
     } catch (error) {
 

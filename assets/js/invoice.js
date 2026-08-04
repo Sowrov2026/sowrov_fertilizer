@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Invoice System
 // Sowrov Fertilizer
 // ======================================
@@ -24,7 +24,7 @@ if (!orderId) {
 
     alert("Invoice not found.");
 
-    window.location.href = "customer-orders.html";
+    window.location.href = "/customer-orders.html";
 
 }
 

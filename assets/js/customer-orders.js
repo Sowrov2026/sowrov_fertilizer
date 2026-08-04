@@ -1,4 +1,4 @@
-console.log("customer-orders.js Loaded");
+﻿console.log("customer-orders.js Loaded");
 // ======================================
 // Customer Orders
 // Sowrov Fertilizer
@@ -25,7 +25,7 @@ onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
 
-        window.location.href="customer-login.html";
+        window.location.href = "/customer-login.html";
 
         return;
 

@@ -1,4 +1,4 @@
-import { auth, db } from "./firebase.js";
+﻿import { auth, db } from "./firebase.js";
 
 import {
   signInWithEmailAndPassword,
@@ -27,7 +27,7 @@ if (loginForm) {
 
       await signInWithEmailAndPassword(auth, email, password);
 
-      window.location.href = "admin-dashboard.html";
+      window.location.href = "/admin-dashboard.html";
 
     } catch (error) {
       // V34 FIX: Show user-friendly error instead of raw Firebase error
@@ -61,7 +61,7 @@ if (isAdminPage) {
     onAuthStateChanged(auth, async (user) => {
 
         if (!user) {
-            window.location.href = "admin-login.html";
+            window.location.href = "/admin-login.html";
             return;
         }
 
@@ -70,7 +70,7 @@ if (isAdminPage) {
             const userData = userDoc.exists() ? userDoc.data() : null;
             if (!userData || (userData.role !== "admin" && userData.role !== "super_admin")) {
                 await signOut(auth);
-                window.location.href = "admin-login.html";
+                window.location.href = "/admin-login.html";
             }
         } catch (e) {
             console.error("Admin role check failed:", e);
@@ -92,7 +92,7 @@ window.adminLogout = async function () {
   } catch (error) {
     console.error('Logout error:', error);
   } finally {
-    window.location.href = "admin-login.html";
+    window.location.href = "/admin-login.html";
   }
 
 };

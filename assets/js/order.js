@@ -1,4 +1,4 @@
-// ======================================
+﻿// ======================================
 // Order System
 // Sowrov Fertilizer
 // ======================================
@@ -75,7 +75,7 @@ onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
 
-        window.location.href="customer-login.html";
+        window.location.href = "/customer-login.html";
 
         return;
 
