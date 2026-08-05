@@ -6,3 +6,7 @@ pages_build_output_dir = "."
 [functions]
 # Ensure functions can access Node.js compatibility mode if needed
 # node_compat = true
+
+# Local development environment variables
+[vars]
+GROQ_API_KEY = ""
