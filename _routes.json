@@ -5,6 +5,7 @@
     "/*.html",
     "/assets/*",
     "/images/*",
+    "/evaluation/*",
     "/*.css",
     "/*.js",
     "/*.json",
@@ -18,6 +19,9 @@
     "/sw.js",
     "/manifest.json",
     "/sitemap.xml",
-    "/robots.txt"
+    "/robots.txt",
+    "/_routes.json",
+    "/_headers",
+    "/_redirects"
   ]
 }
