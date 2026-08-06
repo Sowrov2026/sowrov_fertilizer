@@ -21,12 +21,12 @@ export const SFAdmin = {
     async loadDashboard() {
         try {
             const [pendingRes, wrongRes, popularRes, missingRes, feedbackRes, healthRes] = await Promise.allSettled([
-                fetch('/api/v19/pending-questions'),
-                fetch('/api/v19/wrong-answers'),
-                fetch('/api/v19/popular-questions'),
-                fetch('/api/v19/missing-knowledge'),
-                fetch('/api/v19/feedback/stats'),
-                fetch('/api/v19/health')
+                fetch('/api/v19-api?action=get_unanswered&status=pending'),
+                fetch('/api/v19-api?action=get_unanswered&status=wrong'),
+                fetch('/api/v19-api?action=get_popular'),
+                fetch('/api/v19-api?action=get_unanswered&status=missing'),
+                fetch('/api/v19-api?action=feedback_stats'),
+                fetch('/api/v19-api?action=health_check')
             ]);
 
             if (pendingRes.status === 'fulfilled' && pendingRes.value.ok) {
@@ -54,7 +54,7 @@ export const SFAdmin = {
 
     async loadPendingQuestions() {
         try {
-            const res = await fetch('/api/v19/pending-questions');
+            const res = await fetch('/api/v19-api?action=get_unanswered&status=pending');
             if (res.ok) this.data.pending = await res.json();
         } catch (e) { console.error(e); }
         return this.data.pending;
@@ -62,7 +62,7 @@ export const SFAdmin = {
 
     async loadWrongAnswers() {
         try {
-            const res = await fetch('/api/v19/wrong-answers');
+            const res = await fetch('/api/v19-api?action=get_unanswered&status=wrong');
             if (res.ok) this.data.wrongAnswers = await res.json();
         } catch (e) { console.error(e); }
         return this.data.wrongAnswers;
@@ -70,7 +70,7 @@ export const SFAdmin = {
 
     async loadPopularQuestions() {
         try {
-            const res = await fetch('/api/v19/popular-questions');
+            const res = await fetch('/api/v19-api?action=get_popular');
             if (res.ok) this.data.popular = await res.json();
         } catch (e) { console.error(e); }
         return this.data.popular;
@@ -78,7 +78,7 @@ export const SFAdmin = {
 
     async loadMissingKnowledge() {
         try {
-            const res = await fetch('/api/v19/missing-knowledge');
+            const res = await fetch('/api/v19-api?action=get_unanswered&status=missing');
             if (res.ok) this.data.missing = await res.json();
         } catch (e) { console.error(e); }
         return this.data.missing;
@@ -86,7 +86,7 @@ export const SFAdmin = {
 
     async loadFeedbackDashboard() {
         try {
-            const res = await fetch('/api/v19/feedback/stats');
+            const res = await fetch('/api/v19-api?action=feedback_stats');
             if (res.ok) this.data.feedback = await res.json();
         } catch (e) { console.error(e); }
         return this.data.feedback;
@@ -94,7 +94,7 @@ export const SFAdmin = {
 
     async loadKnowledgeSuggestions() {
         try {
-            const res = await fetch('/api/v19/suggestions');
+            const res = await fetch('/api/v19-api?action=get_suggestions');
             if (res.ok) this.data.suggestions = await res.json();
         } catch (e) { console.error(e); }
         return this.data.suggestions;
@@ -102,7 +102,7 @@ export const SFAdmin = {
 
     async loadHealthCheck() {
         try {
-            const res = await fetch('/api/v19/health');
+            const res = await fetch('/api/v19-api?action=health_check');
             if (res.ok) this.data.health = await res.json();
         } catch (e) { console.error(e); }
         return this.data.health;
@@ -110,7 +110,7 @@ export const SFAdmin = {
 
     async loadMonthlyReport() {
         try {
-            const res = await fetch('/api/v19/monthly-report');
+            const res = await fetch('/api/v19-api?action=monthly_report');
             if (res.ok) this.data.monthly = await res.json();
         } catch (e) { console.error(e); }
         return this.data.monthly;
@@ -118,10 +118,10 @@ export const SFAdmin = {
 
     async reviewSuggestion(id, status) {
         try {
-            const res = await fetch(`/api/v19/suggestions/${id}/review`, {
+            const res = await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status })
+                body: JSON.stringify({ id, status })
             });
             if (res.ok) {
                 this.data.suggestions = this.data.suggestions.filter(s => s.id !== id);
@@ -133,9 +133,10 @@ export const SFAdmin = {
 
     async markAnswered(id) {
         try {
-            const res = await fetch(`/api/v19/pending/${id}/answered`, {
+            const res = await fetch('/api/v19-api?action=update_unanswered', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, status: 'answered' })
             });
             if (res.ok) {
                 this.data.pending = this.data.pending.filter(p => p.id !== id);

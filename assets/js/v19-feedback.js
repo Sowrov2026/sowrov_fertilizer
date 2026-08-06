@@ -143,7 +143,7 @@ export const SFFeedback = {
         this.saveToStorage();
 
         try {
-            const response = await fetch('/api/v19/feedback', {
+            const response = await fetch('/api/v19-api?action=store_feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedbackEntry)
@@ -175,7 +175,7 @@ export const SFFeedback = {
         };
 
         try {
-            const response = await fetch('/api/v19/feedback/stats');
+            const response = await fetch('/api/v19-api?action=feedback_stats');
             if (response.ok) {
                 const serverStats = await response.json();
                 return { ...localStats, ...serverStats };
@@ -191,7 +191,7 @@ export const SFFeedback = {
         const unsent = this.feedbackHistory.filter(f => !f.sent);
         for (const fb of unsent) {
             try {
-                const response = await fetch('/api/v19/feedback', {
+                const response = await fetch('/api/v19-api?action=store_feedback', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(fb)

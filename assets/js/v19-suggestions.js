@@ -59,7 +59,7 @@ export const SFSuggestions = {
 
     async analyzeSuggestions() {
         try {
-            const res = await fetch('/api/v19/suggestions/analyze');
+            const res = await fetch('/api/v19-api?action=get_suggestions');
             if (res.ok) {
                 const serverSuggestions = await res.json();
                 if (Array.isArray(serverSuggestions)) {
@@ -90,7 +90,7 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch('/api/v19/suggestions', {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(suggestion)
@@ -114,7 +114,7 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch('/api/v19/suggestions', {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(suggestion)
@@ -138,7 +138,7 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch('/api/v19/suggestions', {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(suggestion)
@@ -162,7 +162,7 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch('/api/v19/suggestions', {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(suggestion)
@@ -186,7 +186,7 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch('/api/v19/suggestions', {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(suggestion)
@@ -210,7 +210,7 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch('/api/v19/suggestions', {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(suggestion)
@@ -224,7 +224,7 @@ export const SFSuggestions = {
 
     async getSuggestions(filter = 'all') {
         try {
-            const res = await fetch(`/api/v19/suggestions?filter=${filter}`);
+            const res = await fetch(`/api/v19-api?action=get_suggestions&filter=${filter}`);
             if (res.ok) {
                 const serverSuggestions = await res.json();
                 if (Array.isArray(serverSuggestions)) {
@@ -291,10 +291,10 @@ export const SFSuggestions = {
         }
 
         try {
-            await fetch(`/api/v19/suggestions/${id}/vote`, {
+            await fetch('/api/v19-api?action=update_suggestion', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ direction })
+                body: JSON.stringify({ id, status: 'voted', direction })
             });
         } catch (e) {
             console.warn('ভোট পাঠানো যায়নি');
@@ -306,7 +306,11 @@ export const SFSuggestions = {
         this.saveToStorage();
 
         try {
-            await fetch(`/api/v19/suggestions/${id}`, { method: 'DELETE' });
+            await fetch('/api/v19-api?action=update_suggestion', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, status: 'deleted' })
+            });
         } catch (e) {
             console.warn('মুছে ফেলা যায়নি');
         }

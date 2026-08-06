@@ -109,5 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(v22Script);
     }
 
+    // Register Service Worker directly (fallback if V17 chain fails)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+            console.log('[SW] Registered, scope:', reg.scope);
+        }).catch(err => {
+            console.warn('[SW] Registration failed:', err);
+        });
+    }
+
     console.log("Component Loader Loaded — V22 Enterprise Platform");
 });
