@@ -653,7 +653,7 @@ export const SFSemanticSearch = {
             .replace(/[\u200B-\u200D\uFEFF]/g, '')
             .replace(/\s+/g, ' ')
             .replace(/["""]+/g, '"')
-            .replace(/['']+*/g, "'");
+            .replace(/['']+/g, "'");
 
         const bengaliNormMap = {
             '\u09CD': '',
