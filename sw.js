@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v19';
+const CACHE_VERSION = 'sf-v26';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -76,7 +76,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (request.destination === 'document' || url.pathname === '/' || url.pathname.endsWith('.html')) {
-    event.respondWith(staleWhileRevalidate(request, DYNAMIC_CACHE));
+    event.respondWith(networkFirst(request, DYNAMIC_CACHE));
     return;
   }
 
@@ -89,13 +89,13 @@ self.addEventListener('fetch', (event) => {
 });
 
 async function cacheFirst(request, cacheName) {
-  const cached = await caches.match(request);
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
   if (cached) return cached;
 
   try {
     const response = await fetch(request);
     if (isCacheableResponse(response)) {
-      const cache = await caches.open(cacheName);
       await cache.put(request, response.clone());
     }
     return response;
@@ -113,7 +113,8 @@ async function networkFirst(request, cacheName) {
     }
     return response;
   } catch (error) {
-    const cached = await caches.match(request);
+    const cache = await caches.open(cacheName);
+    const cached = await cache.match(request);
     if (cached) return cached;
     return new Response('Offline', { status: 503, statusText: 'Offline' });
   }

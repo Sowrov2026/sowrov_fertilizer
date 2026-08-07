@@ -1,122 +1,405 @@
 // ======================================
-// Component Loader
+// Component Loader — SINGLE SHARED COMPONENT
 // Sowrov Fertilizer — V22 Enterprise Platform
+// Injects: Navbar, Footer, AI Chat, All Modules
 // ======================================
 
-document.addEventListener("DOMContentLoaded", () => {
+(function () {
+    'use strict';
 
-    // Load AI Assistant CSS
-    if (!document.getElementById("ai-style")) {
-        const css = document.createElement("link");
-        css.id = "ai-style";
-        css.rel = "stylesheet";
-        css.href = "assets/css/ai.css";
-        document.head.appendChild(css);
+    const CURRENT_PAGE = window.location.pathname.split('/').pop() || 'index.html';
+
+    // ========================================
+    // NAVBAR — ONE source of truth
+    // ========================================
+    function buildNavbar() {
+        return `<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="logo">Sowrov <span>Fertilizer</span></a>
+            <div class="dash-nav">
+                <a href="/" class="dash-nav-home">Home</a>
+                <a href="/customer-login.html" class="dash-nav-login" id="sf-nav-login">Login</a>
+                <div class="dash-trigger" id="sf-nav-dashboard" style="display:none">
+                    <button class="dash-trigger-btn" aria-haspopup="true" aria-expanded="false">Dashboard <span class="arrow">▼</span></button>
+                    <div class="dash-dropdown" role="menu">
+                        <div class="dash-dropdown-label">Browse</div>
+                        <a href="/products.html" class="dd-icon">📦</a><a href="/products.html">Products</a>
+                        <a href="/gallery.html" class="dd-icon">🖼️</a><a href="/gallery.html">Gallery</a>
+                        <a href="/faq.html" class="dd-icon">❓</a><a href="/faq.html">FAQ</a>
+                        <a href="/contact.html" class="dd-icon">📞</a><a href="/contact.html">Contact</a>
+                        <a href="/about.html" class="dd-icon">ℹ️</a><a href="/about.html">About</a>
+                        <div class="dd-sep"></div>
+                        <div class="dash-dropdown-label">Dashboards</div>
+                        <a href="/customer-dashboard.html" class="dd-icon">👤</a><a href="/customer-dashboard.html">Customer Dashboard</a>
+                        <a href="/admin-dashboard.html" class="dd-icon">🔧</a><a href="/admin-dashboard.html">Admin Dashboard</a>
+                        <div class="dd-sep"></div>
+                        <div class="dash-dropdown-label">Activity</div>
+                        <a href="/customer-orders.html" class="dd-icon">📋</a><a href="/customer-orders.html">Orders</a>
+                        <a href="/admin-reviews.html" class="dd-icon">⭐</a><a href="/admin-reviews.html">Reviews</a>
+                        <div class="dd-sep"></div>
+                        <div class="dash-dropdown-label">Account</div>
+                        <a href="/profile.html" class="dd-icon">🧑</a><a href="/profile.html">Profile</a>
+                        <a href="/admin-settings.html" class="dd-icon">⚙️</a><a href="/admin-settings.html">Settings</a>
+                        <div class="dd-sep"></div>
+                        <div class="dash-dropdown-label">Admin</div>
+                        <a href="/admin-reports.html" class="dd-icon">📈</a><a href="/admin-reports.html">Reports</a>
+                        <div class="dd-sep"></div>
+                        <div class="dash-dropdown-label">Support</div>
+                        <a href="https://wa.me/8801829775552" target="_blank" class="dd-icon">💬</a><a href="https://wa.me/8801829775552" target="_blank">WhatsApp Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-toggle" aria-label="Open menu">☰</div>
+        </nav>
+    </div>
+</header>
+<div class="dash-slide-overlay"></div>
+<div class="dash-slide-panel">
+    <div class="dash-slide-header">
+        <h3>Menu</h3>
+        <button class="dash-slide-close" aria-label="Close menu">✕</button>
+    </div>
+    <div class="dash-slide-body">
+        <a href="/customer-login.html" class="btn" id="sf-nav-login-mobile" style="display:none;width:100%;text-align:center;margin-bottom:12px">Login</a>
+        <div id="sf-nav-dashboard-mobile">
+            <div class="dash-slide-label">Dashboards</div>
+            <a href="/customer-dashboard.html"><span class="dd-icon">👤</span> Customer Dashboard</a>
+            <a href="/admin-dashboard.html"><span class="dd-icon">🔧</span> Admin Dashboard</a>
+            <div class="dd-sep"></div>
+        </div>
+        <div class="dash-slide-label">Browse</div>
+        <a href="/products.html"><span class="dd-icon">📦</span> Products</a>
+        <a href="/gallery.html"><span class="dd-icon">🖼️</span> Gallery</a>
+        <a href="/faq.html"><span class="dd-icon">❓</span> FAQ</a>
+        <a href="/contact.html"><span class="dd-icon">📞</span> Contact</a>
+        <a href="/about.html"><span class="dd-icon">ℹ️</span> About</a>
+        <div class="dd-sep"></div>
+        <div class="dash-slide-label">Activity</div>
+        <a href="/customer-orders.html"><span class="dd-icon">📋</span> Orders</a>
+        <a href="/admin-reviews.html"><span class="dd-icon">⭐</span> Reviews</a>
+        <div class="dd-sep"></div>
+        <div class="dash-slide-label">Account</div>
+        <a href="/profile.html"><span class="dd-icon">🧑</span> Profile</a>
+        <a href="/admin-settings.html"><span class="dd-icon">⚙️</span> Settings</a>
+        <div class="dd-sep"></div>
+        <div class="dash-slide-label">Admin</div>
+        <a href="/admin-reports.html"><span class="dd-icon">📈</span> Reports</a>
+        <div class="dd-sep"></div>
+        <div class="dash-slide-label">Support</div>
+        <a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">💬</span> WhatsApp Support</a>
+    </div>
+</div>`;
     }
 
-    // Load AI Assistant JS
-    if (!document.getElementById("ai-script")) {
-        const script = document.createElement("script");
-        script.id = "ai-script";
-        script.src = "assets/js/ai.js";
-        script.onload = () => {
-            console.log("AI Assistant Loaded");
-            loadV15Modules();
-            loadV16Modules();
-            loadV17Modules();
-            loadV19Modules();
-            loadV20Modules();
-            loadV21Modules();
-            loadV22Modules();
-        };
-        document.body.appendChild(script);
+    // ========================================
+    // FOOTER — ONE source of truth
+    // ========================================
+    function buildFooter() {
+        return `<footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h2>Sowrov <span>Fertilizer</span></h2>
+                    <p>Premium organic fertilizer manufacturer based in Maheshkhali, Cox's Bazar. We provide high-quality Vermicompost and Trichoderma for sustainable agriculture across Bangladesh.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/products.html">Products</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/customer-login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Products</h3>
+                    <ul>
+                        <li><a href="/products.html">Vermicompost</a></li>
+                        <li><a href="/products.html">Trichoderma</a></li>
+                        <li><a href="/products.html">Organic Fertilizer</a></li>
+                        <li><a href="/products.html">Wholesale Supply</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>📍 Maheshkhali, Cox's Bazar</p>
+                    <p>📞 01829775552</p>
+                    <p>📞 01518945262</p>
+                    <p>✉️ shohrahuddinsowrov2026@gmail.com</p>
+                </div>
+            </div>
+            <div class="copyright">© 2022 - 2026 <strong>Sowrov Fertilizer</strong><br>All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp">
+        <img src="assets/images/icons/whatsapp.png" alt="WhatsApp">
+    </a>`;
     }
 
-    // Load V15 Module Integration
-    function loadV15Modules() {
-        if (document.getElementById("v15-module")) return;
-        const v15Script = document.createElement("script");
-        v15Script.id = "v15-module";
-        v15Script.type = "module";
-        v15Script.src = "assets/js/v15-integration.js";
-        v15Script.onload = () => console.log("V15 Smart Agriculture Loaded");
-        document.body.appendChild(v15Script);
+    // ========================================
+    // INJECT COMPONENTS
+    // ========================================
+    function injectComponents() {
+        // Inject navbar if placeholder exists
+        const navbarEl = document.getElementById('sf-navbar');
+        if (navbarEl) {
+            navbarEl.outerHTML = buildNavbar();
+        }
+
+        // Inject footer if placeholder exists
+        const footerEl = document.getElementById('sf-footer');
+        if (footerEl) {
+            footerEl.outerHTML = buildFooter();
+        }
     }
 
-    // Load V16 Enterprise Integration
-    function loadV16Modules() {
-        if (document.getElementById("v16-module")) return;
-        const v16Script = document.createElement("script");
-        v16Script.id = "v16-module";
-        v16Script.type = "module";
-        v16Script.src = "assets/js/v16-integration.js";
-        v16Script.onload = () => console.log("V16 Enterprise Intelligence Loaded");
-        document.body.appendChild(v16Script);
-    }
+    // ========================================
+    // NAVBAR INTERACTIONS (dropdown, mobile, active page)
+    // ========================================
+    function initNavbar() {
+        // Desktop dropdown toggle
+        const trigger = document.querySelector('.dash-trigger');
+        if (trigger) {
+            const btn = trigger.querySelector('.dash-trigger-btn');
+            if (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    trigger.classList.toggle('open');
+                });
+            }
+            document.addEventListener('click', function (e) {
+                if (!trigger.contains(e.target)) {
+                    trigger.classList.remove('open');
+                }
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') trigger.classList.remove('open');
+            });
+        }
 
-    // Load V17 Ultimate Production
-    function loadV17Modules() {
-        if (document.getElementById("v17-module")) return;
-        const v17Script = document.createElement("script");
-        v17Script.id = "v17-module";
-        v17Script.type = "module";
-        v17Script.src = "assets/js/v17-integration.js";
-        v17Script.onload = () => console.log("V17 Ultimate Production Loaded");
-        document.body.appendChild(v17Script);
-    }
+        // Mobile slide panel
+        const overlay = document.querySelector('.dash-slide-overlay');
+        const panel = document.querySelector('.dash-slide-panel');
+        const closeBtn = document.querySelector('.dash-slide-close');
+        const mobileToggle = document.querySelector('.mobile-toggle');
 
-    // Load V19 Self-Evolving AI
-    function loadV19Modules() {
-        if (document.getElementById("v19-module")) return;
-        const v19Script = document.createElement("script");
-        v19Script.id = "v19-module";
-        v19Script.type = "module";
-        v19Script.src = "assets/js/v19-integration.js";
-        v19Script.onload = () => console.log("V19 Self-Evolving AI Loaded");
-        document.body.appendChild(v19Script);
-    }
+        function openSlide() {
+            if (overlay) overlay.classList.add('open');
+            if (panel) panel.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSlide() {
+            if (overlay) overlay.classList.remove('open');
+            if (panel) panel.classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
-    // Load V20 Commercial Ecosystem
-    function loadV20Modules() {
-        if (document.getElementById("v20-module")) return;
-        const v20Script = document.createElement("script");
-        v20Script.id = "v20-module";
-        v20Script.type = "module";
-        v20Script.src = "assets/js/v20-integration.js";
-        v20Script.onload = () => console.log("V20 Commercial Ecosystem Loaded");
-        document.body.appendChild(v20Script);
-    }
+        if (mobileToggle) mobileToggle.addEventListener('click', openSlide);
+        if (closeBtn) closeBtn.addEventListener('click', closeSlide);
+        if (overlay) overlay.addEventListener('click', closeSlide);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSlide();
+        });
 
-    // Load V21 Knowledge Universe
-    function loadV21Modules() {
-        if (document.getElementById("v21-module")) return;
-        const v21Script = document.createElement("script");
-        v21Script.id = "v21-module";
-        v21Script.type = "module";
-        v21Script.src = "assets/js/v21-integration.js";
-        v21Script.onload = () => console.log("V21 Knowledge Universe Loaded");
-        document.body.appendChild(v21Script);
-    }
-
-    // Load V22 Enterprise Platform
-    function loadV22Modules() {
-        if (document.getElementById("v22-module")) return;
-        const v22Script = document.createElement("script");
-        v22Script.id = "v22-module";
-        v22Script.type = "module";
-        v22Script.src = "assets/js/v22-integration.js";
-        v22Script.onload = () => console.log("V22 Enterprise Platform Loaded");
-        document.body.appendChild(v22Script);
-    }
-
-    // Register Service Worker directly (fallback if V17 chain fails)
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(reg => {
-            console.log('[SW] Registered, scope:', reg.scope);
-        }).catch(err => {
-            console.warn('[SW] Registration failed:', err);
+        // Mark active page in dropdowns
+        document.querySelectorAll('.dash-dropdown a[href], .dash-slide-body a[href]').forEach(function (link) {
+            const href = link.getAttribute('href');
+            if (href) {
+                const page = href.split('/').pop();
+                if (page === CURRENT_PAGE || (CURRENT_PAGE === '' && page === 'index.html') || (CURRENT_PAGE === '/' && page === '')) {
+                    link.classList.add('active-page');
+                }
+            }
         });
     }
 
-    console.log("Component Loader Loaded — V22 Enterprise Platform");
-});
+    // ========================================
+    // LOAD AI ASSISTANT
+    // ========================================
+    function loadAI() {
+        // Load CSS
+        if (!document.getElementById("ai-style")) {
+            const css = document.createElement("link");
+            css.id = "ai-style";
+            css.rel = "stylesheet";
+            css.href = "assets/css/ai.css";
+            document.head.appendChild(css);
+        }
+
+        // Load JS
+        if (!document.getElementById("ai-script")) {
+            const script = document.createElement("script");
+            script.id = "ai-script";
+            script.src = "assets/js/ai.js";
+            script.onload = () => {
+                console.log("AI Assistant Loaded");
+                loadV15Modules();
+                loadV16Modules();
+                loadV17Modules();
+                loadV19Modules();
+                loadV20Modules();
+                loadV21Modules();
+                loadV22Modules();
+            };
+            document.body.appendChild(script);
+        }
+    }
+
+    // ========================================
+    // V15–V22 MODULE LOADER
+    // ========================================
+    function loadV15Modules() {
+        if (document.getElementById("v15-module")) return;
+        const s = document.createElement("script");
+        s.id = "v15-module";
+        s.type = "module";
+        s.src = "assets/js/v15-integration.js";
+        s.onload = () => console.log("V15 Smart Agriculture Loaded");
+        document.body.appendChild(s);
+    }
+    function loadV16Modules() {
+        if (document.getElementById("v16-module")) return;
+        const s = document.createElement("script");
+        s.id = "v16-module";
+        s.type = "module";
+        s.src = "assets/js/v16-integration.js";
+        s.onload = () => console.log("V16 Enterprise Intelligence Loaded");
+        document.body.appendChild(s);
+    }
+    function loadV17Modules() {
+        if (document.getElementById("v17-module")) return;
+        const s = document.createElement("script");
+        s.id = "v17-module";
+        s.type = "module";
+        s.src = "assets/js/v17-integration.js";
+        s.onload = () => console.log("V17 Ultimate Production Loaded");
+        document.body.appendChild(s);
+    }
+    function loadV19Modules() {
+        if (document.getElementById("v19-module")) return;
+        const s = document.createElement("script");
+        s.id = "v19-module";
+        s.type = "module";
+        s.src = "assets/js/v19-integration.js";
+        s.onload = () => console.log("V19 Self-Evolving AI Loaded");
+        document.body.appendChild(s);
+    }
+    function loadV20Modules() {
+        if (document.getElementById("v20-module")) return;
+        const s = document.createElement("script");
+        s.id = "v20-module";
+        s.type = "module";
+        s.src = "assets/js/v20-integration.js";
+        s.onload = () => console.log("V20 Commercial Ecosystem Loaded");
+        document.body.appendChild(s);
+    }
+    function loadV21Modules() {
+        if (document.getElementById("v21-module")) return;
+        const s = document.createElement("script");
+        s.id = "v21-module";
+        s.type = "module";
+        s.src = "assets/js/v21-integration.js";
+        s.onload = () => console.log("V21 Knowledge Universe Loaded");
+        document.body.appendChild(s);
+    }
+    function loadV22Modules() {
+        if (document.getElementById("v22-module")) return;
+        const s = document.createElement("script");
+        s.id = "v22-module";
+        s.type = "module";
+        s.src = "assets/js/v22-integration.js";
+        s.onload = () => console.log("V22 Enterprise Platform Loaded");
+        document.body.appendChild(s);
+    }
+
+    // ========================================
+    // SERVICE WORKER
+    // ========================================
+    function registerSW() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(reg => {
+                console.log('[SW] Registered, scope:', reg.scope);
+            }).catch(err => {
+                console.warn('[SW] Registration failed:', err);
+            });
+        }
+    }
+
+    // ========================================
+    // FIREBASE AUTH STATE → NAVBAR TOGGLE
+    // ========================================
+    function initAuth() {
+        if (!window.firebase) {
+            import('https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js')
+                .then(function (appMod) {
+                    return import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js').then(function (authMod) {
+                        var cfg = {
+                            apiKey: "AIzaSyCwD4knvy0O2KlGFte7qfHsAkiS8QeMRB8",
+                            authDomain: "sowrov-fertilizer-905de.firebaseapp.com",
+                            projectId: "sowrov-fertilizer-905de",
+                            storageBucket: "sowrov-fertilizer-905de.firebasestorage.app",
+                            messagingSenderId: "726860595005",
+                            appId: "1:726860595005:web:76b82c1d32a72e98c98f54"
+                        };
+                        var app = appMod.initializeApp(cfg);
+                        var auth = authMod.getAuth(app);
+                        window.firebase = { app: app, auth: auth };
+                        listenAuth(auth);
+                    });
+                })
+                .catch(function (e) { console.warn('[Auth] Firebase init failed:', e); });
+        } else {
+            listenAuth(window.firebase.auth);
+        }
+
+        function listenAuth(auth) {
+            var loginEl = document.getElementById('sf-nav-login');
+            var dashEl = document.getElementById('sf-nav-dashboard');
+            var loginMobile = document.getElementById('sf-nav-login-mobile');
+            var dashMobile = document.getElementById('sf-nav-dashboard-mobile');
+            if (!loginEl || !dashEl) return;
+            auth.onAuthStateChanged(function (user) {
+                if (user) {
+                    loginEl.style.display = 'none';
+                    dashEl.style.display = '';
+                    if (loginMobile) loginMobile.style.display = 'none';
+                    if (dashMobile) dashMobile.style.display = '';
+                } else {
+                    loginEl.style.display = '';
+                    dashEl.style.display = 'none';
+                    if (loginMobile) loginMobile.style.display = '';
+                    if (dashMobile) dashMobile.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    // ========================================
+    // BOOT
+    // ========================================
+    var booted = false;
+    function safeBoot() {
+        if (booted) return;
+        booted = true;
+        boot();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', safeBoot);
+    } else {
+        safeBoot();
+    }
+    window.addEventListener('load', safeBoot);
+
+    function boot() {
+        injectComponents();
+        initNavbar();
+        initAuth();
+        loadAI();
+        registerSW();
+        console.log("Component Loader — V22 Enterprise Platform");
+    }
+})();
