@@ -8,80 +8,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header class="header">
-    <div class="container">
-        <nav class="navbar">
-            <a href="/" class="logo">Sowrov <span>Fertilizer</span></a>
-            <div class="dash-nav">
-                <a href="/" class="dash-nav-home">Home</a>
-                <a href="/customer-login.html" class="dash-nav-login">Login</a>
-                <div class="dash-trigger">
-                    <button class="dash-trigger-btn" aria-haspopup="true" aria-expanded="false">Dashboard <span class="arrow">▼</span></button>
-                    <div class="dash-dropdown" role="menu">
-                        <div class="dash-dropdown-label">Browse</div>
-                        <a href="/products.html" class="dd-icon">📦</a><a href="/products.html">Products</a>
-                        <a href="/gallery.html" class="dd-icon">🖼️</a><a href="/gallery.html">Gallery</a>
-                        <a href="/faq.html" class="dd-icon">❓</a><a href="/faq.html">FAQ</a>
-                        <a href="/contact.html" class="dd-icon">📞</a><a href="/contact.html">Contact</a>
-                        <a href="/about.html" class="dd-icon">ℹ️</a><a href="/about.html">About</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Dashboards</div>
-                        <a href="/customer-dashboard.html" class="dd-icon">👤</a><a href="/customer-dashboard.html">Customer Dashboard</a>
-                        <a href="/admin-dashboard.html" class="dd-icon">🔧</a><a href="/admin-dashboard.html">Admin Dashboard</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Activity</div>
-                        <a href="/customer-orders.html" class="dd-icon">📋</a><a href="/customer-orders.html">Orders</a>
-                        <a href="/admin-reviews.html" class="dd-icon">⭐</a><a href="/admin-reviews.html">Reviews</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Account</div>
-                        <a href="/profile.html" class="dd-icon">🧑</a><a href="/profile.html">Profile</a>
-                        <a href="/admin-settings.html" class="dd-icon">⚙️</a><a href="/admin-settings.html">Settings</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Admin</div>
-                        <a href="/admin-reports.html" class="dd-icon">📈</a><a href="/admin-reports.html">Reports</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Support</div>
-                        <a href="https://wa.me/8801829775552" target="_blank" class="dd-icon">💬</a><a href="https://wa.me/8801829775552" target="_blank">WhatsApp Support</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mobile-toggle" aria-label="Open menu">☰</div>
-        </nav>
-    </div>
-</header>
-<div class="dash-slide-overlay"></div>
-<div class="dash-slide-panel">
-    <div class="dash-slide-header">
-        <h3>Menu</h3>
-        <button class="dash-slide-close" aria-label="Close menu">✕</button>
-    </div>
-    <div class="dash-slide-body">
-        <div class="dash-slide-label">Browse</div>
-        <a href="/products.html"><span class="dd-icon">📦</span> Products</a>
-        <a href="/gallery.html"><span class="dd-icon">🖼️</span> Gallery</a>
-        <a href="/faq.html"><span class="dd-icon">❓</span> FAQ</a>
-        <a href="/contact.html"><span class="dd-icon">📞</span> Contact</a>
-        <a href="/about.html"><span class="dd-icon">ℹ️</span> About</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Dashboards</div>
-        <a href="/customer-dashboard.html"><span class="dd-icon">👤</span> Customer Dashboard</a>
-        <a href="/admin-dashboard.html"><span class="dd-icon">🔧</span> Admin Dashboard</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Activity</div>
-        <a href="/customer-orders.html"><span class="dd-icon">📋</span> Orders</a>
-        <a href="/admin-reviews.html"><span class="dd-icon">⭐</span> Reviews</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Account</div>
-        <a href="/profile.html"><span class="dd-icon">🧑</span> Profile</a>
-        <a href="/admin-settings.html"><span class="dd-icon">⚙️</span> Settings</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Admin</div>
-        <a href="/admin-reports.html"><span class="dd-icon">📈</span> Reports</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Support</div>
-        <a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">💬</span> WhatsApp Support</a>
-    </div>
-</div>
+    <div id="sf-navbar"></div>
+
     <section class="faq" style="padding-top:7rem;">
         <div class="container">
             <div class="section-header">
@@ -117,13 +45,9 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
-        <div class="container"><div class="copyright">© 2022 - 2026 <strong>Sowrov Fertilizer</strong>. All Rights Reserved.</div></div>
-    </footer>
-    <a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp">
-        <img src="assets/images/icons/whatsapp.png" alt="WhatsApp">
-    </a>
-    <script src="assets/js/script.js"></script>
+
+    <div id="sf-footer"></div>
+
     <script>
     document.querySelectorAll('.faq-question').forEach(btn=>{
         btn.addEventListener('click',()=>{
@@ -134,5 +58,6 @@
         });
     });
     </script>
+    <script src="assets/js/component-loader.js"></script>
 </body>
 </html>

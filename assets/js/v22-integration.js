@@ -43,7 +43,7 @@
 
     // ==================== AUTHENTICATION ====================
 
-    async login: function(email, password) {
+    login: async function(email, password) {
       var result = await this.apiCall('/v22-auth', {
         method: 'POST',
         body: JSON.stringify({ action: 'login', email: email, password: password })
@@ -60,7 +60,7 @@
       return result;
     },
 
-    async logout: function() {
+    logout: async function() {
       try {
         await this.apiCall('/v22-auth', {
           method: 'POST',
@@ -76,7 +76,7 @@
       document.dispatchEvent(new CustomEvent('sf:logout'));
     },
 
-    async refreshToken: function() {
+    refreshToken: async function() {
       if (!this._refreshToken) throw new Error('No refresh token');
       var result = await this.apiCall('/v22-auth', {
         method: 'POST',
@@ -112,7 +112,7 @@
 
     // ==================== ORDERS ====================
 
-    async createOrder: function(data) {
+    createOrder: async function(data) {
       var result = await this.apiCall('/v22-order', {
         method: 'POST',
         body: JSON.stringify(Object.assign({ action: 'create' }, data))
@@ -121,7 +121,7 @@
       return result;
     },
 
-    async getOrders: function(filter) {
+    getOrders: async function(filter) {
       var params = new URLSearchParams({ action: 'list' });
       if (filter) {
         if (filter.status) params.set('status', filter.status);
@@ -133,11 +133,11 @@
       return this.apiCall('/v22-order?' + params.toString());
     },
 
-    async getOrder: function(orderId) {
+    getOrder: async function(orderId) {
       return this.apiCall('/v22-order?action=detail&id=' + orderId);
     },
 
-    async updateOrderStatus: function(id, status, note) {
+    updateOrderStatus: async function(id, status, note) {
       var result = await this.apiCall('/v22-order', {
         method: 'POST',
         body: JSON.stringify({ action: 'update', orderId: id, status: status, note: note || '' })
@@ -146,7 +146,7 @@
       return result;
     },
 
-    async cancelOrder: function(id, reason) {
+    cancelOrder: async function(id, reason) {
       var result = await this.apiCall('/v22-order', {
         method: 'POST',
         body: JSON.stringify({ action: 'cancel', orderId: id, reason: reason })
@@ -155,7 +155,7 @@
       return result;
     },
 
-    async getOrderStats: function(dealerId) {
+    getOrderStats: async function(dealerId) {
       var url = '/v22-order?action=stats';
       if (dealerId) url += '&dealerId=' + dealerId;
       return this.apiCall(url);
@@ -163,7 +163,7 @@
 
     // ==================== PAYMENTS ====================
 
-    async createPayment: function(data) {
+    createPayment: async function(data) {
       var result = await this.apiCall('/v22-payment', {
         method: 'POST',
         body: JSON.stringify(Object.assign({ action: 'create' }, data))
@@ -172,7 +172,7 @@
       return result;
     },
 
-    async verifyPayment: function(paymentId, providerData) {
+    verifyPayment: async function(paymentId, providerData) {
       var result = await this.apiCall('/v22-payment', {
         method: 'POST',
         body: JSON.stringify({ action: 'verify', paymentId: paymentId, providerData: providerData || {} })
@@ -181,7 +181,7 @@
       return result;
     },
 
-    async refundPayment: function(paymentId, amount, reason) {
+    refundPayment: async function(paymentId, amount, reason) {
       var result = await this.apiCall('/v22-payment', {
         method: 'POST',
         body: JSON.stringify({ action: 'refund', paymentId: paymentId, amount: amount, reason: reason })
@@ -190,7 +190,7 @@
       return result;
     },
 
-    async getPayments: function(filter) {
+    getPayments: async function(filter) {
       var params = new URLSearchParams({ action: 'list' });
       if (filter) {
         if (filter.status) params.set('status', filter.status);
@@ -200,7 +200,7 @@
       return this.apiCall('/v22-payment?' + params.toString());
     },
 
-    async generateInvoice: function(orderData) {
+    generateInvoice: async function(orderData) {
       return this.apiCall('/v22-payment', {
         method: 'POST',
         body: JSON.stringify({ action: 'invoice', orderData: orderData })
@@ -209,7 +209,7 @@
 
     // ==================== SHIPPING ====================
 
-    async createShipment: function(data) {
+    createShipment: async function(data) {
       var result = await this.apiCall('/v22-shipping', {
         method: 'POST',
         body: JSON.stringify(Object.assign({ action: 'create' }, data))
@@ -218,11 +218,11 @@
       return result;
     },
 
-    async trackShipment: function(trackingNumber) {
+    trackShipment: async function(trackingNumber) {
       return this.apiCall('/v22-shipping?action=track&tracking=' + encodeURIComponent(trackingNumber));
     },
 
-    async getCourierRates: function(weight, codAmount, area) {
+    getCourierRates: async function(weight, codAmount, area) {
       var params = new URLSearchParams({
         action: 'rates',
         weight: weight,
@@ -232,13 +232,13 @@
       return this.apiCall('/v22-shipping?' + params.toString());
     },
 
-    async getAvailableCouriers: function(area) {
+    getAvailableCouriers: async function(area) {
       return this.apiCall('/v22-shipping?action=couriers&area=' + encodeURIComponent(area));
     },
 
     // ==================== NOTIFICATIONS ====================
 
-    async getNotifications: function(filter) {
+    getNotifications: async function(filter) {
       var params = new URLSearchParams({ action: 'list' });
       if (filter) {
         if (filter.unread) params.set('unread', 'true');
@@ -248,7 +248,7 @@
       return this.apiCall('/v22-notification?' + params.toString());
     },
 
-    async markNotificationRead: function(id) {
+    markNotificationRead: async function(id) {
       var result = await this.apiCall('/v22-notification', {
         method: 'POST',
         body: JSON.stringify({ action: 'markRead', notificationId: id })
@@ -257,7 +257,7 @@
       return result;
     },
 
-    async markAllNotificationsRead: function() {
+    markAllNotificationsRead: async function() {
       var result = await this.apiCall('/v22-notification', {
         method: 'POST',
         body: JSON.stringify({ action: 'readAll' })
@@ -266,11 +266,11 @@
       return result;
     },
 
-    async getUnreadCount: function() {
+    getUnreadCount: async function() {
       return this.apiCall('/v22-notification?action=unreadCount');
     },
 
-    async updateNotificationPrefs: function(prefs) {
+    updateNotificationPrefs: async function(prefs) {
       return this.apiCall('/v22-notification', {
         method: 'POST',
         body: JSON.stringify({ action: 'updatePrefs', preferences: prefs })
@@ -279,14 +279,14 @@
 
     // ==================== LIVE CHAT ====================
 
-    async createChatRoom: function(participants, type) {
+    createChatRoom: async function(participants, type) {
       return this.apiCall('/v22-livechat', {
         method: 'POST',
         body: JSON.stringify({ action: 'createRoom', participants: participants, type: type || 'direct' })
       });
     },
 
-    async sendMessage: function(roomId, content) {
+    sendMessage: async function(roomId, content) {
       var result = await this.apiCall('/v22-livechat', {
         method: 'POST',
         body: JSON.stringify({ action: 'send', roomId: roomId, content: content })
@@ -295,44 +295,44 @@
       return result;
     },
 
-    async getMessages: function(roomId, limit, before) {
+    getMessages: async function(roomId, limit, before) {
       var params = new URLSearchParams({ action: 'messages', roomId: roomId });
       if (limit) params.set('limit', limit);
       if (before) params.set('before', before);
       return this.apiCall('/v22-livechat?' + params.toString());
     },
 
-    async markMessageRead: function(roomId, messageId) {
+    markMessageRead: async function(roomId, messageId) {
       return this.apiCall('/v22-livechat', {
         method: 'POST',
         body: JSON.stringify({ action: 'markRead', roomId: roomId, messageId: messageId })
       });
     },
 
-    async setTyping: function(roomId, isTyping) {
+    setTyping: async function(roomId, isTyping) {
       return this.apiCall('/v22-livechat', {
         method: 'POST',
         body: JSON.stringify({ action: 'typing', roomId: roomId, isTyping: isTyping })
       });
     },
 
-    async getUserRooms: function() {
+    getUserRooms: async function() {
       return this.apiCall('/v22-livechat?action=rooms');
     },
 
-    async searchMessages: function(roomId, query) {
+    searchMessages: async function(roomId, query) {
       return this.apiCall('/v22-livechat?action=search&roomId=' + roomId + '&q=' + encodeURIComponent(query));
     },
 
     // ==================== ANALYTICS ====================
 
-    async getDashboard: function() {
+    getDashboard: async function() {
       return this._cached('dashboard', 60000, function() {
         return SFEnterprise.apiCall('/v22-analytics?action=dashboard');
       });
     },
 
-    async getAnalytics: function(type, period) {
+    getAnalytics: async function(type, period) {
       var params = new URLSearchParams({ action: type || 'dashboard' });
       if (period) params.set('period', period);
       var cacheKey = 'analytics_' + type + '_' + (period || '');
@@ -341,43 +341,43 @@
       });
     },
 
-    async getSalesAnalytics: function(period) {
+    getSalesAnalytics: async function(period) {
       return this.getAnalytics('sales', period);
     },
 
-    async getUserAnalytics: function() {
+    getUserAnalytics: async function() {
       return this.getAnalytics('users');
     },
 
-    async getProductAnalytics: function() {
+    getProductAnalytics: async function() {
       return this.getAnalytics('products');
     },
 
-    async getRevenueAnalytics: function(startDate, endDate) {
+    getRevenueAnalytics: async function(startDate, endDate) {
       var params = new URLSearchParams({ action: 'revenue' });
       if (startDate) params.set('startDate', startDate);
       if (endDate) params.set('endDate', endDate);
       return this.apiCall('/v22-analytics?' + params.toString());
     },
 
-    async getCropAnalytics: function() {
+    getCropAnalytics: async function() {
       return this.getAnalytics('crops');
     },
 
-    async trackEvent: function(type, data) {
+    trackEvent: async function(type, data) {
       return this.apiCall('/v22-analytics', {
         method: 'POST',
         body: JSON.stringify({ action: 'track', type: type, data: data })
       });
     },
 
-    async exportAnalytics: function(type, format) {
+    exportAnalytics: async function(type, format) {
       return this.apiCall('/v22-analytics?action=export&type=' + (type || 'order') + '&format=' + (format || 'json'));
     },
 
     // ==================== AI INSIGHTS ====================
 
-    async getInsights: function(type, data) {
+    getInsights: async function(type, data) {
       var payload = Object.assign({ action: type }, data || {});
       return this.apiCall('/v22-insights', {
         method: 'POST',
@@ -385,27 +385,27 @@
       });
     },
 
-    async predictDemand: function(productHistory, days) {
+    predictDemand: async function(productHistory, days) {
       return this.getInsights('predictDemand', { productHistory: productHistory, days: days });
     },
 
-    async predictDiseaseRisk: function(crop, season, weather) {
+    predictDiseaseRisk: async function(crop, season, weather) {
       return this.getInsights('predictDiseaseRisk', { crop: crop, season: season, weather: weather });
     },
 
-    async predictCropYield: function(crop, acreage, conditions) {
+    predictCropYield: async function(crop, acreage, conditions) {
       return this.getInsights('predictCropYield', { crop: crop, acreage: acreage, conditions: conditions });
     },
 
-    async predictCropPrice: function(crop, history) {
+    predictCropPrice: async function(crop, history) {
       return this.getInsights('predictCropPrice', { crop: crop, history: history });
     },
 
-    async assessWeatherRisk: function(weatherForecast) {
+    assessWeatherRisk: async function(weatherForecast) {
       return this.getInsights('assessWeatherRisk', { weatherForecast: weatherForecast });
     },
 
-    async predictBusinessGrowth: function(salesHistory) {
+    predictBusinessGrowth: async function(salesHistory) {
       return this.getInsights('predictBusinessGrowth', { salesHistory: salesHistory });
     },
 
@@ -436,7 +436,7 @@
 
     // ==================== API CALLS ====================
 
-    async apiCall: function(endpoint, options) {
+    apiCall: async function(endpoint, options) {
       var url = API_BASE + endpoint;
       var config = {
         method: (options && options.method) || 'GET',
