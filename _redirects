@@ -1,6 +1,0 @@
-# Cloudflare Pages _redirects
-# Only add redirects that Cloudflare Pages doesn't handle natively
-# Static .html files are served automatically at their path
-
-# SPA fallback for client-side routing
-/index.html    /index.html    200

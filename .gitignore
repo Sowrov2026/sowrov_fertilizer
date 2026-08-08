@@ -47,3 +47,5 @@ temp/
 
 # Wrangler
 .wrangler/
+.vercel
+.env*

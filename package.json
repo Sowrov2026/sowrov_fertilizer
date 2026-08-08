@@ -3,16 +3,16 @@
   "version": "34.1.0",
   "description": "SF AI — Bangladesh Agriculture Enterprise Platform",
   "private": true,
+  "type": "module",
   "dependencies": {
     "groq-sdk": "^0.12.0"
   },
   "scripts": {
-    "start": "wrangler pages dev .",
+    "start": "vercel dev",
     "build": "echo 'Static site - no build needed'",
     "test": "echo 'Tests passed'",
     "lint": "echo 'Lint passed'",
-    "deploy": "wrangler pages deploy .",
-    "dev": "wrangler pages dev . --port 8788"
+    "deploy": "vercel --prod"
   },
   "engines": {
     "node": ">=18.0.0"
