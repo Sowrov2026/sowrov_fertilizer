@@ -25,17 +25,26 @@ if (loginForm) {
 
     try {
 
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const userData = userDoc.exists() ? userDoc.data() : null;
+
+      if (!userData || (userData.role !== "admin" && userData.role !== "super_admin")) {
+        await signOut(auth);
+        alert('এই অ্যাকাউন্টটি অ্যাডমিন অ্যাক্সেস পায়নি।');
+        return;
+      }
 
       window.location.href = "/admin-dashboard.html";
 
     } catch (error) {
-      // V34 FIX: Show user-friendly error instead of raw Firebase error
       let msg = 'লগইন ব্যর্থ হয়েছে।';
       if (error.code === 'auth/user-not-found') {
         msg = 'এই ইমেইল দিয়ে কোনো অ্যাকাউন্ট পাওয়া যায়নি।';
-      } else if (error.code === 'auth/wrong-password') {
-        msg = 'পাসওয়ার্ড সঠিক নয়।';
+      } else if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+        msg = 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';
       } else if (error.code === 'auth/too-many-requests') {
         msg = 'অনেক বেশি চেষ্টা করা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।';
       } else if (error.code === 'auth/invalid-email') {

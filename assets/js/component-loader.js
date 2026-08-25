@@ -32,7 +32,8 @@
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Dashboards</div>
                         <a href="/customer-dashboard.html" class="dd-icon">👤</a><a href="/customer-dashboard.html">Customer Dashboard</a>
-                        <a href="/admin-dashboard.html" class="dd-icon">🔧</a><a href="/admin-dashboard.html">Admin Dashboard</a>
+                        <a href="/admin-login.html" class="dd-icon" id="sf-nav-admin-login" style="display:none">🔑</a><a href="/admin-login.html" id="sf-nav-admin-login-text" style="display:none">Admin Login</a>
+                        <a href="/admin-dashboard.html" class="dd-icon" id="sf-nav-admin-dashboard" style="display:none">🔧</a><a href="/admin-dashboard.html" id="sf-nav-admin-dashboard-text" style="display:none">Admin Dashboard</a>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Activity</div>
                         <a href="/customer-orders.html" class="dd-icon">📋</a><a href="/customer-orders.html">Orders</a>
@@ -65,7 +66,8 @@
         <div id="sf-nav-dashboard-mobile">
             <div class="dash-slide-label">Dashboards</div>
             <a href="/customer-dashboard.html"><span class="dd-icon">👤</span> Customer Dashboard</a>
-            <a href="/admin-dashboard.html"><span class="dd-icon">🔧</span> Admin Dashboard</a>
+            <a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">🔑</span> Admin Login</a>
+            <a href="/admin-dashboard.html" id="sf-nav-admin-dashboard-mobile" style="display:none"><span class="dd-icon">🔧</span> Admin Dashboard</a>
             <div class="dd-sep"></div>
         </div>
         <div class="dash-slide-label">Browse</div>
@@ -336,7 +338,12 @@
         if (!window.firebase) {
             import('https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js')
                 .then(function (appMod) {
-                    return import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js').then(function (authMod) {
+                    return Promise.all([
+                        import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js'),
+                        import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js')
+                    ]).then(function (mods) {
+                        var authMod = mods[0];
+                        var fsMod = mods[1];
                         var cfg = {
                             apiKey: "AIzaSyCwD4knvy0O2KlGFte7qfHsAkiS8QeMRB8",
                             authDomain: "sowrov-fertilizer-905de.firebaseapp.com",
@@ -347,32 +354,73 @@
                         };
                         var app = appMod.initializeApp(cfg);
                         var auth = authMod.getAuth(app);
-                        window.firebase = { app: app, auth: auth };
-                        listenAuth(auth);
+                        var db = fsMod.getFirestore(app);
+                        window.firebase = { app: app, auth: auth, db: db, fsMod: fsMod };
+                        listenAuth(auth, db, fsMod);
                     });
                 })
                 .catch(function (e) { console.warn('[Auth] Firebase init failed:', e); });
         } else {
-            listenAuth(window.firebase.auth);
+            listenAuth(window.firebase.auth, window.firebase.db, window.firebase.fsMod);
         }
 
-        function listenAuth(auth) {
+        function listenAuth(auth, db, fsMod) {
             var loginEl = document.getElementById('sf-nav-login');
             var dashEl = document.getElementById('sf-nav-dashboard');
             var loginMobile = document.getElementById('sf-nav-login-mobile');
             var dashMobile = document.getElementById('sf-nav-dashboard-mobile');
+            var adminLoginEl = document.getElementById('sf-nav-admin-login');
+            var adminLoginTextEl = document.getElementById('sf-nav-admin-login-text');
+            var adminDashEl = document.getElementById('sf-nav-admin-dashboard');
+            var adminDashTextEl = document.getElementById('sf-nav-admin-dashboard-text');
+            var adminLoginMobile = document.getElementById('sf-nav-admin-login-mobile');
+            var adminDashMobile = document.getElementById('sf-nav-admin-dashboard-mobile');
             if (!loginEl || !dashEl) return;
+
+            function showAdminLinks(isAdmin, isLoggedIn) {
+                if (isAdmin) {
+                    if (adminLoginEl) adminLoginEl.style.display = 'none';
+                    if (adminLoginTextEl) adminLoginTextEl.style.display = 'none';
+                    if (adminDashEl) adminDashEl.style.display = '';
+                    if (adminDashTextEl) adminDashTextEl.style.display = '';
+                    if (adminLoginMobile) adminLoginMobile.style.display = 'none';
+                    if (adminDashMobile) adminDashMobile.style.display = '';
+                } else if (isLoggedIn) {
+                    if (adminLoginEl) adminLoginEl.style.display = 'none';
+                    if (adminLoginTextEl) adminLoginTextEl.style.display = 'none';
+                    if (adminDashEl) adminDashEl.style.display = 'none';
+                    if (adminDashTextEl) adminDashTextEl.style.display = 'none';
+                    if (adminLoginMobile) adminLoginMobile.style.display = 'none';
+                    if (adminDashMobile) adminDashMobile.style.display = 'none';
+                } else {
+                    if (adminLoginEl) adminLoginEl.style.display = '';
+                    if (adminLoginTextEl) adminLoginTextEl.style.display = '';
+                    if (adminDashEl) adminDashEl.style.display = 'none';
+                    if (adminDashTextEl) adminDashTextEl.style.display = 'none';
+                    if (adminLoginMobile) adminLoginMobile.style.display = '';
+                    if (adminDashMobile) adminDashMobile.style.display = 'none';
+                }
+            }
+
             auth.onAuthStateChanged(function (user) {
+                dashEl.style.display = '';
+                if (dashMobile) dashMobile.style.display = '';
+
                 if (user) {
                     loginEl.style.display = 'none';
-                    dashEl.style.display = '';
                     if (loginMobile) loginMobile.style.display = 'none';
-                    if (dashMobile) dashMobile.style.display = '';
+
+                    fsMod.getDoc(fsMod.doc(db, 'users', user.uid)).then(function (snap) {
+                        var data = snap.exists() ? snap.data() : null;
+                        var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
+                        showAdminLinks(isAdmin, true);
+                    }).catch(function () {
+                        showAdminLinks(false, true);
+                    });
                 } else {
                     loginEl.style.display = '';
-                    dashEl.style.display = 'none';
                     if (loginMobile) loginMobile.style.display = '';
-                    if (dashMobile) dashMobile.style.display = 'none';
+                    showAdminLinks(false, false);
                 }
             });
         }
