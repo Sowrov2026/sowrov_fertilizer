@@ -391,8 +391,8 @@
             function applyNavState(isLoggedIn, isAdmin) {
                 loginEl.style.display = isLoggedIn ? 'none' : '';
                 if (loginMobile) loginMobile.style.display = isLoggedIn ? 'none' : '';
-                dashEl.style.display = '';
-                if (dashMobile) dashMobile.style.display = '';
+                dashEl.style.display = isLoggedIn ? '' : 'none';
+                if (dashMobile) dashMobile.style.display = isLoggedIn ? '' : 'none';
                 var custDash = isLoggedIn && !isAdmin;
                 if (custDashEl) custDashEl.style.display = custDash ? '' : 'none';
                 if (custDashTextEl) custDashTextEl.style.display = custDash ? '' : 'none';
