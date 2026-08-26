@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v26';
+const CACHE_VERSION = 'sf-v29';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 

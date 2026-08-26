@@ -31,20 +31,20 @@
                         <a href="/about.html" class="dd-icon">ℹ️</a><a href="/about.html">About</a>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Dashboards</div>
-                        <a href="/customer-dashboard.html" class="dd-icon">👤</a><a href="/customer-dashboard.html">Customer Dashboard</a>
+                        <a href="/customer-dashboard.html" class="dd-icon" id="sf-nav-cust-dash" style="display:none">👤</a><a href="/customer-dashboard.html" id="sf-nav-cust-dash-text" style="display:none">Customer Dashboard</a>
                         <a href="/admin-login.html" class="dd-icon" id="sf-nav-admin-login" style="display:none">🔑</a><a href="/admin-login.html" id="sf-nav-admin-login-text" style="display:none">Admin Login</a>
                         <a href="/admin-dashboard.html" class="dd-icon" id="sf-nav-admin-dashboard" style="display:none">🔧</a><a href="/admin-dashboard.html" id="sf-nav-admin-dashboard-text" style="display:none">Admin Dashboard</a>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Activity</div>
                         <a href="/customer-orders.html" class="dd-icon">📋</a><a href="/customer-orders.html">Orders</a>
-                        <a href="/admin-reviews.html" class="dd-icon">⭐</a><a href="/admin-reviews.html">Reviews</a>
+                        <a href="/admin-reviews.html" class="dd-icon" id="sf-nav-admin-reviews" style="display:none">⭐</a><a href="/admin-reviews.html" id="sf-nav-admin-reviews-text" style="display:none">Reviews</a>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Account</div>
                         <a href="/profile.html" class="dd-icon">🧑</a><a href="/profile.html">Profile</a>
-                        <a href="/admin-settings.html" class="dd-icon">⚙️</a><a href="/admin-settings.html">Settings</a>
+                        <a href="/admin-settings.html" class="dd-icon" id="sf-nav-admin-settings" style="display:none">⚙️</a><a href="/admin-settings.html" id="sf-nav-admin-settings-text" style="display:none">Settings</a>
                         <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Admin</div>
-                        <a href="/admin-reports.html" class="dd-icon">📈</a><a href="/admin-reports.html">Reports</a>
+                        <div id="sf-nav-admin-section" style="display:none"><div class="dash-dropdown-label">Admin</div>
+                        <a href="/admin-reports.html" class="dd-icon">📈</a><a href="/admin-reports.html">Reports</a></div>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Support</div>
                         <a href="https://wa.me/8801829775552" target="_blank" class="dd-icon">💬</a><a href="https://wa.me/8801829775552" target="_blank">WhatsApp Support</a>
@@ -65,7 +65,7 @@
         <a href="/customer-login.html" class="btn" id="sf-nav-login-mobile" style="display:none;width:100%;text-align:center;margin-bottom:12px">Login</a>
         <div id="sf-nav-dashboard-mobile">
             <div class="dash-slide-label">Dashboards</div>
-            <a href="/customer-dashboard.html"><span class="dd-icon">👤</span> Customer Dashboard</a>
+            <a href="/customer-dashboard.html" id="sf-nav-cust-dash-mobile" style="display:none"><span class="dd-icon">👤</span> Customer Dashboard</a>
             <a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">🔑</span> Admin Login</a>
             <a href="/admin-dashboard.html" id="sf-nav-admin-dashboard-mobile" style="display:none"><span class="dd-icon">🔧</span> Admin Dashboard</a>
             <div class="dd-sep"></div>
@@ -79,14 +79,14 @@
         <div class="dd-sep"></div>
         <div class="dash-slide-label">Activity</div>
         <a href="/customer-orders.html"><span class="dd-icon">📋</span> Orders</a>
-        <a href="/admin-reviews.html"><span class="dd-icon">⭐</span> Reviews</a>
+        <a href="/admin-reviews.html" id="sf-nav-admin-reviews-mobile" style="display:none"><span class="dd-icon">⭐</span> Reviews</a>
         <div class="dd-sep"></div>
         <div class="dash-slide-label">Account</div>
         <a href="/profile.html"><span class="dd-icon">🧑</span> Profile</a>
-        <a href="/admin-settings.html"><span class="dd-icon">⚙️</span> Settings</a>
+        <a href="/admin-settings.html" id="sf-nav-admin-settings-mobile" style="display:none"><span class="dd-icon">⚙️</span> Settings</a>
         <div class="dd-sep"></div>
-        <div class="dash-slide-label">Admin</div>
-        <a href="/admin-reports.html"><span class="dd-icon">📈</span> Reports</a>
+        <div id="sf-nav-admin-section-mobile" style="display:none"><div class="dash-slide-label">Admin</div>
+        <a href="/admin-reports.html"><span class="dd-icon">📈</span> Reports</a></div>
         <div class="dd-sep"></div>
         <div class="dash-slide-label">Support</div>
         <a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">💬</span> WhatsApp Support</a>
@@ -369,59 +369,67 @@
             var dashEl = document.getElementById('sf-nav-dashboard');
             var loginMobile = document.getElementById('sf-nav-login-mobile');
             var dashMobile = document.getElementById('sf-nav-dashboard-mobile');
+            var custDashEl = document.getElementById('sf-nav-cust-dash');
+            var custDashTextEl = document.getElementById('sf-nav-cust-dash-text');
+            var custDashMobile = document.getElementById('sf-nav-cust-dash-mobile');
             var adminLoginEl = document.getElementById('sf-nav-admin-login');
             var adminLoginTextEl = document.getElementById('sf-nav-admin-login-text');
+            var adminLoginMobile = document.getElementById('sf-nav-admin-login-mobile');
             var adminDashEl = document.getElementById('sf-nav-admin-dashboard');
             var adminDashTextEl = document.getElementById('sf-nav-admin-dashboard-text');
-            var adminLoginMobile = document.getElementById('sf-nav-admin-login-mobile');
             var adminDashMobile = document.getElementById('sf-nav-admin-dashboard-mobile');
+            var adminSectionEl = document.getElementById('sf-nav-admin-section');
+            var adminSectionMobile = document.getElementById('sf-nav-admin-section-mobile');
+            var adminReviewsEl = document.getElementById('sf-nav-admin-reviews');
+            var adminReviewsTextEl = document.getElementById('sf-nav-admin-reviews-text');
+            var adminReviewsMobile = document.getElementById('sf-nav-admin-reviews-mobile');
+            var adminSettingsEl = document.getElementById('sf-nav-admin-settings');
+            var adminSettingsTextEl = document.getElementById('sf-nav-admin-settings-text');
+            var adminSettingsMobile = document.getElementById('sf-nav-admin-settings-mobile');
             if (!loginEl || !dashEl) return;
 
-            function showAdminLinks(isAdmin, isLoggedIn) {
-                if (isAdmin) {
-                    if (adminLoginEl) adminLoginEl.style.display = 'none';
-                    if (adminLoginTextEl) adminLoginTextEl.style.display = 'none';
-                    if (adminDashEl) adminDashEl.style.display = '';
-                    if (adminDashTextEl) adminDashTextEl.style.display = '';
-                    if (adminLoginMobile) adminLoginMobile.style.display = 'none';
-                    if (adminDashMobile) adminDashMobile.style.display = '';
-                } else if (isLoggedIn) {
-                    if (adminLoginEl) adminLoginEl.style.display = 'none';
-                    if (adminLoginTextEl) adminLoginTextEl.style.display = 'none';
-                    if (adminDashEl) adminDashEl.style.display = 'none';
-                    if (adminDashTextEl) adminDashTextEl.style.display = 'none';
-                    if (adminLoginMobile) adminLoginMobile.style.display = 'none';
-                    if (adminDashMobile) adminDashMobile.style.display = 'none';
-                } else {
-                    if (adminLoginEl) adminLoginEl.style.display = '';
-                    if (adminLoginTextEl) adminLoginTextEl.style.display = '';
-                    if (adminDashEl) adminDashEl.style.display = 'none';
-                    if (adminDashTextEl) adminDashTextEl.style.display = 'none';
-                    if (adminLoginMobile) adminLoginMobile.style.display = '';
-                    if (adminDashMobile) adminDashMobile.style.display = 'none';
-                }
+            function applyNavState(isLoggedIn, isAdmin) {
+                loginEl.style.display = isLoggedIn ? 'none' : '';
+                if (loginMobile) loginMobile.style.display = isLoggedIn ? 'none' : '';
+                dashEl.style.display = '';
+                if (dashMobile) dashMobile.style.display = '';
+                var custDash = isLoggedIn && !isAdmin;
+                if (custDashEl) custDashEl.style.display = custDash ? '' : 'none';
+                if (custDashTextEl) custDashTextEl.style.display = custDash ? '' : 'none';
+                if (custDashMobile) custDashMobile.style.display = custDash ? '' : 'none';
+                var showAdminLogin = !isAdmin;
+                if (adminLoginEl) adminLoginEl.style.display = showAdminLogin ? '' : 'none';
+                if (adminLoginTextEl) adminLoginTextEl.style.display = showAdminLogin ? '' : 'none';
+                if (adminLoginMobile) adminLoginMobile.style.display = showAdminLogin ? '' : 'none';
+                if (adminDashEl) adminDashEl.style.display = isAdmin ? '' : 'none';
+                if (adminDashTextEl) adminDashTextEl.style.display = isAdmin ? '' : 'none';
+                if (adminDashMobile) adminDashMobile.style.display = isAdmin ? '' : 'none';
+                if (adminSectionEl) adminSectionEl.style.display = isAdmin ? '' : 'none';
+                if (adminSectionMobile) adminSectionMobile.style.display = isAdmin ? '' : 'none';
+                if (adminReviewsEl) adminReviewsEl.style.display = isAdmin ? '' : 'none';
+                if (adminReviewsTextEl) adminReviewsTextEl.style.display = isAdmin ? '' : 'none';
+                if (adminReviewsMobile) adminReviewsMobile.style.display = isAdmin ? '' : 'none';
+                if (adminSettingsEl) adminSettingsEl.style.display = isAdmin ? '' : 'none';
+                if (adminSettingsTextEl) adminSettingsTextEl.style.display = isAdmin ? '' : 'none';
+                if (adminSettingsMobile) adminSettingsMobile.style.display = isAdmin ? '' : 'none';
             }
 
             auth.onAuthStateChanged(function (user) {
+                if (!user) {
+                    applyNavState(false, false);
+                    return;
+                }
+                loginEl.style.display = 'none';
+                if (loginMobile) loginMobile.style.display = 'none';
                 dashEl.style.display = '';
                 if (dashMobile) dashMobile.style.display = '';
-
-                if (user) {
-                    loginEl.style.display = 'none';
-                    if (loginMobile) loginMobile.style.display = 'none';
-
-                    fsMod.getDoc(fsMod.doc(db, 'users', user.uid)).then(function (snap) {
-                        var data = snap.exists() ? snap.data() : null;
-                        var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
-                        showAdminLinks(isAdmin, true);
-                    }).catch(function () {
-                        showAdminLinks(false, true);
-                    });
-                } else {
-                    loginEl.style.display = '';
-                    if (loginMobile) loginMobile.style.display = '';
-                    showAdminLinks(false, false);
-                }
+                fsMod.getDoc(fsMod.doc(db, 'users', user.uid)).then(function (snap) {
+                    var data = snap.exists() ? snap.data() : null;
+                    var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
+                    applyNavState(true, isAdmin);
+                }).catch(function () {
+                    applyNavState(true, false);
+                });
             });
         }
     }
