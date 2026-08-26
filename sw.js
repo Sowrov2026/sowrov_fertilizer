@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v30';
+const CACHE_VERSION = 'sf-v31';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -42,7 +42,10 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE).then(async cache => {
       for (const asset of STATIC_ASSETS) {
-        try { await cache.add(asset); }
+        try {
+          const response = await fetch(asset, { cache: 'no-store' });
+          if (response.ok) await cache.put(asset, response);
+        }
         catch (err) { console.warn('[SW] Pre-cache skip:', asset); }
       }
     })
@@ -94,7 +97,7 @@ async function cacheFirst(request, cacheName) {
   if (cached) return cached;
 
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { cache: 'no-store' });
     if (isCacheableResponse(response)) {
       await cache.put(request, response.clone());
     }
@@ -106,7 +109,7 @@ async function cacheFirst(request, cacheName) {
 
 async function networkFirst(request, cacheName) {
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { cache: 'no-store' });
     if (isCacheableResponse(response)) {
       const cache = await caches.open(cacheName);
       await cache.put(request, response.clone());
@@ -124,7 +127,7 @@ async function staleWhileRevalidate(request, cacheName) {
   const cached = await caches.match(request);
 
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { cache: 'no-store' });
     if (isCacheableResponse(response)) {
       const cache = await caches.open(cacheName);
       await cache.put(request, response.clone());

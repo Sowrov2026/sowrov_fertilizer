@@ -63,7 +63,7 @@
     </div>
     <div class="dash-slide-body">
         <a href="/customer-login.html" class="btn" id="sf-nav-login-mobile" style="display:none;width:100%;text-align:center;margin-bottom:12px">Login</a>
-        <div id="sf-nav-dashboard-mobile">
+        <div id="sf-nav-dashboard-mobile" style="display:none">
             <div class="dash-slide-label">Dashboards</div>
             <a href="/customer-dashboard.html" id="sf-nav-cust-dash-mobile" style="display:none"><span class="dd-icon">👤</span> Customer Dashboard</a>
             <a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">🔑</span> Admin Login</a>
