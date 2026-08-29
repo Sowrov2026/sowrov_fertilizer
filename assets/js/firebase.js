@@ -5,7 +5,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { getAuth, initializeAuth, inMemoryPersistence } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
@@ -36,13 +36,11 @@ const customerAuth = getAuth(customerApp);
 
 // ==========================================
 // Admin App (named) — used by admin pages
-// Uses inMemory persistence to avoid IndexedDB collision with customerAuth
-// Admin must re-login after page refresh (acceptable trade-off)
 // ==========================================
 
 const adminApp = initializeApp(firebaseConfig, "sf-admin");
 
-const adminAuth = initializeAuth(adminApp, { persistence: inMemoryPersistence });
+const adminAuth = getAuth(adminApp);
 
 // ==========================================
 // Shared services (same project, same Firestore)
