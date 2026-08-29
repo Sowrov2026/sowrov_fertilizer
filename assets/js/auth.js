@@ -37,6 +37,9 @@ if (loginForm) {
         return;
       }
 
+      // Save admin session for isolation
+      localStorage.setItem('sf_admin_session', JSON.stringify({ uid: user.uid, email: user.email || "" }));
+
       window.location.href = "/admin-dashboard.html";
 
     } catch (error) {
@@ -101,6 +104,7 @@ window.adminLogout = async function () {
   } catch (error) {
     console.error('Logout error:', error);
   } finally {
+    localStorage.removeItem('sf_admin_session');
     window.location.href = "/admin-login.html";
   }
 

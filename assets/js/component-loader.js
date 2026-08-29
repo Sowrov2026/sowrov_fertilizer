@@ -419,6 +419,12 @@
                     var data = snap.exists() ? snap.data() : null;
                     var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
                     applyNavState(true, isAdmin);
+                    // Auto sign out admin on Home page to preserve customer session
+                    if (isAdmin && (CURRENT_PAGE === 'index.html' || CURRENT_PAGE === '' || CURRENT_PAGE === '/')) {
+                        auth.signOut().then(function() {
+                            localStorage.removeItem('sf_admin_session');
+                        });
+                    }
                 }).catch(function () {
                     applyNavState(true, false);
                 });
