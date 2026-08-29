@@ -37,69 +37,14 @@ onAuthStateChanged(auth, async(user)=>{
 
 
     if(!user){
-        // Check localStorage for customer session as fallback
-        const saved = localStorage.getItem('sf_customer_session');
-        if (saved) {
-            const savedSession = JSON.parse(saved);
-            // Use saved UID to load data
-            try {
-                const userSnap = await getDoc(doc(db, "users", savedSession.uid));
-                if (!userSnap.exists()) {
-                    alert("User profile not found.");
-                    window.location.href = "/customer-login.html";
-                    return;
-                }
-                // Continue with saved UID
-                const customer = userSnap.data();
-                const customerPhone = customer.phone || "";
-                document.getElementById("welcomeText").innerHTML = `Welcome ${customer.name || "Customer"} 👋`;
-                document.getElementById("profileName").innerText = customer.name || "-";
-                document.getElementById("profileEmail").innerText = customer.email || "-";
-                document.getElementById("profilePhone").innerText = customer.phone || "-";
-                document.getElementById("profileAddress").innerText = customer.address || "-";
 
-                const orderQuery = query(collection(db,"orders"), where("phone","==",customerPhone));
-                const orderSnap = await getDocs(orderQuery);
-                const orderBody = document.getElementById("customerOrdersBody");
-                let totalOrders = 0;
-                let totalSpent = 0;
-                let pending = 0;
-                let delivered = 0;
-                orderBody.innerHTML="";
-                orderSnap.forEach((doc)=>{
-                    const order = doc.data();
-                    totalOrders++;
-                    totalSpent += Number(order.total || 0);
-                    if(order.status==="Pending") pending++;
-                    if(order.status==="Delivered") delivered++;
-                    orderBody.innerHTML += `
-<tr>
-<td>${order.orderNumber}</td>
-<td>${order.productName}</td>
-<td>${order.quantity} kg</td>
-<td>৳${order.total}</td>
-<td>
-<div class="order-actions">
-<button class="btn" onclick="viewOrder('${doc.id}')">Details</button>
-<button class="btn" onclick="trackOrder('${doc.id}')">Track</button>
-<a href="invoice.html?id=${doc.id}" class="btn">Invoice</a>
-</div>
-</td>
-</tr>
-`;
-                });
-                document.getElementById("customerOrders").innerText = totalOrders;
-                document.getElementById("customerSpent").innerText = "৳"+totalSpent;
-                document.getElementById("pendingOrders").innerText = pending;
-                document.getElementById("deliveredOrders").innerText = delivered;
-            } catch (error) {
-                console.error(error);
-                alert(error.message);
-            }
-            return;
-        }
+
         window.location.href = "/customer-login.html";
+
+
         return;
+
+
     }
 
 
@@ -563,7 +508,6 @@ window.customerLogout = async function () {
     try {
 
         await signOut(auth);
-        localStorage.removeItem('sf_customer_session');
 
         alert("Logged Out Successfully");
 

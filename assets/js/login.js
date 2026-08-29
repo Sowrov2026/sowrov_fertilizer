@@ -102,9 +102,6 @@ if(user.status === "blocked"){
 
 alert("✅ Login Successful");
 
-// Save customer session for isolation
-localStorage.setItem('sf_customer_session', JSON.stringify({ uid: uid, email: email.value.trim() }));
-
 window.location.href = "/customer-dashboard.html";
 }
 
@@ -151,10 +148,9 @@ path.includes("customer-orders")
 onAuthStateChanged(auth,(user)=>{
 
 if(!user){
-    // Check localStorage for customer session as fallback
-    const saved = localStorage.getItem('sf_customer_session');
-    if (saved) return; // Don't redirect, wait for potential session restoration
-    window.location.href = "/customer-login.html";
+
+window.location.href = "/customer-login.html";
+
 }
 
 });
@@ -168,7 +164,6 @@ if(!user){
 window.customerLogout = async ()=>{
 try{
 await signOut(auth);
-localStorage.removeItem('sf_customer_session');
 window.location.href = "/customer-login.html";
 }catch(error){
 console.error("Logout error:",error);
@@ -242,9 +237,6 @@ if (googleLoginBtn) {
                     return;
                 }
             }
-
-            // Save customer session for isolation
-            localStorage.setItem('sf_customer_session', JSON.stringify({ uid: firebaseUser.uid, email: firebaseUser.email || "" }));
 
             window.location.href = "/customer-dashboard.html";
 

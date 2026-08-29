@@ -52,37 +52,11 @@ let currentUID = null;
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
-        // Check localStorage for customer session as fallback
-        const saved = localStorage.getItem('sf_customer_session');
-        if (saved) {
-            const savedSession = JSON.parse(saved);
-            currentUID = savedSession.uid;
-            try {
-                const snap = await getDoc(doc(db, "users", currentUID));
-                if (!snap.exists()) {
-                    alert("User not found.");
-                    return;
-                }
-                const data = snap.data();
-                profileName.value = data.name || "";
-                profileEmail.value = data.email || "";
-                profilePhone.value = data.phone || "";
-                profileAddress.value = data.address || "";
-                if (data.photo) {
-                    profilePreview.src = data.photo;
-                }
-                profileOrders.textContent = data.totalOrders || 0;
-                profileSpent.textContent = "৳" + (data.totalSpent || 0);
-                profileStatus.textContent = data.status || "active";
-                document.getElementById("profileLoading").style.display = "none";
-            } catch (error) {
-                console.error(error);
-                alert("Failed to load profile.");
-            }
-            return;
-        }
+
         window.location.href = "/customer-login.html";
+
         return;
+
     }
 
     currentUID = user.uid;
@@ -301,7 +275,6 @@ alert(error.message);
 window.customerLogout = async () => {
     try {
         await signOut(auth);
-        localStorage.removeItem('sf_customer_session');
         window.location.href = "/customer-login.html";
     } catch (error) {
         console.error("Logout error:", error);

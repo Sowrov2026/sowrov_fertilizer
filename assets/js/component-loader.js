@@ -327,36 +327,15 @@
     // FIREBASE AUTH STATE → NAVBAR TOGGLE
     // ========================================
     function initAuth() {
-        if (!window.firebase) {
-            import('https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js')
-                .then(function (appMod) {
-                    return Promise.all([
-                        import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js'),
-                        import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js')
-                    ]).then(function (mods) {
-                        var authMod = mods[0];
-                        var fsMod = mods[1];
-                        var cfg = {
-                            apiKey: "AIzaSyCwD4knvy0O2KlGFte7qfHsAkiS8QeMRB8",
-                            authDomain: "sowrov-fertilizer-905de.firebaseapp.com",
-                            projectId: "sowrov-fertilizer-905de",
-                            storageBucket: "sowrov-fertilizer-905de.firebasestorage.app",
-                            messagingSenderId: "726860595005",
-                            appId: "1:726860595005:web:76b82c1d32a72e98c98f54"
-                        };
-                        var app = appMod.initializeApp(cfg);
-                        var auth = authMod.getAuth(app);
-                        var db = fsMod.getFirestore(app);
-                        window.firebase = { app: app, auth: auth, db: db, fsMod: fsMod };
-                        listenAuth(auth, db, fsMod);
-                    });
-                })
-                .catch(function (e) { console.warn('[Auth] Firebase init failed:', e); });
-        } else {
-            listenAuth(window.firebase.auth, window.firebase.db, window.firebase.fsMod);
-        }
+        import('./firebase.js').then(function (firebase) {
+            return import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js').then(function (fsMod) {
+                listenAuth(firebase.customerAuth, firebase.adminAuth, firebase.db, fsMod);
+            });
+        }).catch(function (e) {
+            console.warn('[Auth] Firebase init failed:', e);
+        });
 
-        function listenAuth(auth, db, fsMod) {
+        function listenAuth(customerAuth, adminAuth, db, fsMod) {
             var loginEl = document.getElementById('sf-nav-login');
             var dashEl = document.getElementById('sf-nav-dashboard');
             var loginMobile = document.getElementById('sf-nav-login-mobile');
@@ -406,7 +385,7 @@
                 if (adminSettingsMobile) adminSettingsMobile.style.display = isAdmin ? '' : 'none';
             }
 
-            auth.onAuthStateChanged(function (user) {
+            customerAuth.onAuthStateChanged(function (user) {
                 if (!user) {
                     applyNavState(false, false);
                     return;
@@ -419,15 +398,16 @@
                     var data = snap.exists() ? snap.data() : null;
                     var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
                     applyNavState(true, isAdmin);
-                    // Auto sign out admin on Home page to preserve customer session
-                    if (isAdmin && (CURRENT_PAGE === 'index.html' || CURRENT_PAGE === '' || CURRENT_PAGE === '/')) {
-                        auth.signOut().then(function() {
-                            localStorage.removeItem('sf_admin_session');
-                        });
-                    }
                 }).catch(function () {
                     applyNavState(true, false);
                 });
+            });
+
+            adminAuth.onAuthStateChanged(function (adminUser) {
+                if (!adminUser) return;
+                if (CURRENT_PAGE === 'index.html' || CURRENT_PAGE === '' || CURRENT_PAGE === '/') {
+                    adminAuth.signOut();
+                }
             });
         }
     }

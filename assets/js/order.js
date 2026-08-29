@@ -74,24 +74,11 @@ const stockInfo = document.getElementById("stockInfo");
 onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
-        // Check localStorage for customer session as fallback
-        const saved = localStorage.getItem('sf_customer_session');
-        if (saved) {
-            const savedSession = JSON.parse(saved);
-            currentUser = { uid: savedSession.uid };
-            try {
-                const snap = await getDoc(doc(db, "users", savedSession.uid));
-                if (!snap.exists()) return;
-                const data = snap.data();
-                customerName.value = data.name || "";
-                phone.value = data.phone || "";
-            } catch (error) {
-                console.error(error);
-            }
-            return;
-        }
+
         window.location.href = "/customer-login.html";
+
         return;
+
     }
 
     currentUser=user;

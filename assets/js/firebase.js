@@ -1,5 +1,6 @@
 // ==========================================
-// Firebase Configuration
+// Firebase Configuration — Dual Auth Architecture
+// Customer: default app | Admin: named "sf-admin" app
 // ==========================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -25,25 +26,49 @@ const firebaseConfig = {
 
 };
 
-// Initialize Firebase
+// ==========================================
+// Customer App (default) — used by customer pages
+// ==========================================
 
-const app = initializeApp(firebaseConfig);
+const customerApp = initializeApp(firebaseConfig);
 
-// Firebase Services
+const customerAuth = getAuth(customerApp);
 
-const auth = getAuth(app);
+// ==========================================
+// Admin App (named) — used by admin pages
+// ==========================================
 
-const db = getFirestore(app);
+const adminApp = initializeApp(firebaseConfig, "sf-admin");
 
-// Export
+const adminAuth = getAuth(adminApp);
+
+// ==========================================
+// Shared services (same project, same Firestore)
+// ==========================================
+
+const db = getFirestore(customerApp);
+
+const storage = getStorage(customerApp);
+
+// ==========================================
+// Exports
+// auth = customerAuth (backward compatible for customer pages)
+// adminAuth = for admin pages
+// ==========================================
 
 export {
 
-    app,
+    customerApp,
 
-    auth,
+    customerAuth,
+
+    adminApp,
+
+    adminAuth,
+
+    auth: customerAuth,
 
     db
 
 };
-export const storage = getStorage(app);
+export { storage };

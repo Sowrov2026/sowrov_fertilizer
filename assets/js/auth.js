@@ -1,4 +1,4 @@
-﻿import { auth, db } from "./firebase.js";
+﻿import { adminAuth, db } from "./firebase.js";
 
 import {
   signInWithEmailAndPassword,
@@ -25,20 +25,17 @@ if (loginForm) {
 
     try {
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(adminAuth, email, password);
       const user = userCredential.user;
 
       const userDoc = await getDoc(doc(db, "users", user.uid));
       const userData = userDoc.exists() ? userDoc.data() : null;
 
       if (!userData || (userData.role !== "admin" && userData.role !== "super_admin")) {
-        await signOut(auth);
+        await signOut(adminAuth);
         alert('এই অ্যাকাউন্টটি অ্যাডমিন অ্যাক্সেস পায়নি।');
         return;
       }
-
-      // Save admin session for isolation
-      localStorage.setItem('sf_admin_session', JSON.stringify({ uid: user.uid, email: user.email || "" }));
 
       window.location.href = "/admin-dashboard.html";
 
@@ -62,7 +59,6 @@ if (loginForm) {
 
 // =========================
 // Protect All Admin Pages
-// V34 FIX: Check for admin- prefix instead of listing each page
 // =========================
 
 const currentPage = window.location.pathname;
@@ -70,7 +66,7 @@ const isAdminPage = currentPage.includes("admin-") && !currentPage.includes("adm
 
 if (isAdminPage) {
 
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(adminAuth, async (user) => {
 
         if (!user) {
             window.location.href = "/admin-login.html";
@@ -81,7 +77,7 @@ if (isAdminPage) {
             const userDoc = await getDoc(doc(db, "users", user.uid));
             const userData = userDoc.exists() ? userDoc.data() : null;
             if (!userData || (userData.role !== "admin" && userData.role !== "super_admin")) {
-                await signOut(auth);
+                await signOut(adminAuth);
                 window.location.href = "/admin-login.html";
             }
         } catch (e) {
@@ -94,17 +90,15 @@ if (isAdminPage) {
 
 // =========================
 // Logout
-// V34 FIX: Add error handling
 // =========================
 
 window.adminLogout = async function () {
 
   try {
-    await signOut(auth);
+    await signOut(adminAuth);
   } catch (error) {
     console.error('Logout error:', error);
   } finally {
-    localStorage.removeItem('sf_admin_session');
     window.location.href = "/admin-login.html";
   }
 

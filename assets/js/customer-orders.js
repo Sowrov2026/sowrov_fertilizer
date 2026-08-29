@@ -24,43 +24,11 @@ document.getElementById("customerOrdersTable");
 onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
-        // Check localStorage for customer session as fallback
-        const saved = localStorage.getItem('sf_customer_session');
-        if (saved) {
-            const savedSession = JSON.parse(saved);
-            // Use saved UID to load orders
-            try {
-                const q = query(collection(db, "orders"), where("userId", "==", savedSession.uid));
-                console.log("Logged User UID (fallback):", savedSession.uid);
-                onSnapshot(q, (snapshot) => {
-                    console.log("Total Orders:", snapshot.size);
-                    table.innerHTML = "";
-                    snapshot.forEach((doc) => {
-                        const order = doc.data();
-                        table.innerHTML += `
-<tr>
-<td>${order.orderId}</td>
-<td>${order.productName}</td>
-<td>${order.quantity} kg</td>
-<td>৳${Number(order.totalAmount).toLocaleString()}</td>
-<td>${order.paymentMethod}</td>
-<td><span class="status-badge">${order.paymentStatus}</span></td>
-<td><span class="status-badge ${order.status.toLowerCase()}">${order.status}</span></td>
-<td>
-<button class="btn trackBtn" data-status="${order.status}">Track</button>
-<button class="btn detailsBtn" data-id="${doc.id}">View</button>
-</td>
-</tr>
-`;
-                    });
-                });
-            } catch (error) {
-                console.error(error);
-            }
-            return;
-        }
+
         window.location.href = "/customer-login.html";
+
         return;
+
     }
 
     try{
