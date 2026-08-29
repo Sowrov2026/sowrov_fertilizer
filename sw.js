@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v31';
+const CACHE_VERSION = 'sf-v32';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -10,6 +10,7 @@ const STATIC_ASSETS = [
   '/assets/css/pages.css',
   '/assets/js/ai.js',
   '/assets/js/component-loader.js',
+  '/assets/js/floating-buttons.js',
   '/assets/js/script.js',
   '/assets/js/v15-integration.js',
   '/assets/js/v16-integration.js',
