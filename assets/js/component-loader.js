@@ -33,7 +33,6 @@
                         <div class="dash-dropdown-label">Dashboards</div>
                         <a href="/customer-dashboard.html" class="dd-icon" id="sf-nav-cust-dash" style="display:none">👤</a><a href="/customer-dashboard.html" id="sf-nav-cust-dash-text" style="display:none">Customer Dashboard</a>
                         <a href="/admin-login.html" class="dd-icon" id="sf-nav-admin-login" style="display:none">🔑</a><a href="/admin-login.html" id="sf-nav-admin-login-text" style="display:none">Admin Login</a>
-                        <a href="/admin-dashboard.html" class="dd-icon" id="sf-nav-admin-dashboard" style="display:none">🔧</a><a href="/admin-dashboard.html" id="sf-nav-admin-dashboard-text" style="display:none">Admin Dashboard</a>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Activity</div>
                         <a href="/customer-orders.html" class="dd-icon">📋</a><a href="/customer-orders.html">Orders</a>
@@ -42,9 +41,6 @@
                         <div class="dash-dropdown-label">Account</div>
                         <a href="/profile.html" class="dd-icon">🧑</a><a href="/profile.html">Profile</a>
                         <a href="/admin-settings.html" class="dd-icon" id="sf-nav-admin-settings" style="display:none">⚙️</a><a href="/admin-settings.html" id="sf-nav-admin-settings-text" style="display:none">Settings</a>
-                        <div class="dd-sep"></div>
-                        <div id="sf-nav-admin-section" style="display:none"><div class="dash-dropdown-label">Admin</div>
-                        <a href="/admin-reports.html" class="dd-icon">📈</a><a href="/admin-reports.html">Reports</a></div>
                         <div class="dd-sep"></div>
                         <div class="dash-dropdown-label">Support</div>
                         <a href="https://wa.me/8801829775552" target="_blank" class="dd-icon">💬</a><a href="https://wa.me/8801829775552" target="_blank">WhatsApp Support</a>
@@ -67,7 +63,6 @@
             <div class="dash-slide-label">Dashboards</div>
             <a href="/customer-dashboard.html" id="sf-nav-cust-dash-mobile" style="display:none"><span class="dd-icon">👤</span> Customer Dashboard</a>
             <a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">🔑</span> Admin Login</a>
-            <a href="/admin-dashboard.html" id="sf-nav-admin-dashboard-mobile" style="display:none"><span class="dd-icon">🔧</span> Admin Dashboard</a>
             <div class="dd-sep"></div>
         </div>
         <div class="dash-slide-label">Browse</div>
@@ -84,9 +79,6 @@
         <div class="dash-slide-label">Account</div>
         <a href="/profile.html"><span class="dd-icon">🧑</span> Profile</a>
         <a href="/admin-settings.html" id="sf-nav-admin-settings-mobile" style="display:none"><span class="dd-icon">⚙️</span> Settings</a>
-        <div class="dd-sep"></div>
-        <div id="sf-nav-admin-section-mobile" style="display:none"><div class="dash-slide-label">Admin</div>
-        <a href="/admin-reports.html"><span class="dd-icon">📈</span> Reports</a></div>
         <div class="dd-sep"></div>
         <div class="dash-slide-label">Support</div>
         <a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">💬</span> WhatsApp Support</a>
