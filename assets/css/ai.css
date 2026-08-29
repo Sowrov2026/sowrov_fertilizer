@@ -93,7 +93,7 @@
    ============================================ */
 .chat-toggle {
     position: fixed;
-    bottom: 24px;
+    bottom: 100px;
     right: 24px;
     width: 64px;
     height: 64px;
@@ -166,7 +166,7 @@
    ============================================ */
 .chat-window {
     position: fixed;
-    bottom: 100px;
+    bottom: 176px;
     right: 24px;
     width: var(--chat-width);
     height: var(--chat-height);
@@ -727,7 +727,7 @@
     }
 
     .chat-toggle {
-        bottom: 16px;
+        bottom: 86px;
         right: 16px;
         width: 56px;
         height: 56px;
@@ -774,7 +774,7 @@
     .chat-window {
         width: var(--chat-width);
         height: var(--chat-height);
-        bottom: 100px;
+        bottom: 176px;
         right: 24px;
         border-radius: var(--border-radius);
     }

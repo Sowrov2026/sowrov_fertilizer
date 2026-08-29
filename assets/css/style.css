@@ -2143,7 +2143,7 @@ section{
 
     right:25px;
 
-    bottom:105px;
+    bottom:180px;
 
     width:55px;
 
@@ -3552,6 +3552,26 @@ section{
     height:58px;
 
     font-size:28px;
+
+}
+
+.whatsapp-btn-only{
+
+    width:54px;
+
+    height:54px;
+
+    right:16px;
+
+    bottom:16px;
+
+}
+
+.whatsapp-btn-only img{
+
+    width:42px;
+
+    height:42px;
 
 }
 

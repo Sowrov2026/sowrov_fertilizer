@@ -49,3 +49,9 @@ temp/
 .wrangler/
 .vercel
 .env*
+
+# Service account keys (NEVER commit)
+*-service-account.json
+*-firebase-adminsdk*.json
+service-account.json
+credentials.json
