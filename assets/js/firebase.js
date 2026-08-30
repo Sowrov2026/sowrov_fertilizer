@@ -86,9 +86,8 @@ export {
 
     adminAuth,
 
-    auth: customerAuth,
-
     db
 
 };
 export { storage };
+export const auth = customerAuth;
