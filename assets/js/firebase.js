@@ -5,10 +5,14 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { getAuth, initializeAuth, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
+
+import { RECAPTCHA_SITE_KEY } from "./app-config.js";
 
 const firebaseConfig = {
 
@@ -40,7 +44,23 @@ const customerAuth = getAuth(customerApp);
 
 const adminApp = initializeApp(firebaseConfig, "sf-admin");
 
-const adminAuth = initializeAuth(adminApp, { persistence: browserSessionPersistence });
+const adminAuth = getAuth(adminApp);
+
+// ==========================================
+// App Check — reCAPTCHA Enterprise
+// ==========================================
+
+if (RECAPTCHA_SITE_KEY) {
+    initializeAppCheck(customerApp, {
+        provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY),
+        isTokenAutoRefreshEnabled: true
+    });
+
+    initializeAppCheck(adminApp, {
+        provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY),
+        isTokenAutoRefreshEnabled: true
+    });
+}
 
 // ==========================================
 // Shared services (same project, same Firestore)
