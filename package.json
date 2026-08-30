@@ -9,8 +9,8 @@
     "groq-sdk": "^0.12.0"
   },
   "scripts": {
-    "start": "vercel dev",
-    "build": "echo 'Static site - no build needed'",
+    "start": "node scripts/inject-config.js && vercel dev",
+    "build": "node scripts/inject-config.js",
     "test": "echo 'Tests passed'",
     "lint": "echo 'Lint passed'",
     "deploy": "vercel --prod"
