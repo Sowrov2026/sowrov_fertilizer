@@ -23,20 +23,25 @@ if (loginForm) {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
+    console.log('[SESSION DEBUG] Admin login form submitted');
+
     try {
 
       const userCredential = await signInWithEmailAndPassword(adminAuth, email, password);
       const user = userCredential.user;
+      console.log('[SESSION DEBUG] Admin signInWithEmailAndPassword SUCCESS, uid:', user.uid);
 
       const userDoc = await getDoc(doc(db, "users", user.uid));
       const userData = userDoc.exists() ? userDoc.data() : null;
 
       if (!userData || (userData.role !== "admin" && userData.role !== "super_admin")) {
+        console.log('[SESSION DEBUG] Admin role check FAILED, signing out');
         await signOut(adminAuth);
         alert('এই অ্যাকাউন্টটি অ্যাডমিন অ্যাক্সেস পায়নি।');
         return;
       }
 
+      console.log('[SESSION DEBUG] Admin role OK:', userData.role, '→ navigating to admin-dashboard');
       window.location.href = "/admin-dashboard.html";
 
     } catch (error) {
@@ -66,9 +71,14 @@ const isAdminPage = currentPage.includes("admin-") && !currentPage.includes("adm
 
 if (isAdminPage) {
 
+    console.log('[SESSION DEBUG] Admin page detected, protecting with onAuthStateChanged');
+
     onAuthStateChanged(adminAuth, async (user) => {
 
+        console.log('[SESSION DEBUG] admin page onAuthStateChanged. uid:', user ? user.uid : 'null');
+
         if (!user) {
+            console.log('[SESSION DEBUG] No admin user on admin page → redirect to admin-login');
             window.location.href = "/admin-login.html";
             return;
         }

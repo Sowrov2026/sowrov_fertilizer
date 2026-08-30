@@ -45,6 +45,8 @@ form.addEventListener("submit", async (e) => {
 
 e.preventDefault();
 
+console.log('[SESSION DEBUG] Customer login form submitted');
+
 try {
 
 const userCredential =
@@ -57,6 +59,8 @@ email.value.trim(),
 password.value
 
 );
+
+console.log('[SESSION DEBUG] Customer signInWithEmailAndPassword SUCCESS, uid:', userCredential.user.uid);
 
 const uid = userCredential.user.uid;
 

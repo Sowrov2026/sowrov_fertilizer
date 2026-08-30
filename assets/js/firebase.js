@@ -5,7 +5,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getAuth, initializeAuth, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
@@ -40,7 +40,7 @@ const customerAuth = getAuth(customerApp);
 
 const adminApp = initializeApp(firebaseConfig, "sf-admin");
 
-const adminAuth = getAuth(adminApp);
+const adminAuth = initializeAuth(adminApp, { persistence: browserSessionPersistence });
 
 // ==========================================
 // Shared services (same project, same Firestore)

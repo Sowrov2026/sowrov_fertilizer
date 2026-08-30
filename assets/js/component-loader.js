@@ -359,7 +359,10 @@
             var adminSettingsMobile = document.getElementById('sf-nav-admin-settings-mobile');
             if (!loginEl || !dashEl) return;
 
+            console.log('[SESSION DEBUG] listenAuth started. PAGE:', CURRENT_PAGE);
+
             function applyNavState(isLoggedIn, isAdmin) {
+                console.log('[SESSION DEBUG] applyNavState called. isLoggedIn:', isLoggedIn, 'isAdmin:', isAdmin);
                 loginEl.style.display = isLoggedIn ? 'none' : '';
                 if (loginMobile) loginMobile.style.display = isLoggedIn ? 'none' : '';
                 dashEl.style.display = isLoggedIn ? '' : 'none';
@@ -385,8 +388,13 @@
                 if (adminSettingsMobile) adminSettingsMobile.style.display = isAdmin ? '' : 'none';
             }
 
+            console.log('[SESSION DEBUG] customerAuth persistence type:', customerAuth.persistence ? 'set' : 'unknown');
+            console.log('[SESSION DEBUG] adminAuth persistence type:', adminAuth.persistence ? 'set' : 'unknown');
+
             customerAuth.onAuthStateChanged(function (user) {
+                console.log('[SESSION DEBUG] customerAuth.onAuthStateChanged. uid:', user ? user.uid : 'null');
                 if (!user) {
+                    console.log('[SESSION DEBUG] customer NOT logged in → applyNavState(false, false)');
                     applyNavState(false, false);
                     return;
                 }
@@ -394,19 +402,31 @@
                 if (loginMobile) loginMobile.style.display = 'none';
                 dashEl.style.display = '';
                 if (dashMobile) dashMobile.style.display = '';
+                console.log('[SESSION DEBUG] customer logged in. Fetching Firestore role for uid:', user.uid);
                 fsMod.getDoc(fsMod.doc(db, 'users', user.uid)).then(function (snap) {
                     var data = snap.exists() ? snap.data() : null;
                     var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
+                    console.log('[SESSION DEBUG] Firestore role:', data ? data.role : 'no doc', 'isAdmin:', isAdmin);
                     applyNavState(true, isAdmin);
-                }).catch(function () {
+                }).catch(function (e) {
+                    console.log('[SESSION DEBUG] Firestore fetch failed:', e);
                     applyNavState(true, false);
                 });
             });
 
             adminAuth.onAuthStateChanged(function (adminUser) {
-                if (!adminUser) return;
+                console.log('[SESSION DEBUG] adminAuth.onAuthStateChanged. uid:', adminUser ? adminUser.uid : 'null');
+                if (!adminUser) {
+                    console.log('[SESSION DEBUG] admin NOT logged in → no action');
+                    return;
+                }
                 if (CURRENT_PAGE === 'index.html' || CURRENT_PAGE === '' || CURRENT_PAGE === '/') {
-                    adminAuth.signOut();
+                    console.log('[SESSION DEBUG] HOME detected → calling adminAuth.signOut()');
+                    adminAuth.signOut().then(function () {
+                        console.log('[SESSION DEBUG] adminAuth.signOut() COMPLETED');
+                    }).catch(function (e) {
+                        console.log('[SESSION DEBUG] adminAuth.signOut() FAILED:', e);
+                    });
                 }
             });
         }
