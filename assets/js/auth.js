@@ -8,6 +8,10 @@ import {
 
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+import { renderWidget, getToken, resetWidget } from "./recaptcha-widget.js";
+
+renderWidget("admin-recaptcha");
+
 // =========================
 // Admin Login
 // =========================
@@ -19,6 +23,13 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
 
     e.preventDefault();
+
+    const recaptchaToken = getToken("admin-recaptcha");
+    if (!recaptchaToken) {
+      const errEl = document.getElementById("admin-recaptcha").closest(".recaptcha-group").querySelector(".recaptcha-error");
+      if (errEl) errEl.style.display = "block";
+      return;
+    }
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
@@ -50,6 +61,7 @@ if (loginForm) {
         msg = 'ইমেইল ঠিক নয়।';
       }
       alert(msg);
+      resetWidget("admin-recaptcha");
     }
 
   });

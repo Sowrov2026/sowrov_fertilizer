@@ -157,3 +157,15 @@ text-align:center;
 margin-top:25px;
 
 }
+
+.recaptcha-group{
+
+margin:20px 0;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+}

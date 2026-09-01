@@ -25,6 +25,8 @@ getDoc,
 setDoc
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+import { renderWidget, getToken, resetWidget } from "./recaptcha-widget.js";
 // ======================================
 // Elements
 // ======================================
@@ -36,6 +38,12 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 
 // ======================================
+// Initialize reCAPTCHA Widget
+// ======================================
+
+renderWidget("customer-recaptcha");
+
+// ======================================
 // Login
 // ======================================
 
@@ -44,6 +52,13 @@ if (form) {
 form.addEventListener("submit", async (e) => {
 
 e.preventDefault();
+
+const recaptchaToken = getToken("customer-recaptcha");
+if (!recaptchaToken) {
+    const errEl = document.querySelector("#customer-recaptcha").closest(".recaptcha-group").querySelector(".recaptcha-error");
+    if (errEl) errEl.style.display = "block";
+    return;
+}
 
 try {
 
@@ -122,6 +137,7 @@ if (error.code === 'auth/user-not-found') {
     msg = 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';
 }
 alert(msg);
+resetWidget("customer-recaptcha");
 
 }
 
