@@ -7,6 +7,11 @@ const loadCallbacks = [];
 
 function loadScript() {
     if (scriptLoaded) { fireCallbacks(); return; }
+    if (typeof grecaptcha !== "undefined" && grecaptcha.enterprise) {
+        scriptLoaded = true;
+        fireCallbacks();
+        return;
+    }
     if (scriptLoading) { return; }
     scriptLoading = true;
     const s = document.createElement("script");
