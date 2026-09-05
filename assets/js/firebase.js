@@ -77,38 +77,6 @@ if (RECAPTCHA_SITE_KEY) {
     console.warn("[App Check] RECAPTCHA_SITE_KEY not set — App Check skipped");
 }
 
-// ==========================================
-// TEMPORARY DIAGNOSTIC — REMOVE AFTER TEST
-// ==========================================
-setTimeout(async () => {
-    if (!customerAppCheck) {
-        console.log("[DIAG] customerAppCheck is null — App Check not initialized");
-        return;
-    }
-    try {
-        const result = await getToken(customerAppCheck, true);
-        const token = result.token;
-        console.log("[DIAG] token exists:", !!token);
-        console.log("[DIAG] token length:", token.length);
-        const parts = token.split(".");
-        console.log("[DIAG] JWT structure valid:", parts.length === 3);
-        if (parts.length === 3) {
-            const payload = JSON.parse(atob(parts[1]));
-            console.log("[DIAG] issuer:", payload.iss);
-            console.log("[DIAG] audience:", payload.aud);
-            console.log("[DIAG] sub:", payload.sub);
-            console.log("[DIAG] app_id:", payload.app_id);
-            console.log("[DIAG] configured app_id:", firebaseConfig.appId);
-            console.log("[DIAG] app_id matches config:", payload.app_id === firebaseConfig.appId);
-            console.log("[DIAG] exp:", new Date(payload.exp * 1000).toISOString());
-            console.log("[DIAG] iat:", new Date(payload.iat * 1000).toISOString());
-            console.log("[DIAG] expired:", Date.now() > payload.exp * 1000);
-        }
-    } catch (err) {
-        console.error("[DIAG] token generation FAILED:", err.message);
-    }
-}, 3000);
-
 export async function verifyAppCheckToken(appCheckInstance, label) {
     try {
         const result = await getToken(appCheckInstance, true);

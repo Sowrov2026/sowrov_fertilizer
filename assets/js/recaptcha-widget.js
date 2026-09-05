@@ -1,6 +1,6 @@
-import { RECAPTCHA_SITE_KEY } from "./app-config.js";
+import { RECAPTCHA_CHECKBOX_SITE_KEY } from "./app-config.js";
 
-const SCRIPT_URL = "https://www.google.com/recaptcha/enterprise.js?render=" + RECAPTCHA_SITE_KEY;
+const SCRIPT_URL = "https://www.google.com/recaptcha/enterprise.js?render=" + RECAPTCHA_CHECKBOX_SITE_KEY;
 let scriptLoaded = false;
 let scriptLoading = false;
 const loadCallbacks = [];
@@ -49,7 +49,7 @@ export function renderWidget(containerId, options) {
         const container = document.getElementById(containerId);
         if (!container) return;
         const widgetId = grecaptcha.enterprise.render(container, {
-            sitekey: RECAPTCHA_SITE_KEY,
+            sitekey: RECAPTCHA_CHECKBOX_SITE_KEY,
             theme: (options && options.theme) || "light",
             size: "normal",
             callback: function (token) {

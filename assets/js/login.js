@@ -41,7 +41,7 @@ const password = document.getElementById("password");
 // Initialize reCAPTCHA Widget
 // ======================================
 
-// renderWidget("customer-recaptcha"); // TEMP DISABLED FOR ISOLATION TEST
+renderWidget("customer-recaptcha");
 
 // ======================================
 // Login
