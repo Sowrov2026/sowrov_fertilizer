@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v36';
+const CACHE_VERSION = 'sf-v37';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -73,6 +73,10 @@ self.addEventListener('fetch', (event) => {
   }
 
   const url = new URL(request.url);
+
+  if (url.origin !== self.location.origin) {
+    return;
+  }
 
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(fetch(request));

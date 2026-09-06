@@ -75,16 +75,25 @@ if (loginForm) {
 const currentPage = window.location.pathname;
 const isAdminPage = currentPage.includes("admin-") && !currentPage.includes("admin-login");
 
+function waitForAdminAuth(timeoutMs) {
+    return new Promise(function(resolve) {
+        if (adminAuth.currentUser) { resolve(adminAuth.currentUser); return; }
+        var done = false;
+        var unsub = onAuthStateChanged(adminAuth, function(u) {
+            if (!done && u) { done = true; unsub(); resolve(u); }
+        });
+        setTimeout(function() {
+            if (!done) { done = true; unsub(); resolve(adminAuth.currentUser); }
+        }, timeoutMs);
+    });
+}
+
 if (isAdminPage) {
 
-adminAuth.authStateReady().then(() => {
+(async function() {
 
-    onAuthStateChanged(adminAuth, async (user) => {
-
-        if (!user) {
-            window.location.href = "/admin-login.html";
-            return;
-        }
+var user = await waitForAdminAuth(3000);
+if (!user) { window.location.href = "/admin-login.html"; return; }
 
         try {
             const userDoc = await getDoc(doc(db, "users", user.uid));
@@ -97,9 +106,7 @@ adminAuth.authStateReady().then(() => {
             console.error("Admin role check failed:", e);
         }
 
-    });
-
-}); // adminAuth.authStateReady()
+})(); // async IIFE
 
 }
 

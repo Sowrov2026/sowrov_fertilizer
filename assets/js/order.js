@@ -71,17 +71,23 @@ const stockInfo = document.getElementById("stockInfo");
 // Auto Login
 // ======================================
 
-auth.authStateReady().then(() => {
+function waitForAuthUser(timeoutMs) {
+    return new Promise(function(resolve) {
+        if (auth.currentUser) { resolve(auth.currentUser); return; }
+        var done = false;
+        var unsub = onAuthStateChanged(auth, function(u) {
+            if (!done && u) { done = true; unsub(); resolve(u); }
+        });
+        setTimeout(function() {
+            if (!done) { done = true; unsub(); resolve(auth.currentUser); }
+        }, timeoutMs);
+    });
+}
 
-onAuthStateChanged(auth, async(user)=>{
+(async function() {
 
-    if(!user){
-
-        window.location.href = "/customer-login.html";
-
-        return;
-
-    }
+var user = await waitForAuthUser(3000);
+if (!user) { window.location.href = "/customer-login.html"; return; }
 
     currentUser=user;
 
@@ -106,9 +112,7 @@ onAuthStateChanged(auth, async(user)=>{
 
     }
 
-});
-
-}); // auth.authStateReady()
+})(); // async IIFE
 
 // ======================================
 // Load Products
