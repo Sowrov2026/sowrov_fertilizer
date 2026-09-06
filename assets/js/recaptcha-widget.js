@@ -1,10 +1,7 @@
 import { RECAPTCHA_CHECKBOX_SITE_KEY } from "./app-config.js";
 
-var ONLOAD_CB = "_sfRecaptchaOnload";
-var SCRIPT_URL = "https://www.google.com/recaptcha/enterprise.js?onload=" + ONLOAD_CB + "&render=explicit";
-
 var scriptLoaded = false;
-var scriptLoading = false;
+var pollTimer = null;
 var loadCallbacks = [];
 
 function hasRenderApi() {
@@ -13,38 +10,25 @@ function hasRenderApi() {
         && typeof grecaptcha.enterprise.render === "function";
 }
 
-function fireCallbacks() {
-    scriptLoaded = true;
-    scriptLoading = false;
-    while (loadCallbacks.length) { loadCallbacks.shift()(); }
+function checkReady() {
+    if (hasRenderApi()) {
+        scriptLoaded = true;
+        if (pollTimer) { clearTimeout(pollTimer); pollTimer = null; }
+        while (loadCallbacks.length) { loadCallbacks.shift()(); }
+        return true;
+    }
+    return false;
 }
 
-function loadScript() {
-    if (scriptLoaded) { fireCallbacks(); return; }
-    if (hasRenderApi()) { fireCallbacks(); return; }
-    if (scriptLoading) { return; }
-    scriptLoading = true;
-
-    window[ONLOAD_CB] = function () {
-        delete window[ONLOAD_CB];
-        fireCallbacks();
-    };
-
-    var s = document.createElement("script");
-    s.src = SCRIPT_URL;
-    s.async = true;
-    s.defer = true;
-    s.onerror = function () {
-        scriptLoading = false;
-        console.error("[reCAPTCHA] Failed to load Enterprise checkbox script");
-    };
-    document.head.appendChild(s);
+function pollForApi() {
+    if (checkReady()) return;
+    pollTimer = setTimeout(pollForApi, 50);
 }
 
 export function onRecaptchaReady(cb) {
-    if (hasRenderApi()) { cb(); return; }
+    if (checkReady()) { cb(); return; }
     loadCallbacks.push(cb);
-    loadScript();
+    pollForApi();
 }
 
 var widgetInstances = new Map();
