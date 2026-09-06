@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v35';
+const CACHE_VERSION = 'sf-v36';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -85,7 +85,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (/\.(css|js|png|jpe?g|gif|svg|webp|ico|woff2?|json)$/i.test(url.pathname) || url.pathname.startsWith('/assets/')) {
-    event.respondWith(cacheFirst(request, STATIC_CACHE));
+    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
     return;
   }
 
