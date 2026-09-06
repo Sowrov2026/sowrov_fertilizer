@@ -4,4 +4,4 @@ export const RECAPTCHA_SITE_KEY = "6LcJGqAtAAAAAMKVVoTduSXY2oPYKF_58tPYbiDE";
 
 // CHECKBOX key — used only by the visible login reCAPTCHA widget
 // Do NOT use this for Firebase App Check (use RECAPTCHA_SITE_KEY above)
-export const RECAPTCHA_CHECKBOX_SITE_KEY = "6LfddqotAAAAANImg3A65CnFBzv6C5Dfv0-81aag";
+export const RECAPTCHA_CHECKBOX_SITE_KEY = "6LcuJqwtAAAAALoRZd1i7xziBrtEBbh4kruwvwJ7";
