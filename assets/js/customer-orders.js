@@ -21,6 +21,8 @@ import {
 const table =
 document.getElementById("customerOrdersTable");
 
+auth.authStateReady().then(() => {
+
 onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
@@ -115,6 +117,7 @@ View
 
 });
 
+}); // auth.authStateReady()
 
 
 // ======================================

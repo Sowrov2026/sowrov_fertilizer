@@ -33,6 +33,8 @@ getDocs
 // ======================================
 
 
+auth.authStateReady().then(() => {
+
 onAuthStateChanged(auth, async(user)=>{
 
 
@@ -295,6 +297,8 @@ Invoice
 
 
 });
+
+}); // auth.authStateReady()
 
 
 

@@ -77,6 +77,8 @@ const isAdminPage = currentPage.includes("admin-") && !currentPage.includes("adm
 
 if (isAdminPage) {
 
+adminAuth.authStateReady().then(() => {
+
     onAuthStateChanged(adminAuth, async (user) => {
 
         if (!user) {
@@ -96,6 +98,8 @@ if (isAdminPage) {
         }
 
     });
+
+}); // adminAuth.authStateReady()
 
 }
 

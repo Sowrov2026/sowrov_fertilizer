@@ -71,6 +71,8 @@ const stockInfo = document.getElementById("stockInfo");
 // Auto Login
 // ======================================
 
+auth.authStateReady().then(() => {
+
 onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
@@ -105,6 +107,8 @@ onAuthStateChanged(auth, async(user)=>{
     }
 
 });
+
+}); // auth.authStateReady()
 
 // ======================================
 // Load Products

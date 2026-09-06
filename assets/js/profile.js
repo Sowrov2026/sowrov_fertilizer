@@ -49,6 +49,8 @@ let currentUID = null;
 // Load Profile
 // ======================================
 
+auth.authStateReady().then(() => {
+
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
@@ -156,6 +158,8 @@ saveProfileBtn.style.background="";
     }
 
 });
+
+}); // auth.authStateReady()
 
 photoInput.addEventListener("change", async () => {
 
