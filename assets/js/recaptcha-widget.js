@@ -1,13 +1,19 @@
 import { RECAPTCHA_CHECKBOX_SITE_KEY } from "./app-config.js";
 
-const SCRIPT_URL = "https://www.google.com/recaptcha/enterprise.js?render=" + RECAPTCHA_CHECKBOX_SITE_KEY;
+const SCRIPT_URL = "https://www.google.com/recaptcha/enterprise.js";
 let scriptLoaded = false;
 let scriptLoading = false;
 const loadCallbacks = [];
 
+function hasRenderApi() {
+    return typeof grecaptcha !== "undefined"
+        && grecaptcha.enterprise
+        && typeof grecaptcha.enterprise.render === "function";
+}
+
 function loadScript() {
     if (scriptLoaded) { fireCallbacks(); return; }
-    if (typeof grecaptcha !== "undefined" && grecaptcha.enterprise) {
+    if (hasRenderApi()) {
         scriptLoaded = true;
         fireCallbacks();
         return;
