@@ -1,15 +1,12 @@
 /* ============================================
-   SF AI Assistant - Self-Contained Module
-   Finds existing #aiButton or creates one
-   Injects chat window + handles all logic
+   SF AI Assistant - Sliding Workspace Module
+   Global AI workspace that slides from the right
+   Preserves all existing chat functionality
    ============================================ */
 
 (function () {
     'use strict';
 
-    // ========================================
-    // Configuration
-    // ========================================
     const CONFIG = {
         API_ENDPOINT: '/api/chat',
         MAX_INPUT_LENGTH: 2000,
@@ -20,40 +17,40 @@
     };
 
     // ========================================
-    // Build Chat Window HTML
+    // Workspace HTML (sliding panel)
     // ========================================
-    function buildChatWindowHTML() {
+    function buildWorkspaceHTML() {
         return `
-        <div id="chat-window" class="chat-window hidden">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <div class="chat-avatar"><i class="fas fa-leaf"></i></div>
-                    <div class="chat-header-text">
+        <div id="sf-ai-panel" class="sf-ai-panel chat-window">
+            <div class="sf-ai-header">
+                <div class="sf-ai-header-info">
+                    <div class="sf-ai-avatar"><i class="fas fa-leaf"></i></div>
+                    <div class="sf-ai-header-text">
                         <h3>SF AI Assistant</h3>
-                        <span class="chat-status">
-                            <span class="status-dot"></span>
+                        <span class="sf-ai-status">
+                            <span class="sf-ai-status-dot"></span>
                             Online - Agricultural Expert
                         </span>
                     </div>
                 </div>
-                <div class="chat-header-actions">
-                    <button id="btn-new-chat" class="header-btn" title="New Chat" aria-label="New Chat">
+                <div class="sf-ai-header-actions">
+                    <button id="btn-new-chat" class="sf-ai-hdr-btn" title="New Chat" aria-label="New Chat">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <button id="btn-clear-chat" class="header-btn" title="Clear Chat" aria-label="Clear Chat">
+                    <button id="btn-clear-chat" class="sf-ai-hdr-btn" title="Clear Chat" aria-label="Clear Chat">
                         <i class="fas fa-trash-alt"></i>
                     </button>
-                    <button id="btn-minimize" class="header-btn" title="Minimize" aria-label="Minimize Chat">
-                        <i class="fas fa-minus"></i>
+                    <button id="btn-close-workspace" class="sf-ai-hdr-btn sf-ai-close-btn" title="Close" aria-label="Close AI Workspace">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
-            <div id="chat-messages" class="chat-messages">
-                <div class="message-wrapper bot-message-wrapper">
-                    <div class="message-avatar bot-avatar"><i class="fas fa-leaf"></i></div>
-                    <div class="message-content">
-                        <div class="message-bubble bot-bubble">
-                            <div class="message-text" id="welcome-message">
+            <div id="chat-messages" class="sf-ai-messages chat-messages">
+                <div class="sf-ai-msg-wrap sf-ai-msg-bot message-wrapper bot-message-wrapper">
+                    <div class="sf-ai-msg-avatar sf-ai-avatar-bot message-avatar bot-avatar"><i class="fas fa-leaf"></i></div>
+                    <div class="sf-ai-msg-body message-content">
+                        <div class="sf-ai-bubble sf-ai-bubble-bot message-bubble bot-bubble">
+                            <div class="sf-ai-msg-text message-text" id="welcome-message">
                                 <h4>Welcome to SF AI Assistant!</h4>
                                 <p>I'm your expert agricultural consultant from <strong>Sowrov Fertilizer</strong>.</p>
                                 <p>I can help you with:</p>
@@ -69,31 +66,31 @@
                                 <p>Ask me anything about agriculture! <em>You can write in English or Bangla.</em></p>
                             </div>
                         </div>
-                        <span class="message-time" id="welcome-time"></span>
+                        <span class="sf-ai-msg-time message-time" id="welcome-time"></span>
                     </div>
                 </div>
             </div>
-            <div id="typing-indicator" class="typing-indicator hidden">
-                <div class="message-wrapper bot-message-wrapper">
-                    <div class="message-avatar bot-avatar"><i class="fas fa-leaf"></i></div>
-                    <div class="typing-bubble">
-                        <div class="typing-dots"><span></span><span></span><span></span></div>
-                        <span class="typing-text">Thinking...</span>
+            <div id="typing-indicator" class="sf-ai-typing typing-indicator hidden">
+                <div class="sf-ai-msg-wrap sf-ai-msg-bot message-wrapper bot-message-wrapper">
+                    <div class="sf-ai-msg-avatar sf-ai-avatar-bot message-avatar bot-avatar"><i class="fas fa-leaf"></i></div>
+                    <div class="sf-ai-typing-bubble">
+                        <div class="sf-ai-typing-dots"><span></span><span></span><span></span></div>
+                        <span class="sf-ai-typing-text">Thinking...</span>
                     </div>
                 </div>
             </div>
-            <div class="chat-input-area">
-                <div class="input-container">
-                    <button id="btn-attach" class="input-btn attach-btn" title="Upload Crop Image" aria-label="Upload Image">
+            <div class="sf-ai-input-area chat-input-area">
+                <div class="sf-ai-input-wrap input-container">
+                    <button id="btn-attach" class="sf-ai-input-btn sf-ai-attach-btn" title="Upload Crop Image" aria-label="Upload Image">
                         <i class="fas fa-image"></i>
                     </button>
                     <input type="file" id="file-input" accept="image/*" class="hidden">
-                    <textarea id="chat-input" class="chat-input" placeholder="Ask about agriculture..." rows="1" aria-label="Type your message"></textarea>
-                    <button id="btn-send" class="input-btn send-btn" disabled title="Send Message" aria-label="Send Message">
+                    <textarea id="chat-input" class="sf-ai-input chat-input" placeholder="Ask about agriculture..." rows="1" aria-label="Type your message"></textarea>
+                    <button id="btn-send" class="sf-ai-input-btn sf-ai-send-btn" disabled title="Send Message" aria-label="Send Message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
-                <div class="input-footer">
+                <div class="sf-ai-input-footer">
                     <span>Powered by Sowrov Fertilizer</span>
                 </div>
             </div>
@@ -101,77 +98,94 @@
     }
 
     // ========================================
-    // Inject Font Awesome if missing
+    // Font Awesome
     // ========================================
     function ensureFontAwesome() {
         if (document.querySelector('link[href*="font-awesome"]')) return;
-        const link = document.createElement('link');
+        var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
         document.head.appendChild(link);
     }
 
     // ========================================
-    // Inject marked + DOMPurify if missing
-    // V33 FIX: Wait for scripts to load before resolving
+    // marked + DOMPurify
     // ========================================
     function ensureDependencies() {
-        const promises = [];
-
+        var promises = [];
         if (typeof marked === 'undefined') {
-            const s = document.createElement('script');
+            var s = document.createElement('script');
             s.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
-            promises.push(new Promise((resolve) => {
-                s.onload = resolve;
-                s.onerror = resolve; // Don't block on failure
-                document.head.appendChild(s);
-            }));
-        }
-
-        if (typeof DOMPurify === 'undefined') {
-            const s = document.createElement('script');
-            s.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js';
-            promises.push(new Promise((resolve) => {
+            promises.push(new Promise(function (resolve) {
                 s.onload = resolve;
                 s.onerror = resolve;
                 document.head.appendChild(s);
             }));
         }
-
+        if (typeof DOMPurify === 'undefined') {
+            var s2 = document.createElement('script');
+            s2.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js';
+            promises.push(new Promise(function (resolve) {
+                s2.onload = resolve;
+                s2.onerror = resolve;
+                document.head.appendChild(s2);
+            }));
+        }
         return promises.length > 0 ? Promise.all(promises) : Promise.resolve();
     }
 
     // ========================================
-    // Find or Create Button
+    // Find or Create AI Toggle Button
     // ========================================
     function getOrCreateButton() {
-        let btn = document.getElementById('aiButton') || document.getElementById('chat-toggle');
-        if (btn) return btn;
-
+        var btn = document.getElementById('aiButton') || document.getElementById('chat-toggle');
+        if (btn) {
+            if (btn.id === 'aiButton') {
+                btn.id = 'chat-toggle';
+                btn.className = 'sf-ai-toggle';
+                btn.setAttribute('aria-label', 'Open AI Chat');
+                btn.innerHTML = '<span class="sf-ai-toggle-icon"><i class="fas fa-robot"></i></span><span class="sf-ai-toggle-pulse"></span>';
+            }
+            return btn;
+        }
         btn = document.createElement('button');
         btn.id = 'chat-toggle';
-        btn.className = 'chat-toggle';
+        btn.className = 'sf-ai-toggle';
         btn.setAttribute('aria-label', 'Open AI Chat');
-        btn.innerHTML = '<span class="chat-toggle-icon"><i class="fas fa-robot"></i></span><span class="chat-toggle-pulse"></span>';
+        btn.innerHTML = '<span class="sf-ai-toggle-icon"><i class="fas fa-robot"></i></span><span class="sf-ai-toggle-pulse"></span>';
         document.body.appendChild(btn);
         return btn;
     }
 
     // ========================================
+    // Wrap Body Content for page shift
+    // ========================================
+    function wrapBodyContent() {
+        if (document.getElementById('sf-ai-page-wrapper')) return;
+        var wrapper = document.createElement('div');
+        wrapper.id = 'sf-ai-page-wrapper';
+        var body = document.body;
+        while (body.firstChild) {
+            wrapper.appendChild(body.firstChild);
+        }
+        body.appendChild(wrapper);
+    }
+
+    // ========================================
     // Utilities
     // ========================================
-    const Utils = {
-        getTimestamp() {
+    var Utils = {
+        getTimestamp: function () {
             return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         },
-        escapeHtml(text) {
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-            return String(text).replace(/[&<>"']/g, (m) => map[m]);
+        escapeHtml: function (text) {
+            var map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return String(text).replace(/[&<>"']/g, function (m) { return map[m]; });
         },
-        renderMarkdown(text) {
+        renderMarkdown: function (text) {
             if (typeof marked === 'undefined') return Utils.escapeHtml(text);
             marked.setOptions({ breaks: true, gfm: true, headerIds: false, mangle: false });
-            const rawHtml = marked.parse(text);
+            var rawHtml = marked.parse(text);
             if (typeof DOMPurify !== 'undefined') {
                 return DOMPurify.sanitize(rawHtml, {
                     ALLOWED_TAGS: ['h1','h2','h3','h4','h5','h6','p','br','hr','strong','em','b','i','u','s','ul','ol','li','a','code','pre','blockquote','table','thead','tbody','tr','th','td','span','img'],
@@ -186,16 +200,16 @@
     // ========================================
     // Storage
     // ========================================
-    const Storage = {
-        save(h) { try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(h)); } catch(e) {} },
-        load() { try { const d = localStorage.getItem(CONFIG.STORAGE_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; } },
-        clear() { try { localStorage.removeItem(CONFIG.STORAGE_KEY); } catch(e) {} },
+    var Storage = {
+        save: function (h) { try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(h)); } catch(e) {} },
+        load: function () { try { var d = localStorage.getItem(CONFIG.STORAGE_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; } },
+        clear: function () { try { localStorage.removeItem(CONFIG.STORAGE_KEY); } catch(e) {} },
     };
 
     // ========================================
     // State
     // ========================================
-    const state = {
+    var state = {
         conversationHistory: [],
         isOpen: false,
         isLoading: false,
@@ -203,10 +217,7 @@
         selectedImageBase64: null,
     };
 
-    // ========================================
-    // DOM refs (set after inject)
-    // ========================================
-    let DOM = {};
+    var DOM = {};
 
     // ========================================
     // Initialize
@@ -215,25 +226,19 @@
         ensureFontAwesome();
         ensureDependencies();
 
-        const btn = getOrCreateButton();
+        wrapBodyContent();
 
-        // Inject chat window
-        const wrapper = document.createElement('div');
-        wrapper.id = 'ai-app';
-        wrapper.innerHTML = buildChatWindowHTML();
-        document.body.appendChild(wrapper);
+        var btn = getOrCreateButton();
 
-        // Set btn to use new id if it was the old one
-        if (btn.id === 'aiButton') {
-            btn.id = 'chat-toggle';
-            btn.className = 'chat-toggle';
-            btn.innerHTML = '<span class="chat-toggle-icon"><i class="fas fa-robot"></i></span><span class="chat-toggle-pulse"></span>';
-        }
+        // Inject workspace panel into body
+        var appDiv = document.createElement('div');
+        appDiv.id = 'sf-ai-app';
+        appDiv.innerHTML = buildWorkspaceHTML();
+        document.body.appendChild(appDiv);
 
-        // Cache DOM
         DOM = {
             chatToggle: btn,
-            chatWindow: document.getElementById('chat-window'),
+            workspace: document.getElementById('sf-ai-panel'),
             chatMessages: document.getElementById('chat-messages'),
             chatInput: document.getElementById('chat-input'),
             btnSend: document.getElementById('btn-send'),
@@ -241,9 +246,10 @@
             fileInput: document.getElementById('file-input'),
             btnClear: document.getElementById('btn-clear-chat'),
             btnNewChat: document.getElementById('btn-new-chat'),
-            btnMinimize: document.getElementById('btn-minimize'),
+            btnClose: document.getElementById('btn-close-workspace'),
             typingIndicator: document.getElementById('typing-indicator'),
             welcomeTime: document.getElementById('welcome-time'),
+            pageWrapper: document.getElementById('sf-ai-page-wrapper'),
         };
 
         setWelcomeTime();
@@ -259,22 +265,42 @@
     }
 
     // ========================================
-    // Toggle Chat
+    // Toggle Workspace
     // ========================================
     function toggleChat() {
         state.isOpen = !state.isOpen;
         if (state.isOpen) {
-            DOM.chatWindow.classList.remove('hidden');
+            DOM.workspace.classList.add('open');
             DOM.chatToggle.classList.add('open');
-            const icon = DOM.chatToggle.querySelector('i');
+            document.body.classList.add('sf-ai-open');
+            var icon = DOM.chatToggle.querySelector('i');
             if (icon) icon.className = 'fas fa-times';
-            DOM.chatInput.focus();
+            updateFloatingButtonPosition();
+            setTimeout(function () { DOM.chatInput.focus(); }, 350);
             scrollToBottom();
         } else {
-            DOM.chatWindow.classList.add('hidden');
+            DOM.workspace.classList.remove('open');
             DOM.chatToggle.classList.remove('open');
-            const icon = DOM.chatToggle.querySelector('i');
-            if (icon) icon.className = 'fas fa-robot';
+            document.body.classList.remove('sf-ai-open');
+            var icon2 = DOM.chatToggle.querySelector('i');
+            if (icon2) icon2.className = 'fas fa-robot';
+            updateFloatingButtonPosition();
+        }
+    }
+
+    function closeWorkspace() {
+        if (state.isOpen) toggleChat();
+    }
+
+    function updateFloatingButtonPosition() {
+        var panelWidth = DOM.workspace.offsetWidth || 600;
+        var buttons = document.querySelectorAll('.sf-ai-toggle, .whatsapp-btn-only');
+        for (var i = 0; i < buttons.length; i++) {
+            if (state.isOpen) {
+                buttons[i].style.right = (panelWidth + 16) + 'px';
+            } else {
+                buttons[i].style.right = '';
+            }
         }
     }
 
@@ -282,32 +308,33 @@
     // Messages
     // ========================================
     function createMessageElement(role, text, imageDataUrl) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'message-wrapper ' + (role === 'user' ? 'user-message-wrapper' : 'bot-message-wrapper');
+        var isUser = role === 'user';
+        var wrapper = document.createElement('div');
+        wrapper.className = 'sf-ai-msg-wrap message-wrapper ' + (isUser ? 'sf-ai-msg-user user-message-wrapper' : 'sf-ai-msg-bot bot-message-wrapper');
 
-        const avatarDiv = document.createElement('div');
-        avatarDiv.className = 'message-avatar ' + (role === 'user' ? 'user-avatar' : 'bot-avatar');
-        avatarDiv.innerHTML = role === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-leaf"></i>';
+        var avatarDiv = document.createElement('div');
+        avatarDiv.className = 'sf-ai-msg-avatar message-avatar ' + (isUser ? 'sf-ai-avatar-user user-avatar' : 'sf-ai-avatar-bot bot-avatar');
+        avatarDiv.innerHTML = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-leaf"></i>';
 
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'message-content';
+        var contentDiv = document.createElement('div');
+        contentDiv.className = 'sf-ai-msg-body message-content';
 
-        const bubble = document.createElement('div');
-        bubble.className = 'message-bubble ' + (role === 'user' ? 'user-bubble' : 'bot-bubble');
+        var bubble = document.createElement('div');
+        bubble.className = 'sf-ai-bubble message-bubble ' + (isUser ? 'sf-ai-bubble-user user-bubble' : 'sf-ai-bubble-bot bot-bubble');
 
-        const textDiv = document.createElement('div');
-        textDiv.className = 'message-text';
-        if (role === 'user') {
+        var textDiv = document.createElement('div');
+        textDiv.className = 'sf-ai-msg-text message-text';
+        if (isUser) {
             textDiv.textContent = text;
         } else {
             textDiv.innerHTML = Utils.renderMarkdown(text);
         }
         bubble.appendChild(textDiv);
 
-        if (imageDataUrl && role === 'user') {
-            const imgWrap = document.createElement('div');
+        if (imageDataUrl && isUser) {
+            var imgWrap = document.createElement('div');
             imgWrap.style.marginBottom = '8px';
-            const img = document.createElement('img');
+            var img = document.createElement('img');
             img.src = imageDataUrl;
             img.alt = 'Uploaded crop image';
             img.style.cssText = 'max-width:200px;max-height:150px;border-radius:8px;border:1px solid rgba(16,185,129,0.3);';
@@ -315,8 +342,8 @@
             bubble.insertBefore(imgWrap, textDiv);
         }
 
-        const timeSpan = document.createElement('span');
-        timeSpan.className = 'message-time';
+        var timeSpan = document.createElement('span');
+        timeSpan.className = 'sf-ai-msg-time message-time';
         timeSpan.textContent = Utils.getTimestamp();
 
         contentDiv.appendChild(bubble);
@@ -332,7 +359,7 @@
     }
 
     function scrollToBottom() {
-        requestAnimationFrame(() => { DOM.chatMessages.scrollTop = DOM.chatMessages.scrollHeight; });
+        requestAnimationFrame(function () { DOM.chatMessages.scrollTop = DOM.chatMessages.scrollHeight; });
     }
 
     // ========================================
@@ -345,12 +372,12 @@
     // Send Message
     // ========================================
     async function sendMessage() {
-        const text = DOM.chatInput.value.trim();
-        const imageDataUrl = state.selectedImageBase64;
+        var text = DOM.chatInput.value.trim();
+        var imageDataUrl = state.selectedImageBase64;
         if (!text && !imageDataUrl) return;
         if (state.isLoading) return;
 
-        const now = Date.now();
+        var now = Date.now();
         if (now - state.lastSendTime < CONFIG.RATE_LIMIT_MS) return;
         state.lastSendTime = now;
 
@@ -362,8 +389,7 @@
         addMessage('user', text || 'Please analyze this crop image.', imageDataUrl);
         state.conversationHistory.push({ role: 'user', content: text || 'Please analyze this crop image.' });
 
-        // V34 FIX: Limit conversation history to prevent unbounded growth
-        const MAX_HISTORY = 40;
+        var MAX_HISTORY = 40;
         if (state.conversationHistory.length > MAX_HISTORY) {
             state.conversationHistory = state.conversationHistory.slice(-MAX_HISTORY);
         }
@@ -377,14 +403,13 @@
         showTyping();
 
         try {
-            const payload = { messages: state.conversationHistory };
+            var payload = { messages: state.conversationHistory };
             if (imageDataUrl) payload.image = imageDataUrl;
 
-            // V33 FIX: Add fetch timeout to prevent infinite loading
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s timeout
+            var controller = new AbortController();
+            var timeoutId = setTimeout(function () { controller.abort(); }, 35000);
 
-            const response = await fetch(CONFIG.API_ENDPOINT, {
+            var response = await fetch(CONFIG.API_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -394,20 +419,19 @@
             clearTimeout(timeoutId);
 
             if (!response.ok) {
-                const errData = await response.json().catch(() => null);
-                throw new Error(errData?.error || 'Server error (' + response.status + ')');
+                var errData = await response.json().catch(function () { return null; });
+                throw new Error((errData && errData.error) || 'Server error (' + response.status + ')');
             }
 
-            const data = await response.json();
-            const botReply = data.reply || data.message || 'আপনার প্রশ্নের উত্তর দিতে আমি সক্ষম। অনুগ্রহ করে আবার চেষ্টা করুন অথবা আমাদের হটলাইনে কল করুন: 01829-775552';
+            var data = await response.json();
+            var botReply = data.reply || data.message || 'আপনার প্রশ্নের উত্তর দিতে আমি সক্ষম। অনুগ্রহ করে আবার চেষ্টা করুন অথবা আমাদের হটলাইনে কল করুন: 01829-775552';
 
             addMessage('bot', botReply);
             state.conversationHistory.push({ role: 'assistant', content: botReply });
             Storage.save(state.conversationHistory);
         } catch (error) {
             console.error('Chat error:', error);
-            // V36: NEVER show error messages — always provide helpful answer
-            const fallback = 'আমার কৃষি জ্ঞান ভান্ডার থেকে আপনাকে সাহায্য করতে পারি।\n\n**সাধারণ কৃষি পরামর্শ:**\n- সবসময় অনুমোদিত ডিলার থেকে যাচাইকৃত বীজ ব্যবহার করুন\n- মাটির পরীক্ষা করে সঠিক সার ব্যবহার করুন\n- নিয়মিত সেচ দিন\n- পোকামাকড় দেখলে স্থানীয় কৃষি অফিসে জানান\n\n**যোগাযোগ:**\n📞 হটলাইন: 01829-775552\n🌐 BARI: bari.gov.bd\n📍 নিকটস্থ কৃষি সম্প্রসারণ অফিস (DAE)\n\n*আমাদের হটলাইনে কল করলে বিশেষজ্ঞ কৃষি পরামর্শ পাবেন।*';
+            var fallback = '\u0986\u09AE\u09BE\u09B0 \u0995\u09C3\u09B7\u09BF \u099C\u09CD\u09A8\u09BE\u09A8 \u09AD\u09BE\u09A8\u09CD\u09A1\u09BE\u09B0 \u09A5\u09C7\u0995\u09C7 \u0986\u09AA\u09A8\u09BE\u0995\u09C7 \u09B8\u09BE\u09B9\u09BE\u09AF\u09CD\u09AF \u0995\u09B0\u09A4\u09C7 \u09AA\u09BE\u09B0\u09BF\u0966\n\n**\u09B8\u09BE\u09A7\u09BE\u09B0\u09A3 \u0995\u09C3\u09B7\u09BF \u09AA\u09B0\u09BE\u09AE\u09B0\u09CD\u09B6:**\n- \u09B8\u09AC\u09B8\u09AE\u09AF\u09BC \u0985\u09A8\u09C1\u09AE\u09CB\u09A6\u09BF\u09A4 \u09A1\u09BF\u09B2\u09BE\u09B0 \u09A5\u09C7\u0995\u09C7 \u09AF\u09be\u099A\u09BE\u0987\u0995\u09C3\u09A4 \u09AC\u09C0\u099C \u09AC\u09CD\u09AF\u09AC\u09B9\u09BE\u09B0 \u0995\u09B0\u09C1\u09A8\n- \u09AE\u09BE\u099F\u09BF\u09B0 \u09AA\u09B0\u09C0\u0995\u09CD\u09B7\u09BE \u0995\u09B0\u09C7 \u09B8\u09A8\u09CD\u09A6\u09BF\u0995 \u09B8\u09BE\u09B0 \u09AC\u09CD\u09AF\u09AC\u09B9\u09BE\u09B0 \u0995\u09B0\u09C1\u09A8\n- \u09A8\u09BF\u09AF\u09BC\u09AE\u09BF\u09A4 \u09B8\u09C7\u099A \u09A6\u09BF\u09A8\n- \u09AA\u09CB\u0995\u09BE\u09AE\u09BE\u0995\u09A1\u09BC\u09B0 \u09A6\u09C7\u0996\u09B2\u09C7 \u09B8\u09CD\u09A5\u09BE\u09A8\u09C0\u09AF\u09BC\u09B9 \u0995\u09C3\u09B7\u09BF \u0985\u09AB\u09BF\u09B8\u09C7 \u099C\u09BE\u09A8\u09BE\u09A8\n\n**\u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997:**\n\u099F\u09C7\u09B2\u09BF\u09B9\u09B2\u09BE\u0987\u09A8: 01829-775552\n\u09A8\u09A8\u09CD\u09A4\u09B0\u09B8\u09CD\u09A5 \u0995\u09C3\u09B7\u09BF \u09B8\u09AE\u09CD\u09AA\u09CD\u09B0\u09B8\u09BE\u09B0\u09A3 \u0985\u09AB\u09BF\u09B8 (DAE)\n\n*\u0986\u09AE\u09BE\u09A6\u09C7\u09B0 \u09B9\u099F\u09B2\u09BE\u0987\u09A8\u09C7 \u0995\u09B2 \u0995\u09B0\u09B2\u09C7 \u09AC\u09BF\u09B6\u09C7\u09B7\u09CD\u099C\u09CD\u099E \u0995\u09C3\u09B7\u09BF \u09AA\u09B0\u09BE\u09AE\u09B0\u09CD\u09B6 \u09AA\u09BE\u09AC\u09C7\u09A8\u0964*';
             addMessage('bot', fallback);
         } finally {
             state.isLoading = false;
@@ -429,7 +453,7 @@
             addMessage('bot', 'Image size must be under ' + CONFIG.MAX_IMAGE_SIZE_MB + 'MB.');
             return;
         }
-        const reader = new FileReader();
+        var reader = new FileReader();
         reader.onload = function (e) {
             state.selectedImageBase64 = e.target.result;
             showImagePreview(file.name, e.target.result);
@@ -439,26 +463,25 @@
 
     function showImagePreview(name, dataUrl) {
         removeExistingPreview();
-        const preview = document.createElement('div');
-        preview.className = 'image-preview';
+        var preview = document.createElement('div');
+        preview.className = 'sf-ai-image-preview image-preview';
         preview.id = 'image-preview';
-        preview.innerHTML = '<img src="' + dataUrl + '" alt="Preview"><div class="image-preview-info"><div class="image-preview-name">' + Utils.escapeHtml(name) + '</div><div>Ready to analyze</div></div><button class="image-preview-remove" title="Remove image" aria-label="Remove image"><i class="fas fa-times"></i></button>';
-        preview.querySelector('.image-preview-remove').addEventListener('click', clearImagePreview);
-        document.querySelector('.input-container').parentNode.insertBefore(preview, document.querySelector('.input-container'));
+        preview.innerHTML = '<img src="' + dataUrl + '" alt="Preview"><div class="sf-ai-preview-info"><div class="sf-ai-preview-name">' + Utils.escapeHtml(name) + '</div><div>Ready to analyze</div></div><button class="sf-ai-preview-remove" title="Remove image" aria-label="Remove image"><i class="fas fa-times"></i></button>';
+        preview.querySelector('.sf-ai-preview-remove').addEventListener('click', clearImagePreview);
+        document.querySelector('.sf-ai-input-wrap').parentNode.insertBefore(preview, document.querySelector('.sf-ai-input-wrap'));
     }
 
     function clearImagePreview() {
         removeExistingPreview();
         state.selectedImageBase64 = null;
         if (DOM.fileInput) DOM.fileInput.value = '';
-        // V34 FIX: Update send button state after clearing image
         if (DOM.btnSend) {
             DOM.btnSend.disabled = !DOM.chatInput.value.trim();
         }
     }
 
     function removeExistingPreview() {
-        const el = document.getElementById('image-preview');
+        var el = document.getElementById('image-preview');
         if (el) el.remove();
     }
 
@@ -477,8 +500,8 @@
         if (!confirm('Are you sure you want to clear all messages?')) return;
         state.conversationHistory = [];
         Storage.clear();
-        const msgs = DOM.chatMessages.querySelectorAll('.message-wrapper');
-        msgs.forEach((m, i) => { if (i > 0) m.remove(); });
+        var msgs = DOM.chatMessages.querySelectorAll('.sf-ai-msg-wrap');
+        msgs.forEach(function (m, i) { if (i > 0) m.remove(); });
         clearImagePreview();
     }
 
@@ -486,8 +509,8 @@
         state.conversationHistory = [];
         Storage.clear();
         clearImagePreview();
-        const msgs = DOM.chatMessages.querySelectorAll('.message-wrapper');
-        msgs.forEach((m, i) => { if (i > 0) m.remove(); });
+        var msgs = DOM.chatMessages.querySelectorAll('.sf-ai-msg-wrap');
+        msgs.forEach(function (m, i) { if (i > 0) m.remove(); });
         DOM.chatInput.value = '';
         DOM.chatInput.style.height = 'auto';
         DOM.btnSend.disabled = true;
@@ -497,10 +520,10 @@
     // Restore History
     // ========================================
     function restoreHistory() {
-        const history = Storage.load();
+        var history = Storage.load();
         if (!history || history.length === 0) return;
         state.conversationHistory = history;
-        history.forEach((msg) => {
+        history.forEach(function (msg) {
             if (msg.role === 'user' || msg.role === 'assistant') {
                 addMessage(msg.role === 'assistant' ? 'bot' : 'user', msg.content);
             }
@@ -512,7 +535,7 @@
     // ========================================
     function initEventListeners() {
         DOM.chatToggle.addEventListener('click', toggleChat);
-        DOM.btnMinimize.addEventListener('click', toggleChat);
+        DOM.btnClose.addEventListener('click', closeWorkspace);
         DOM.btnSend.addEventListener('click', sendMessage);
 
         DOM.chatInput.addEventListener('keydown', function (e) {
@@ -547,6 +570,10 @@
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && state.isOpen) toggleChat();
+        });
+
+        window.addEventListener('resize', function () {
+            if (state.isOpen) updateFloatingButtonPosition();
         });
     }
 
