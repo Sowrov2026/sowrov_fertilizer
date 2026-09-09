@@ -138,7 +138,7 @@
     // Find or Create AI Toggle Button
     // ========================================
     function getOrCreateButton() {
-        var btn = document.getElementById('aiButton') || document.getElementById('chat-toggle');
+        var btn = document.getElementById('chat-toggle') || document.getElementById('aiButton');
         if (btn) {
             if (btn.id === 'aiButton') {
                 btn.id = 'chat-toggle';
@@ -153,7 +153,6 @@
         btn.className = 'sf-ai-toggle';
         btn.setAttribute('aria-label', 'Open AI Chat');
         btn.innerHTML = '<span class="sf-ai-toggle-icon"><i class="fas fa-robot"></i></span><span class="sf-ai-toggle-pulse"></span>';
-        document.body.appendChild(btn);
         return btn;
     }
 
@@ -165,10 +164,66 @@
         var wrapper = document.createElement('div');
         wrapper.id = 'sf-ai-page-wrapper';
         var body = document.body;
-        while (body.firstChild) {
-            wrapper.appendChild(body.firstChild);
+
+        // Collect all children except floating elements
+        var floatingEls = [];
+        var children = Array.from(body.children);
+        for (var i = 0; i < children.length; i++) {
+            var el = children[i];
+            if (el.classList && (el.classList.contains('whatsapp-btn-only') ||
+                el.id === 'chat-toggle' || el.id === 'sf-ai-app' ||
+                el.id === 'sf-ai-float-stack')) {
+                floatingEls.push(el);
+            } else {
+                wrapper.appendChild(el);
+            }
         }
         body.appendChild(wrapper);
+
+        // Extract WhatsApp buttons that may be nested inside the wrapper
+        // (e.g. inside footer HTML from component-loader.js)
+        var nestedWA = wrapper.querySelectorAll('.whatsapp-btn-only');
+        for (var k = 0; k < nestedWA.length; k++) {
+            floatingEls.push(nestedWA[k]);
+        }
+
+        // Put floating elements back outside wrapper
+        for (var j = 0; j < floatingEls.length; j++) {
+            body.appendChild(floatingEls[j]);
+        }
+    }
+
+    // ========================================
+    // Create Float Stack (AI + WhatsApp buttons)
+    // ========================================
+    function createFloatStack() {
+        var existing = document.getElementById('sf-ai-float-stack');
+        if (existing) return existing;
+
+        var stack = document.createElement('div');
+        stack.id = 'sf-ai-float-stack';
+        stack.className = 'sf-ai-float-stack';
+
+        // Move AI toggle button into stack
+        var aiBtn = document.getElementById('chat-toggle') || document.getElementById('aiButton');
+        if (aiBtn) {
+            if (aiBtn.id === 'aiButton') {
+                aiBtn.id = 'chat-toggle';
+                aiBtn.className = 'sf-ai-toggle';
+                aiBtn.setAttribute('aria-label', 'Open AI Chat');
+                aiBtn.innerHTML = '<span class="sf-ai-toggle-icon"><i class="fas fa-robot"></i></span><span class="sf-ai-toggle-pulse"></span>';
+            }
+            stack.appendChild(aiBtn);
+        }
+
+        // Move WhatsApp button into stack
+        var waBtn = document.querySelector('.whatsapp-btn-only');
+        if (waBtn) {
+            stack.appendChild(waBtn);
+        }
+
+        document.body.appendChild(stack);
+        return stack;
     }
 
     // ========================================
@@ -230,6 +285,9 @@
 
         var btn = getOrCreateButton();
 
+        // Create float stack with AI + WhatsApp buttons
+        createFloatStack();
+
         // Inject workspace panel into body
         var appDiv = document.createElement('div');
         appDiv.id = 'sf-ai-app';
@@ -275,7 +333,6 @@
             document.body.classList.add('sf-ai-open');
             var icon = DOM.chatToggle.querySelector('i');
             if (icon) icon.className = 'fas fa-times';
-            updateFloatingButtonPosition();
             setTimeout(function () { DOM.chatInput.focus(); }, 350);
             scrollToBottom();
         } else {
@@ -284,24 +341,11 @@
             document.body.classList.remove('sf-ai-open');
             var icon2 = DOM.chatToggle.querySelector('i');
             if (icon2) icon2.className = 'fas fa-robot';
-            updateFloatingButtonPosition();
         }
     }
 
     function closeWorkspace() {
         if (state.isOpen) toggleChat();
-    }
-
-    function updateFloatingButtonPosition() {
-        var panelWidth = DOM.workspace.offsetWidth || 600;
-        var buttons = document.querySelectorAll('.sf-ai-toggle, .whatsapp-btn-only');
-        for (var i = 0; i < buttons.length; i++) {
-            if (state.isOpen) {
-                buttons[i].style.right = (panelWidth + 16) + 'px';
-            } else {
-                buttons[i].style.right = '';
-            }
-        }
     }
 
     // ========================================
@@ -570,10 +614,6 @@
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && state.isOpen) toggleChat();
-        });
-
-        window.addEventListener('resize', function () {
-            if (state.isOpen) updateFloatingButtonPosition();
         });
     }
 

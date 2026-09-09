@@ -78,44 +78,53 @@
 }
 
 /* ============================================
-   PAGE WRAPPER — shifts when workspace opens
+   PAGE WRAPPER — width-based layout shift
    ============================================ */
 #sf-ai-page-wrapper {
-    transition: transform var(--sf-transition-speed) var(--sf-transition-ease);
-    will-change: transform;
+    transition: max-width var(--sf-transition-speed) var(--sf-transition-ease);
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 body.sf-ai-open #sf-ai-page-wrapper {
-    transform: translateX(calc(var(--sf-workspace-max) * -1));
+    max-width: calc(100vw - var(--sf-workspace-max));
 }
 
-@media (max-width: 1200px) {
-    body.sf-ai-open #sf-ai-page-wrapper {
-        transform: translateX(calc(var(--sf-workspace-width) * -1));
-    }
+body {
+    overflow-x: hidden;
 }
 
 /* ============================================
-   AI TOGGLE BUTTON (floating)
+   FLOATING BUTTONS — unified positioning
    ============================================ */
-.sf-ai-toggle {
+.sf-ai-float-stack {
     position: fixed;
-    bottom: 100px;
+    bottom: 20px;
     right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10001;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.sf-ai-open .sf-ai-float-stack {
+    right: calc(var(--sf-workspace-max) + 16px);
+}
+
+/* AI Toggle Button */
+.sf-ai-toggle {
     width: 64px;
     height: 64px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    z-index: 10001;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--emerald-600), var(--emerald-500));
     box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4), 0 0 40px rgba(16, 185, 129, 0.1);
-    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: sfToggleFloat 3s ease-in-out infinite;
 }
 
@@ -165,11 +174,18 @@ body.sf-ai-open #sf-ai-page-wrapper {
 }
 
 /* ============================================
-   WHATSAPP BUTTON — maintain existing style
+   WHATSAPP BUTTON — inside float stack
    ============================================ */
 .whatsapp-btn-only {
     z-index: 10000 !important;
-    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.whatsapp-btn-only:hover {
+    transform: scale(1.1) !important;
 }
 
 /* ============================================
@@ -1098,12 +1114,19 @@ body.sf-ai-open #sf-ai-page-wrapper {
     }
 
     body.sf-ai-open #sf-ai-page-wrapper {
-        transform: translateX(-50vw);
+        max-width: calc(100vw - 50vw);
+    }
+
+    .sf-ai-float-stack {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    body.sf-ai-open .sf-ai-float-stack {
+        right: calc(50vw + 16px);
     }
 
     .sf-ai-toggle {
-        bottom: 90px;
-        right: 20px;
         width: 58px;
         height: 58px;
     }
@@ -1130,12 +1153,19 @@ body.sf-ai-open #sf-ai-page-wrapper {
     }
 
     body.sf-ai-open #sf-ai-page-wrapper {
-        transform: translateX(-100vw);
+        max-width: 0;
+    }
+
+    .sf-ai-float-stack {
+        bottom: 20px;
+        right: 16px;
+    }
+
+    body.sf-ai-open .sf-ai-float-stack {
+        right: 16px;
     }
 
     .sf-ai-toggle {
-        bottom: 86px;
-        right: 16px;
         width: 56px;
         height: 56px;
     }
@@ -1191,7 +1221,7 @@ body.sf-ai-open #sf-ai-page-wrapper {
     }
 
     body.sf-ai-open #sf-ai-page-wrapper {
-        transform: translateX(-100vw);
+        max-width: 0;
     }
 
     .sf-ai-header-text h3 {
@@ -1240,10 +1270,12 @@ body.sf-ai-open #sf-ai-page-wrapper {
     .sf-ai-toggle,
     .sf-ai-panel,
     #sf-ai-page-wrapper {
-        transform: none !important;
+        max-width: none !important;
+        width: auto !important;
     }
     .sf-ai-toggle,
-    .sf-ai-panel {
+    .sf-ai-panel,
+    .sf-ai-float-stack {
         display: none !important;
     }
 }
