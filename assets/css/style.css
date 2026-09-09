@@ -3379,7 +3379,8 @@ textarea.form-control{
     display:none;
 }
 
-.mobile-toggle{
+.mobile-toggle,
+.sf-menu-btn{
     display:flex;
 }
 
@@ -3818,7 +3819,251 @@ body.dark p{
 }
 
 /*==================================================
-            PRINT
+        GLOBAL MENU — MENU BUTTON
+==================================================*/
+
+.sf-menu-btn{
+    display:none;
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    background:var(--primary);
+    color:#fff;
+    cursor:pointer;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    border:none;
+    font-weight:700;
+    transition:background .2s;
+    flex-shrink:0;
+}
+.sf-menu-btn:hover{background:var(--primary-dark);}
+.sf-menu-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px;}
+
+/*==================================================
+        GLOBAL MENU — DESKTOP PANEL OVERRIDE
+==================================================*/
+
+@media(min-width:769px){
+    .dash-slide-overlay{
+        display:block;
+    }
+    .dash-slide-panel{
+        width:340px;
+    }
+}
+
+/*==================================================
+        GLOBAL MENU — THEME SUBMENU
+==================================================*/
+
+.theme-toggle{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 20px;
+    color:var(--text);
+    font-weight:500;
+    font-size:15px;
+    cursor:pointer;
+    transition:background .2s,color .2s;
+    user-select:none;
+}
+.theme-toggle:hover{background:var(--light-green);color:var(--primary);}
+.theme-toggle .dd-icon{width:22px;text-align:center;font-size:17px;flex-shrink:0;}
+.theme-arrow{margin-left:auto;font-size:10px;transition:transform .25s ease;display:inline-block;}
+.theme-arrow.open{transform:rotate(90deg);}
+
+.theme-submenu{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+}
+.theme-submenu.open{
+    max-height:300px;
+}
+
+.theme-option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 20px 11px 54px;
+    color:var(--text);
+    font-weight:500;
+    font-size:14px;
+    cursor:pointer;
+    transition:background .2s,color .2s;
+    user-select:none;
+}
+.theme-option:hover{background:var(--light-green);color:var(--primary);}
+.theme-option.active{font-weight:700;}
+.theme-icon{width:20px;text-align:center;font-size:15px;flex-shrink:0;}
+.theme-check{margin-left:auto;font-size:14px;font-weight:700;color:var(--primary);min-width:18px;text-align:right;}
+
+/*==================================================
+        EXTENDED DARK MODE
+==================================================*/
+
+html.dark body,
+body.dark{
+    background:#0F172A;
+    color:#F8FAFC;
+}
+
+body.dark .header,
+body.dark .product-card,
+body.dark .contact-card,
+body.dark .why-card,
+body.dark .dashboard-card,
+body.dark .table-card,
+body.dark .form-card{
+    background:#1E293B;
+    color:#fff;
+}
+
+body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5,body.dark h6{
+    color:#F1F5F9;
+}
+body.dark p{color:#CBD5E1;}
+body.dark a:not(.btn):not(.btn-outline):not(.whatsapp-btn-only):not(.floating-btn){
+    color:#94A3B8;
+}
+
+body.dark .dash-slide-panel{
+    background:#1E293B;
+}
+body.dark .dash-slide-header{
+    border-bottom-color:#334155;
+}
+body.dark .dash-slide-header h3{color:#F1F5F9;}
+body.dark .dash-slide-close{background:#334155;color:#CBD5E1;}
+body.dark .dash-slide-close:hover{background:#475569;}
+body.dark .dash-slide-body a{color:#CBD5E1;}
+body.dark .dash-slide-body a:hover{background:#334155;color:#4ADE80;}
+body.dark .dash-slide-body a.active-page{background:#334155;color:#4ADE80;}
+body.dark .dash-slide-label{color:#64748B;}
+body.dark .dash-slide-body .dd-sep{background:#334155;}
+
+body.dark .theme-toggle{color:#CBD5E1;}
+body.dark .theme-toggle:hover{background:#334155;color:#4ADE80;}
+body.dark .theme-option{color:#CBD5E1;}
+body.dark .theme-option:hover{background:#334155;color:#4ADE80;}
+body.dark .theme-check{color:#4ADE80;}
+
+body.dark .sf-menu-btn{background:#334155;color:#F1F5F9;}
+body.dark .sf-menu-btn:hover{background:#475569;}
+
+body.dark .dash-slide-overlay{background:rgba(0,0,0,.6);}
+
+body.dark .mobile-toggle{background:#334155;color:#F1F5F9;}
+
+body.dark .hero{background:#0F172A;}
+body.dark .hero h1{color:#F1F5F9;}
+body.dark .hero p{color:#CBD5E1;}
+body.dark .hero-badge{background:#334155;color:#4ADE80;}
+body.dark .announcement-box,
+body.dark .commitment-box{background:#1E293B;border-color:#334155;}
+body.dark .announcement-box h3,
+body.dark .commitment-box h3{color:#F1F5F9;}
+
+body.dark .section-title{color:#F1F5F9;}
+body.dark .section-subtitle{color:#94A3B8;}
+
+body.dark .btn{background:#059669;}
+body.dark .btn:hover{background:#047857;}
+body.dark .btn-outline{border-color:#4ADE80;color:#4ADE80;}
+body.dark .btn-outline:hover{background:#4ADE80;color:#0F172A;}
+
+body.dark .faq-question{background:#1E293B;color:#F1F5F9;}
+body.dark .faq-answer{background:#1E293B;color:#CBD5E1;}
+
+body.dark .testimonial-card{background:#1E293B;border-color:#334155;}
+body.dark .testimonial-card p{color:#CBD5E1;}
+body.dark .testimonial-card .customer h4{color:#F1F5F9;}
+
+body.dark .review-form input,
+body.dark .review-form textarea,
+body.dark .review-form select{background:#1E293B;color:#F1F5F9;border-color:#334155;}
+
+body.dark table{background:#1E293B;color:#CBD5E1;}
+body.dark th{background:#334155;color:#F1F5F9;}
+body.dark td{border-bottom-color:#334155;}
+body.dark tr:hover td{background:#334155;}
+
+body.dark .modal-content{background:#1E293B;color:#F1F5F9;}
+
+body.dark .hero-buttons .btn{background:#059669;}
+body.dark .hero-buttons .btn:hover{background:#047857;}
+body.dark .hero-buttons .btn-outline{border-color:#4ADE80;color:#4ADE80;}
+
+body.dark .contact-info{background:#0F172A;}
+body.dark .contact-card{background:#1E293B;border-color:#334155;}
+
+body.dark .testimonials{background:#0F172A;}
+body.dark .reviews{background:#0F172A;}
+
+body.dark .cart-page{background:#0F172A;}
+body.dark .cart-summary{background:#1E293B;}
+body.dark .cart-summary h3{color:#F1F5F9;}
+
+body.dark .dashboard-layout{background:#0F172A;}
+body.dark .sidebar{background:#1E293B;}
+body.dark .sidebar-logo span{color:#F1F5F9;}
+body.dark .sidebar-menu li a{color:#CBD5E1;}
+body.dark .sidebar-menu li.active,
+body.dark .sidebar-menu li:hover{background:#334155;}
+body.dark .sidebar-menu li.active a{color:#4ADE80;}
+
+body.dark .main-content{background:#0F172A;}
+body.dark .topbar{background:#1E293B;border-bottom-color:#334155;}
+body.dark .topbar h1{color:#F1F5F9;}
+body.dark .topbar p{color:#CBD5E1;}
+
+body.dark .stat-card{background:#1E293B;border-color:#334155;}
+body.dark .stat-card h2{color:#4ADE80;}
+body.dark .stat-card p{color:#CBD5E1;}
+
+body.dark .dashboard-section{background:#1E293B;border-color:#334155;}
+body.dark .dashboard-section h2{color:#F1F5F9;}
+
+body.dark .profile-box{background:#1E293B;}
+body.dark .profile-box p{color:#CBD5E1;}
+body.dark .profile-box b{color:#F1F5F9;}
+
+body.dark .form-box{background:#1E293B;}
+body.dark .form-box h3{color:#F1F5F9;}
+body.dark .form-group label{color:#CBD5E1;}
+
+body.dark input,
+body.dark textarea,
+body.dark select{background:#1E293B;color:#F1F5F9;border-color:#334155;}
+body.dark input::placeholder,
+body.dark textarea::placeholder{color:#64748B;}
+
+body.dark .profile-photo-box{background:#1E293B;}
+
+body.dark .tracking-timeline .circle{background:#334155;color:#CBD5E1;}
+body.dark .tracking-step p{color:#CBD5E1;}
+
+body.dark .quick-grid .btn{background:#059669;}
+
+body.dark .table-box{background:#1E293B;}
+
+body.dark .order-summary{background:#1E293B;border-color:#334155;}
+
+body.dark .admin-profile{background:#1E293B;}
+body.dark .admin-profile span{color:#CBD5E1;}
+
+body.dark .dash-topnav{background:#1E293B;border-bottom-color:#334155;}
+body.dark .dash-topnav a{color:#CBD5E1;}
+
+body.dark .auth-container{background:#1E293B;}
+
+body.dark .menu-toggle{background:#334155;color:#F1F5F9;}
+
+/*==================================================
+        PRINT
 ==================================================*/
 
 @media print{
@@ -3828,6 +4073,7 @@ body.dark p{
 .whatsapp,
 .back-top,
 .mobile-toggle,
+.sf-menu-btn,
 .top-bar{
 
     display:none !important;

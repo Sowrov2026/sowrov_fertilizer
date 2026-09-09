@@ -2,163 +2,127 @@
 // Component Loader — SINGLE SHARED COMPONENT
 // Sowrov Fertilizer — V22 Enterprise Platform
 // Injects: Navbar, Footer, AI Chat, All Modules
+// Global Menu + Theme System
 // ======================================
 
 (function () {
     'use strict';
 
-    const CURRENT_PAGE = window.location.pathname.split('/').pop() || 'index.html';
+    var CURRENT_PAGE = window.location.pathname.split('/').pop() || 'index.html';
+
+    // ========================================
+    // THEME — Apply before paint to avoid flash
+    // ========================================
+    (function initThemeEarly() {
+        try {
+            var saved = localStorage.getItem('sf-theme');
+            if (saved === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (saved === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                // System Default or no preference
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                }
+            }
+        } catch (e) { /* storage unavailable */ }
+    })();
 
     // ========================================
     // NAVBAR — ONE source of truth
     // ========================================
     function buildNavbar() {
-        return `<header class="header">
-    <div class="container">
-        <nav class="navbar">
-            <a href="/" class="logo">Sowrov <span>Fertilizer</span></a>
-            <div class="dash-nav">
-                <a href="/" class="dash-nav-home">Home</a>
-                <a href="/customer-login.html" class="dash-nav-login" id="sf-nav-login">Login</a>
-                <div class="dash-trigger" id="sf-nav-dashboard" style="display:none">
-                    <button class="dash-trigger-btn" aria-haspopup="true" aria-expanded="false">Dashboard <span class="arrow">▼</span></button>
-                    <div class="dash-dropdown" role="menu">
-                        <div class="dash-dropdown-label">Browse</div>
-                        <a href="/products.html" class="dd-icon">📦</a><a href="/products.html">Products</a>
-                        <a href="/gallery.html" class="dd-icon">🖼️</a><a href="/gallery.html">Gallery</a>
-                        <a href="/faq.html" class="dd-icon">❓</a><a href="/faq.html">FAQ</a>
-                        <a href="/contact.html" class="dd-icon">📞</a><a href="/contact.html">Contact</a>
-                        <a href="/about.html" class="dd-icon">ℹ️</a><a href="/about.html">About</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Dashboards</div>
-                        <a href="/customer-dashboard.html" class="dd-icon" id="sf-nav-cust-dash" style="display:none">👤</a><a href="/customer-dashboard.html" id="sf-nav-cust-dash-text" style="display:none">Customer Dashboard</a>
-                        <a href="/admin-login.html" class="dd-icon" id="sf-nav-admin-login" style="display:none">🔑</a><a href="/admin-login.html" id="sf-nav-admin-login-text" style="display:none">Admin Login</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Activity</div>
-                        <a href="/customer-orders.html" class="dd-icon">📋</a><a href="/customer-orders.html">Orders</a>
-                        <a href="/admin-reviews.html" class="dd-icon" id="sf-nav-admin-reviews" style="display:none">⭐</a><a href="/admin-reviews.html" id="sf-nav-admin-reviews-text" style="display:none">Reviews</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Account</div>
-                        <a href="/profile.html" class="dd-icon">🧑</a><a href="/profile.html">Profile</a>
-                        <a href="/admin-settings.html" class="dd-icon" id="sf-nav-admin-settings" style="display:none">⚙️</a><a href="/admin-settings.html" id="sf-nav-admin-settings-text" style="display:none">Settings</a>
-                        <div class="dd-sep"></div>
-                        <div class="dash-dropdown-label">Support</div>
-                        <a href="https://wa.me/8801829775552" target="_blank" class="dd-icon">💬</a><a href="https://wa.me/8801829775552" target="_blank">WhatsApp Support</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mobile-toggle" aria-label="Open menu">☰</div>
-        </nav>
-    </div>
-</header>
-<div class="dash-slide-overlay"></div>
-<div class="dash-slide-panel">
-    <div class="dash-slide-header">
-        <h3>Menu</h3>
-        <button class="dash-slide-close" aria-label="Close menu">✕</button>
-    </div>
-    <div class="dash-slide-body">
-        <a href="/customer-login.html" class="btn" id="sf-nav-login-mobile" style="display:none;width:100%;text-align:center;margin-bottom:12px">Login</a>
-        <div id="sf-nav-dashboard-mobile" style="display:none">
-            <div class="dash-slide-label">Dashboards</div>
-            <a href="/customer-dashboard.html" id="sf-nav-cust-dash-mobile" style="display:none"><span class="dd-icon">👤</span> Customer Dashboard</a>
-            <a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">🔑</span> Admin Login</a>
-            <div class="dd-sep"></div>
-        </div>
-        <div class="dash-slide-label">Browse</div>
-        <a href="/products.html"><span class="dd-icon">📦</span> Products</a>
-        <a href="/gallery.html"><span class="dd-icon">🖼️</span> Gallery</a>
-        <a href="/faq.html"><span class="dd-icon">❓</span> FAQ</a>
-        <a href="/contact.html"><span class="dd-icon">📞</span> Contact</a>
-        <a href="/about.html"><span class="dd-icon">ℹ️</span> About</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Activity</div>
-        <a href="/customer-orders.html"><span class="dd-icon">📋</span> Orders</a>
-        <a href="/admin-reviews.html" id="sf-nav-admin-reviews-mobile" style="display:none"><span class="dd-icon">⭐</span> Reviews</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Account</div>
-        <a href="/profile.html"><span class="dd-icon">🧑</span> Profile</a>
-        <a href="/admin-settings.html" id="sf-nav-admin-settings-mobile" style="display:none"><span class="dd-icon">⚙️</span> Settings</a>
-        <div class="dd-sep"></div>
-        <div class="dash-slide-label">Support</div>
-        <a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">💬</span> WhatsApp Support</a>
-    </div>
-</div>`;
+        return '<header class="header"><div class="container"><nav class="navbar"><a href="/" class="logo">Sowrov <span>Fertilizer</span></a><div class="dash-nav"><a href="/" class="dash-nav-home">Home</a><a href="/customer-login.html" class="dash-nav-login" id="sf-nav-login">Login</a><div class="dash-trigger" id="sf-nav-dashboard" style="display:none"><button class="dash-trigger-btn" aria-haspopup="true" aria-expanded="false">Dashboard <span class="arrow">\u25BC</span></button><div class="dash-dropdown" role="menu"><a href="/customer-dashboard.html" id="sf-nav-cust-dash" style="display:none"><span class="dd-icon">\uD83D\uDC64</span> Customer Dashboard</a><a href="/customer-dashboard.html" id="sf-nav-cust-dash-text" style="display:none"><span class="dd-icon">\uD83D\uDC64</span> Customer Dashboard</a><a href="/admin-login.html" id="sf-nav-admin-login" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a><a href="/admin-login.html" id="sf-nav-admin-login-text" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a><div class="dd-sep"></div><a href="/cart.html"><span class="dd-icon">\uD83D\uDED2</span> Cart</a><a href="/customer-orders.html"><span class="dd-icon">\uD83D\uDCE6</span> Orders</a><a href="/profile.html"><span class="dd-icon">\uD83D\uDC64</span> Profile</a><div class="dd-sep"></div><a href="/products.html"><span class="dd-icon">\uD83C\uDF31</span> Products</a><a href="/gallery.html"><span class="dd-icon">\uD83D\uDDBC\uFE0F</span> Gallery</a><a href="/faq.html"><span class="dd-icon">\u2753</span> FAQ</a><a href="/contact.html"><span class="dd-icon">\uD83D\uDCDE</span> Contact</a><a href="/about.html"><span class="dd-icon">\u2139\uFE0F</span> About</a><div class="dd-sep"></div><a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">\uD83D\uDCAC</span> WhatsApp Support</a></div></div><div class="sf-menu-btn" id="sf-menu-btn" aria-label="Open menu" role="button" tabindex="0">\u2630</div></nav></div></header><div class="dash-slide-overlay"></div><div class="dash-slide-panel"><div class="dash-slide-header"><h3>Menu</h3><button class="dash-slide-close" aria-label="Close menu">\u2715</button></div><div class="dash-slide-body"><a href="/customer-login.html" class="btn" id="sf-nav-login-mobile" style="display:none;width:100%;text-align:center;margin-bottom:12px">Login</a><div id="sf-nav-dashboard-mobile" style="display:none"><a href="/customer-dashboard.html" id="sf-nav-cust-dash-mobile" style="display:none"><span class="dd-icon">\uD83D\uDC64</span> Customer Dashboard</a><a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a></div><div class="dd-sep"></div><div class="dash-slide-label">BROWSE</div><a href="/products.html"><span class="dd-icon">\uD83C\uDF31</span> Products</a><a href="/gallery.html"><span class="dd-icon">\uD83D\uDDBC\uFE0F</span> Gallery</a><a href="/faq.html"><span class="dd-icon">\u2753</span> FAQ</a><a href="/contact.html"><span class="dd-icon">\uD83D\uDCDE</span> Contact</a><a href="/about.html"><span class="dd-icon">\u2139\uFE0F</span> About</a><div class="dd-sep"></div><div class="dash-slide-label">SHOP</div><a href="/cart.html"><span class="dd-icon">\uD83D\uDED2</span> Cart</a><a href="/customer-orders.html"><span class="dd-icon">\uD83D\uDCE6</span> Orders</a><a href="/track-order.html"><span class="dd-icon">\uD83D\uDD0E</span> Track Order</a><div class="dd-sep"></div><div class="dash-slide-label">ACCOUNT</div><a href="/profile.html"><span class="dd-icon">\uD83D\uDC64</span> Profile</a><a href="/customer-dashboard.html"><span class="dd-icon">\uD83D\uDCCA</span> Customer Dashboard</a><a href="/admin-login.html"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a><div class="dd-sep"></div><div class="dash-slide-label">SUPPORT</div><a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">\uD83D\uDCAC</span> WhatsApp Support</a><div class="dd-sep"></div><div class="dash-slide-label">SETTINGS</div><div class="theme-toggle" id="sf-theme-toggle"><span class="dd-icon">\uD83C\uDF10</span> Appearance <span class="theme-arrow">\u25B6</span></div><div class="theme-submenu" id="sf-theme-submenu"><div class="theme-option sf-theme-select" data-theme="light"><span class="theme-icon">\u2600\uFE0F</span> Light Mode <span class="theme-check"></span></div><div class="theme-option sf-theme-select" data-theme="dark"><span class="theme-icon">\uD83C\uDF19</span> Dark Mode <span class="theme-check"></span></div><div class="theme-option sf-theme-select" data-theme="system"><span class="theme-icon">\u2699\uFE0F</span> System Default <span class="theme-check"></span></div></div></div></div>';
     }
 
     // ========================================
     // FOOTER — ONE source of truth
     // ========================================
     function buildFooter() {
-        return `<footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h2>Sowrov <span>Fertilizer</span></h2>
-                    <p>Premium organic fertilizer manufacturer based in Maheshkhali, Cox's Bazar. We provide high-quality Vermicompost and Trichoderma for sustainable agriculture across Bangladesh.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/products.html">Products</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                        <li><a href="/customer-login.html">Login</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Our Products</h3>
-                    <ul>
-                        <li><a href="/products.html">Vermicompost</a></li>
-                        <li><a href="/products.html">Trichoderma</a></li>
-                        <li><a href="/products.html">Organic Fertilizer</a></li>
-                        <li><a href="/products.html">Wholesale Supply</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact</h3>
-                    <p>📍 Maheshkhali, Cox's Bazar</p>
-                    <p>📞 01829775552</p>
-                    <p>📞 01518945262</p>
-                    <p>✉️ shohrahuddinsowrov2026@gmail.com</p>
-                </div>
-            </div>
-            <div class="copyright">© 2022 - 2026 <strong>Sowrov Fertilizer</strong><br>All Rights Reserved.</div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp">
-        <img src="assets/images/icons/whatsapp.png" alt="WhatsApp">
-    </a>`;
+        return '<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h2>Sowrov <span>Fertilizer</span></h2><p>Premium organic fertilizer manufacturer based in Maheshkhali, Cox\'s Bazar. We provide high-quality Vermicompost and Trichoderma for sustainable agriculture across Bangladesh.</p></div><div class="footer-col"><h3>Quick Links</h3><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/products.html">Products</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/customer-login.html">Login</a></li></ul></div><div class="footer-col"><h3>Our Products</h3><ul><li><a href="/products.html">Vermicompost</a></li><li><a href="/products.html">Trichoderma</a></li><li><a href="/products.html">Organic Fertilizer</a></li><li><a href="/products.html">Wholesale Supply</a></li></ul></div><div class="footer-col"><h3>Contact</h3><p>\uD83D\uDCCD Maheshkhali, Cox\'s Bazar</p><p>\uD83D\uDCDE 01829775552</p><p>\uD83D\uDCDE 01518945262</p><p>\u2709\uFE0F shohrahuddinsowrov2026@gmail.com</p></div></div><div class="copyright">\u00A9 2022 - 2026 <strong>Sowrov Fertilizer</strong><br>All Rights Reserved.</div></div></footer><a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp"><img src="assets/images/icons/whatsapp.png" alt="WhatsApp"></a>';
     }
 
     // ========================================
     // INJECT COMPONENTS
     // ========================================
     function injectComponents() {
-        // Inject navbar if placeholder exists
-        const navbarEl = document.getElementById('sf-navbar');
+        var navbarEl = document.getElementById('sf-navbar');
         if (navbarEl) {
             navbarEl.outerHTML = buildNavbar();
         }
-
-        // Inject footer if placeholder exists
-        const footerEl = document.getElementById('sf-footer');
+        var footerEl = document.getElementById('sf-footer');
         if (footerEl) {
             footerEl.outerHTML = buildFooter();
         }
     }
 
     // ========================================
-    // NAVBAR INTERACTIONS (dropdown, mobile, active page)
+    // THEME SYSTEM
+    // ========================================
+    function getStoredTheme() {
+        try { return localStorage.getItem('sf-theme') || 'system'; } catch (e) { return 'system'; }
+    }
+
+    function applyTheme(theme) {
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = theme === 'dark' || (theme === 'system' && prefersDark);
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+            if (document.body) document.body.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (document.body) document.body.classList.remove('dark');
+        }
+    }
+
+    function updateThemeCheckmarks() {
+        var stored = getStoredTheme();
+        document.querySelectorAll('.sf-theme-select').forEach(function (opt) {
+            var check = opt.querySelector('.theme-check');
+            if (check) {
+                check.textContent = opt.getAttribute('data-theme') === stored ? '\u2713' : '';
+            }
+            if (opt.getAttribute('data-theme') === stored) {
+                opt.classList.add('active');
+            } else {
+                opt.classList.remove('active');
+            }
+        });
+    }
+
+    function initThemeSystem() {
+        applyTheme(getStoredTheme());
+        updateThemeCheckmarks();
+
+        document.querySelectorAll('.sf-theme-select').forEach(function (opt) {
+            opt.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var theme = this.getAttribute('data-theme');
+                try { localStorage.setItem('sf-theme', theme); } catch (e) { /* ignore */ }
+                applyTheme(theme);
+                updateThemeCheckmarks();
+            });
+        });
+
+        // Follow OS changes when in System mode
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+                if (getStoredTheme() === 'system') {
+                    applyTheme('system');
+                }
+            });
+        }
+    }
+
+    // ========================================
+    // NAVBAR INTERACTIONS
     // ========================================
     function initNavbar() {
         // Desktop dropdown toggle
-        const trigger = document.querySelector('.dash-trigger');
+        var trigger = document.querySelector('.dash-trigger');
         if (trigger) {
-            const btn = trigger.querySelector('.dash-trigger-btn');
+            var btn = trigger.querySelector('.dash-trigger-btn');
             if (btn) {
                 btn.addEventListener('click', function (e) {
                     e.stopPropagation();
@@ -175,11 +139,11 @@
             });
         }
 
-        // Mobile slide panel
-        const overlay = document.querySelector('.dash-slide-overlay');
-        const panel = document.querySelector('.dash-slide-panel');
-        const closeBtn = document.querySelector('.dash-slide-close');
-        const mobileToggle = document.querySelector('.mobile-toggle');
+        // Global Menu — slide panel (works on all screen sizes)
+        var overlay = document.querySelector('.dash-slide-overlay');
+        var panel = document.querySelector('.dash-slide-panel');
+        var closeBtn = document.querySelector('.dash-slide-close');
+        var menuBtn = document.querySelector('.sf-menu-btn');
 
         function openSlide() {
             if (overlay) overlay.classList.add('open');
@@ -192,18 +156,55 @@
             document.body.style.overflow = '';
         }
 
-        if (mobileToggle) mobileToggle.addEventListener('click', openSlide);
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                openSlide();
+            });
+            menuBtn.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openSlide();
+                }
+            });
+        }
         if (closeBtn) closeBtn.addEventListener('click', closeSlide);
         if (overlay) overlay.addEventListener('click', closeSlide);
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeSlide();
         });
 
-        // Mark active page in dropdowns
+        // Submenu toggles
+        document.querySelectorAll('.sf-submenu-toggle').forEach(function (toggle) {
+            toggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var submenuId = this.getAttribute('data-submenu');
+                var submenu = document.getElementById(submenuId);
+                var arrow = this.querySelector('.theme-arrow');
+                if (submenu) {
+                    submenu.classList.toggle('open');
+                    if (arrow) arrow.classList.toggle('open');
+                }
+            });
+        });
+
+        // Theme submenu toggle
+        var themeToggle = document.getElementById('sf-theme-toggle');
+        var themeSubmenu = document.getElementById('sf-theme-submenu');
+        if (themeToggle && themeSubmenu) {
+            themeToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                themeSubmenu.classList.toggle('open');
+                var arrow = themeToggle.querySelector('.theme-arrow');
+                if (arrow) arrow.classList.toggle('open');
+            });
+        }
+
+        // Mark active page in menu
         document.querySelectorAll('.dash-dropdown a[href], .dash-slide-body a[href]').forEach(function (link) {
-            const href = link.getAttribute('href');
+            var href = link.getAttribute('href');
             if (href) {
-                const page = href.split('/').pop();
+                var page = href.split('/').pop();
                 if (page === CURRENT_PAGE || (CURRENT_PAGE === '' && page === 'index.html') || (CURRENT_PAGE === '/' && page === '')) {
                     link.classList.add('active-page');
                 }
@@ -215,22 +216,19 @@
     // LOAD AI ASSISTANT
     // ========================================
     function loadAI() {
-        // Load CSS
-        if (!document.getElementById("ai-style")) {
-            const css = document.createElement("link");
-            css.id = "ai-style";
-            css.rel = "stylesheet";
-            css.href = "assets/css/ai.css";
+        if (!document.getElementById('ai-style')) {
+            var css = document.createElement('link');
+            css.id = 'ai-style';
+            css.rel = 'stylesheet';
+            css.href = 'assets/css/ai.css';
             document.head.appendChild(css);
         }
-
-        // Load JS
-        if (!document.getElementById("ai-script")) {
-            const script = document.createElement("script");
-            script.id = "ai-script";
-            script.src = "assets/js/ai.js";
-            script.onload = () => {
-                console.log("AI Assistant Loaded");
+        if (!document.getElementById('ai-script')) {
+            var script = document.createElement('script');
+            script.id = 'ai-script';
+            script.src = 'assets/js/ai.js';
+            script.onload = function () {
+                console.log('AI Assistant Loaded');
                 loadV15Modules();
                 loadV16Modules();
                 loadV17Modules();
@@ -244,69 +242,69 @@
     }
 
     // ========================================
-    // V15–V22 MODULE LOADER
+    // V15-V22 MODULE LOADER
     // ========================================
     function loadV15Modules() {
-        if (document.getElementById("v15-module")) return;
-        const s = document.createElement("script");
-        s.id = "v15-module";
-        s.type = "module";
-        s.src = "assets/js/v15-integration.js";
-        s.onload = () => console.log("V15 Smart Agriculture Loaded");
+        if (document.getElementById('v15-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v15-module';
+        s.type = 'module';
+        s.src = 'assets/js/v15-integration.js';
+        s.onload = function () { console.log('V15 Smart Agriculture Loaded'); };
         document.body.appendChild(s);
     }
     function loadV16Modules() {
-        if (document.getElementById("v16-module")) return;
-        const s = document.createElement("script");
-        s.id = "v16-module";
-        s.type = "module";
-        s.src = "assets/js/v16-integration.js";
-        s.onload = () => console.log("V16 Enterprise Intelligence Loaded");
+        if (document.getElementById('v16-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v16-module';
+        s.type = 'module';
+        s.src = 'assets/js/v16-integration.js';
+        s.onload = function () { console.log('V16 Enterprise Intelligence Loaded'); };
         document.body.appendChild(s);
     }
     function loadV17Modules() {
-        if (document.getElementById("v17-module")) return;
-        const s = document.createElement("script");
-        s.id = "v17-module";
-        s.type = "module";
-        s.src = "assets/js/v17-integration.js";
-        s.onload = () => console.log("V17 Ultimate Production Loaded");
+        if (document.getElementById('v17-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v17-module';
+        s.type = 'module';
+        s.src = 'assets/js/v17-integration.js';
+        s.onload = function () { console.log('V17 Ultimate Production Loaded'); };
         document.body.appendChild(s);
     }
     function loadV19Modules() {
-        if (document.getElementById("v19-module")) return;
-        const s = document.createElement("script");
-        s.id = "v19-module";
-        s.type = "module";
-        s.src = "assets/js/v19-integration.js";
-        s.onload = () => console.log("V19 Self-Evolving AI Loaded");
+        if (document.getElementById('v19-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v19-module';
+        s.type = 'module';
+        s.src = 'assets/js/v19-integration.js';
+        s.onload = function () { console.log('V19 Self-Evolving AI Loaded'); };
         document.body.appendChild(s);
     }
     function loadV20Modules() {
-        if (document.getElementById("v20-module")) return;
-        const s = document.createElement("script");
-        s.id = "v20-module";
-        s.type = "module";
-        s.src = "assets/js/v20-integration.js";
-        s.onload = () => console.log("V20 Commercial Ecosystem Loaded");
+        if (document.getElementById('v20-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v20-module';
+        s.type = 'module';
+        s.src = 'assets/js/v20-integration.js';
+        s.onload = function () { console.log('V20 Commercial Ecosystem Loaded'); };
         document.body.appendChild(s);
     }
     function loadV21Modules() {
-        if (document.getElementById("v21-module")) return;
-        const s = document.createElement("script");
-        s.id = "v21-module";
-        s.type = "module";
-        s.src = "assets/js/v21-integration.js";
-        s.onload = () => console.log("V21 Knowledge Universe Loaded");
+        if (document.getElementById('v21-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v21-module';
+        s.type = 'module';
+        s.src = 'assets/js/v21-integration.js';
+        s.onload = function () { console.log('V21 Knowledge Universe Loaded'); };
         document.body.appendChild(s);
     }
     function loadV22Modules() {
-        if (document.getElementById("v22-module")) return;
-        const s = document.createElement("script");
-        s.id = "v22-module";
-        s.type = "module";
-        s.src = "assets/js/v22-integration.js";
-        s.onload = () => console.log("V22 Enterprise Platform Loaded");
+        if (document.getElementById('v22-module')) return;
+        var s = document.createElement('script');
+        s.id = 'v22-module';
+        s.type = 'module';
+        s.src = 'assets/js/v22-integration.js';
+        s.onload = function () { console.log('V22 Enterprise Platform Loaded'); };
         document.body.appendChild(s);
     }
 
@@ -315,16 +313,16 @@
     // ========================================
     function registerSW() {
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').then(reg => {
+            navigator.serviceWorker.register('/sw.js').then(function (reg) {
                 console.log('[SW] Registered, scope:', reg.scope);
-            }).catch(err => {
+            }).catch(function (err) {
                 console.warn('[SW] Registration failed:', err);
             });
         }
     }
 
     // ========================================
-    // FIREBASE AUTH STATE → NAVBAR TOGGLE
+    // FIREBASE AUTH STATE TO NAVBAR TOGGLE
     // ========================================
     function initAuth() {
         import('./firebase.js').then(function (firebase) {
@@ -398,15 +396,13 @@
                     var data = snap.exists() ? snap.data() : null;
                     var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
                     applyNavState(true, isAdmin);
-                }).catch(function (e) {
+                }).catch(function () {
                     applyNavState(true, false);
                 });
             });
 
             adminAuth.onAuthStateChanged(function (adminUser) {
-                if (!adminUser) {
-                    return;
-                }
+                if (!adminUser) return;
                 if (CURRENT_PAGE === 'index.html' || CURRENT_PAGE === '' || CURRENT_PAGE === '/') {
                     adminAuth.signOut().catch(function () {});
                 }
@@ -433,9 +429,10 @@
     function boot() {
         injectComponents();
         initNavbar();
+        initThemeSystem();
         initAuth();
         loadAI();
         registerSW();
-        console.log("Component Loader — V22 Enterprise Platform");
+        console.log('Component Loader - V22 Enterprise Platform | Global Menu + Theme');
     }
 })();
