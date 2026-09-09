@@ -153,6 +153,7 @@
         btn.className = 'sf-ai-toggle';
         btn.setAttribute('aria-label', 'Open AI Chat');
         btn.innerHTML = '<span class="sf-ai-toggle-icon"><i class="fas fa-robot"></i></span><span class="sf-ai-toggle-pulse"></span>';
+        document.body.appendChild(btn);
         return btn;
     }
 
