@@ -564,11 +564,13 @@ section{
     background:rgba(0,0,0,.4);
     z-index:3000;
     opacity:0;
+    pointer-events:none;
     transition:opacity .3s ease;
 }
 
 .dash-slide-overlay.open{
     opacity:1;
+    pointer-events:auto;
 }
 
 .dash-slide-panel{
@@ -3787,38 +3789,6 @@ select:focus{
 }
 
 /*==================================================
-            DARK MODE (Future Ready)
-==================================================*/
-
-body.dark{
-
-    background:#0F172A;
-
-    color:#F8FAFC;
-
-}
-
-body.dark .header,
-body.dark .product-card,
-body.dark .contact-card,
-body.dark .why-card,
-body.dark .dashboard-card,
-body.dark .table-card,
-body.dark .form-card{
-
-    background:#1E293B;
-
-    color:#fff;
-
-}
-
-body.dark p{
-
-    color:#CBD5E1;
-
-}
-
-/*==================================================
         GLOBAL MENU — MENU BUTTON
 ==================================================*/
 
@@ -3905,162 +3875,234 @@ body.dark p{
         EXTENDED DARK MODE
 ==================================================*/
 
+/* --- CSS Variables Override --- */
+html.dark,
+body.dark{
+    --white:#0F172A;
+    --light:#0F172A;
+    --light-green:#1a3a2a;
+    --text:#E2E8F0;
+    --gray:#94A3B8;
+    --border:#334155;
+    --shadow-sm:0 4px 10px rgba(0,0,0,.2);
+    --shadow:0 10px 30px rgba(0,0,0,.3);
+    --shadow-lg:0 20px 60px rgba(0,0,0,.4);
+}
+
 html.dark body,
 body.dark{
     background:#0F172A;
-    color:#F8FAFC;
-}
-
-body.dark .header,
-body.dark .product-card,
-body.dark .contact-card,
-body.dark .why-card,
-body.dark .dashboard-card,
-body.dark .table-card,
-body.dark .form-card{
-    background:#1E293B;
-    color:#fff;
+    color:#E2E8F0;
 }
 
 body.dark h1,body.dark h2,body.dark h3,body.dark h4,body.dark h5,body.dark h6{
     color:#F1F5F9;
 }
 body.dark p{color:#CBD5E1;}
-body.dark a:not(.btn):not(.btn-outline):not(.whatsapp-btn-only):not(.floating-btn){
-    color:#94A3B8;
-}
+body.dark strong,b{color:#F1F5F9;}
+body.dark a{color:#93C5FD;}
+body.dark a:hover{color:#60A5FA;}
 
-body.dark .dash-slide-panel{
-    background:#1E293B;
-}
-body.dark .dash-slide-header{
-    border-bottom-color:#334155;
-}
+/* --- Header --- */
+body.dark .header{background:#1E293B;box-shadow:0 4px 10px rgba(0,0,0,.3);}
+body.dark .dash-nav-home{color:#CBD5E1;}
+body.dark .dash-nav-home:hover{color:#4ADE80;background:rgba(74,222,128,.1);}
+
+/* --- Slide Panel --- */
+body.dark .dash-slide-panel{background:#1E293B;}
+body.dark .dash-slide-header{border-bottom-color:#334155;}
 body.dark .dash-slide-header h3{color:#F1F5F9;}
 body.dark .dash-slide-close{background:#334155;color:#CBD5E1;}
 body.dark .dash-slide-close:hover{background:#475569;}
 body.dark .dash-slide-body a{color:#CBD5E1;}
 body.dark .dash-slide-body a:hover{background:#334155;color:#4ADE80;}
 body.dark .dash-slide-body a.active-page{background:#334155;color:#4ADE80;}
-body.dark .dash-slide-label{color:#64748B;}
+body.dark .dash-slide-label{color:#94A3B8;}
 body.dark .dash-slide-body .dd-sep{background:#334155;}
 
+/* --- Theme Submenu --- */
 body.dark .theme-toggle{color:#CBD5E1;}
 body.dark .theme-toggle:hover{background:#334155;color:#4ADE80;}
 body.dark .theme-option{color:#CBD5E1;}
 body.dark .theme-option:hover{background:#334155;color:#4ADE80;}
 body.dark .theme-check{color:#4ADE80;}
 
+/* --- Menu Button --- */
 body.dark .sf-menu-btn{background:#334155;color:#F1F5F9;}
 body.dark .sf-menu-btn:hover{background:#475569;}
-
-body.dark .dash-slide-overlay{background:rgba(0,0,0,.6);}
-
 body.dark .mobile-toggle{background:#334155;color:#F1F5F9;}
 
+/* --- Overlay --- */
+body.dark .dash-slide-overlay{background:rgba(0,0,0,.7);}
+
+/* --- Desktop Dropdown --- */
+body.dark .dash-dropdown{background:#1E293B;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+body.dark .dash-dropdown-label{color:#64748B;}
+body.dark .dash-dropdown a{color:#CBD5E1;}
+body.dark .dash-dropdown a:hover{background:#334155;color:#4ADE80;}
+body.dark .dash-dropdown .dd-sep{background:#334155;}
+
+/* --- Buttons --- */
+body.dark .btn{background:#059669;color:#fff;}
+body.dark .btn:hover{background:#047857;}
+body.dark .btn-outline{background:transparent;border-color:#4ADE80;color:#4ADE80;}
+body.dark .btn-outline:hover{background:#4ADE80;color:#0F172A;}
+
+/* --- Hero --- */
 body.dark .hero{background:#0F172A;}
 body.dark .hero h1{color:#F1F5F9;}
 body.dark .hero p{color:#CBD5E1;}
 body.dark .hero-badge{background:#334155;color:#4ADE80;}
-body.dark .announcement-box,
-body.dark .commitment-box{background:#1E293B;border-color:#334155;}
-body.dark .announcement-box h3,
-body.dark .commitment-box h3{color:#F1F5F9;}
+body.dark .hero-buttons .btn{background:#059669;}
+body.dark .hero-buttons .btn:hover{background:#047857;}
+body.dark .hero-buttons .btn-outline{border-color:#4ADE80;color:#4ADE80;}
+body.dark .announcement-box,.body.dark .commitment-box{background:#1E293B;border-color:#334155;}
+body.dark .announcement-box h3,body.dark .commitment-box h3{color:#F1F5F9;}
+body.dark .announcement-box li{color:#CBD5E1;}
+body.dark .commitment-box p{color:#CBD5E1;}
+body.dark .commitment-box .tagline{color:#93C5FD;}
 
+/* --- Sections --- */
 body.dark .section-title{color:#F1F5F9;}
 body.dark .section-subtitle{color:#94A3B8;}
+body.dark section{background:#0F172A;}
 
-body.dark .btn{background:#059669;}
-body.dark .btn:hover{background:#047857;}
-body.dark .btn-outline{border-color:#4ADE80;color:#4ADE80;}
-body.dark .btn-outline:hover{background:#4ADE80;color:#0F172A;}
+/* --- Cards --- */
+body.dark .product-card,.body.dark .contact-card,.body.dark .why-card,
+body.dark .dashboard-card,.body.dark .table-card,.body.dark .form-card,
+body.dark .card,.body.dark .badge-card,.body.dark .floating-card,
+body.dark .review-card,.body.dark .success-box,.body.dark .about-card{
+    background:#1E293B;color:#E2E8F0;border-color:#334155;
+}
+body.dark .product-card:hover{box-shadow:0 20px 40px rgba(0,0,0,.3);}
 
+/* --- Icons on cards --- */
+body.dark .contact-icon{background:rgba(74,222,128,.15);color:#4ADE80;}
+body.dark .why-icon{background:rgba(74,222,128,.15);color:#4ADE80;}
+body.dark .why-card .icon{background:rgba(74,222,128,.15);}
+body.dark .why-card h3{color:#F1F5F9;}
+body.dark .badge-icon{background:rgba(74,222,128,.15);}
+
+/* --- FAQ --- */
+body.dark .faq{background:#0F172A;}
+body.dark .faq-item{background:#1E293B;}
 body.dark .faq-question{background:#1E293B;color:#F1F5F9;}
+body.dark .faq-question span{color:#4ADE80;}
 body.dark .faq-answer{background:#1E293B;color:#CBD5E1;}
 
+/* --- Testimonials --- */
+body.dark .testimonials{background:#0F172A;}
 body.dark .testimonial-card{background:#1E293B;border-color:#334155;}
 body.dark .testimonial-card p{color:#CBD5E1;}
 body.dark .testimonial-card .customer h4{color:#F1F5F9;}
+body.dark .customer span{color:#94A3B8;}
 
-body.dark .review-form input,
-body.dark .review-form textarea,
+/* --- Reviews --- */
+body.dark .reviews{background:#0F172A;}
+body.dark .review-form input,.body.dark .review-form textarea,
 body.dark .review-form select{background:#1E293B;color:#F1F5F9;border-color:#334155;}
+body.dark .review-form label{color:#CBD5E1;}
+body.dark .review-message{color:#CBD5E1;}
+body.dark .review-date{color:#94A3B8;}
+body.dark .review-product{color:#4ADE80;}
+body.dark .review-stars{color:#FBBF24;}
+body.dark .verified-badge{background:rgba(74,222,128,.15);color:#4ADE80;}
+body.dark .star{color:#64748B;}
+body.dark .star.active,body.dark .star:hover{color:#FBBF24;}
+body.dark .rating-box{background:#1E293B;}
+body.dark .rating-title{color:#CBD5E1;}
 
+/* --- Tables --- */
 body.dark table{background:#1E293B;color:#CBD5E1;}
 body.dark th{background:#334155;color:#F1F5F9;}
 body.dark td{border-bottom-color:#334155;}
 body.dark tr:hover td{background:#334155;}
+body.dark .table-box{background:#1E293B;}
 
+/* --- Modal --- */
 body.dark .modal-content{background:#1E293B;color:#F1F5F9;}
+body.dark .modal .close{color:#CBD5E1;}
 
-body.dark .hero-buttons .btn{background:#059669;}
-body.dark .hero-buttons .btn:hover{background:#047857;}
-body.dark .hero-buttons .btn-outline{border-color:#4ADE80;color:#4ADE80;}
-
+/* --- Contact --- */
 body.dark .contact-info{background:#0F172A;}
 body.dark .contact-card{background:#1E293B;border-color:#334155;}
+body.dark .contact-card p{color:#CBD5E1;}
 
-body.dark .testimonials{background:#0F172A;}
-body.dark .reviews{background:#0F172A;}
-
+/* --- Cart --- */
 body.dark .cart-page{background:#0F172A;}
-body.dark .cart-summary{background:#1E293B;}
+body.dark .cart-summary{background:#1E293B;border-color:#334155;}
 body.dark .cart-summary h3{color:#F1F5F9;}
 
+/* --- Gallery --- */
+body.dark .gallery{background:#0F172A;}
+
+/* --- Dashboard --- */
 body.dark .dashboard-layout{background:#0F172A;}
 body.dark .sidebar{background:#1E293B;}
 body.dark .sidebar-logo span{color:#F1F5F9;}
 body.dark .sidebar-menu li a{color:#CBD5E1;}
-body.dark .sidebar-menu li.active,
-body.dark .sidebar-menu li:hover{background:#334155;}
+body.dark .sidebar-menu li.active,body.dark .sidebar-menu li:hover{background:#334155;}
 body.dark .sidebar-menu li.active a{color:#4ADE80;}
-
 body.dark .main-content{background:#0F172A;}
 body.dark .topbar{background:#1E293B;border-bottom-color:#334155;}
 body.dark .topbar h1{color:#F1F5F9;}
 body.dark .topbar p{color:#CBD5E1;}
-
 body.dark .stat-card{background:#1E293B;border-color:#334155;}
 body.dark .stat-card h2{color:#4ADE80;}
 body.dark .stat-card p{color:#CBD5E1;}
-
 body.dark .dashboard-section{background:#1E293B;border-color:#334155;}
 body.dark .dashboard-section h2{color:#F1F5F9;}
 
+/* --- Profile --- */
 body.dark .profile-box{background:#1E293B;}
 body.dark .profile-box p{color:#CBD5E1;}
 body.dark .profile-box b{color:#F1F5F9;}
-
 body.dark .form-box{background:#1E293B;}
 body.dark .form-box h3{color:#F1F5F9;}
 body.dark .form-group label{color:#CBD5E1;}
-
-body.dark input,
-body.dark textarea,
-body.dark select{background:#1E293B;color:#F1F5F9;border-color:#334155;}
-body.dark input::placeholder,
-body.dark textarea::placeholder{color:#64748B;}
-
 body.dark .profile-photo-box{background:#1E293B;}
 
+/* --- Forms --- */
+body.dark input,body.dark textarea,body.dark select{
+    background:#1E293B;color:#F1F5F9;border-color:#334155;
+}
+body.dark input::placeholder,body.dark textarea::placeholder{color:#64748B;}
+body.dark input:focus,body.dark textarea:focus,body.dark select:focus{
+    border-color:#4ADE80;box-shadow:0 0 0 3px rgba(74,222,128,.2);
+}
+
+/* --- Tracking --- */
 body.dark .tracking-timeline .circle{background:#334155;color:#CBD5E1;}
 body.dark .tracking-step p{color:#CBD5E1;}
 
+/* --- Quick Actions --- */
 body.dark .quick-grid .btn{background:#059669;}
 
-body.dark .table-box{background:#1E293B;}
-
+/* --- Order --- */
 body.dark .order-summary{background:#1E293B;border-color:#334155;}
 
+/* --- Admin --- */
 body.dark .admin-profile{background:#1E293B;}
 body.dark .admin-profile span{color:#CBD5E1;}
-
 body.dark .dash-topnav{background:#1E293B;border-bottom-color:#334155;}
 body.dark .dash-topnav a{color:#CBD5E1;}
-
-body.dark .auth-container{background:#1E293B;}
-
 body.dark .menu-toggle{background:#334155;color:#F1F5F9;}
+
+/* --- Auth --- */
+body.dark .auth{background:#0F172A;}
+body.dark .auth-container{background:#1E293B;}
+body.dark .auth-left{background:#1E293B;}
+body.dark .auth-right{background:#1E293B;}
+body.dark .auth-left h1{color:#F1F5F9;}
+body.dark .auth-left p{color:#CBD5E1;}
+body.dark .auth-right h2{color:#F1F5F9;}
+body.dark .back-home a{color:#93C5FD;}
+
+/* --- Scrollbar --- */
+body.dark ::-webkit-scrollbar{width:8px;}
+body.dark ::-webkit-scrollbar-track{background:#1E293B;}
+body.dark ::-webkit-scrollbar-thumb{background:#475569;border-radius:4px;}
+body.dark ::-webkit-scrollbar-thumb:hover{background:#64748B;}
 
 /*==================================================
         PRINT
