@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support | Sowrov Fertilizer</title>
+    <link rel="icon" href="assets/images/logo/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="sf-navbar"></div>
+
+    <section style="padding-top:7rem;">
+        <div class="container">
+            <div class="section-header">
+                <span class="hero-badge" data-i18n="help_title">🆘 Help & Support</span>
+                <h2 class="section-title" data-i18n="help_subtitle">We are here to help you</h2>
+            </div>
+
+            <div class="contact-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+
+                <div class="contact-card">
+                    <div class="contact-icon">❓</div>
+                    <h3 data-i18n="help_faq_title">Frequently Asked Questions</h3>
+                    <p data-i18n="help_faq_desc">Find answers to common questions about our products and services.</p>
+                    <a href="/faq.html" class="btn" style="margin-top:16px;display:inline-flex;" data-i18n="btn_view_faq">View FAQ</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3 data-i18n="help_contact_title">Contact Support</h3>
+                    <p data-i18n="help_contact_desc">Reach our support team for personalized assistance.</p>
+                    <a href="/contact.html" class="btn" style="margin-top:16px;display:inline-flex;" data-i18n="btn_contact_now">Contact Now</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3 data-i18n="help_whatsapp_title">WhatsApp Support</h3>
+                    <p data-i18n="help_whatsapp_desc">Chat with us directly on WhatsApp for quick support.</p>
+                    <a href="https://wa.me/8801829775552" target="_blank" class="btn" style="margin-top:16px;display:inline-flex;" data-i18n="btn_chat_now">Chat Now</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📦</div>
+                    <h3 data-i18n="help_orders_title">Order Help</h3>
+                    <p data-i18n="help_orders_desc">Track your orders, check status, and manage your purchases.</p>
+                    <a href="/track-order.html" class="btn" style="margin-top:16px;display:inline-flex;" data-i18n="btn_track_now">Track Order</a>
+                </div>
+
+            </div>
+
+            <div style="margin-top:60px;">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="help_track_title">Track Your Order</h2>
+                    <p class="section-subtitle" data-i18n="help_track_desc">Enter your order ID to check the current status of your delivery.</p>
+                </div>
+                <div style="max-width:500px;margin:0 auto;text-align:center;">
+                    <input type="text" id="trackOrderId" placeholder="Enter Order ID" style="width:100%;padding:14px 18px;border-radius:12px;border:2px solid var(--border);font-size:15px;margin-bottom:12px;">
+                    <button id="trackBtn" class="btn" style="width:100%;" data-i18n="btn_track_now">Track Order</button>
+                    <div id="trackingResult" style="margin-top:20px;text-align:left;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="sf-footer"></div>
+
+    <script src="assets/js/i18n.js"></script>
+    <script type="module" src="assets/js/track-order.js"></script>
+    <script src="assets/js/component-loader.js"></script>
+</body>
+</html>

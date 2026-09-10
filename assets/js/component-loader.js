@@ -2,7 +2,7 @@
 // Component Loader — SINGLE SHARED COMPONENT
 // Sowrov Fertilizer — V22 Enterprise Platform
 // Injects: Navbar, Footer, AI Chat, All Modules
-// Global Menu + Theme System
+// Consolidated Navigation + Theme + i18n
 // ======================================
 
 (function () {
@@ -21,7 +21,6 @@
             } else if (saved === 'light') {
                 document.documentElement.classList.remove('dark');
             } else {
-                // System Default or no preference
                 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                     document.documentElement.classList.add('dark');
                 }
@@ -31,16 +30,17 @@
 
     // ========================================
     // NAVBAR — ONE source of truth
+    // Dashboard dropdown = complete navigation
     // ========================================
     function buildNavbar() {
-        return '<header class="header"><div class="container"><nav class="navbar"><a href="/" class="logo">Sowrov <span>Fertilizer</span></a><div class="dash-nav"><a href="/" class="dash-nav-home">Home</a><a href="/customer-login.html" class="dash-nav-login" id="sf-nav-login">Login</a><div class="dash-trigger" id="sf-nav-dashboard" style="display:none"><button class="dash-trigger-btn" aria-haspopup="true" aria-expanded="false">Dashboard <span class="arrow">\u25BC</span></button><div class="dash-dropdown" role="menu"><a href="/customer-dashboard.html" id="sf-nav-cust-dash" style="display:none"><span class="dd-icon">\uD83D\uDC64</span> Customer Dashboard</a><a href="/customer-dashboard.html" id="sf-nav-cust-dash-text" style="display:none"><span class="dd-icon">\uD83D\uDC64</span> Customer Dashboard</a><a href="/admin-login.html" id="sf-nav-admin-login" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a><a href="/admin-login.html" id="sf-nav-admin-login-text" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a><div class="dd-sep"></div><a href="/cart.html"><span class="dd-icon">\uD83D\uDED2</span> Cart</a><a href="/customer-orders.html"><span class="dd-icon">\uD83D\uDCE6</span> Orders</a><a href="/profile.html"><span class="dd-icon">\uD83D\uDC64</span> Profile</a><div class="dd-sep"></div><a href="/products.html"><span class="dd-icon">\uD83C\uDF31</span> Products</a><a href="/gallery.html"><span class="dd-icon">\uD83D\uDDBC\uFE0F</span> Gallery</a><a href="/faq.html"><span class="dd-icon">\u2753</span> FAQ</a><a href="/contact.html"><span class="dd-icon">\uD83D\uDCDE</span> Contact</a><a href="/about.html"><span class="dd-icon">\u2139\uFE0F</span> About</a><div class="dd-sep"></div><a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">\uD83D\uDCAC</span> WhatsApp Support</a></div></div><div class="sf-menu-btn" id="sf-menu-btn" aria-label="Open menu" role="button" tabindex="0">\u2630</div></nav></div></header><div class="dash-slide-overlay"></div><div class="dash-slide-panel"><div class="dash-slide-header"><h3>Menu</h3><button class="dash-slide-close" aria-label="Close menu">\u2715</button></div><div class="dash-slide-body"><a href="/customer-login.html" class="btn" id="sf-nav-login-mobile" style="display:none;width:100%;text-align:center;margin-bottom:12px">Login</a><div id="sf-nav-dashboard-mobile" style="display:none"><a href="/customer-dashboard.html" id="sf-nav-cust-dash-mobile" style="display:none"><span class="dd-icon">\uD83D\uDC64</span> Customer Dashboard</a><a href="/admin-login.html" id="sf-nav-admin-login-mobile" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a></div><div class="dd-sep"></div><div class="dash-slide-label">BROWSE</div><a href="/products.html"><span class="dd-icon">\uD83C\uDF31</span> Products</a><a href="/gallery.html"><span class="dd-icon">\uD83D\uDDBC\uFE0F</span> Gallery</a><a href="/faq.html"><span class="dd-icon">\u2753</span> FAQ</a><a href="/contact.html"><span class="dd-icon">\uD83D\uDCDE</span> Contact</a><a href="/about.html"><span class="dd-icon">\u2139\uFE0F</span> About</a><div class="dd-sep"></div><div class="dash-slide-label">SHOP</div><a href="/cart.html"><span class="dd-icon">\uD83D\uDED2</span> Cart</a><a href="/customer-orders.html"><span class="dd-icon">\uD83D\uDCE6</span> Orders</a><a href="/track-order.html"><span class="dd-icon">\uD83D\uDD0E</span> Track Order</a><div class="dd-sep"></div><div class="dash-slide-label">ACCOUNT</div><a href="/profile.html"><span class="dd-icon">\uD83D\uDC64</span> Profile</a><a href="/customer-dashboard.html"><span class="dd-icon">\uD83D\uDCCA</span> Customer Dashboard</a><a href="/admin-login.html"><span class="dd-icon">\uD83D\uDD10</span> Admin Login</a><div class="dd-sep"></div><div class="dash-slide-label">SUPPORT</div><a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">\uD83D\uDCAC</span> WhatsApp Support</a><div class="dd-sep"></div><div class="dash-slide-label">SETTINGS</div><div class="theme-toggle" id="sf-theme-toggle"><span class="dd-icon">\uD83C\uDF10</span> Appearance <span class="theme-arrow">\u25B6</span></div><div class="theme-submenu" id="sf-theme-submenu"><div class="theme-option sf-theme-select" data-theme="light"><span class="theme-icon">\u2600\uFE0F</span> Light Mode <span class="theme-check"></span></div><div class="theme-option sf-theme-select" data-theme="dark"><span class="theme-icon">\uD83C\uDF19</span> Dark Mode <span class="theme-check"></span></div><div class="theme-option sf-theme-select" data-theme="system"><span class="theme-icon">\u2699\uFE0F</span> System Default <span class="theme-check"></span></div></div></div></div>';
+        return '<header class="header"><div class="container"><nav class="navbar"><a href="/" class="logo">Sowrov <span>Fertilizer</span></a><div class="dash-nav"><a href="/" class="dash-nav-home" data-i18n="nav_home">Home</a><a href="/customer-login.html" class="dash-nav-login" id="sf-nav-login" data-i18n="nav_login">Login</a><div class="dash-trigger" id="sf-nav-dashboard" style="display:none"><button class="dash-trigger-btn" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav_dashboard">Dashboard</span> <span class="arrow">\u25BC</span></button><div class="dash-dropdown" role="menu"><div class="dash-dropdown-label" data-i18n="menu_browse">BROWSE</div><a href="/products.html"><span class="dd-icon">\uD83C\uDF31</span> <span data-i18n="nav_products">Products</span></a><a href="/gallery.html"><span class="dd-icon">\uD83D\uDDBC\uFE0F</span> <span data-i18n="nav_gallery">Gallery</span></a><a href="/faq.html"><span class="dd-icon">\u2753</span> <span data-i18n="nav_faq">FAQ</span></a><a href="/contact.html"><span class="dd-icon">\uD83D\uDCDE</span> <span data-i18n="nav_contact">Contact</span></a><a href="/about.html"><span class="dd-icon">\u2139\uFE0F</span> <span data-i18n="nav_about">About</span></a><div class="dd-sep"></div><div class="dash-dropdown-label" data-i18n="menu_shop">SHOP</div><a href="/cart.html"><span class="dd-icon">\uD83D\uDED2</span> <span data-i18n="nav_cart">Cart</span></a><a href="/customer-orders.html"><span class="dd-icon">\uD83D\uDCE6</span> <span data-i18n="nav_orders">Orders</span></a><a href="/track-order.html"><span class="dd-icon">\uD83D\uDD0E</span> <span data-i18n="nav_track_order">Track Order</span></a><div class="dd-sep"></div><div class="dash-dropdown-label" data-i18n="menu_account">ACCOUNT</div><a href="/profile.html"><span class="dd-icon">\uD83D\uDC64</span> <span data-i18n="nav_profile">Profile</span></a><a href="/customer-dashboard.html" id="sf-nav-cust-dash" style="display:none"><span class="dd-icon">\uD83D\uDCCA</span> <span data-i18n="nav_customer_dashboard">Customer Dashboard</span></a><a href="/admin-login.html" id="sf-nav-admin-login" style="display:none"><span class="dd-icon">\uD83D\uDD10</span> <span data-i18n="nav_admin_login">Admin Login</span></a><div class="dd-sep"></div><div class="dash-dropdown-label" data-i18n="menu_support">SUPPORT</div><a href="https://wa.me/8801829775552" target="_blank"><span class="dd-icon">\uD83D\uDCAC</span> <span data-i18n="nav_whatsapp">WhatsApp Support</span></a><a href="/help.html"><span class="dd-icon">\uD83D\uDE11</span> <span data-i18n="nav_help">Help & Support</span></a><div class="dd-sep"></div><div class="dash-dropdown-label" data-i18n="menu_settings">SETTINGS</div><div class="sf-dd-submenu-trigger" data-submenu="sf-lang-submenu"><span class="dd-icon">\uD83C\uDF10</span> <span data-i18n="nav_language">Language</span> <span class="dd-arrow">\u25B6</span></div><div class="sf-dd-submenu" id="sf-lang-submenu"><div class="sf-dd-submenu-item sf-lang-option" data-lang="bn"><span class="dd-icon">\uD83D\uDD12</span> \u09AC\u09BE\u0982\u09B2\u09BE <span class="lang-check"></span></div><div class="sf-dd-submenu-item sf-lang-option" data-lang="en"><span class="dd-icon">\uD83D\uDD11</span> English <span class="lang-check"></span></div></div><div class="sf-dd-submenu-trigger" id="sf-theme-toggle" data-submenu="sf-theme-submenu"><span class="dd-icon">\uD83C\uDF13</span> <span data-i18n="nav_appearance">Appearance</span> <span class="dd-arrow">\u25B6</span></div><div class="sf-dd-submenu" id="sf-theme-submenu"><div class="sf-dd-submenu-item sf-theme-select" data-theme="light"><span class="dd-icon">\u2600\uFE0F</span> <span data-i18n="theme_light">Light Mode</span> <span class="theme-check"></span></div><div class="sf-dd-submenu-item sf-theme-select" data-theme="dark"><span class="dd-icon">\uD83C\uDF19</span> <span data-i18n="theme_dark">Dark Mode</span> <span class="theme-check"></span></div><div class="sf-dd-submenu-item sf-theme-select" data-theme="system"><span class="dd-icon">\u2699\uFE0F</span> <span data-i18n="theme_system">System Default</span> <span class="theme-check"></span></div></div><div class="dd-sep"></div><div class="dash-dropdown-label" data-i18n="menu_legal">LEGAL</div><a href="/privacy.html"><span class="dd-icon">\uD83D\uDD12</span> <span data-i18n="nav_privacy">Privacy Policy</span></a><a href="/terms.html"><span class="dd-icon">\uD83D\uDCCB</span> <span data-i18n="nav_terms">Terms & Conditions</span></a><a href="/return-policy.html"><span class="dd-icon">\u21A9\uFE0F</span> <span data-i18n="nav_return">Return / Refund Policy</span></a></div></div></nav></div></header>';
     }
 
     // ========================================
     // FOOTER — ONE source of truth
     // ========================================
     function buildFooter() {
-        return '<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h2>Sowrov <span>Fertilizer</span></h2><p>Premium organic fertilizer manufacturer based in Maheshkhali, Cox\'s Bazar. We provide high-quality Vermicompost and Trichoderma for sustainable agriculture across Bangladesh.</p></div><div class="footer-col"><h3>Quick Links</h3><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/products.html">Products</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/customer-login.html">Login</a></li></ul></div><div class="footer-col"><h3>Our Products</h3><ul><li><a href="/products.html">Vermicompost</a></li><li><a href="/products.html">Trichoderma</a></li><li><a href="/products.html">Organic Fertilizer</a></li><li><a href="/products.html">Wholesale Supply</a></li></ul></div><div class="footer-col"><h3>Contact</h3><p>\uD83D\uDCCD Maheshkhali, Cox\'s Bazar</p><p>\uD83D\uDCDE 01829775552</p><p>\uD83D\uDCDE 01518945262</p><p>\u2709\uFE0F shohrahuddinsowrov2026@gmail.com</p></div></div><div class="copyright">\u00A9 2022 - 2026 <strong>Sowrov Fertilizer</strong><br>All Rights Reserved.</div></div></footer><a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp"><img src="assets/images/icons/whatsapp.png" alt="WhatsApp"></a>';
+        return '<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h2>Sowrov <span>Fertilizer</span></h2><p>Premium organic fertilizer manufacturer based in Maheshkhali, Cox\'s Bazar. We provide high-quality Vermicompost and Trichoderma for sustainable agriculture across Bangladesh.</p></div><div class="footer-col"><h3 data-i18n="footer_quick_links">Quick Links</h3><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/products.html">Products</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/customer-login.html" data-i18n="footer_login">Login</a></li></ul></div><div class="footer-col"><h3 data-i18n="footer_our_products">Our Products</h3><ul><li><a href="/products.html">Vermicompost</a></li><li><a href="/products.html">Trichoderma</a></li><li><a href="/products.html">Organic Fertilizer</a></li><li><a href="/products.html">Wholesale Supply</a></li></ul></div><div class="footer-col"><h3 data-i18n="footer_contact">Contact</h3><p>\uD83D\uDCCD Maheshkhali, Cox\'s Bazar</p><p>\uD83D\uDCDE 01829775552</p><p>\uD83D\uDCDE 01518945262</p><p>\u2709\uFE0F shohrahuddinsowrov2026@gmail.com</p></div></div><div class="copyright">\u00A9 2022 - 2026 <strong>Sowrov Fertilizer</strong><br>All Rights Reserved.</div></div></footer><a href="https://wa.me/8801829775552" target="_blank" class="floating-btn whatsapp-btn-only" title="WhatsApp"><img src="assets/images/icons/whatsapp.png" alt="WhatsApp"></a>';
     }
 
     // ========================================
@@ -105,7 +105,6 @@
             });
         });
 
-        // Follow OS changes when in System mode
         if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
                 if (getStoredTheme() === 'system') {
@@ -113,6 +112,28 @@
                 }
             });
         }
+    }
+
+    // ========================================
+    // LANGUAGE SYSTEM
+    // ========================================
+    function initLanguageSystem() {
+        if (window.SFi18n) {
+            window.SFi18n.applyTranslations();
+            window.SFi18n.updateLangIndicators();
+        }
+
+        document.querySelectorAll('.sf-lang-option').forEach(function (opt) {
+            opt.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var lang = this.getAttribute('data-lang');
+                if (window.SFi18n) {
+                    window.SFi18n.setLang(lang);
+                    window.SFi18n.applyTranslations();
+                    window.SFi18n.updateLangIndicators();
+                }
+            });
+        });
     }
 
     // ========================================
@@ -139,48 +160,13 @@
             });
         }
 
-        // Global Menu — slide panel (works on all screen sizes)
-        var overlay = document.querySelector('.dash-slide-overlay');
-        var panel = document.querySelector('.dash-slide-panel');
-        var closeBtn = document.querySelector('.dash-slide-close');
-        var menuBtn = document.querySelector('.sf-menu-btn');
-
-        function openSlide() {
-            if (overlay) overlay.classList.add('open');
-            if (panel) panel.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeSlide() {
-            if (overlay) overlay.classList.remove('open');
-            if (panel) panel.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        if (menuBtn) {
-            menuBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                openSlide();
-            });
-            menuBtn.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openSlide();
-                }
-            });
-        }
-        if (closeBtn) closeBtn.addEventListener('click', closeSlide);
-        if (overlay) overlay.addEventListener('click', closeSlide);
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeSlide();
-        });
-
-        // Submenu toggles
-        document.querySelectorAll('.sf-submenu-toggle').forEach(function (toggle) {
+        // Dropdown submenu toggles (Language, Appearance)
+        document.querySelectorAll('.sf-dd-submenu-trigger').forEach(function (toggle) {
             toggle.addEventListener('click', function (e) {
                 e.stopPropagation();
                 var submenuId = this.getAttribute('data-submenu');
                 var submenu = document.getElementById(submenuId);
-                var arrow = this.querySelector('.theme-arrow');
+                var arrow = this.querySelector('.dd-arrow');
                 if (submenu) {
                     submenu.classList.toggle('open');
                     if (arrow) arrow.classList.toggle('open');
@@ -188,20 +174,8 @@
             });
         });
 
-        // Theme submenu toggle
-        var themeToggle = document.getElementById('sf-theme-toggle');
-        var themeSubmenu = document.getElementById('sf-theme-submenu');
-        if (themeToggle && themeSubmenu) {
-            themeToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                themeSubmenu.classList.toggle('open');
-                var arrow = themeToggle.querySelector('.theme-arrow');
-                if (arrow) arrow.classList.toggle('open');
-            });
-        }
-
         // Mark active page in menu
-        document.querySelectorAll('.dash-dropdown a[href], .dash-slide-body a[href]').forEach(function (link) {
+        document.querySelectorAll('.dash-dropdown a[href]').forEach(function (link) {
             var href = link.getAttribute('href');
             if (href) {
                 var page = href.split('/').pop();
@@ -210,6 +184,18 @@
                 }
             }
         });
+    }
+
+    // ========================================
+    // LOAD i18n
+    // ========================================
+    function loadI18n() {
+        if (!document.getElementById('i18n-script')) {
+            var s = document.createElement('script');
+            s.id = 'i18n-script';
+            s.src = 'assets/js/i18n.js';
+            document.head.appendChild(s);
+        }
     }
 
     // ========================================
@@ -336,51 +322,17 @@
         function listenAuth(customerAuth, adminAuth, db, fsMod) {
             var loginEl = document.getElementById('sf-nav-login');
             var dashEl = document.getElementById('sf-nav-dashboard');
-            var loginMobile = document.getElementById('sf-nav-login-mobile');
-            var dashMobile = document.getElementById('sf-nav-dashboard-mobile');
             var custDashEl = document.getElementById('sf-nav-cust-dash');
-            var custDashTextEl = document.getElementById('sf-nav-cust-dash-text');
-            var custDashMobile = document.getElementById('sf-nav-cust-dash-mobile');
             var adminLoginEl = document.getElementById('sf-nav-admin-login');
-            var adminLoginTextEl = document.getElementById('sf-nav-admin-login-text');
-            var adminLoginMobile = document.getElementById('sf-nav-admin-login-mobile');
-            var adminDashEl = document.getElementById('sf-nav-admin-dashboard');
-            var adminDashTextEl = document.getElementById('sf-nav-admin-dashboard-text');
-            var adminDashMobile = document.getElementById('sf-nav-admin-dashboard-mobile');
-            var adminSectionEl = document.getElementById('sf-nav-admin-section');
-            var adminSectionMobile = document.getElementById('sf-nav-admin-section-mobile');
-            var adminReviewsEl = document.getElementById('sf-nav-admin-reviews');
-            var adminReviewsTextEl = document.getElementById('sf-nav-admin-reviews-text');
-            var adminReviewsMobile = document.getElementById('sf-nav-admin-reviews-mobile');
-            var adminSettingsEl = document.getElementById('sf-nav-admin-settings');
-            var adminSettingsTextEl = document.getElementById('sf-nav-admin-settings-text');
-            var adminSettingsMobile = document.getElementById('sf-nav-admin-settings-mobile');
             if (!loginEl || !dashEl) return;
 
             function applyNavState(isLoggedIn, isAdmin) {
                 loginEl.style.display = isLoggedIn ? 'none' : '';
-                if (loginMobile) loginMobile.style.display = isLoggedIn ? 'none' : '';
                 dashEl.style.display = isLoggedIn ? '' : 'none';
-                if (dashMobile) dashMobile.style.display = isLoggedIn ? '' : 'none';
                 var custDash = isLoggedIn && !isAdmin;
                 if (custDashEl) custDashEl.style.display = custDash ? '' : 'none';
-                if (custDashTextEl) custDashTextEl.style.display = custDash ? '' : 'none';
-                if (custDashMobile) custDashMobile.style.display = custDash ? '' : 'none';
                 var showAdminLogin = !isAdmin;
                 if (adminLoginEl) adminLoginEl.style.display = showAdminLogin ? '' : 'none';
-                if (adminLoginTextEl) adminLoginTextEl.style.display = showAdminLogin ? '' : 'none';
-                if (adminLoginMobile) adminLoginMobile.style.display = showAdminLogin ? '' : 'none';
-                if (adminDashEl) adminDashEl.style.display = isAdmin ? '' : 'none';
-                if (adminDashTextEl) adminDashTextEl.style.display = isAdmin ? '' : 'none';
-                if (adminDashMobile) adminDashMobile.style.display = isAdmin ? '' : 'none';
-                if (adminSectionEl) adminSectionEl.style.display = isAdmin ? '' : 'none';
-                if (adminSectionMobile) adminSectionMobile.style.display = isAdmin ? '' : 'none';
-                if (adminReviewsEl) adminReviewsEl.style.display = isAdmin ? '' : 'none';
-                if (adminReviewsTextEl) adminReviewsTextEl.style.display = isAdmin ? '' : 'none';
-                if (adminReviewsMobile) adminReviewsMobile.style.display = isAdmin ? '' : 'none';
-                if (adminSettingsEl) adminSettingsEl.style.display = isAdmin ? '' : 'none';
-                if (adminSettingsTextEl) adminSettingsTextEl.style.display = isAdmin ? '' : 'none';
-                if (adminSettingsMobile) adminSettingsMobile.style.display = isAdmin ? '' : 'none';
             }
 
             customerAuth.onAuthStateChanged(function (user) {
@@ -389,9 +341,7 @@
                     return;
                 }
                 loginEl.style.display = 'none';
-                if (loginMobile) loginMobile.style.display = 'none';
                 dashEl.style.display = '';
-                if (dashMobile) dashMobile.style.display = '';
                 fsMod.getDoc(fsMod.doc(db, 'users', user.uid)).then(function (snap) {
                     var data = snap.exists() ? snap.data() : null;
                     var isAdmin = data && (data.role === 'admin' || data.role === 'super_admin');
@@ -427,12 +377,14 @@
     window.addEventListener('load', safeBoot);
 
     function boot() {
+        loadI18n();
         injectComponents();
         initNavbar();
         initThemeSystem();
+        initLanguageSystem();
         initAuth();
         loadAI();
         registerSW();
-        console.log('Component Loader - V22 Enterprise Platform | Global Menu + Theme');
+        console.log('Component Loader - V22 Enterprise Platform | Consolidated Nav + Theme + i18n');
     }
 })();
