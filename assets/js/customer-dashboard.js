@@ -48,7 +48,7 @@ function waitForAuthUser(timeoutMs) {
 
 (async function() {
 
-var user = await waitForAuthUser(3000);
+var user = await waitForAuthUser(5000);
 if (!user) { window.location.href = "/customer-login.html"; return; }
 
     const uid = user.uid;
