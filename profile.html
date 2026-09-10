@@ -4,6 +4,8 @@
 <head>
 
 <meta charset="UTF-8">
+
+<script>try{var t=localStorage.getItem("sf-theme");var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;if(t==="dark"||(t==="system"&&d)){document.documentElement.classList.add("dark")}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>My Profile | Sowrov Fertilizer</title>
@@ -32,13 +34,13 @@
 
 <ul>
 
-<li class="active">👤 My Profile</li>
+<li class="active"><span data-i18n="cust_nav_profile">👤 My Profile</span></li>
 
 <li><a href="/products.html">🛒 Shop</a></li>
 
-<li><a href="/order-history.html">📦 My Orders</a></li>
+<li><a href="/order-history.html"><span data-i18n="cust_nav_orders">📦 My Orders</span></a></li>
 
-<li onclick="customerLogout()" style="cursor:pointer;">🚪 Logout</li>
+<li onclick="customerLogout()" style="cursor:pointer;"><span data-i18n="cust_nav_logout">🚪 Logout</span></li>
 
 </ul>
 
@@ -57,12 +59,12 @@ Loading Profile...
 <div class="topbar">
 
 <div class="dash-topnav">
-    <a href="/" class="topnav-home">🏠 Home</a>
+    <a href="/" class="topnav-home">🏠 <span data-i18n="cust_topbar_home">Home</span></a>
     <div class="topnav-sep"></div>
-    <a href="/customer-dashboard.html">📊 Dashboard</a>
-    <a href="/profile.html">👤 Profile</a>
+    <a href="/customer-dashboard.html">📊 <span data-i18n="cust_topbar_dashboard">Dashboard</span></a>
+    <a href="/profile.html">👤 <span data-i18n="cust_topbar_profile">Profile</span></a>
     <div class="topnav-sep"></div>
-    <a href="#" onclick="customerLogout()">🚪 Logout</a>
+    <a href="#" onclick="customerLogout()">🚪 <span data-i18n="cust_topbar_logout">Logout</span></a>
 </div>
 
 <h1>Customer Profile</h1>
@@ -268,6 +270,60 @@ Change Password
 
 </div>
 
+<!-- Settings Card -->
+<div class="settings-card" style="margin-top:24px;">
+
+<h2>
+🎨 <span data-i18n="settings_appearance">Appearance</span>
+</h2>
+
+<div class="settings-group">
+
+<h3 data-i18n="settings_appearance">Appearance</h3>
+
+<div class="settings-option">
+
+<div class="sf-theme-select settings-option-item" data-theme="light">
+<span class="theme-check"></span>
+<span data-i18n="settings_light_mode">Light Mode</span>
+</div>
+
+<div class="sf-theme-select settings-option-item" data-theme="dark">
+<span class="theme-check"></span>
+<span data-i18n="settings_dark_mode">Dark Mode</span>
+</div>
+
+<div class="sf-theme-select settings-option-item" data-theme="system">
+<span class="theme-check"></span>
+<span data-i18n="settings_system_default">System Default</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="settings-group">
+
+<h3 data-i18n="settings_language">Language</h3>
+
+<div class="settings-option">
+
+<div class="sf-lang-option settings-option-item" data-lang="en">
+<span class="lang-check"></span>
+<span data-i18n="settings_english">English</span>
+</div>
+
+<div class="sf-lang-option settings-option-item" data-lang="bn">
+<span class="lang-check"></span>
+<span>বাংলা</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </main>
 
 </div>
@@ -276,6 +332,8 @@ Change Password
 <script type="module" src="assets/js/profile.js"></script>
 
 <script src="assets/js/floating-buttons.js"></script>
+
+<script src="assets/js/dashboard-init.js"></script>
 
 </body>
 

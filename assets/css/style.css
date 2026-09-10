@@ -3950,6 +3950,17 @@ body.dark ::-webkit-scrollbar-track{background:#1E293B;}
 body.dark ::-webkit-scrollbar-thumb{background:#475569;border-radius:4px;}
 body.dark ::-webkit-scrollbar-thumb:hover{background:#64748B;}
 
+/* --- Settings Controls --- */
+body.dark .settings-card{background:#1E293B;border-color:#334155;}
+body.dark .settings-card h2{color:#F1F5F9;}
+body.dark .settings-card label{color:#CBD5E1;}
+body.dark .settings-card input,body.dark .settings-card textarea{background:#0F172A;color:#F1F5F9;border-color:#334155;}
+body.dark .settings-group{border-top-color:#334155;}
+body.dark .settings-group h3{color:#F1F5F9;}
+body.dark .settings-option-item{background:#0F172A;border-color:#334155;color:#CBD5E1;}
+body.dark .settings-option-item:hover{border-color:#4ADE80;}
+body.dark .settings-option-item.active{border-color:#4ADE80;background:rgba(74,222,128,.1);color:#4ADE80;}
+
 /*==================================================
         PRINT
 ==================================================*/

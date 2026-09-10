@@ -5,6 +5,8 @@
 
 <meta charset="UTF-8">
 
+<script>try{var t=localStorage.getItem("sf-theme");var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;if(t==="dark"||(t==="system"&&d)){document.documentElement.classList.add("dark")}}catch(e){}</script>
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
@@ -72,42 +74,42 @@ Fertilizer
 
 <li class="active">
 <a href="/customer-dashboard.html">
-🏠 Dashboard
+<span data-i18n="cust_nav_dashboard">🏠 Dashboard</span>
 </a>
 </li>
 
 <li>
 <a href="/profile.html">
-👤 My Profile
+<span data-i18n="cust_nav_profile">👤 My Profile</span>
 </a>
 </li>
 
 <li>
 <a href="/customer-orders.html">
-📦 My Orders
+<span data-i18n="cust_nav_orders">📦 My Orders</span>
+</a>
+</li>
+
+<li>
+<a href="/customer-orders.html">
+<span data-i18n="cust_nav_reviews">⭐ My Reviews</span>
+</a>
+</li>
+
+<li>
+<a href="/customer-orders.html">
+<span data-i18n="cust_nav_orders">📦 My Orders</span>
 </a>
 </li>
 
 <li>
 <a href="/profile.html">
-⭐ My Reviews
-</a>
-</li>
-
-<li>
-<a href="/order-history.html">
-❤️ My Orders
-</a>
-</li>
-
-<li>
-<a href="/profile.html">
-⚙ Settings
+<span data-i18n="cust_nav_settings">⚙ Settings</span>
 </a>
 </li>
 
 <li onclick="customerLogout()" style="cursor:pointer;">
-🚪 Logout
+<span data-i18n="cust_nav_logout">🚪 Logout</span>
 </li>
 
 </ul>
@@ -141,12 +143,12 @@ Fertilizer
 <div class="topbar">
 
 <div class="dash-topnav">
-    <a href="/" class="topnav-home">🏠 Home</a>
+    <a href="/" class="topnav-home">🏠 <span data-i18n="cust_topbar_home">Home</span></a>
     <div class="topnav-sep"></div>
-    <a href="/customer-dashboard.html">📊 Dashboard</a>
-    <a href="/profile.html">👤 Profile</a>
+    <a href="/customer-dashboard.html">📊 <span data-i18n="cust_topbar_dashboard">Dashboard</span></a>
+    <a href="/profile.html">👤 <span data-i18n="cust_topbar_profile">Profile</span></a>
     <div class="topnav-sep"></div>
-    <a href="#" onclick="customerLogout()">🚪 Logout</a>
+    <a href="#" onclick="customerLogout()">🚪 <span data-i18n="cust_topbar_logout">Logout</span></a>
 </div>
 
 <button 
@@ -654,6 +656,8 @@ src="assets/js/customer-dashboard.js">
 </script>
 
 <script src="assets/js/floating-buttons.js"></script>
+
+<script src="assets/js/dashboard-init.js"></script>
 
 </body>
 

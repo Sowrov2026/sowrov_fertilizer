@@ -4,6 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
+
+<script>try{var t=localStorage.getItem('sf-theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;if(t==='dark'||(t==='system'&&d)){document.documentElement.classList.add('dark')}}catch(e){}</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Edit Product | Sowrov Fertilizer</title>
@@ -58,12 +61,12 @@
 
         <div class="topbar">
             <div class="dash-topnav">
-    <a href="/" class="topnav-home">🏠 Home</a>
+    <a href="/" class="topnav-home">🏠 <span data-i18n="admin_topbar_home">Home</span></a>
     <div class="topnav-sep"></div>
-    <a href="/admin-dashboard.html">📊 Dashboard</a>
-    <a href="/admin-settings.html">⚙️ Settings</a>
+    <a href="/admin-dashboard.html">📊 <span data-i18n="admin_topbar_dashboard">Dashboard</span></a>
+    <a href="/admin-settings.html">⚙️ <span data-i18n="admin_topbar_settings">Settings</span></a>
     <div class="topnav-sep"></div>
-    <a href="#" onclick="adminLogout()">🚪 Logout</a>
+    <a href="#" onclick="adminLogout()">🚪 <span data-i18n="admin_topbar_logout">Logout</span></a>
 </div>
             <button id="menuToggle" class="menu-toggle">
 ☰
@@ -208,6 +211,7 @@
 <script type="module" src="assets/js/auth.js"></script>
 <script src="assets/js/admin.js"></script>
 <script type="module" src="assets/js/admin-product-edit.js"></script>
+<script src="assets/js/dashboard-init.js"></script>
 </body>
 
 </html>

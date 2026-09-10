@@ -51,12 +51,46 @@ document.getElementById("adminImage");
 
 
 
+// Save buttons
+const saveSettingsBtn =
+document.getElementById("saveSettings");
+
+const saveAdminBtn =
+document.getElementById("saveAdmin");
+
+// Save status elements (if they exist)
+const settingsStatus =
+document.getElementById("settingsStatus");
+
+const adminStatus =
+document.getElementById("adminStatus");
+
+function showStatus(el, msg, isError) {
+    if (!el) return;
+    el.textContent = msg;
+    el.style.color = isError ? '#dc2626' : '#0a8f3d';
+    el.style.display = 'block';
+    setTimeout(function() { el.style.display = 'none'; }, 3000);
+}
+
+function setBtnLoading(btn, loading, originalText) {
+    if (!btn) return;
+    if (loading) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Saving...';
+    } else {
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+
 
 // Load Settings
 
 
 async function loadSettings(){
 
+try {
 
 const snap = await getDoc(
 
@@ -82,6 +116,7 @@ email.value=data.email || "";
 address.value=data.address || "";
 
 about.value=data.about || "";
+
 
 
 }
@@ -111,7 +146,10 @@ adminImage.value=data.image || "";
 
 }
 
-
+} catch (err) {
+    console.error("Error loading settings:", err);
+    showStatus(settingsStatus, "⚠️ Failed to load settings", true);
+}
 
 }
 
@@ -122,13 +160,16 @@ loadSettings();
 
 
 
+
 // Save Website
 
 
-document
-.getElementById("saveSettings")
-.onclick = async()=>{
+if (saveSettingsBtn) {
+saveSettingsBtn.onclick = async()=>{
 
+setBtnLoading(saveSettingsBtn, true, '💾 Save Settings');
+
+try {
 
 await setDoc(
 
@@ -151,25 +192,33 @@ about:about.value
 }
 
 
-
 );
 
 
-alert("✅ Website Settings Saved");
+showStatus(settingsStatus, "✅ Website Settings Saved", false);
 
+} catch (err) {
+    console.error("Error saving website settings:", err);
+    showStatus(settingsStatus, "⚠️ Failed to save settings. Please try again.", true);
+} finally {
+    setBtnLoading(saveSettingsBtn, false, '💾 Save Settings');
+}
 
 };
 
+}
 
 
 
 // Save Admin
 
 
-document
-.getElementById("saveAdmin")
-.onclick = async()=>{
+if (saveAdminBtn) {
+saveAdminBtn.onclick = async()=>{
 
+setBtnLoading(saveAdminBtn, true, 'Update Profile');
+
+try {
 
 await setDoc(
 
@@ -191,11 +240,18 @@ image:adminImage.value
 );
 
 
+showStatus(adminStatus, "✅ Admin Profile Updated", false);
 
-alert("✅ Admin Profile Updated");
-
+} catch (err) {
+    console.error("Error saving admin profile:", err);
+    showStatus(adminStatus, "⚠️ Failed to update profile. Please try again.", true);
+} finally {
+    setBtnLoading(saveAdminBtn, false, 'Update Profile');
+}
 
 };
+
+}
 
 
 
