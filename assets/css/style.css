@@ -3894,21 +3894,8 @@ body.dark .sidebar{
     background:linear-gradient(180deg,#182338 0%,#3A121B 100%);
 }
 body.dark .sidebar-logo span{color:#F1F5F9;}
-body.dark .sidebar-menu li a{color:#FFFFFF;}
-body.dark .sidebar-menu li.active,body.dark .sidebar-menu li:hover{background:rgba(100,28,40,.5);}
-body.dark .sidebar-menu li.active a{color:#4ADE80;}
 body.dark .main-content{background:#0B1628;}
-body.dark .topbar{
-    background:linear-gradient(90deg,#182338 0%,#3A121B 100%);
-    border-bottom-color:#3A121B;
-}
-body.dark .topbar h1{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
-body.dark .topbar p{color:#08BD95;}
-body.dark .stat-card,.body.dark .stats-card{background:#102A24;border-color:#03568A;}
-body.dark .stat-card h2{color:#4ADE80;}
-body.dark .stat-card p{color:#FFFFFF;}
-body.dark .dashboard-section{background:#102A24;border-color:#03568A;}
-body.dark .dashboard-section h2{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
+body.dark .menu-toggle{background:#641C28;color:#FFFFFF;}
 
 /* --- Profile --- Asmani/Cyan values with blue border --- */
 body.dark .profile-box{
@@ -3916,7 +3903,8 @@ body.dark .profile-box{
     border-color:#03568A;border-radius:16px;border-width:1px;border-style:solid;
 }
 body.dark .profile-box p{color:#08BD95;}
-body.dark .profile-box b{color:#F1F5F9;}
+body.dark .profile-box span{color:#67E8F9;}
+body.dark .profile-box b{color:#FFFFFF;}
 body.dark .form-box{
     background:#102A24;
     border-color:#03568A;border-radius:16px;border-width:1px;border-style:solid;
@@ -3937,7 +3925,7 @@ body.dark input:focus,body.dark textarea:focus,body.dark select:focus{
     border-color:#03568A;box-shadow:0 0 0 3px rgba(3,86,138,.3);
 }
 body.dark .form-group input:focus,body.dark .form-group textarea:focus,body.dark .form-group select:focus{
-    border-color:#03568A;box-shadow:0 0 0 3px rgba(3,86,138,.3);
+    border-color:#03568A;box-shadow:0 0 0 3px rgba(3,86,138,.3);outline:none;
 }
 
 /* --- Tracking --- */
@@ -3949,19 +3937,6 @@ body.dark .quick-grid .btn{background:#059669;color:#FFFFFF;}
 
 /* --- Order --- */
 body.dark .order-summary{background:#102A24;border-color:#03568A;}
-
-/* --- Admin --- */
-body.dark .admin-profile{
-    background:#102A24;
-    border-color:#03568A;border-radius:16px;border-width:1px;border-style:solid;
-}
-body.dark .admin-profile span{color:#08BD95;}
-body.dark .dash-topnav{
-    background:linear-gradient(90deg,#182338 0%,#3A121B 100%);
-    border-bottom-color:#3A121B;
-}
-body.dark .dash-topnav a{color:#FFFFFF;}
-body.dark .menu-toggle{background:#641C28;color:#FFFFFF;}
 
 /* --- Auth --- */
 body.dark .auth{background:#0B1628;}
@@ -3990,52 +3965,113 @@ body.dark .settings-option-item{background:#0B1628;border-color:#03568A;color:#F
 body.dark .settings-option-item:hover{border-color:#03568A;}
 body.dark .settings-option-item.active{border-color:#03568A;background:rgba(3,86,138,.15);color:#4ADE80;}
 
-/* --- Pages.css Cascade Overrides --- Winning selectors that beat dark mode --- */
+/* --- Pages.css Cascade Overrides --- Higher-specificity rules that beat pages.css selectors --- */
 body.dark .btn-outline{border-color:#03568A;}
-body.dark .timeline-active{border-left-color:#03568A;}
+body.dark .timeline-active{border-left-color:#03568A;background:#102A24;color:#FFFFFF;}
 body.dark .testimonial-card{border-color:#03568A;}
-body.dark .dashboard-card span,body.dark .stats-card span,body.dark .stat-card span{color:#FFFFFF;font-size:38px;font-weight:800;}
-body.dark .order-status span,body.dark .order-summary span,body.dark .status-cards span{color:#FFFFFF;}
-body.dark .order-status>div,body.dark .order-summary>div,body.dark .status-cards>div{background:#102A24;}
-body.dark .dashboard-table tbody tr:hover{background:#14362D;}
-body.dark .dash-topnav a:hover{background:#3A121B;color:#FFFFFF;}
-body.dark .dash-topnav a.topnav-home{background:#3A121B;color:#FFFFFF;}
-body.dark .dash-topnav .topnav-sep{background:#3A121B;}
-body.dark .sidebar-menu .active span{color:#FFFFFF;}
-body.dark .notification-item{border-bottom-color:#03568A;}
-body.dark .status-item{border-bottom-color:#03568A;}
-body.dark .activity-item{border-bottom-color:#03568A;}
-body.dark .activity-content strong{color:#FFFFFF;}
-body.dark .activity-content small{color:#08BD95;}
-body.dark .quick-actions button:hover{background:#03568A;color:#FFFFFF;}
-body.dark .dashboard-card::before,body.dark .stats-card::before,body.dark .stat-card::before{opacity:0;}
+body.dark .dashboard-card,body.dark .stats-card,body.dark .stat-card,body.dark .analytics-card{
+    background:#102A24;border-color:#03568A;
+}
+body.dark .dashboard-card span,body.dark .stats-card span,body.dark .stat-card span{color:#FFFFFF;}
+body.dark .stat-card h2{color:#4ADE80;}
+body.dark .stat-card p{color:#FFFFFF;}
+body.dark .dashboard-card h3,body.dark .stats-card h3,body.dark .stat-card h3{color:#08BD95;}
+body.dark .dashboard-card::before,body.dark .stats-card::before,body.dark .stat-card::before{background:transparent !important;opacity:0;}
 body.dark .stat-card::after{background:transparent;}
-
-/* --- Pages.css Admin Overrides --- */
-body.dark .notification-panel{background:#182338;}
-body.dark .chart-container{background:#102A24;}
-body.dark .analytics-card{background:#102A24;color:#FFFFFF;border-color:#03568A;}
 body.dark .dashboard-table{background:#102A24;}
 body.dark .dashboard-table th{background:#14362D;color:#FFFFFF;}
 body.dark .dashboard-table td{border-bottom-color:#03568A;color:#FFFFFF;}
-body.dark .dashboard-table tr:hover td{background:#14362D;}
-body.dark .quick-actions button{background:#102A24;color:#FFFFFF;}
-body.dark .system-status{background:#102A24;color:#FFFFFF;}
-body.dark .activity-list{background:#102A24;color:#FFFFFF;}
+body.dark .dashboard-table tbody tr:hover{background:#14362D;}
+body.dark .dashboard-table .view-btn{background:#059669;color:#FFFFFF;}
+body.dark .dashboard-section{background:#102A24;border-color:#03568A;}
+body.dark .topbar{background:linear-gradient(90deg,#182338 0%,#3A121B 100%);border-bottom-color:#3A121B;}
+body.dark .topbar h1{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
+body.dark .topbar p{color:#08BD95;}
+body.dark .dash-topnav{background:linear-gradient(90deg,#182338 0%,#3A121B 100%);border-bottom-color:#3A121B;}
+body.dark .dash-topnav a{color:#FFFFFF;}
+body.dark .dash-topnav a:hover{background:#3A121B;color:#FFFFFF;}
+body.dark .dash-topnav a.topnav-active{background:#059669;color:#FFFFFF;}
+body.dark .dash-topnav a.topnav-home{background:#3A121B;color:#FFFFFF;}
+body.dark .dash-topnav .topnav-sep{background:#3A121B;}
 body.dark .sidebar-menu .active{background:rgba(100,28,40,.5);}
-body.dark .google-btn{background:#102A24;color:#FFFFFF;}
-body.dark #invoice{background:#102A24;color:#FFFFFF;}
-
-/* --- Dashboard Footer --- */
-body.dark .dashboard-footer{
-    background:#102A24;
-    border-top-color:#03568A;
-    color:#08BD95;
-}
+body.dark .sidebar-menu .active a{color:#4ADE80;}
+body.dark .sidebar-menu .active span{color:#FFFFFF;}
+body.dark .sidebar-menu li:hover{background:rgba(255,255,255,.08);}
+body.dark .sidebar-menu li a{color:#FFFFFF;}
+body.dark .notification-panel{background:#182338;}
+body.dark .notification-item{border-bottom-color:#03568A;}
+body.dark .status-item{border-bottom-color:#03568A;}
+body.dark .activity-list{background:#102A24;color:#FFFFFF;}
+body.dark .activity-item{border-bottom-color:#03568A;}
+body.dark .activity-icon{background:#3A121B;}
+body.dark .activity-content strong{color:#FFFFFF;}
+body.dark .activity-content small{color:#08BD95;}
+body.dark .quick-actions button{background:#102A24;color:#FFFFFF;border-color:#03568A;}
+body.dark .quick-actions button:hover{background:#03568A;color:#FFFFFF;}
+body.dark .system-status{background:#102A24;color:#FFFFFF;}
+body.dark .chart-container{background:#102A24;}
+body.dark .order-status span,body.dark .order-summary span,body.dark .status-cards span{color:#FFFFFF;}
+body.dark .order-status>div,body.dark .order-summary>div,body.dark .status-cards>div{background:#102A24;border-color:#03568A;}
+body.dark .order-status h3,body.dark .order-summary h3,body.dark .status-cards h3{color:#08BD95;}
+body.dark .dashboard-footer{background:#102A24;border-top-color:#03568A;color:#08BD95;}
 body.dark .dashboard-footer strong{color:#F1F5F9;}
 body.dark .dashboard-footer span{color:#4ADE80;}
 body.dark .dashboard-footer a{color:#93C5FD;}
 body.dark .dashboard-footer a:hover{color:#4ADE80;}
+body.dark .footer-left{color:#08BD95;}
+body.dark .footer-left strong{color:#FFFFFF;}
+body.dark .footer-right a{color:#93C5FD;}
+body.dark .footer-right a:hover{color:#4ADE80;}
+body.dark .admin-profile{background:#102A24;border-color:#03568A;}
+body.dark .admin-profile strong{color:#FFFFFF;}
+body.dark .admin-profile small{color:#08BD95;}
+body.dark .admin-profile span{color:#08BD95;}
+body.dark .google-btn{background:#102A24;color:#FFFFFF;}
+body.dark .header-btn{background:#182338;color:#FFFFFF;}
+body.dark .header-btn:hover{background:#059669;color:#FFFFFF;}
+body.dark .search-box{background:#182338;}
+body.dark .search-box input{color:#FFFFFF;}
+body.dark .products-page{background:#0B1628;}
+body.dark .products-page .section-title h2{color:#F1F5F9;}
+body.dark .products-page .section-title p{color:#08BD95;}
+body.dark .product-content h3{color:#F1F5F9;}
+body.dark .product-content p{color:#08BD95;}
+body.dark .product-category{background:#182338;color:#4ADE80;}
+body.dark .product-bottom h4{color:#4ADE80;}
+body.dark .no-product h2{color:#F1F5F9;}
+body.dark .no-product p{color:#08BD95;}
+body.dark .status-active{background:#102A24;color:#4ADE80;border-color:#03568A;}
+body.dark .pending-status{background:#182338;color:#FBBF24;}
+body.dark .inactive-status{background:#3A121B;color:#F87171;}
+body.dark .cart-item{background:#102A24;border-color:#03568A;}
+body.dark .cart-item{box-shadow:0 5px 15px rgba(0,0,0,.3);}
+body.dark .cart-info p{color:#08BD95;}
+body.dark .cart-info h3{color:#FFFFFF;}
+body.dark .cart-price{color:#4ADE80;}
+body.dark .cart-summary{background:#102A24;border-color:#03568A;}
+body.dark .cart-summary h3{color:#F1F5F9;}
+body.dark .empty-cart{background:#102A24;}
+body.dark .qty-btn{background:#059669;color:#FFFFFF;}
+body.dark .remove-btn{background:#DC2626;color:#FFFFFF;}
+body.dark .remember a{color:#93C5FD;}
+body.dark .auth-right input{border-color:#03568A;}
+body.dark .overview-banner{background:linear-gradient(135deg,#182338 0%,#3A121B 100%);}
+body.dark .overview-left h2{color:#F1F5F9;}
+body.dark .overview-left p{color:#08BD95;}
+body.dark .overview-box h3{color:#FFFFFF;}
+body.dark .overview-box span{color:#08BD95;}
+body.dark .invoice-container{background:#0B1628;}
+body.dark .bill-box{background:#102A24;}
+body.dark .bill-box h3{color:#4ADE80;}
+body.dark .company-left h1{color:#4ADE80;}
+body.dark .company-left p{color:#08BD95;}
+body.dark .company-right h2{color:#F1F5F9;}
+body.dark .invoice-table td{border-bottom-color:#03568A;color:#FFFFFF;}
+body.dark .invoice-footer{color:#08BD95;}
+body.dark .forgot-box a{color:#93C5FD;}
+body.dark .logo-green{color:#4ADE80;}
+body.dark .logo-white{color:#FFFFFF;}
+body.dark #status{color:#4ADE80;}
 
 /* --- Footer --- Deep Navy + Dark Red --- */
 body.dark .footer{
