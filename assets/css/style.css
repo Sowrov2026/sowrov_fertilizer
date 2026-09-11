@@ -3792,22 +3792,25 @@ body.dark .sf-dd-submenu-item.active{color:#4ADE80;}
 body.dark .lang-check,body.dark .theme-check{color:#4ADE80;}
 body.dark .dd-arrow{color:#08BD95;}
 
-/* --- Buttons --- Primary: Sowrov Green, Secondary: Blue --- */
-body.dark .btn{background:#059669;color:#FFFFFF;}
-body.dark .btn:hover{background:#047857;}
-body.dark .btn-outline{background:transparent;border-color:#03568A;color:#4ADE80;}
-body.dark .btn-outline:hover{background:#4ADE80;color:#0B1628;}
-body.dark .btn-blue{background:#2563EB;color:#FFFFFF;}
+/* --- Buttons --- Dark Mode: Blue primary, Green accent for Add to Cart --- */
+body.dark .btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .btn:hover{background:#1D4ED8;}
+body.dark .btn-outline{background:transparent;border-color:#03568A;color:#2563EB;}
+body.dark .btn-outline:hover{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .btn-blue{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
 body.dark .btn-blue:hover{background:#1D4ED8;}
+body.dark #addCart{background:#2563EB;color:#FFFFFF;border:1px solid #03568A;border-left:4px solid #2E7D32;padding-left:12px;}
+body.dark #addCart:hover{background:#1D4ED8;}
 
 /* --- Hero --- */
 body.dark .hero{background:#0B1628;}
 body.dark .hero h1{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
 body.dark .hero p{color:#08BD95;}
 body.dark .hero-badge{background:#3A121B;color:#4ADE80;border-color:#03568A;}
-body.dark .hero-buttons .btn{background:#059669;color:#FFFFFF;}
-body.dark .hero-buttons .btn:hover{background:#047857;}
-body.dark .hero-buttons .btn-outline{border-color:#03568A;color:#4ADE80;}
+body.dark .hero-buttons .btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .hero-buttons .btn:hover{background:#1D4ED8;}
+body.dark .hero-buttons .btn-outline{border-color:#03568A;color:#2563EB;}
+body.dark .hero-buttons .btn-outline:hover{background:#2563EB;color:#FFFFFF;}
 body.dark .announcement-box,.body.dark .commitment-box{background:#102A24;border-color:#03568A;}
 body.dark .announcement-box h3,body.dark .commitment-box h3{color:#F1F5F9;}
 body.dark .announcement-box li{color:#08BD95;}
@@ -3933,7 +3936,7 @@ body.dark .tracking-timeline .circle{background:#14362D;color:#FFFFFF;border-col
 body.dark .tracking-step p{color:#FFFFFF;}
 
 /* --- Quick Actions --- */
-body.dark .quick-grid .btn{background:#059669;color:#FFFFFF;}
+body.dark .quick-grid .btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
 
 /* --- Order --- */
 body.dark .order-summary{background:#102A24;border-color:#03568A;}
@@ -3982,7 +3985,7 @@ body.dark .dashboard-table{background:#102A24;}
 body.dark .dashboard-table th{background:#14362D;color:#FFFFFF;}
 body.dark .dashboard-table td{border-bottom-color:#03568A;color:#FFFFFF;}
 body.dark .dashboard-table tbody tr:hover{background:#14362D;}
-body.dark .dashboard-table .view-btn{background:#059669;color:#FFFFFF;}
+body.dark .dashboard-table .view-btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
 body.dark .dashboard-section{background:#102A24;border-color:#03568A;}
 body.dark .topbar{background:linear-gradient(90deg,#182338 0%,#3A121B 100%);border-bottom-color:#3A121B;}
 body.dark .topbar h1{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
@@ -4028,7 +4031,7 @@ body.dark .admin-profile small{color:#08BD95;}
 body.dark .admin-profile span{color:#08BD95;}
 body.dark .google-btn{background:#102A24;color:#FFFFFF;}
 body.dark .header-btn{background:#182338;color:#FFFFFF;}
-body.dark .header-btn:hover{background:#059669;color:#FFFFFF;}
+body.dark .header-btn:hover{background:#2563EB;color:#FFFFFF;}
 body.dark .search-box{background:#182338;}
 body.dark .search-box input{color:#FFFFFF;}
 body.dark .products-page{background:#0B1628;}
@@ -4051,7 +4054,7 @@ body.dark .cart-price{color:#4ADE80;}
 body.dark .cart-summary{background:#102A24;border-color:#03568A;}
 body.dark .cart-summary h3{color:#F1F5F9;}
 body.dark .empty-cart{background:#102A24;}
-body.dark .qty-btn{background:#059669;color:#FFFFFF;}
+body.dark .qty-btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
 body.dark .remove-btn{background:#DC2626;color:#FFFFFF;}
 body.dark .remember a{color:#93C5FD;}
 body.dark .auth-right input{border-color:#03568A;}
@@ -4072,6 +4075,39 @@ body.dark .forgot-box a{color:#93C5FD;}
 body.dark .logo-green{color:#4ADE80;}
 body.dark .logo-white{color:#FFFFFF;}
 body.dark #status{color:#4ADE80;}
+body.dark .dash-nav-login{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .dash-nav-login:hover{background:#1D4ED8;}
+body.dark .btn-login-nav{background:transparent;border-color:#03568A;color:#2563EB;}
+body.dark .btn-login-nav:hover{background:#2563EB;color:#FFFFFF;}
+body.dark .cta .btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .cta .btn:hover{background:#1D4ED8;}
+body.dark .cta .btn-outline{border-color:#03568A;color:#2563EB;}
+body.dark .cta .btn-outline:hover{background:#2563EB;color:#FFFFFF;}
+body.dark .edit-btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .edit-btn:hover{background:#1D4ED8;}
+body.dark #exportOrdersBtn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark #exportOrdersBtn:hover{background:#1D4ED8;}
+body.dark .settings-card button{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .settings-card button:hover{background:#1D4ED8;}
+body.dark .back-top{background:#2563EB;color:#FFFFFF;}
+body.dark .back-top:hover{background:#1D4ED8;}
+body.dark #cartCount{background:#2563EB;color:#FFFFFF;}
+body.dark .order-actions .btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .quantity-box button{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .quantity-box button:hover{background:#1D4ED8;}
+body.dark .trackBtn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .trackBtn:hover{background:#1D4ED8;}
+body.dark .detailsBtn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .detailsBtn:hover{background:#1D4ED8;}
+body.dark .payment-btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .payment-btn:hover{background:#1D4ED8;}
+body.dark .delete-btn{background:#DC2626;color:#FFFFFF;}
+body.dark .delete-btn:hover{background:#B91C1C;}
+body.dark .vision-btn-analyze{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .vision-btn-analyze:hover{background:#1D4ED8;}
+body.dark .sf-calc-btn{background:#2563EB;color:#FFFFFF;border-color:#03568A;}
+body.dark .sf-calc-btn:hover{background:#1D4ED8;}
+body.dark .clear-cart{background:#DC2626;color:#FFFFFF;}
 
 /* --- Footer --- Deep Navy + Dark Red --- */
 body.dark .footer{
