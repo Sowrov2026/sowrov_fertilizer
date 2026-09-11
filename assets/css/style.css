@@ -3971,7 +3971,7 @@ body.dark .auth-right{background:#102A24;}
 body.dark .auth-left h1{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
 body.dark .auth-left p{color:#08BD95;}
 body.dark .auth-right h2{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
-body.dark .back-home a{color:#93C5FD;}
+body.dark .back-home a{color:#93C5FD !important;}
 
 /* --- Scrollbar --- */
 body.dark ::-webkit-scrollbar{width:8px;}
@@ -3990,10 +3990,26 @@ body.dark .settings-option-item{background:#0B1628;border-color:#03568A;color:#F
 body.dark .settings-option-item:hover{border-color:#03568A;}
 body.dark .settings-option-item.active{border-color:#03568A;background:rgba(3,86,138,.15);color:#4ADE80;}
 
-/* --- Pages.css Green Border Overrides --- */
+/* --- Pages.css Cascade Overrides --- Winning selectors that beat dark mode --- */
 body.dark .btn-outline{border-color:#03568A;}
 body.dark .timeline-active{border-left-color:#03568A;}
 body.dark .testimonial-card{border-color:#03568A;}
+body.dark .dashboard-card span,body.dark .stats-card span,body.dark .stat-card span{color:#FFFFFF;font-size:38px;font-weight:800;}
+body.dark .order-status span,body.dark .order-summary span,body.dark .status-cards span{color:#FFFFFF;}
+body.dark .order-status>div,body.dark .order-summary>div,body.dark .status-cards>div{background:#102A24;}
+body.dark .dashboard-table tbody tr:hover{background:#14362D;}
+body.dark .dash-topnav a:hover{background:#3A121B;color:#FFFFFF;}
+body.dark .dash-topnav a.topnav-home{background:#3A121B;color:#FFFFFF;}
+body.dark .dash-topnav .topnav-sep{background:#3A121B;}
+body.dark .sidebar-menu .active span{color:#FFFFFF;}
+body.dark .notification-item{border-bottom-color:#03568A;}
+body.dark .status-item{border-bottom-color:#03568A;}
+body.dark .activity-item{border-bottom-color:#03568A;}
+body.dark .activity-content strong{color:#FFFFFF;}
+body.dark .activity-content small{color:#08BD95;}
+body.dark .quick-actions button:hover{background:#03568A;color:#FFFFFF;}
+body.dark .dashboard-card::before,body.dark .stats-card::before,body.dark .stat-card::before{opacity:0;}
+body.dark .stat-card::after{background:transparent;}
 
 /* --- Pages.css Admin Overrides --- */
 body.dark .notification-panel{background:#182338;}
