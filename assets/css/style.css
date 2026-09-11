@@ -3897,23 +3897,11 @@ body.dark .sidebar{
     background:linear-gradient(180deg,#182338 0%,#3A121B 100%);
 }
 body.dark .sidebar-logo span{color:#F1F5F9;}
-body.dark .sidebar-heading{
-    color:#FFFFFF;
-    border-left-color:#03568A;
-    background:rgba(3,86,138,.08);
-}
-body.dark .sidebar-heading span{
-    color:#FFFFFF;
-}
-body.dark .sidebar-heading::after{
-    content:'';
-    display:inline-block;
-    width:16px;height:2px;
-    background:#C9A84C;
-    margin-left:6px;
-    vertical-align:middle;
-    border-radius:1px;
-}
+body.dark .sidebar-menu li a{color:#FFFFFF;}
+body.dark .sidebar-menu li a:hover{background:rgba(3,86,138,.2);border-left:3px solid #C9A84C;}
+body.dark .sidebar-menu .active{background:rgba(3,86,138,.3);border-left:3px solid #03568A;}
+body.dark .sidebar-menu .active a{color:#FFFFFF;}
+body.dark .sidebar-menu .active span{color:#FFFFFF;}
 body.dark .main-content{background:#0B1628;}
 body.dark .menu-toggle{background:#641C28;color:#FFFFFF;}
 

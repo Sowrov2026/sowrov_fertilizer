@@ -67,35 +67,12 @@ Fertilizer
 
 <ul class="sidebar-menu">
 
-<li class="sidebar-heading"><span>BROWSE</span></li>
-<li><a href="/products.html"><span data-i18n="nav_products">🌱 Products</span></a></li>
-<li><a href="/gallery.html"><span data-i18n="nav_gallery">🖼 Gallery</span></a></li>
-<li><a href="/faq.html"><span data-i18n="nav_faq">❓ FAQ</span></a></li>
-<li><a href="/contact.html"><span data-i18n="nav_contact">📞 Contact</span></a></li>
-<li><a href="/about.html"><span data-i18n="nav_about">ℹ️ About</span></a></li>
-
-<li class="sidebar-heading"><span>SHOP</span></li>
-<li><a href="/cart.html"><span data-i18n="nav_cart">🛒 Cart</span></a></li>
+<li class="active"><a href="/customer-dashboard.html"><span data-i18n="nav_customer_dashboard">📊 Dashboard</span></a></li>
+<li><a href="/profile.html"><span data-i18n="nav_profile">👤 Profile</span></a></li>
 <li><a href="/customer-orders.html"><span data-i18n="nav_orders">📦 My Orders</span></a></li>
 <li><a href="/track-order.html"><span data-i18n="nav_track_order">🔍 Track Order</span></a></li>
-
-<li class="sidebar-heading"><span>ACCOUNT</span></li>
-<li><a href="/profile.html"><span data-i18n="nav_profile">👤 Profile</span></a></li>
-<li class="active"><a href="/customer-dashboard.html"><span data-i18n="nav_customer_dashboard">📊 Dashboard</span></a></li>
-<li><a href="/admin-login.html"><span data-i18n="nav_admin_login">🔐 Admin Login</span></a></li>
-
-<li class="sidebar-heading"><span>SUPPORT</span></li>
-<li><a href="https://wa.me/8801829775552" target="_blank"><span data-i18n="nav_whatsapp">💬 WhatsApp Support</span></a></li>
 <li><a href="/help.html"><span data-i18n="nav_help">👁 Help & Support</span></a></li>
-
-<li class="sidebar-heading"><span>SETTINGS</span></li>
-<li><a href="#" id="sf-lang-toggle"><span data-i18n="nav_language">🌐 Language</span></a></li>
-<li><a href="#" id="sf-theme-toggle"><span data-i18n="nav_appearance">🌿 Appearance</span></a></li>
-
-<li class="sidebar-heading"><span>LEGAL</span></li>
-<li><a href="/privacy.html"><span data-i18n="nav_privacy">🔒 Privacy Policy</span></a></li>
-<li><a href="/terms.html"><span data-i18n="nav_terms">📋 Terms & Conditions</span></a></li>
-<li><a href="/return-policy.html"><span data-i18n="nav_return">↩️ Return / Refund Policy</span></a></li>
+<li><a href="#" id="sf-settings-toggle"><span data-i18n="nav_settings">⚙️ Settings</span></a></li>
 
 <li onclick="customerLogout()" style="cursor:pointer;margin-top:10px;">
 <span data-i18n="cust_nav_logout">🚪 Logout</span>
@@ -636,31 +613,6 @@ src="assets/js/customer-dashboard.js">
 <script defer src="assets/js/dashboard-init.js"></script>
 
 <script src="assets/js/component-loader.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-    var langBtn=document.getElementById('sf-lang-toggle');
-    if(langBtn){langBtn.addEventListener('click',function(e){
-        e.preventDefault();
-        var cur=localStorage.getItem('sf-i18n-lang')||'en';
-        var next=cur==='en'?'bn':'en';
-        try{localStorage.setItem('sf-i18n-lang',next);}catch(e){}
-        if(window.SFi18n){window.SFi18n.setLang(next);window.SFi18n.applyTranslations();window.SFi18n.updateLangIndicators();}
-    });}
-    var themeBtn=document.getElementById('sf-theme-toggle');
-    if(themeBtn){themeBtn.addEventListener('click',function(e){
-        e.preventDefault();
-        var cur=localStorage.getItem('sf-theme')||'system';
-        var next=(cur==='dark')?'light':'dark';
-        try{localStorage.setItem('sf-theme',next);}catch(e){}
-        if(typeof applyTheme==='function'){applyTheme(next);}
-        else{
-            if(next==='dark'){document.documentElement.classList.add('dark');document.body.classList.add('dark');}
-            else{document.documentElement.classList.remove('dark');document.body.classList.remove('dark');}
-        }
-    });}
-});
-</script>
 
 </body>
 
