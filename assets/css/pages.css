@@ -149,7 +149,7 @@ color:#fff;
 
 .dashboard{
 
-padding:120px 0;
+padding:30px 0;
 
 background:#F8FAFC;
 
@@ -244,6 +244,30 @@ height:100vh;
 
 margin-bottom:40px;
 
+}
+
+.sidebar-heading{
+    margin-top:18px;
+    margin-bottom:2px;
+    padding:6px 12px 4px;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.55);
+    border-left:3px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.04);
+    border-radius:0 4px 4px 0;
+    line-height:1;
+}
+
+.sidebar-heading:first-child{
+    margin-top:0;
+}
+
+.sidebar ul .sidebar-heading span{
+    display:block;
+    color:rgba(255,255,255,.55);
 }
 
 .sidebar ul{
@@ -912,6 +936,23 @@ height:400px !important;
 
 .dashboard-layout{
     align-items:flex-start;
+}
+/* Customer Dashboard scoped layout — full-height sidebar, scrolling main */
+.customer-dash .dashboard-layout{
+    height:100vh;
+    align-items:stretch;
+    overflow:hidden;
+}
+.customer-dash .sidebar{
+    position:static;
+    height:100%;
+    overflow-y:auto;
+    flex-shrink:0;
+}
+.customer-dash .main-content{
+    flex:1;
+    overflow-y:auto;
+    padding-top:30px;
 }
 
 
@@ -2761,6 +2802,8 @@ align-items:center;
 color:#64748b;
 
 font-size:14px;
+
+flex-shrink:0;
 
 }
 
