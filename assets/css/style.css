@@ -4003,7 +4003,7 @@ body.dark .dash-topnav a.topnav-active{background:#059669;color:#FFFFFF;}
 body.dark .dash-topnav a.topnav-home{background:#3A121B;color:#FFFFFF;}
 body.dark .dash-topnav .topnav-sep{background:#3A121B;}
 body.dark .dash-search-box{background:#F2E9CE;}
-body.dark .dash-search-input{color:#0A011F;}
+body.dark .dash-search-input{background:transparent;color:#0A011F;border:none;box-shadow:none;}
 body.dark .dash-search-input::placeholder{color:rgba(10,1,31,.5);}
 body.dark .sidebar-menu .active{background:rgba(100,28,40,.5);}
 body.dark .sidebar-menu .active a{color:#4ADE80;}
