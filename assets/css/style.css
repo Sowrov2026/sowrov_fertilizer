@@ -3996,7 +3996,7 @@ body.dark .dashboard-section{background:#102A24;border-color:#03568A;}
 body.dark .topbar{background:linear-gradient(90deg,#182338 0%,#3A121B 100%);border-bottom-color:#3A121B;}
 body.dark .topbar h1{color:#F1F5F9;text-shadow:0 0 12px rgba(255,255,255,.12);}
 body.dark .topbar p{color:#08BD95;}
-body.dark .dash-topnav{background:linear-gradient(90deg,#182338 0%,#3A121B 100%);border-bottom-color:#3A121B;}
+body.dark .dash-topnav{background:none;}
 body.dark .dash-topnav a{color:#FFFFFF;}
 body.dark .dash-topnav a:hover{background:#3A121B;color:#FFFFFF;}
 body.dark .dash-topnav a.topnav-active{background:#059669;color:#FFFFFF;}
