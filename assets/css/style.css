@@ -3898,6 +3898,7 @@ body.dark .sidebar{
 }
 body.dark .sidebar-logo span{color:#F1F5F9;}
 body.dark .sidebar-menu li a{color:#FFFFFF;}
+body.dark .sidebar-menu li span{color:#FFFFFF;}
 body.dark .sidebar-menu li a:hover{background:rgba(3,86,138,.2);border-left:3px solid #C9A84C;}
 body.dark .sidebar-menu .active{background:rgba(3,86,138,.3);border-left:3px solid #03568A;}
 body.dark .sidebar-menu .active a{color:#FFFFFF;}
@@ -4001,6 +4002,9 @@ body.dark .dash-topnav a:hover{background:#3A121B;color:#FFFFFF;}
 body.dark .dash-topnav a.topnav-active{background:#059669;color:#FFFFFF;}
 body.dark .dash-topnav a.topnav-home{background:#3A121B;color:#FFFFFF;}
 body.dark .dash-topnav .topnav-sep{background:#3A121B;}
+body.dark .dash-search-box{background:#F2E9CE;}
+body.dark .dash-search-input{color:#0A011F;}
+body.dark .dash-search-input::placeholder{color:rgba(10,1,31,.5);}
 body.dark .sidebar-menu .active{background:rgba(100,28,40,.5);}
 body.dark .sidebar-menu .active a{color:#4ADE80;}
 body.dark .sidebar-menu .active span{color:#FFFFFF;}

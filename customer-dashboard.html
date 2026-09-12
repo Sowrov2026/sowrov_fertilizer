@@ -101,12 +101,10 @@ Fertilizer
 <div class="topbar">
 
 <div class="dash-topnav">
-    <a href="/" class="topnav-home">🏠 <span data-i18n="cust_topbar_home">Home</span></a>
-    <div class="topnav-sep"></div>
-    <a href="/customer-dashboard.html">📊 <span data-i18n="cust_topbar_dashboard">Dashboard</span></a>
-    <a href="/profile.html">👤 <span data-i18n="cust_topbar_profile">Profile</span></a>
-    <div class="topnav-sep"></div>
-    <a href="#" onclick="customerLogout()">🚪 <span data-i18n="cust_topbar_logout">Logout</span></a>
+    <div class="dash-search-box">
+        <span class="dash-search-icon">🔍</span>
+        <input type="text" class="dash-search-input" placeholder="Search..." data-i18n-placeholder="cust_search_placeholder">
+    </div>
 </div>
 
 <button
