@@ -76,7 +76,7 @@ const ALL_DOCUMENTS = [
 function searchKnowledge(query, options = {}) {
     if (!query || typeof query !== 'string') return [];
 
-    const { crop, disease, season, intent, limit = 5 } = options;
+    const { crop, disease, season, intent, subIntent, limit = 5 } = options;
     const queryLower = query.toLowerCase();
     const queryWords = queryLower.split(/\s+/).filter(w => w.length > 2);
 
@@ -91,17 +91,14 @@ function searchKnowledge(query, options = {}) {
         const englishName = localNames.english || '';
         const chatgaiyaName = localNames.chatgaiya || '';
         const titleLower = title.toLowerCase();
-        const contentLower = content.toLowerCase();
         const banglaLower = banglaName.toLowerCase();
 
         // FAQ-specific fields
         const faqQuestion = doc.question?.bangla || doc.question?.english || doc.question?.chatgaiya || '';
-        const faqAnswer = doc.answer?.bangla || doc.answer?.english || '';
-        const faqKeywords = (doc.keywords || []).join(' ');
 
         // Build searchable text from all fields
         const allText = [title, content, banglaName, englishName, chatgaiyaName,
-            faqQuestion, faqAnswer, faqKeywords,
+            faqQuestion,
             doc.cause || '', doc.symptoms?.early || '', doc.symptoms?.late || '',
             ...(doc.organic_control || []), ...(doc.chemical_control || []),
             ...(doc.prevention || []), ...(doc.tips || []),
@@ -127,16 +124,68 @@ function searchKnowledge(query, options = {}) {
             if (banglaLower.includes(word)) score += 3;
         }
 
-        // Intent-based boosting
-        if (intent === 'disease' && (doc.disease || doc.type === 'fungal' || doc.type === 'bacterial' || doc.type === 'viral')) score += 5;
-        if (intent === 'fertilizer' && (doc.organic_control || doc.chemical_control || doc.fertilizer_schedule)) score += 5;
+        // ── Intent-based boosting (refined) ──
+        const isDiseaseDoc = !!(doc.disease || doc.type === 'fungal' || doc.type === 'bacterial' || doc.type === 'viral');
+        const isFertilizerDoc = !!(doc.fertilizer_schedule?.length || doc.organic_fertilizer?.length || doc.chemical_fertilizer?.length);
+        const isCropGeneralDoc = !!(doc.fertilizer_schedule && !doc.disease && !doc.organic_control && !doc.chemical_control);
+        const titleLooksLikeDisease = /disease|রোগ|guide/i.test(title);
+
+        // Extract docCrop early (needed for disease-name matching)
+        const docCrop = doc.crop || banglaName || englishName || '';
+
+        // ── Disease-name-specific matching ──
+        // When intent is disease, detect specific disease names in the query
+        // and strongly boost documents that contain that exact disease.
+        if (intent === 'disease') {
+            const BANGLA_DISEASE_NAMES = [
+                { names: ['ব্লাস্ট', 'blast', 'ব্লাস্ট রোগ'], docPatterns: ['ব্লাস্ট', 'blast', 'Pyricularia'] },
+                { names: ['টুংরো', 'tungro', 'টাঙ্গরো', 'tangro'], docPatterns: ['টুংরো', 'tungro', 'টাঙ্গরো', 'tangro'] },
+                { names: ['শিউথ', 'sheath', 'শিউথ ব্লাইট'], docPatterns: ['শিউথ', 'sheath'] },
+                { names: ['ব্লাইট', 'blight'], docPatterns: ['ব্লাইট', 'blight'] },
+                { names: ['হরিতকী', 'haritoki', 'গাছ পুড়ে যাওয়া'], docPatterns: ['হরিতকী', 'haritoki'] },
+                { names: ['ব্রাউন স্পট', 'brown spot'], docPatterns: ['ব্রাউন স্পট', 'brown spot'] },
+                { names: ['তিলা', 'tela', 'ব্যাকটেরিয়াল ব্লাইট'], docPatterns: ['তিলা', 'tela'] },
+                { names: ['পাতা হলুদ', 'leaf yellow', 'পিঁচড়া'], docPatterns: ['পাতা হলুদ', 'leaf yellow', 'পিঁচড়া'] },
+                { names: ['দাগ', 'spot', 'লিফ স্পট'], docPatterns: ['দাগ', 'spot', 'লিফ স্পট'] },
+                { names: ['পচা', 'rot', 'গলা', 'wilt'], docPatterns: ['পচা', 'rot', 'গলা', 'wilt'] },
+                { names: ['মলদ্রব', 'bacterial ooze'], docPatterns: ['মলদ্রব', 'bacterial ooze'] },
+                { names: ['ফাংগাস', 'fungus', 'ছত্রাক'], docPatterns: ['ফাংগাস', 'fungus', 'ছত্রাক'] },
+                { names: ['পোকা', 'insect', 'pest'], docPatterns: ['পোকা', 'insect', 'pest'] },
+            ];
+            const queryLower = query.toLowerCase();
+            for (const dn of BANGLA_DISEASE_NAMES) {
+                if (dn.names.some(n => queryLower.includes(n))) {
+                    const docNameLower = (doc.name || '').toLowerCase();
+                    const docBanglaLower = banglaName.toLowerCase();
+                    const docDiseases = (doc.diseases || []).map(d => d.toLowerCase());
+                    const docAffected = (doc.affected_crops || []).map(c => c.toLowerCase());
+                    const nameMatch = dn.docPatterns.some(p => docNameLower.includes(p) || docBanglaLower.includes(p));
+                    const diseasesArrayMatch = dn.docPatterns.some(p => docDiseases.some(d => d.includes(p)));
+                    const allTextMatch = dn.docPatterns.some(p => allText.includes(p));
+                    if (nameMatch) score += 20;
+                    else if (diseasesArrayMatch) score += 15;
+                    else if (allTextMatch && crop && docAffected.some(c => c.includes(crop))) score += 10;
+                    break;
+                }
+            }
+        }
+
+        if (intent === 'fertilizer') {
+            if (isFertilizerDoc && !isDiseaseDoc && !titleLooksLikeDisease) score += 8;
+            else if (isFertilizerDoc && isDiseaseDoc) score += 2;
+            else if (isDiseaseDoc && !isFertilizerDoc) score -= 10;
+            else if (titleLooksLikeDisease && !isFertilizerDoc) score -= 8;
+        }
+        if (intent === 'disease') {
+            if (isDiseaseDoc) score += 8;
+            if (isFertilizerDoc && !isDiseaseDoc) score -= 5;
+        }
         if (intent === 'government' && doc.source !== 'SF') score += 3;
         if (intent === 'weather' && doc.weather) score += 5;
         if (intent === 'soil' && doc.soil) score += 5;
         if (intent === 'product' && doc.url && doc.url.includes('firebase')) score += 5;
 
         // Crop filter
-        const docCrop = doc.crop || banglaName || englishName || '';
         if (crop && (docCrop.includes(crop) || banglaName.includes(crop))) score += 8;
         else if (crop && docCrop !== 'সর্বজনীন' && !docCrop.includes(crop)) score -= 5;
 
@@ -165,11 +214,12 @@ function searchKnowledge(query, options = {}) {
 
 /**
  * Build context string from retrieved documents for LLM
- * Handles both V11 and V12 formats
+ * Intent-aware: only includes fields relevant to the detected intent
  */
-function buildKnowledgeContext(docs) {
+function buildKnowledgeContext(docs, options = {}) {
     if (!docs || docs.length === 0) return '';
 
+    const { intent = 'general', subIntent = 'informational' } = options;
     let context = '\n\n📚 INTERNAL KNOWLEDGE BASE (Verified Sources):\n\n';
 
     docs.forEach((doc, i) => {
@@ -178,30 +228,50 @@ function buildKnowledgeContext(docs) {
         const localNames = doc.local_names || {};
         context += `- Title: ${title}\n`;
         if (localNames.bangla) context += `- Bangla: ${localNames.bangla}\n`;
-        if (localNames.chatgaiya) context += `- Chatgaiya: ${localNames.chatgaiya}\n`;
         if (localNames.english) context += `- English: ${localNames.english}\n`;
         context += `- Source: ${doc.source}\n`;
-        if (doc.url) context += `- URL: ${doc.url}\n`;
         if (doc.crop) context += `- Crop: ${doc.crop}\n`;
-        if (doc.disease) context += `- Disease: ${doc.disease}\n`;
-        if (doc.season) context += `- Season: ${doc.season}\n`;
-        if (doc.type) context += `- Type: ${doc.type}\n`;
-        if (doc.severity) context += `- Severity: ${doc.severity}\n`;
-        if (doc.cause) context += `- Cause: ${doc.cause}\n`;
-        if (doc.symptoms) context += `- Symptoms: ${doc.symptoms.early || ''} ${doc.symptoms.late || ''}\n`;
-        if (doc.organic_control) context += `- Organic Control: ${doc.organic_control.join(', ')}\n`;
-        if (doc.chemical_control) context += `- Chemical Control: ${doc.chemical_control.join(', ')}\n`;
-        if (doc.prevention) context += `- Prevention: ${doc.prevention.join(', ')}\n`;
-        if (doc.fertilizer_schedule) context += `- Fertilizer Schedule: ${doc.fertilizer_schedule.map(f => f.stage + ': ' + f.fertilizer + ' ' + f.amount).join('; ')}\n`;
-        if (doc.tips) context += `- Tips: ${doc.tips.join('; ')}\n`;
-        if (doc.common_questions) context += `- Common Q: ${doc.common_questions.map(q => q.q + ' → ' + q.a).join('; ')}\n`;
-        if (doc.soil) context += `- Soil: pH ${doc.soil.pH || ''}, Type: ${doc.soil.type || ''}\n`;
-        if (doc.temperature) context += `- Temperature: ${doc.temperature.min}-${doc.temperature.max}°C (optimal: ${doc.temperature.optimal}°C)\n`;
-        if (doc.watering) context += `- Watering: ${doc.watering.frequency || ''}, ${doc.watering.method || ''}\n`;
-        if (doc.yield) context += `- Yield: ${doc.yield.per_acre || ''}\n`;
-        if (doc.harvest) context += `- Harvest: ${doc.harvest.method || ''}, ${doc.harvest.indicators || ''}\n`;
-        const content = doc.content || '';
-        if (content) context += `- Content: ${content}\n`;
+
+        if (intent === 'fertilizer') {
+            if (doc.fertilizer_schedule) context += `- Fertilizer Schedule: ${doc.fertilizer_schedule.map(f => f.stage + ': ' + f.fertilizer + ' ' + f.amount).join('; ')}\n`;
+            if (doc.organic_fertilizer?.length) context += `- Organic Fertilizer: ${doc.organic_fertilizer.join(', ')}\n`;
+            if (doc.chemical_fertilizer?.length) context += `- Chemical Fertilizer: ${doc.chemical_fertilizer.join(', ')}\n`;
+            if (subIntent === 'calculation') {
+                const fertQA = (doc.common_questions || []).filter(q =>
+                    /সার|fertilizer|ইউরিয়া|urea|ডিএপি|dap|কেসিএ|এমওপি/i.test(q.q) && /\d/.test(q.a)
+                );
+                if (fertQA.length) context += `- Fertilizer Rates: ${fertQA.map(q => q.q + ' → ' + q.a).join('; ')}\n`;
+            } else {
+                const fertQA = (doc.common_questions || []).filter(q =>
+                    /সার|fertilizer/i.test(q.q)
+                );
+                if (fertQA.length) context += `- Common Q: ${fertQA.slice(0, 2).map(q => q.q + ' → ' + q.a).join('; ')}\n`;
+            }
+            if (doc.tips) context += `- Tips: ${doc.tips.join('; ')}\n`;
+        } else if (intent === 'disease') {
+            if (doc.disease || doc.type === 'fungal' || doc.type === 'bacterial' || doc.type === 'viral') {
+                if (doc.cause) context += `- Cause: ${doc.cause}\n`;
+                if (doc.symptoms) context += `- Symptoms: ${doc.symptoms.early || ''} ${doc.symptoms.late || ''}\n`;
+                if (doc.organic_control?.length) context += `- Organic Treatment: ${doc.organic_control.join(', ')}\n`;
+                if (doc.chemical_control?.length) context += `- Chemical Treatment: ${doc.chemical_control.join(', ')}\n`;
+                if (doc.prevention?.length) context += `- Prevention: ${doc.prevention.join(', ')}\n`;
+                if (doc.severity) context += `- Severity: ${doc.severity}\n`;
+            }
+            if (doc.tips) context += `- Tips: ${doc.tips.join('; ')}\n`;
+            const diseaseQA = (doc.common_questions || []).filter(q =>
+                /রোগ|disease|blight|symptom|লক্ষণ/i.test(q.q)
+            );
+            if (diseaseQA.length) context += `- Common Q: ${diseaseQA.slice(0, 2).map(q => q.q + ' → ' + q.a).join('; ')}\n`;
+        } else {
+            // General: include a compact set of fields
+            if (doc.type) context += `- Type: ${doc.type}\n`;
+            if (doc.fertilizer_schedule) context += `- Fertilizer Schedule: ${doc.fertilizer_schedule.map(f => f.stage + ': ' + f.fertilizer + ' ' + f.amount).join('; ')}\n`;
+            if (doc.organic_fertilizer?.length) context += `- Organic Fertilizer: ${doc.organic_fertilizer.join(', ')}\n`;
+            if (doc.chemical_fertilizer?.length) context += `- Chemical Fertilizer: ${doc.chemical_fertilizer.join(', ')}\n`;
+            if (doc.tips) context += `- Tips: ${doc.tips.join('; ')}\n`;
+            if (doc.common_questions) context += `- Common Q: ${doc.common_questions.slice(0, 2).map(q => q.q + ' → ' + q.a).join('; ')}\n`;
+        }
+
         context += '\n';
     });
 

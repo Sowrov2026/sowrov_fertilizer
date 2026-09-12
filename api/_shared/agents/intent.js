@@ -10,12 +10,55 @@ function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+const BANGLA_DIGITS = { '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9' };
+
+function parseBanglaNumber(str) {
+    if (!str) return NaN;
+    let normalized = str.trim();
+    for (const [bn, en] of Object.entries(BANGLA_DIGITS)) {
+        normalized = normalized.replaceAll(bn, en);
+    }
+    return Number(normalized);
+}
+
+function extractQuantity(text) {
+    if (!text) return null;
+    const lower = text.toLowerCase();
+    const units = [
+        { bangla: 'একর', english: 'acre', aliases: ['একরে', 'একরজুড়ে', 'একর জমি'] },
+        { bangla: 'শতক', english: 'shatak', aliases: ['শতকে'] },
+        { bangla: 'বিঘা', english: 'bigha', aliases: ['বিঘায়', 'বিঘা জমি'] },
+        { bangla: 'কেজি', english: 'kg', aliases: ['কেজিতে', 'কেজির'] },
+        { bangla: 'গ্রাম', english: 'gram', aliases: ['গ্রামে'] },
+        { bangla: 'লিটার', english: 'liter', aliases: ['লিটারে', 'লিটারি'] },
+        { bangla: 'টন', english: 'ton', aliases: ['টনে'] },
+    ];
+
+    for (const unit of units) {
+        const allNames = [unit.bangla, unit.english, ...unit.aliases];
+        for (const name of allNames) {
+            const idx = lower.indexOf(name);
+            if (idx === -1) continue;
+            const before = text.substring(0, idx).trim();
+            const numMatch = before.match(/[\d০-৯.,]+$/);
+            if (numMatch) {
+                const num = parseBanglaNumber(numMatch[0].replace(/,/g, ''));
+                if (!isNaN(num) && num > 0) {
+                    return { quantity: num, unit: unit.bangla, unitEnglish: unit.english };
+                }
+            }
+        }
+    }
+    return null;
+}
+
 function detectIntent(text, languageResult = {}) {
     const lower = (text || '').toLowerCase();
     const normalized = (languageResult.normalized || text || '').toLowerCase();
 
     const intents = {
         primaryIntent: 'general',
+        subIntent: 'informational',
         isFertilizerQuery: false,
         isDiseaseQuery: false,
         isProductQuery: false,
@@ -27,6 +70,10 @@ function detectIntent(text, languageResult = {}) {
         isPestQuery: false,
         isCropIdQuery: false,
         isEmergency: false,
+        isCalculationQuery: false,
+        needsClarification: false,
+        quantity: null,
+        quantityUnit: null,
         cropName: null,
         location: null,
         season: null,
@@ -93,7 +140,7 @@ function detectIntent(text, languageResult = {}) {
     if (intents.isWeatherQuery) intentScores.weather = 7;
 
     const soilKeywords = ['মাটি', 'soil', 'pH', 'উর্বরতা', 'লবণাক্ত', 'salinity',
-        'মাটির', 'জমি', 'কাদা', 'বালি', 'মাটি পরীক্ষা'];
+        'মাটির', 'কাদা', 'বালি', 'মাটি পরীক্ষা'];
     intents.isSoilQuery = soilKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isSoilQuery) intentScores.soil = 7;
 
@@ -133,6 +180,39 @@ function detectIntent(text, languageResult = {}) {
     intents.primaryIntent = maxIntent;
     intents.confidence = maxScore;
 
+    // ── Sub-intent detection ──
+    const calcKeywords = ['কতটুকু', 'কত লাগবে', 'কত দিতে হবে', 'কত কেজি', 'কত গ্রাম',
+        'কত লিটার', 'কত টন', 'how much', 'how many', 'কত পরিমাণ', 'পরিমাণ কত',
+        'কত হবে', 'হিসাব দাও', 'হিসাব কর', 'calculate', 'quantity'];
+    const isCalcKeyword = calcKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+    const qty = extractQuantity(text);
+    intents.isCalculationQuery = isCalcKeyword || (qty !== null && (intents.isFertilizerQuery || intents.isProductQuery));
+    intents.quantity = qty?.quantity || null;
+    intents.quantityUnit = qty?.unit || null;
+
+    const fertTypeNames = ['ইউরিয়া', 'urea', 'ডিএপি', 'dap', 'কেসিএ', 'kca',
+        'এমওপি', 'mop', 'কমপোস্ট', 'compost', 'npk', 'জিপসাম', 'gypsum',
+        'ভার্মিকমপোস্ট', 'vermicompost', 'টিএসপি', 'tsp'];
+    const hasFertType = fertTypeNames.some(ft => lower.includes(ft) || normalized.includes(ft));
+
+    const recKeywords = ['কোন', 'ভালো', 'কোনটি', 'best', 'which', 'recommend', 'সুপারিশ', 'কোনটা'];
+    const isRecKeyword = recKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+
+    intents.needsClarification = false;
+    if (intents.isFertilizerQuery && !hasFertType && !isRecKeyword && !intents.isCalculationQuery) {
+        intents.needsClarification = true;
+    }
+
+    if (intents.isCalculationQuery) {
+        intents.subIntent = 'calculation';
+    } else if (intents.needsClarification) {
+        intents.subIntent = 'clarification';
+    } else if (maxIntent === 'fertilizer' || maxIntent === 'product') {
+        intents.subIntent = isRecKeyword ? 'recommendation' : 'informational';
+    } else {
+        intents.subIntent = 'informational';
+    }
+
     const crops = {
         'টমেটো': ['টমেটো', 'টমেটু', 'টমেটূ', 'tomato', 'খাট্টাবাইয়্যুন', 'খাট্টাবাইয়ান'],
         'বেগুন': ['বেগুন', 'বেগুন্যা', 'begun', 'brinjal', 'eggplant'],
@@ -169,8 +249,10 @@ function detectIntent(text, languageResult = {}) {
 
     for (const [crop, aliases] of Object.entries(crops)) {
         const matched = aliases.some(alias => {
-            if (alias.length <= 2 && /[\u0980-\u09FF]/.test(alias)) {
-                return matchesWithBoundary(normalized, alias) || matchesWithBoundary(lower, alias);
+            if (/[\u0980-\u09FF]/.test(alias)) {
+                const suffixPattern = 'ের|ে|তে|র|টা|গুলো|টি|দের|না|ও|য়|সহ|বিহীন|মূলক|ক্ষেত্র|নির্ভর';
+                const boundaryRegex = new RegExp(`(?:^|[\\s,।!?.])${escapeRegex(alias)}(?:[\\s,।!?.]|$|${suffixPattern})`, 'i');
+                return boundaryRegex.test(normalized) || boundaryRegex.test(lower);
             }
             return lower.includes(alias) || normalized.includes(alias);
         });
