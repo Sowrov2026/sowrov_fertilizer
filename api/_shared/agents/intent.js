@@ -25,7 +25,7 @@ function extractQuantity(text) {
     if (!text) return null;
     const lower = text.toLowerCase();
     const units = [
-        { bangla: 'একর', english: 'acre', aliases: ['একরে', 'একরজুড়ে', 'একর জমি'] },
+        { bangla: 'একর', english: 'acre', aliases: ['একরে', 'একরজুড়ে', 'একর জমি', 'যেকর', 'যেকরে', 'যেকরেতে', 'একরেতে'] },
         { bangla: 'শতক', english: 'shatak', aliases: ['শতকে'] },
         { bangla: 'বিঘা', english: 'bigha', aliases: ['বিঘায়', 'বিঘা জমি'] },
         { bangla: 'কেজি', english: 'kg', aliases: ['কেজিতে', 'কেজির'] },
@@ -78,6 +78,9 @@ function detectIntent(text, languageResult = {}) {
         location: null,
         season: null,
         confidence: 0,
+        normalizedFertilizerType: null,
+        isTrichodermaTiming: false,
+        isFertilizerComparison: false,
     };
 
     const intentScores = {
@@ -102,7 +105,8 @@ function detectIntent(text, languageResult = {}) {
     if (intents.isEmergency) intentScores.emergency = 20;
 
     const fertKeywords = ['সার', 'fertilizer', 'ইউরিয়া', 'urea', 'ডিএপি', 'dap',
-        'কমপোস্ট', 'compost', 'vermicompost', 'ট্রাইকোডার্মা', 'trichoderma',
+        'কমপোস্ট', 'compost', 'vermicompost', 'vermi', 'ভার্মি',
+        'ট্রাইকোডার্মা', 'trichoderma', 'tricho', 'ট্রাইকো',
         'পুষ্টি', 'nutrition', 'নাইট্রোজেন', 'nitrogen', 'ফসফরাস', 'phosphorus',
         'পটাশিয়াম', 'potassium', 'ভার্মিকমপোস্ট', 'বেজোসার', 'কেসিএ', 'npk',
         'সার দিব', 'সার কি', 'কোন সার', 'কি সার', 'কী সার',
@@ -112,12 +116,14 @@ function detectIntent(text, languageResult = {}) {
     if (intents.isFertilizerQuery) intentScores.fertilizer = 10;
 
     const diseaseKeywords = ['রোগ', 'disease', 'পাতা হলুদ', 'পাতা কুকড়', 'মরা', 'মারা',
-        'ক্ষতি', 'কুঁকড়ে', 'হলদে', 'বাদামি', 'ধুলো', 'মলিচ', 'গলা',
-        'ফাঁপা', 'দাগ', 'পচা', 'মরাডা', 'ফাংগাস', 'ব্যাকটেরিয়া', 'ভাইরাস',
+        'ক্ষতি', 'কুঁকড়ে', 'হলদে', 'হলুদে', 'হলুদ হয়েছে', 'বাদামি', 'ধুলো', 'মলিচ', 'গলা',
+        'ফাঁপা', 'দাগ', 'পচা', 'পচে', 'মরাডা', 'ফাংগাস', 'ব্যাকটেরিয়া', 'ভাইরাস',
         'মরিচ্যা মইরা', 'বেগুন্যা মইরা', 'কুকড়াইছে', 'পাতা ঝরা', 'পাতা পচা',
-        'কী হয়েছে', 'কী হইছে', 'হলুদ হইছে', 'মরে গেছে', 'পচে গেছে',
-        'what happened', 'leaf yellow', 'leaf curl', 'spot', 'blight', 'wilt',
-        'লক্ষণ', 'symptom', 'নষ্ট', 'damaged'];
+        'কী হয়েছে', 'কী হইছে', 'কি হয়েছে', 'কি হইছে', 'হলুদ হইছে', 'মরে গেছে', 'পচে গেছে',
+        'হলুদ কেন', 'কেন হলুদ', 'কেন মরে', 'কেন পচে', 'কেন হয়েছে',
+        'what happened', 'leaf yellow', 'yellowing', 'leaf curl', 'spot', 'blight', 'wilt',
+        'rot', 'rust', 'mildew', 'blotch',
+        'লক্ষণ', 'symptom', 'নষ্ট', 'damaged', 'আক্রান্ত', 'affected'];
     intents.isDiseaseQuery = diseaseKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isDiseaseQuery) intentScores.disease = 12;
 
@@ -161,7 +167,8 @@ function detectIntent(text, languageResult = {}) {
     if (intents.isCropIdQuery) intentScores.crop = 6;
 
     const faqKeywords = ['কীভাবে', 'কিভাবে', 'how to', 'কোথায় পাই', 'কোথায় পাব', 'where to',
-        'কখন দিব', 'কখন লাগাব', 'when to', 'কেন হয়', 'why does',
+        'কখন দিব', 'কখন লাগাব', 'কখন দেব', 'কখন ব্যবহার', 'কতে', 'কতে দিতে', 'কতে লাগাতে',
+        'when to', 'কেন হয়', 'why does',
         'কত টাকা', 'কত দাম', 'how much', 'কোনটি ভালো', 'which is better'];
     intents.isFaqQuery = faqKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
     if (intents.isFaqQuery) intentScores.faq = 3;
@@ -192,7 +199,9 @@ function detectIntent(text, languageResult = {}) {
 
     const fertTypeNames = ['ইউরিয়া', 'urea', 'ডিএপি', 'dap', 'কেসিএ', 'kca',
         'এমওপি', 'mop', 'কমপোস্ট', 'compost', 'npk', 'জিপসাম', 'gypsum',
-        'ভার্মিকমপোস্ট', 'vermicompost', 'টিএসপি', 'tsp'];
+        'ভার্মিকমপোস্ট', 'vermicompost', 'ভার্মি', 'vermi',
+        'ট্রাইকোডার্মা', 'trichoderma', 'ট্রাইকো', 'tricho',
+        'টিএসপি', 'tsp'];
     const hasFertType = fertTypeNames.some(ft => lower.includes(ft) || normalized.includes(ft));
 
     const recKeywords = ['কোন', 'ভালো', 'কোনটি', 'best', 'which', 'recommend', 'সুপারিশ', 'কোনটা'];
@@ -202,6 +211,27 @@ function detectIntent(text, languageResult = {}) {
     if (intents.isFertilizerQuery && !hasFertType && !isRecKeyword && !intents.isCalculationQuery) {
         intents.needsClarification = true;
     }
+
+    // ── Normalized fertilizer type (canonical names) ──
+    const vn = (lower + ' ' + normalized);
+    if (/ভার্মিকমপোস[্টত]|ভার্মিকমপোস[্টত]ে|vermicompost|vermi\b/.test(vn)) {
+        intents.normalizedFertilizerType = 'vermicompost';
+    } else if (/ট্রাইকোডার্মা|trichoderma|ট্রাইকো|tricho\b/.test(vn)) {
+        intents.normalizedFertilizerType = 'trichoderma';
+    } else if (/ইউরিয়া|urea\b/.test(vn)) {
+        intents.normalizedFertilizerType = 'urea';
+    } else if (/ডিএপি|dap\b/.test(vn)) {
+        intents.normalizedFertilizerType = 'dap';
+    }
+
+    // ── Trichoderma timing (timing keywords, no quantity) ──
+    const hasTimingKeywords = /কতে|কবে|কখন|কেন|দিতে|লাগাতে|ব্যবহার|প্রয়োগ|তুলে|when to|how to|কীভাবে|কিভাবে/.test(vn);
+    intents.isTrichodermaTiming = intents.normalizedFertilizerType === 'trichoderma' && hasTimingKeywords && !intents.quantity;
+
+    // ── Fertilizer comparison (two products mentioned) ──
+    const hasTwoProducts = /vermicompost.*trichoderma|trichoderma.*vermicompost|ভার্মি.*ট্রাইকো|ট্রাইকো.*ভার্মি|ভার্মিকমপোস[্টত].*ট্রাইকো|ট্রাইকো.*ভার্মিকমপোস[্টত]/i.test(vn);
+    const hasComparisonWords = /better|best|which|compare|comparison|কোন|ভালো|শ্রেষ্ঠ|তুলনা|কোনটি|কোনটা|কোনটি ভালো|which is better/i.test(vn);
+    intents.isFertilizerComparison = hasTwoProducts && hasComparisonWords;
 
     if (intents.isCalculationQuery) {
         intents.subIntent = 'calculation';

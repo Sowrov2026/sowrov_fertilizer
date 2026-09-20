@@ -160,7 +160,7 @@ function generateKnowledgeAnswer(query, rawDocs, productContext, language, optio
         }
     }
 
-    if (productContext) {
+    if (productContext && intent !== 'disease') {
         answer += productContext + '\n\n';
     }
 
