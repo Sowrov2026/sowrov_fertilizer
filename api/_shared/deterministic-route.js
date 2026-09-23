@@ -10,7 +10,8 @@ function deterministicRoute(intent, lang) {
     const q = lang === 'english';
 
     // 1. Clarification: fertilizer query with no type specified
-    if (intent.isFertilizerQuery && !fert && !intent.isDiseaseQuery) {
+    //    (excludes recommendation questions, which flow to knowledge + Groq)
+    if (intent.isFertilizerQuery && !fert && !intent.isDiseaseQuery && intent.subIntent !== 'recommendation') {
         return {
             reply: q
                 ? 'Which fertilizer do you need: Vermicompost (organic) or Trichoderma (biocontrol)?'

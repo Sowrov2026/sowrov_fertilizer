@@ -204,14 +204,6 @@ function detectIntent(text, languageResult = {}) {
         'টিএসপি', 'tsp'];
     const hasFertType = fertTypeNames.some(ft => lower.includes(ft) || normalized.includes(ft));
 
-    const recKeywords = ['কোন', 'ভালো', 'কোনটি', 'best', 'which', 'recommend', 'সুপারিশ', 'কোনটা'];
-    const isRecKeyword = recKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
-
-    intents.needsClarification = false;
-    if (intents.isFertilizerQuery && !hasFertType && !isRecKeyword && !intents.isCalculationQuery) {
-        intents.needsClarification = true;
-    }
-
     // ── Normalized fertilizer type (canonical names) ──
     const vn = (lower + ' ' + normalized);
     if (/ভার্মিকমপোস[্টত]|ভার্মিকমপোস[্টত]ে|vermicompost|vermi\b/.test(vn)) {
@@ -232,16 +224,6 @@ function detectIntent(text, languageResult = {}) {
     const hasTwoProducts = /vermicompost.*trichoderma|trichoderma.*vermicompost|ভার্মি.*ট্রাইকো|ট্রাইকো.*ভার্মি|ভার্মিকমপোস[্টত].*ট্রাইকো|ট্রাইকো.*ভার্মিকমপোস[্টত]/i.test(vn);
     const hasComparisonWords = /better|best|which|compare|comparison|কোন|ভালো|শ্রেষ্ঠ|তুলনা|কোনটি|কোনটা|কোনটি ভালো|which is better/i.test(vn);
     intents.isFertilizerComparison = hasTwoProducts && hasComparisonWords;
-
-    if (intents.isCalculationQuery) {
-        intents.subIntent = 'calculation';
-    } else if (intents.needsClarification) {
-        intents.subIntent = 'clarification';
-    } else if (maxIntent === 'fertilizer' || maxIntent === 'product') {
-        intents.subIntent = isRecKeyword ? 'recommendation' : 'informational';
-    } else {
-        intents.subIntent = 'informational';
-    }
 
     const crops = {
         'টমেটো': ['টমেটো', 'টমেটু', 'টমেটূ', 'tomato', 'খাট্টাবাইয়্যুন', 'খাট্টাবাইয়ান'],
@@ -331,6 +313,36 @@ function detectIntent(text, languageResult = {}) {
             intents.season = s;
             break;
         }
+    }
+
+    // ── Fertilizer recommendation vs clarification ──
+    // Recommendation language: which/what fertilizer, suitable, recommended, কোন সার, কী সার, কোনটা...
+    const recKeywords = ['কোন', 'ভালো', 'কোনটি', 'কোনটা', 'best', 'which', 'recommend', 'recommended', 'সুপারিশ', 'সুপারিশকৃত', 'what fertilizer', 'suitable', 'কোন সার', 'কী সার', 'কি সার'];
+    const recPhraseRe = /(?:what|which)\s+fertilizers?\b|fertilizer\s+recommend|suitable\s+fertilizer\b|recommended\s+fertilizer\b/i;
+    const isRecommendation = recPhraseRe.test(vn) || recKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+
+    // Agricultural context: detected crop, growth stage/timing, season, or location
+    const stageKeywords = ['পর্যায়', 'কুশি', 'বীজতলা', 'চারা', 'শাখা গঠন', 'শীর্ষ', 'ফুল', 'দানা', 'পাকা',
+        'stage', 'tillering', 'seedling', 'flowering', 'panicle', 'vegetative', 'reproductive',
+        'maturity', 'grain filling', 'grain-filling', 'ripening', 'booting', 'germination', 'emergence'];
+    const hasStageKeyword = stageKeywords.some(kw => lower.includes(kw) || normalized.includes(kw));
+    const hasAgriculturalContext = intents.cropName !== null || hasStageKeyword || intents.season !== null || intents.location !== null;
+
+    intents.needsClarification = false;
+    if (intents.isFertilizerQuery && !hasFertType && !intents.isCalculationQuery && !(isRecommendation && hasAgriculturalContext)) {
+        intents.needsClarification = true;
+    }
+
+    if (intents.isCalculationQuery) {
+        intents.subIntent = 'calculation';
+    } else if (intents.needsClarification) {
+        intents.subIntent = 'clarification';
+    } else if ((maxIntent === 'fertilizer' || maxIntent === 'product') && isRecommendation && hasAgriculturalContext) {
+        intents.subIntent = 'recommendation';
+    } else if (maxIntent === 'fertilizer' || maxIntent === 'product') {
+        intents.subIntent = 'informational';
+    } else {
+        intents.subIntent = 'informational';
     }
 
     return intents;
