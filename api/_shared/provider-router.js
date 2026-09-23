@@ -95,9 +95,7 @@ function buildKnowledgeFallback(rawInput, knowledgeContext, productContext, inte
     if (productContext) answer += '\n\n' + productContext;
 
     if (!answer || answer.length < 50) {
-        answer = isEnglish
-            ? `**Your Question:** ${rawInput}\n\n**Recommendation:**\nFor accurate advice on this topic:\n1. Contact your local DAE office\n2. Visit BARI website: bari.gov.bd\n3. Consult with a local agriculture officer\n\n**General Tips:**\n- Use verified seeds from authorized dealers\n- Follow recommended fertilizer schedules\n- Practice integrated pest management (IPM)\n- Monitor weather before applying treatments\n\n*Contact our hotline for personalized advice: 01829-775552*`
-            : `**আপনার প্রশ্ন:** ${rawInput}\n\n**সুপারিশ:**\nএই বিষয়ে সঠিক পরামর্শের জন্য:\n১. আপনার নিকটস্থ কৃষি সম্প্রসারণ অফিসে (DAE) যোগাযোগ করুন\n২. BARI ওয়েবসাইট: bari.gov.bd\n৩. স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন\n\n**সাধারণ পরামর্শ:**\n- অনুমোদিত ডিলার থেকে যাচাইকৃত বীজ ব্যবহার করুন\n- সুপারিশকৃত সারের সময়সূচি অনুসরণ করুন\n- একীভূত পোকামাকড় ব্যবস্থাপনা (IPM) অনুশীলন করুন\n\n*ব্যক্তিগত পরামর্শের জন্য আমাদের হটলাইনে কল করুন: 01829-775552*`;
+        return null;
     } else {
         const sourceNote = isEnglish
             ? '\n\n*Based on BARI, DAE, BRRI verified sources.*'

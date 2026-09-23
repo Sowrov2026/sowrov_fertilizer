@@ -414,8 +414,74 @@
     function hideTyping() { DOM.typingIndicator.classList.add('hidden'); }
 
     // ========================================
-    // Send Message
+    // Firebase Auth Token
     // ========================================
+    async function getIdToken() {
+        try {
+            var authObj = window.sfAuth;
+            if (authObj && authObj.currentUser && typeof authObj.currentUser.getIdToken === 'function') {
+                return await authObj.currentUser.getIdToken();
+            }
+        } catch (e) { /* not logged in or token error */ }
+        return null;
+    }
+
+    // ========================================
+    // Quota State + Countdown
+    // ========================================
+    var quotaState = { count: 0, limit: 20, remaining: 20, blockedUntil: null, retryMs: null };
+    var quotaCountdownId = null;
+
+    function updateQuotaUI(quota) {
+        if (!quota) return;
+        quotaState = quota;
+        var footer = document.querySelector('.sf-ai-input-footer span');
+        if (!footer) return;
+
+        if (quota.retryMs && quota.retryMs > 0) {
+            footer.textContent = 'AI quota reached. Resets in ' + formatDuration(quota.retryMs);
+            footer.style.color = '#ef4444';
+            DOM.chatInput.disabled = true;
+            DOM.chatInput.placeholder = 'AI quota reached — please wait...';
+            DOM.btnSend.disabled = true;
+            startCountdown(quota.blockedUntil);
+        } else {
+            var remaining = quota.remaining != null ? quota.remaining : Math.max(0, (quota.limit || 20) - (quota.count || 0));
+            footer.textContent = 'Powered by Sowrov Fertilizer' + (remaining < 20 ? '  (' + remaining + ' AI chats left)' : '');
+            footer.style.color = '';
+            DOM.chatInput.disabled = false;
+            DOM.chatInput.placeholder = 'Ask about agriculture...';
+            stopCountdown();
+        }
+    }
+
+    function formatDuration(ms) {
+        if (ms <= 0) return '0m';
+        var totalMin = Math.ceil(ms / 60000);
+        var h = Math.floor(totalMin / 60);
+        var m = totalMin % 60;
+        return h > 0 ? h + 'h ' + m + 'm' : m + 'm';
+    }
+
+    function startCountdown(blockedUntil) {
+        stopCountdown();
+        if (!blockedUntil) return;
+        var target = typeof blockedUntil === 'number' ? blockedUntil : new Date(blockedUntil).getTime();
+        quotaCountdownId = setInterval(function () {
+            var remaining = target - Date.now();
+            if (remaining <= 0) {
+                stopCountdown();
+                updateQuotaUI({ count: 0, limit: 20, remaining: 20, blockedUntil: null, retryMs: null });
+                return;
+            }
+            var footer = document.querySelector('.sf-ai-input-footer span');
+            if (footer) footer.textContent = 'AI quota reached. Resets in ' + formatDuration(remaining);
+        }, 10000);
+    }
+
+    function stopCountdown() {
+        if (quotaCountdownId) { clearInterval(quotaCountdownId); quotaCountdownId = null; }
+    }
     async function sendMessage() {
         var text = DOM.chatInput.value.trim();
         var imageDataUrl = state.selectedImageBase64;
@@ -454,14 +520,26 @@
             var controller = new AbortController();
             var timeoutId = setTimeout(function () { controller.abort(); }, 35000);
 
+            var headers = { 'Content-Type': 'application/json' };
+            var idToken = await getIdToken();
+            if (idToken) headers['Authorization'] = 'Bearer ' + idToken;
+
             var response = await fetch(CONFIG.API_ENDPOINT, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: headers,
                 body: JSON.stringify(payload),
                 signal: controller.signal,
             });
 
             clearTimeout(timeoutId);
+
+            if (response.status === 429) {
+                var quotaData = await response.json().catch(function () { return null; });
+                var quotaMsg = (quotaData && quotaData.messagebn) || 'আপনার AI চ্যাট কোটা শেষ হয়ে গেছে। পরে আবার চেষ্টা করুন।';
+                addMessage('bot', quotaMsg);
+                if (quotaData && quotaData.quota) updateQuotaUI(quotaData.quota);
+                return;
+            }
 
             if (!response.ok) {
                 var errData = await response.json().catch(function () { return null; });
@@ -474,6 +552,8 @@
             addMessage('bot', botReply);
             state.conversationHistory.push({ role: 'assistant', content: botReply });
             Storage.save(state.conversationHistory);
+
+            if (data.quota) updateQuotaUI(data.quota);
         } catch (error) {
             console.error('Chat error:', error);
             var fallback = '\u0986\u09AE\u09BE\u09B0 \u0995\u09C3\u09B7\u09BF \u099C\u09CD\u09A8\u09BE\u09A8 \u09AD\u09BE\u09A8\u09CD\u09A1\u09BE\u09B0 \u09A5\u09C7\u0995\u09C7 \u0986\u09AA\u09A8\u09BE\u0995\u09C7 \u09B8\u09BE\u09B9\u09BE\u09AF\u09CD\u09AF \u0995\u09B0\u09A4\u09C7 \u09AA\u09BE\u09B0\u09BF\u0966\n\n**\u09B8\u09BE\u09A7\u09BE\u09B0\u09A3 \u0995\u09C3\u09B7\u09BF \u09AA\u09B0\u09BE\u09AE\u09B0\u09CD\u09B6:**\n- \u09B8\u09AC\u09B8\u09AE\u09AF\u09BC \u0985\u09A8\u09C1\u09AE\u09CB\u09A6\u09BF\u09A4 \u09A1\u09BF\u09B2\u09BE\u09B0 \u09A5\u09C7\u0995\u09C7 \u09AF\u09be\u099A\u09BE\u0987\u0995\u09C3\u09A4 \u09AC\u09C0\u099C \u09AC\u09CD\u09AF\u09AC\u09B9\u09BE\u09B0 \u0995\u09B0\u09C1\u09A8\n- \u09AE\u09BE\u099F\u09BF\u09B0 \u09AA\u09B0\u09C0\u0995\u09CD\u09B7\u09BE \u0995\u09B0\u09C7 \u09B8\u09A8\u09CD\u09A6\u09BF\u0995 \u09B8\u09BE\u09B0 \u09AC\u09CD\u09AF\u09AC\u09B9\u09BE\u09B0 \u0995\u09B0\u09C1\u09A8\n- \u09A8\u09BF\u09AF\u09BC\u09AE\u09BF\u09A4 \u09B8\u09C7\u099A \u09A6\u09BF\u09A8\n- \u09AA\u09CB\u0995\u09BE\u09AE\u09BE\u0995\u09A1\u09BC\u09B0 \u09A6\u09C7\u0996\u09B2\u09C7 \u09B8\u09CD\u09A5\u09BE\u09A8\u09C0\u09AF\u09BC\u09B9 \u0995\u09C3\u09B7\u09BF \u0985\u09AB\u09BF\u09B8\u09C7 \u099C\u09BE\u09A8\u09BE\u09A8\n\n**\u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997:**\n\u099F\u09C7\u09B2\u09BF\u09B9\u09B2\u09BE\u0987\u09A8: 01829-775552\n\u09A8\u09A8\u09CD\u09A4\u09B0\u09B8\u09CD\u09A5 \u0995\u09C3\u09B7\u09BF \u09B8\u09AE\u09CD\u09AA\u09CD\u09B0\u09B8\u09BE\u09B0\u09A3 \u0985\u09AB\u09BF\u09B8 (DAE)\n\n*\u0986\u09AE\u09BE\u09A6\u09C7\u09B0 \u09B9\u099F\u09B2\u09BE\u0987\u09A8\u09C7 \u0995\u09B2 \u0995\u09B0\u09B2\u09C7 \u09AC\u09BF\u09B6\u09C7\u09B7\u09CD\u099C\u09CD\u099E \u0995\u09C3\u09B7\u09BF \u09AA\u09B0\u09BE\u09AE\u09B0\u09CD\u09B6 \u09AA\u09BE\u09AC\u09C7\u09A8\u0964*';

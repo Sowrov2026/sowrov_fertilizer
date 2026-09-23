@@ -1,3 +1,5 @@
+import { buildCorsHeaders, handleOptions } from './_shared/cors.js';
+
 const analytics = new Map();
 
 function trackEvent(event) {
@@ -151,19 +153,12 @@ function getAllAnalyticsSummary() {
     return summary;
 }
 
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-};
-
 export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
-        res.writeHead(200, corsHeaders);
-        res.end();
+        handleOptions(req, res, 'GET, OPTIONS');
         return;
     }
+    const corsHeaders = buildCorsHeaders(req);
 
     try {
         const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);

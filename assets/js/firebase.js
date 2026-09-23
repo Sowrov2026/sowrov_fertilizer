@@ -121,3 +121,6 @@ export {
 };
 export { storage };
 export const auth = customerAuth;
+
+// Expose for IIFE-based ai.js (non-module script)
+window.sfAuth = customerAuth;

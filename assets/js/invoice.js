@@ -20,6 +20,11 @@ const params = new URLSearchParams(window.location.search);
 
 const orderId = params.get("id");
 
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 if (!orderId) {
 
     alert("Invoice not found.");
@@ -167,32 +172,32 @@ document.getElementById("invoiceProductBody").innerHTML = `
 <td>
 
 <img
-src="${order.productImage || 'assets/images/default-product.png'}"
+src="${escapeHtml(String(order.productImage || 'assets/images/default-product.png'))}"
 style="width:70px;height:70px;object-fit:cover;border-radius:8px;">
 
 </td>
 
 <td>
 
-${order.productName}
+${escapeHtml(String(order.productName))}
 
 </td>
 
 <td>
 
-৳${order.total / order.quantity}
+৳${Number(order.total / order.quantity || 0).toLocaleString()}
 
 </td>
 
 <td>
 
-${order.quantity} kg
+${escapeHtml(String(order.quantity))} kg
 
 </td>
 
 <td>
 
-৳${order.total}
+৳${Number(order.total || 0).toLocaleString()}
 
 </td>
 

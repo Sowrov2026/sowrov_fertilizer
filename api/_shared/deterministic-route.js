@@ -84,19 +84,7 @@ function deterministicRoute(intent, lang) {
         };
     }
 
-    // 7. Disease-only contract: strip everything except disease info
-    if (intent.isDiseaseQuery) {
-        const cropName = intent.cropName || (lang === 'english' ? 'your crop' : 'আপনার ফসল');
-        return {
-            reply: q
-                ? `Based on your description, this appears to be a disease issue on ${cropName}. Please consult with your local agricultural officer for accurate diagnosis and treatment. Focus on disease symptoms and prevention.`
-                : `আপনার বর্ণনা অনুযায়ী, ${cropName}-এ রোগের সমস্যা বলে মনে হচ্ছে। সঠিক নির্ণয় ও চিকিৎসার জন্য স্থানীয় কৃষি কর্মকর্তার সাথে যোগাযোগ করুন। শুধুমাত্র রোগের লক্ষণ ও প্রতিরোধে মনোযোগ দিন।`,
-            lang,
-            model: 'disease-only',
-        };
-    }
-
-    // 8. Vermicompost / Trichoderma product info (non-calculation)
+    // 7. Vermicompost / Trichoderma product info (non-calculation, non-disease)
     if ((fert === 'vermicompost' || fert === 'trichoderma') && !intent.isCalculationQuery && !intent.isTrichodermaTiming && !intent.isDiseaseQuery) {
         const INFO = {
             vermicompost: q

@@ -1,19 +1,12 @@
 import { getHealthReport, getProviderStatus, getAnswerCacheStats } from './_shared/provider-router.js';
-
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-};
+import { buildCorsHeaders, handleOptions } from './_shared/cors.js';
 
 export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
-        res.writeHead(204, corsHeaders);
-        res.end();
+        handleOptions(req, res, 'GET, OPTIONS');
         return;
     }
+    const corsHeaders = buildCorsHeaders(req);
     if (req.method !== 'GET') {
         res.writeHead(405, corsHeaders);
         res.end(JSON.stringify({ error: 'Method not allowed' }));

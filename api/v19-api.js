@@ -11,21 +11,14 @@ import {
 } from './_shared/v19-data.js';
 
 import { processChatResponse, checkUnknownQuestion } from './_shared/v19-chat.js';
-
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-};
+import { buildCorsHeaders, handleOptions } from './_shared/cors.js';
 
 export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
-        res.writeHead(204, corsHeaders);
-        res.end();
+        handleOptions(req, res, 'GET, POST, OPTIONS');
         return;
     }
+    const corsHeaders = buildCorsHeaders(req);
 
     try {
         const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);

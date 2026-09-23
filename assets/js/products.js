@@ -16,6 +16,11 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 const container = document.getElementById("productsContainer");
 
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 async function loadProducts() {
 
     try {
@@ -46,13 +51,21 @@ async function loadProducts() {
 
             const product = doc.data();
 
+            const safeImage = escapeHtml(String(product.image || ''));
+            const safeName = escapeHtml(String(product.name || ''));
+            const safeCategory = escapeHtml(String(product.category || ''));
+            const safeDesc = escapeHtml(String(product.description || ''));
+            const safeWholesale = escapeHtml(String(product.wholesalePrice || 0));
+            const safeRetail = escapeHtml(String(product.retailPrice || 0));
+            const safeStock = escapeHtml(String(product.stock || 0));
+
             container.innerHTML += `
 
             <div class="product-card">
 
                 <div class="product-image">
 
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${safeImage}" alt="${safeName}">
 
                 </div>
 
@@ -60,19 +73,19 @@ async function loadProducts() {
 
                     <span class="product-category">
 
-                        ${product.category}
+                        ${safeCategory}
 
                     </span>
 
                     <h3>
 
-                        ${product.name}
+                        ${safeName}
 
                     </h3>
 
                     <p>
 
-                        ${product.description}
+                        ${safeDesc}
 
                     </p>
 
@@ -84,7 +97,7 @@ async function loadProducts() {
 
         <strong>Wholesale:</strong>
 
-        ৳${product.wholesalePrice}/kg
+        ৳${safeWholesale}/kg
 
     </p>
 
@@ -92,7 +105,7 @@ async function loadProducts() {
 
         <strong>Retail:</strong>
 
-        ৳${product.retailPrice}/kg
+        ৳${safeRetail}/kg
 
     </p>
 
@@ -101,7 +114,7 @@ async function loadProducts() {
 
     <strong>Stock:</strong>
 
-    ${product.stock} kg
+    ${safeStock} kg
 
 </p>
 

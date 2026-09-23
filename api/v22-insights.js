@@ -1,3 +1,5 @@
+import { buildCorsHeaders, handleOptions } from './_shared/cors.js';
+
 function predictDemand(productHistory, days = 30) {
     if (!productHistory || productHistory.length < 7) {
         return { prediction: 'insufficient_data', confidence: 0, message: 'Minimum 7 data points required' };
@@ -172,19 +174,12 @@ function predictCropPrice(crop, history) {
     };
 }
 
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-};
-
 export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
-        res.writeHead(200, corsHeaders);
-        res.end();
+        handleOptions(req, res, 'GET, POST, OPTIONS');
         return;
     }
+    const corsHeaders = buildCorsHeaders(req);
 
     try {
         const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});

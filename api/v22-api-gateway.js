@@ -1,4 +1,5 @@
 import { verifyToken, hasPermission } from './_shared/v22-auth.js';
+import { buildCorsHeaders, handleOptions } from './_shared/cors.js';
 
 const apiKeys = new Map();
 const rateLimits = new Map();
@@ -69,20 +70,14 @@ const routes = {
     'GET /api/docs': { handler: () => ({ openapi: '3.0.0', info: { title: 'SF AI Enterprise API', version: '22.0.0' } }) },
 };
 
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-};
-
 export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
-        res.writeHead(204, corsHeaders);
-        res.end();
+        handleOptions(req, res, 'GET, POST, PUT, DELETE, OPTIONS');
         return;
     }
+    const corsHeaders = buildCorsHeaders(req, {
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
+    });
 
     const startTime = Date.now();
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);

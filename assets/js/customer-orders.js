@@ -21,6 +21,15 @@ import {
 const table =
 document.getElementById("customerOrdersTable");
 
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+function safeClass(str) {
+    return escapeHtml(String(str || '')).toLowerCase();
+}
+
 function waitForAuthUser(timeoutMs) {
     return new Promise(function(resolve) {
         if (auth.currentUser) { resolve(auth.currentUser); return; }
@@ -69,37 +78,37 @@ console.log(snapshot.docs.map(doc => doc.data()));
 
 <tr>
 
-<td>${order.orderId}</td>
+<td>${escapeHtml(String(order.orderId || order.orderNumber || ''))}</td>
 
-<td>${order.productName}</td>
+<td>${escapeHtml(String(order.productName))}</td>
 
-<td>${order.quantity} kg</td>
+<td>${escapeHtml(String(order.quantity))} kg</td>
 
-<td>৳${Number(order.totalAmount).toLocaleString()}</td>
+<td>৳${Number(order.totalAmount || order.total || 0).toLocaleString()}</td>
 
-<td>${order.paymentMethod}</td>
+<td>${escapeHtml(String(order.paymentMethod))}</td>
 
 <td>
 <span class="status-badge">
-${order.paymentStatus}
+${escapeHtml(String(order.paymentStatus))}
 </span>
 </td>
 
 <td>
-<span class="status-badge ${order.status.toLowerCase()}">
-${order.status}
+<span class="status-badge ${safeClass(order.status)}">
+${escapeHtml(String(order.status))}
 </span>
 </td>
 
 <td>
 <button
 class="btn trackBtn"
-data-status="${order.status}">
+data-status="${escapeHtml(String(order.status))}">
 Track
 </button>
 <button
 class="btn detailsBtn"
-data-id="${doc.id}">
+data-id="${escapeHtml(String(doc.id))}">
 
 View
 
@@ -215,29 +224,29 @@ if(!orderSnap.exists()){
 const order = orderSnap.data();
 document.getElementById("orderDetails").innerHTML=`
 
-<b>Order No:</b> ${order.orderId}<br><br>
+<b>Order No:</b> ${escapeHtml(String(order.orderId || order.orderNumber || ''))}<br><br>
 
-<b>Customer:</b> ${order.customerName}<br>
+<b>Customer:</b> ${escapeHtml(String(order.customerName))}<br>
 
-<b>Phone:</b> ${order.phone}<br><br>
+<b>Phone:</b> ${escapeHtml(String(order.phone))}<br><br>
 
-<b>Product:</b> ${order.productName}<br>
+<b>Product:</b> ${escapeHtml(String(order.productName))}<br>
 
-<b>Quantity:</b> ${order.quantity} Kg<br>
+<b>Quantity:</b> ${escapeHtml(String(order.quantity))} Kg<br>
 
-<b>Price/Kg:</b> ৳${Number(order.pricePerKg).toLocaleString()}<br>
+<b>Price/Kg:</b> ৳${Number(order.pricePerKg || 0).toLocaleString()}<br>
 
-<b>Total:</b> ৳${Number(order.totalAmount).toLocaleString()}<br><br>
+<b>Total:</b> ৳${Number(order.totalAmount || order.total || 0).toLocaleString()}<br><br>
 
-<b>Payment:</b> ${order.paymentMethod}<br>
+<b>Payment:</b> ${escapeHtml(String(order.paymentMethod))}<br>
 
-<b>Payment Status:</b> ${order.paymentStatus}<br>
+<b>Payment Status:</b> ${escapeHtml(String(order.paymentStatus))}<br>
 
-<b>Status:</b> ${order.status}<br><br>
+<b>Status:</b> ${escapeHtml(String(order.status))}<br><br>
 
 <b>Address:</b><br>
 
-${order.fullAddress}
+${escapeHtml(String(order.fullAddress))}
 
 `;
 

@@ -53,23 +53,7 @@ function generateKnowledgeAnswer(query, rawDocs, productContext, language, optio
     const { intent = 'general', subIntent = 'informational', calculationResult = null } = options;
 
     if (!rawDocs || rawDocs.length === 0) {
-        return isEnglish
-            ? `Based on our agriculture knowledge base, I couldn't find specific information about: ${query}
-
-**General Recommendation:**
-1. Contact your local DAE (Department of Agricultural Extension) office
-2. Visit BARI website: bari.gov.bd
-3. Consult with a local agriculture officer
-
-*For personalized advice, please consult your nearest agricultural extension office.*`
-            : `আমাদের কৃষি জ্ঞান ভান্ডার থেকে "${query}" সম্পর্কে নির্দিষ্ট তথ্য পাওয়া যায়নি।
-
-**সাধারণ সুপারিশ:**
-১. আপনার নিকটস্থ কৃষি সম্প্রসারণ অফিসে (DAE) যোগাযোগ করুন
-২. BARI ওয়েবসাইট দেখুন: bari.gov.bd
-৩. স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন
-
-*ব্যক্তিগত পরামর্শের জন্য আপনার নিকটস্থ কৃষি সম্প্রসারণ অফিসে যোগাযোগ করুন।*`;
+        return null;
     }
 
     let answer = '';
@@ -173,8 +157,8 @@ function generateKnowledgeAnswer(query, rawDocs, productContext, language, optio
 
     if (!answer.trim()) {
         answer = isEnglish
-            ? `I found some relevant information related to your query.\n\n**General Advice:**\n- Consult your local agriculture officer for specific guidance\n- Visit bari.gov.bd for verified crop information\n- Call our hotline: 01829-775552`
-            : `আপনার প্রশ্নের সাথে সম্পর্কিত কিছু তথ্য পাওয়া গেছে।\n\n**সাধারণ পরামর্শ:**\n- নির্দিষ্ট নির্দেশনার জন্য আপনার স্থানীয় কৃষি কর্মকর্তার সাথে যোগাযোগ করুন\n- যাচাইকৃত ফসলের তথ্যের জন্য bari.gov.bd দেখুন\n- আমাদের হটলাইনে কল করুন: 01829-775552`;
+            ? `I found some information related to your question. Please ask a more specific question for a detailed answer.`
+            : `আপনার প্রশ্নের সাথে সম্পর্কিত কিছু তথ্য পাওয়া গেছে। বিস্তারিত উত্তরের জন্য আরও নির্দিষ্ট প্রশ্ন করুন।`;
     }
 
     return answer;

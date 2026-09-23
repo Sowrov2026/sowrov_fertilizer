@@ -46,6 +46,11 @@ function waitForAuthUser(timeoutMs) {
     });
 }
 
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 (async function() {
 
 var user = await waitForAuthUser(5000);
@@ -78,8 +83,8 @@ const customer = userSnap.data();
 
 const customerPhone = customer.phone || "";
 
-document.getElementById("welcomeText").innerHTML =
-`Welcome ${customer.name || "Customer"} 👋`;
+document.getElementById("welcomeText").textContent =
+"Welcome " + (customer.name || "Customer") + " 👋";
 
 document.getElementById("profileName").innerText =
 customer.name || "-";
@@ -184,19 +189,19 @@ Number(order.total || 0);
 <tr>
 
 <td>
-${order.orderNumber}
+${escapeHtml(String(order.orderNumber))}
 </td>
 
 <td>
-${order.productName}
+${escapeHtml(String(order.productName))}
 </td>
 
 <td>
-${order.quantity} kg
+${escapeHtml(String(order.quantity))} kg
 </td>
 
 <td>
-৳${order.total}
+৳${escapeHtml(String(order.total))}
 </td>
 
 <td>
@@ -300,114 +305,80 @@ Invoice
 
 
 // ======================================
-// View Order Details
+// View Order Details (H7: Server-Side Authorization)
 // ======================================
 
 window.viewOrder = async function(id){
 
     try{
-
-        const snap = await getDoc(
-            doc(db,"orders",id)
-        );
-
-
-        if(!snap.exists()){
-
-            alert("Order not found");
-
+        if (!auth.currentUser) {
+            alert("Please log in.");
             return;
+        }
+        const idToken = await auth.currentUser.getIdToken();
+        const response = await fetch("/api/track-order?id=" + encodeURIComponent(id), {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + idToken },
+        });
+        const data = await response.json();
 
+        if (!response.ok) {
+            alert(data.message || "Order not found.");
+            return;
         }
 
+        const modal = document.getElementById("orderModal");
+        const details = document.getElementById("orderDetails");
+        if (!modal || !details) return;
 
-        const order = snap.data();
+        details.textContent = '';
 
+        const frag = document.createDocumentFragment();
 
-        const modal =
-        document.getElementById("orderModal");
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
 
+        const img = document.createElement('img');
+        img.src = 'assets/images/default-product.png';
+        orderItem.appendChild(img);
 
-        const details =
-        document.getElementById("orderDetails");
+        const info = document.createElement('div');
+        const h3 = document.createElement('h3');
+        h3.textContent = data.productName || 'Product';
+        info.appendChild(h3);
 
+        const qtyP = document.createElement('p');
+        qtyP.textContent = 'Quantity: ' + (data.quantity || 0) + ' kg';
+        info.appendChild(qtyP);
 
+        const priceP = document.createElement('p');
+        priceP.textContent = 'Price: ৳' + (data.total || 0);
+        info.appendChild(priceP);
 
-        details.innerHTML = `
+        orderItem.appendChild(info);
+        frag.appendChild(orderItem);
 
-        <div class="order-item">
+        frag.appendChild(document.createElement('hr'));
 
-            <img 
-            src="${order.productImage || 'assets/images/default-product.png'}">
+        function addInfoLine(parent, label, value) {
+            const p = document.createElement('p');
+            const b = document.createElement('b');
+            b.textContent = label;
+            p.appendChild(b);
+            p.appendChild(document.createTextNode(value));
+            parent.appendChild(p);
+        }
 
-            <div>
+        addInfoLine(frag, 'Order ID: ', data.orderNumber || id);
+        addInfoLine(frag, 'Status: ', data.status || 'Pending');
 
-                <h3>
-                ${order.productName || "Product"}
-                </h3>
-
-                <p>
-                Quantity:
-                ${order.quantity || 0} kg
-                </p>
-
-                <p>
-                Price:
-                ৳${order.total || 0}
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <hr>
-
-
-        <p>
-        <b>Order ID:</b>
-        ${order.orderNumber || id}
-        </p>
-
-
-        <p>
-        <b>Status:</b>
-        ${order.status || "Pending"}
-        </p>
-
-
-        <p>
-        <b>Customer Name:</b>
-        ${order.name || "-"}
-        </p>
-
-
-        <p>
-        <b>Phone:</b>
-        ${order.phone || "-"}
-        </p>
-
-
-        <p>
-        <b>Address:</b>
-        ${order.address || "-"}
-        </p>
-
-
-        `;
-
-
-        modal.style.display="block";
-
+        details.appendChild(frag);
+        if (modal) modal.style.display="flex";
 
     }
-
     catch(error){
-
         console.error(error);
-
         alert("Failed to load order details");
-
     }
 
 };
@@ -419,13 +390,13 @@ window.viewOrder = async function(id){
 // ======================================
 
 
-document.getElementById("closeModal")
-.onclick=function(){
-
-    document.getElementById("orderModal")
-    .style.display="none";
-
-};
+var closeModalBtn = document.getElementById("closeModal");
+if (closeModalBtn) {
+    closeModalBtn.onclick = function(){
+        var orderModal = document.getElementById("orderModal");
+        if (orderModal) orderModal.style.display = "none";
+    };
+}
 
 
 
@@ -435,7 +406,7 @@ window.onclick=function(e){
     document.getElementById("orderModal");
 
 
-    if(e.target === modal){
+    if(modal && e.target === modal){
 
         modal.style.display="none";
 
@@ -444,58 +415,49 @@ window.onclick=function(e){
 };
 
 // ======================================
-// Track Order
+// Track Order (H7: Server-Side Authorization)
 // ======================================
 
 window.trackOrder = async function(id){
 
-const snap = await getDoc(doc(db,"orders",id));
+    try {
+        if (!auth.currentUser) {
+            alert("Please log in.");
+            return;
+        }
+        const idToken = await auth.currentUser.getIdToken();
+        const response = await fetch("/api/track-order?id=" + encodeURIComponent(id), {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + idToken },
+        });
+        const data = await response.json();
 
-if(!snap.exists()) return;
+        if (!response.ok) {
+            alert(data.message || "Order not found.");
+            return;
+        }
 
-const order = snap.data();
+        document.getElementById("trackingBox").style.display="block";
 
-document.getElementById("trackingBox").style.display="block";
+        const steps=["Pending","Approved","Packed","Shipped","Delivered"];
 
-const steps=[
+        steps.forEach(step=>{
+            const element=document.getElementById(step.toLowerCase()+"Step");
+            if (!element) return;
+            element.classList.remove("active");
+            if(steps.indexOf(step)<=steps.indexOf(data.status)){
+                element.classList.add("active");
+            }
+        });
 
-"Pending",
+        window.scrollTo({
+            top:document.getElementById("trackingBox").offsetTop-80,
+            behavior:"smooth"
+        });
 
-"Approved",
-
-"Packed",
-
-"Shipped",
-
-"Delivered"
-
-];
-
-steps.forEach(step=>{
-
-const element=document.getElementById(step.toLowerCase()+"Step");
-
-element.classList.remove("active");
-
-if(
-
-steps.indexOf(step)<=steps.indexOf(order.status)
-
-){
-
-element.classList.add("active");
-
-}
-
-});
-
-window.scrollTo({
-
-top:document.getElementById("trackingBox").offsetTop-80,
-
-behavior:"smooth"
-
-});
+    } catch(error) {
+        console.error(error);
+    }
 
 }
 

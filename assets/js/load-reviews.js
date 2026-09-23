@@ -11,6 +11,11 @@ import {
 const reviewContainer =
 document.getElementById("customerReviewList");
 
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 async function loadReviews(){
 
     if(!reviewContainer) return;
@@ -76,7 +81,7 @@ async function loadReviews(){
 
                     <div>
 
-                        <h3>${review.name}</h3>
+                        <h3>${escapeHtml(String(review.name))}</h3>
 
                         <span class="verified-badge">
 
@@ -90,7 +95,7 @@ async function loadReviews(){
 
                 <div class="review-product">
 
-                    🌱 ${review.productName}
+                    🌱 ${escapeHtml(String(review.productName))}
 
                 </div>
 
@@ -102,7 +107,7 @@ async function loadReviews(){
 
                 <p class="review-message">
 
-                    "${review.message}"
+                    "${escapeHtml(String(review.message))}"
 
                 </p>
 

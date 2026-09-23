@@ -68,9 +68,6 @@ Fertilizer
 <ul class="sidebar-menu">
 
 <li class="active"><a href="/customer-dashboard.html"><span data-i18n="nav_customer_dashboard">📊 Dashboard</span></a></li>
-<li><a href="/profile.html"><span data-i18n="nav_profile">👤 Profile</span></a></li>
-<li><a href="/customer-orders.html"><span data-i18n="nav_orders">📦 My Orders</span></a></li>
-<li><a href="/track-order.html"><span data-i18n="nav_track_order">🔍 Track Order</span></a></li>
 <li><a href="/help.html"><span data-i18n="nav_help">👁 Help & Support</span></a></li>
 <li><a href="#" id="sf-settings-toggle"><span data-i18n="nav_settings">⚙️ Settings</span></a></li>
 
@@ -99,13 +96,6 @@ Fertilizer
 
 
 <div class="topbar">
-
-<div class="dash-topnav">
-    <div class="dash-search-box">
-        <span class="dash-search-icon">🔍</span>
-        <input type="text" class="dash-search-input" placeholder="Search..." data-i18n-placeholder="cust_search_placeholder">
-    </div>
-</div>
 
 <button
 class="menu-toggle"
@@ -256,48 +246,16 @@ Delivered
 
 </div>
 
-<div class="stat-card">
-
-<h2 id="customerReviews">
-
-0
-
-</h2>
-
-<p>
-
-My Reviews
-
-</p>
-
-</div>
-
-<div class="stat-card">
-
-<h2 id="wishlistCount">
-
-0
-
-</h2>
-
-<p>
-
-Wishlist
-
-</p>
-
-</div>
-
 
 </div>
 
 
 
-<!-- PROFILE -->
+<!-- PROFILE + QUICK ACTIONS ROW -->
 
+<div class="dashboard-row">
 
-<div class="dashboard-section">
-
+<div class="dashboard-section left-panel">
 
 <h2>
 
@@ -368,10 +326,9 @@ Wishlist
 
 </div>
 
-
 </div>
 
-<div class="dashboard-section">
+<div class="dashboard-section right-panel">
 
 <h2>
 
@@ -381,37 +338,12 @@ Quick Actions
 
 <div class="quick-grid">
 
-<a
-href="/products.html"
-class="btn">
+<a href="/products.html" class="btn">🛒 Shop Now</a>
+<a href="/cart.html" class="btn">🛍 Cart</a>
+<a href="/customer-orders.html" class="btn">📦 Orders</a>
+<a href="/profile.html" class="btn">👤 Profile</a>
 
-🛒 Shop Now
-
-</a>
-
-<a
-href="/cart.html"
-class="btn">
-
-🛍 Cart
-
-</a>
-
-<a
-href="/customer-orders.html"
-class="btn">
-
-📦 Orders
-
-</a>
-
-<a
-href="/profile.html"
-class="btn">
-
-👤 Profile
-
-</a>
+</div>
 
 </div>
 
@@ -421,9 +353,7 @@ class="btn">
 
 <!-- ORDERS -->
 
-
 <div class="dashboard-section">
-
 
 <h2>
 
@@ -431,66 +361,31 @@ class="btn">
 
 </h2>
 
-
-
 <table class="dashboard-table">
-
 
 <thead>
 
-
 <tr>
 
-
-<th>
-
-Order ID
-
-</th>
-
-
-<th>
-
-Product
-
-</th>
-
-
-<th>
-
-Quantity
-
-</th>
-
-
-<th>
-
-Amount
-
-</th>
-
-
-<th>
-
-Status
-
-</th>
-
+<th>Order ID</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Amount</th>
+<th>Status</th>
 
 </tr>
 
-
 </thead>
-
-
 
 <tbody id="customerOrdersBody">
 
-
 </tbody>
 
-
 </table>
+
+</div>
+
+<!-- REVIEWS -->
 
 <div class="dashboard-section">
 
@@ -506,16 +401,11 @@ Status
 
 </div>
 
-
-</div>
 <!-- =====================
         ORDER TRACKING
 ====================== -->
 
-<div
-class="dashboard-section"
-id="trackingBox"
-style="display:none;">
+<div class="dashboard-section" id="trackingBox" style="display:none;">
 
 <h2>
 
@@ -526,42 +416,50 @@ style="display:none;">
 <div class="tracking-timeline">
 
 <div id="pendingStep" class="tracking-step">
-
 <div class="circle">1</div>
-
 <p>Pending</p>
-
 </div>
 
 <div id="approvedStep" class="tracking-step">
-
 <div class="circle">2</div>
-
 <p>Approved</p>
-
 </div>
 
 <div id="packedStep" class="tracking-step">
-
 <div class="circle">3</div>
-
 <p>Packed</p>
-
 </div>
 
 <div id="shippedStep" class="tracking-step">
-
 <div class="circle">4</div>
-
 <p>Shipped</p>
-
 </div>
 
 <div id="deliveredStep" class="tracking-step">
-
 <div class="circle">5</div>
-
 <p>Delivered</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================
+        ORDER DETAILS MODAL
+====================== -->
+
+<div id="orderModal" class="modal" style="display:none;">
+
+<div class="modal-content" style="background:#fff;border-radius:12px;padding:30px;max-width:500px;margin:80px auto;position:relative;">
+
+<span id="closeModal"
+style="position:absolute;top:12px;right:16px;font-size:28px;cursor:pointer;color:#666;">
+
+&times;
+
+</span>
+
+<div id="orderDetails">
 
 </div>
 

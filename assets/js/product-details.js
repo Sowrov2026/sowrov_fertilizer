@@ -34,6 +34,39 @@ const qty=document.getElementById("qty");
 let currentProduct=null;
 
 // ======================================
+// Utilities
+// ======================================
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+function showNotFound(msg) {
+    if (productName) productName.textContent = msg || 'Product Not Found';
+    if (productPrice) productPrice.textContent = '';
+    if (productDescription) productDescription.textContent = '';
+    if (productStock) productStock.textContent = '';
+    if (mainImage) mainImage.style.display = 'none';
+    if (thumbnailGallery) thumbnailGallery.innerHTML = '';
+    if (featureList) featureList.innerHTML = '';
+    if (specTable) specTable.innerHTML = '';
+    if (relatedProducts) relatedProducts.innerHTML = '';
+    var addCartBtn = document.getElementById('addCart');
+    var buyNowBtn = document.getElementById('buyNow');
+    if (addCartBtn) addCartBtn.style.display = 'none';
+    if (buyNowBtn) buyNowBtn.style.display = 'none';
+}
+
+// ======================================
+// Guard: Missing or Invalid ID
+// ======================================
+
+if (!id || id.trim() === '') {
+    showNotFound('Product Not Found');
+} else {
+
+// ======================================
 // Quantity
 // ======================================
 
@@ -65,8 +98,7 @@ const snap=await getDoc(doc(db,"products",id));
 
 if(!snap.exists()){
 
-productName.innerHTML="Product Not Found";
-
+showNotFound('Product Not Found');
 return;
 
 }
@@ -75,15 +107,15 @@ const p=snap.data();
 
 currentProduct=p;
 
-mainImage.src=p.image;
+mainImage.src=p.image || 'assets/images/default-product.png';
 
-productName.innerHTML=p.name;
+productName.textContent=p.name || 'Product';
 
-productPrice.innerHTML="৳"+p.retailPrice;
+productPrice.textContent="৳"+(p.retailPrice || '');
 
-productDescription.innerHTML=p.description||"";
+productDescription.textContent=p.description||"";
 
-productStock.innerHTML=
+productStock.textContent=
 
 p.stock>0
 
@@ -99,15 +131,10 @@ p.stock>0
 
 thumbnailGallery.innerHTML="";
 
-thumbnailGallery.innerHTML+=`
-
-<img
-
-src="${p.image}"
-
-onclick="document.getElementById('mainImage').src='${p.image}'">
-
-`;
+const galleryImg = document.createElement('img');
+galleryImg.src = p.image;
+galleryImg.onclick = function() { document.getElementById('mainImage').src = p.image; };
+thumbnailGallery.appendChild(galleryImg);
 
 // Features
 
@@ -127,51 +154,33 @@ const features=[
 
 features.forEach(f=>{
 
-featureList.innerHTML+=`
-
-<li>${f}</li>
-
-`;
+const li = document.createElement('li');
+li.textContent = f;
+featureList.appendChild(li);
 
 });
 
 // Specification
 
-specTable.innerHTML=`
+specTable.innerHTML="";
 
-<tr>
+const specData = [
+    ['Category', p.category || '-'],
+    ['Stock', String(p.stock || 0)],
+    ['Wholesale', '৳' + String(p.wholesalePrice || 0)],
+    ['Retail', '৳' + String(p.retailPrice || 0)],
+];
 
-<td>Category</td>
-
-<td>${p.category||"-"}</td>
-
-</tr>
-
-<tr>
-
-<td>Stock</td>
-
-<td>${p.stock}</td>
-
-</tr>
-
-<tr>
-
-<td>Wholesale</td>
-
-<td>৳${p.wholesalePrice}</td>
-
-</tr>
-
-<tr>
-
-<td>Retail</td>
-
-<td>৳${p.retailPrice}</td>
-
-</tr>
-
-`;
+specData.forEach(function(row) {
+    const tr = document.createElement('tr');
+    const td1 = document.createElement('td');
+    td1.textContent = row[0];
+    const td2 = document.createElement('td');
+    td2.textContent = row[1];
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    specTable.appendChild(tr);
+});
 
 }
 
@@ -193,33 +202,28 @@ if(docSnap.id===id) return;
 
 const p=docSnap.data();
 
-relatedProducts.innerHTML+=`
+const card = document.createElement('div');
+card.className = 'product-card';
 
-<div class="product-card">
+const img = document.createElement('img');
+img.src = p.image || 'assets/images/default-product.png';
+card.appendChild(img);
 
-<img src="${p.image}">
+const h3 = document.createElement('h3');
+h3.textContent = p.name || 'Product';
+card.appendChild(h3);
 
-<h3>${p.name}</h3>
+const priceP = document.createElement('p');
+priceP.textContent = '৳' + String(p.retailPrice || '');
+card.appendChild(priceP);
 
-<p>
+const link = document.createElement('a');
+link.className = 'btn';
+link.href = 'product-details.html?id=' + encodeURIComponent(docSnap.id);
+link.textContent = 'View';
+card.appendChild(link);
 
-৳${p.retailPrice}
-
-</p>
-
-<a
-
-class="btn"
-
-href="product-details.html?id=${docSnap.id}">
-
-View
-
-</a>
-
-</div>
-
-`;
+relatedProducts.appendChild(card);
 
 });
 
@@ -292,5 +296,7 @@ document.getElementById("addCart").click();
 window.location.href = "/cart.html";
 
 }
+
+} // end else (valid ID)
 
 console.log("Product Details Loaded");

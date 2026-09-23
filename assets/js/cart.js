@@ -19,6 +19,16 @@ let cart = JSON.parse(
 localStorage.getItem("cart")
 ) || [];
 
+function escapeHtml(str){
+    if(str===null||str===undefined) return '';
+    return String(str)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;');
+}
+
 function saveCart(){
 
 localStorage.setItem(
@@ -53,7 +63,7 @@ Continue Shopping
 
 subtotal.innerText="৳0";
 
-grandTotal.innerText="৳100";
+grandTotal.innerText="৳0";
 
 return;
 
@@ -74,13 +84,13 @@ cartContainer.innerHTML+=`
 
 <div class="cart-item">
 
-<img src="${item.image}">
+<img src="${escapeHtml(String(item.image||''))}">
 
 <div class="cart-info">
 
-<h3>${item.name}</h3>
+<h3>${escapeHtml(String(item.name||''))}</h3>
 
-<p>${item.category||""}</p>
+<p>${escapeHtml(String(item.category||""))}</p>
 
 <div class="cart-price">
 

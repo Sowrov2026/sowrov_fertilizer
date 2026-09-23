@@ -15,6 +15,11 @@ import {
 const productGrid =
 document.getElementById("productGrid");
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 async function loadProducts(){
 
     if(!productGrid) return;
@@ -58,11 +63,12 @@ if(products.length===0){
     </div>
 
     `;
-
+    window._sfProducts = [];
     return;
 
 }
 
+window._sfProducts = products;
 renderProducts(products);
 
        
@@ -189,7 +195,7 @@ function renderProducts(products){
     else if(product.discount > 0){
 
         badge = `<span class="stock-badge discount">
-            ${product.discount}% OFF
+            ${escapeHtml(String(product.discount))}% OFF
         </span>`;
 
     }
@@ -201,47 +207,52 @@ function renderProducts(products){
 
     }
 
+        const safeName = escapeHtml(product.name);
+        const safeImage = escapeHtml(product.image);
+        const safeCategory = escapeHtml(product.category || 'Organic');
+        const safeDesc = escapeHtml(product.description || '');
+        const safeId = escapeHtml(product.id);
+
         productGrid.innerHTML += `
 
         <div class="product-card">
         
 
-            <img src="${product.image}" alt="${product.name}">
+            <img src="${safeImage}" alt="${safeName}">
             ${badge}
 
             <div class="product-content">
             
-            
 
                 <span class="product-badge">
-                    ${product.category || "Organic"}
+                    ${safeCategory}
                 </span>
 
-                <h3>${product.name}</h3>
+                <h3>${safeName}</h3>
 
-                <p>${product.description || ""}</p>
+                <p>${safeDesc}</p>
 
-                <h4>৳${product.retailPrice}</h4>
+                <h4>৳${escapeHtml(String(product.retailPrice))}</h4>
 
                 <small>
-                Stock : ${product.stock} kg
+                Stock : ${escapeHtml(String(product.stock))} kg
                 </small>
 
                 <div class="product-footer">
 
                     <a
                     class="btn"
-                    href="product-details.html?id=${product.id}">
+                    href="product-details.html?id=${safeId}">
                     View Details
                     </a>
 
                     <button
                     class="btn-outline add-cart"
-                    data-id="${product.id}"
-                    data-name="${product.name}"
-                    data-price="${product.retailPrice}"
-                    data-image="${product.image}"
-                    data-category="${product.category}">
+                    data-id="${safeId}"
+                    data-name="${safeName}"
+                    data-price="${escapeHtml(String(product.retailPrice))}"
+                    data-image="${safeImage}"
+                    data-category="${safeCategory}">
                     Add To Cart
                     </button>
 

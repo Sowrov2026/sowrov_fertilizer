@@ -117,7 +117,13 @@ if(user.status === "blocked"){
 
 alert("✅ Login Successful");
 
-window.location.href = "/customer-dashboard.html";
+const params = new URLSearchParams(window.location.search);
+const returnUrl = params.get("returnUrl");
+if (returnUrl) {
+    window.location.href = "/" + returnUrl;
+} else {
+    window.location.href = "/customer-dashboard.html";
+}
 }
 
 catch(error){
@@ -254,7 +260,13 @@ if (googleLoginBtn) {
                 }
             }
 
-            window.location.href = "/customer-dashboard.html";
+            const gParams = new URLSearchParams(window.location.search);
+            const gReturnUrl = gParams.get("returnUrl");
+            if (gReturnUrl) {
+                window.location.href = "/" + gReturnUrl;
+            } else {
+                window.location.href = "/customer-dashboard.html";
+            }
 
         }
 

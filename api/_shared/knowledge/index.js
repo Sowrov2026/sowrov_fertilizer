@@ -220,7 +220,7 @@ function buildKnowledgeContext(docs, options = {}) {
     if (!docs || docs.length === 0) return '';
 
     const { intent = 'general', subIntent = 'informational' } = options;
-    let context = '\n\n📚 INTERNAL KNOWLEDGE BASE (Verified Sources):\n\n';
+    let context = '\n\n📚 SUPPLEMENTAL REFERENCE (Verified Sources — use as additional context, not exclusive source):\n\n';
 
     docs.forEach((doc, i) => {
         context += `Document ${i + 1}:\n`;
@@ -275,7 +275,7 @@ function buildKnowledgeContext(docs, options = {}) {
         context += '\n';
     });
 
-    context += '\n⚠️ INSTRUCTIONS: Use these verified internal documents to answer. Reference sources when relevant. Never invent references not shown above.\n';
+    context += '\n📌 NOTE: The above are supplemental reference documents from verified sources. Use them when relevant, but you may also answer from your general agricultural knowledge when these documents do not cover the question.\n';
 
     return context;
 }

@@ -535,28 +535,30 @@ padding:50px;
 
 }
 /* ==========================
-Order Modal
-========================== */
+   Modal (order details overlay)
+   ========================== */
 
 .modal{
 
 position:fixed;
 
-top:0;
 left:0;
 
+top:0;
+
 width:100%;
+
 height:100%;
 
-background:rgba(0,0,0,.5);
+background:rgba(0,0,0,.6);
 
-display:flex;
+z-index:9999;
+
+display:none;
 
 justify-content:center;
 
 align-items:center;
-
-z-index:9999;
 
 }
 
@@ -564,17 +566,15 @@ z-index:9999;
 
 background:#fff;
 
-padding:30px;
-
-border-radius:12px;
-
-width:500px;
+width:700px;
 
 max-width:95%;
 
-max-height:90vh;
+margin:40px auto;
 
-overflow:auto;
+padding:25px;
+
+border-radius:12px;
 
 }
 
@@ -2943,6 +2943,10 @@ background:rgba(0,0,0,.6);
 
 z-index:9999;
 
+justify-content:center;
+
+align-items:center;
+
 }
 
 .modal-content{
@@ -3639,4 +3643,272 @@ min-width:auto;
 
 }
 
+}
+/* ===========================
+   Customer Dashboard Layout
+   — Content Width & Polish
+=========================== */
+
+.customer-dash .main-content{
+    padding:24px 32px 32px;
+    max-width:100%;
+}
+
+.customer-dash .topbar{
+    padding:16px 24px;
+    margin-bottom:24px;
+    border-radius:16px;
+}
+
+.customer-dash .topbar h1{
+    font-size:28px;
+    font-weight:700;
+    margin:0;
+    color:#1f2937;
+}
+
+.customer-dash .topbar p{
+    font-size:14px;
+    margin:4px 0 0;
+    color:#64748b;
+}
+
+.customer-dash .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:24px;
+}
+
+.customer-dash .stat-card{
+    padding:20px 24px;
+    border-radius:14px;
+    text-align:center;
+    min-height:auto;
+}
+
+.customer-dash .stat-card h2{
+    font-size:30px;
+    margin-bottom:4px;
+}
+
+.customer-dash .stat-card p{
+    font-size:13px;
+    margin:0;
+}
+
+.customer-dash .dashboard-row{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-top:0;
+    margin-bottom:20px;
+}
+
+.customer-dash .dashboard-row .left-panel,
+.customer-dash .dashboard-row .right-panel{
+    flex:1;
+    min-width:0;
+}
+
+.customer-dash .dashboard-section{
+    padding:24px;
+    border-radius:16px;
+    margin-bottom:20px;
+}
+
+.customer-dash .dashboard-section h2{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:16px;
+    color:#1f2937;
+}
+
+.customer-dash .profile-box{
+    background:#f8faf8;
+    border-radius:12px;
+    padding:20px;
+    border:1px solid #e5e7eb;
+}
+
+.customer-dash .profile-box p{
+    margin-bottom:10px;
+    font-size:14px;
+    color:#475569;
+}
+
+.customer-dash .profile-box p:last-child{
+    margin-bottom:0;
+}
+
+.customer-dash .profile-box b{
+    color:#1f2937;
+}
+
+.customer-dash .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.customer-dash .quick-grid .btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 16px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:all .2s;
+}
+
+.customer-dash .dashboard-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.customer-dash .dashboard-table th{
+    padding:14px 16px;
+    text-align:left;
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    color:#64748b;
+    background:#f8fafc;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.customer-dash .dashboard-table td{
+    padding:14px 16px;
+    font-size:14px;
+    color:#334155;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.customer-dash .dashboard-table tr:last-child td{
+    border-bottom:none;
+}
+
+.customer-dash .order-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.customer-dash .order-actions .btn{
+    padding:6px 12px;
+    font-size:12px;
+    border-radius:8px;
+}
+
+.customer-dash .tracking-timeline{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:16px 0;
+}
+
+.customer-dash .tracking-step .circle{
+    width:48px;
+    height:48px;
+    font-size:18px;
+}
+
+.customer-dash .dashboard-footer{
+    margin-top:32px;
+    padding:18px 24px;
+    border-radius:14px;
+}
+
+/* Tablet */
+@media(max-width:1024px){
+    .customer-dash .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+    .customer-dash .dashboard-row{
+        flex-direction:column;
+    }
+    .customer-dash .main-content{
+        padding:20px 24px 24px;
+    }
+}
+
+/* Mobile */
+@media(max-width:640px){
+    .customer-dash .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+    .customer-dash .stat-card{
+        padding:14px;
+    }
+    .customer-dash .stat-card h2{
+        font-size:24px;
+    }
+    .customer-dash .main-content{
+        padding:16px 14px 20px;
+    }
+    .customer-dash .topbar{
+        padding:14px 16px;
+        flex-wrap:wrap;
+    }
+    .customer-dash .topbar h1{
+        font-size:22px;
+    }
+    .customer-dash .dashboard-row{
+        flex-direction:column;
+        gap:12px;
+    }
+    .customer-dash .quick-grid{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+    }
+    .customer-dash .quick-grid .btn{
+        padding:12px 10px;
+        font-size:13px;
+    }
+    .customer-dash .dashboard-table{
+        display:block;
+        overflow-x:auto;
+    }
+    .customer-dash .tracking-timeline{
+        flex-wrap:wrap;
+        gap:8px;
+    }
+    .customer-dash .tracking-step{
+        flex:0 0 calc(33% - 6px);
+    }
+    .customer-dash .tracking-step .circle{
+        width:40px;
+        height:40px;
+        font-size:15px;
+    }
+    .customer-dash .tracking-step p{
+        font-size:12px;
+    }
+    .customer-dash .dashboard-footer{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+        padding:16px;
+    }
+}
+
+/* Very small mobile */
+@media(max-width:380px){
+    .customer-dash .stats-grid{
+        grid-template-columns:1fr;
+    }
+    .customer-dash .quick-grid{
+        grid-template-columns:1fr;
+    }
+    .customer-dash .tracking-step{
+        flex:0 0 calc(50% - 6px);
+    }
 }
