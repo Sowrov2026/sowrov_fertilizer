@@ -13,6 +13,8 @@ import {
     getDocs,
     doc,
     getDoc,
+    query,
+    where,
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 // ======================================
@@ -126,6 +128,76 @@ function clearOrderContext() {
 }
 
 // ======================================
+// Cart-Based Order Context (H1b)
+// Pulls items from localStorage cart so
+// the cart page and the checkout stay linked.
+// ======================================
+
+function getOrderCart() {
+    try {
+        return JSON.parse(localStorage.getItem("cart")) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function renderCartSummary() {
+    var box = document.getElementById("cartSummaryBox");
+    var itemsEl = document.getElementById("cartSummaryItems");
+    var totalEl = document.getElementById("cartSummaryTotal");
+    if (!box || !itemsEl) return;
+
+    var cart = getOrderCart();
+
+    if (cart.length === 0) {
+        box.style.display = "none";
+        return;
+    }
+
+    var html = "";
+    var total = 0;
+    cart.forEach(function (item) {
+        var lineTotal = Number(item.price || 0) * Number(item.qty || 1);
+        total += lineTotal;
+        html += '<div class="cart-summary-item">' +
+            '<span class="cs-name">' + escapeHtml(String(item.name || "")) + '</span>' +
+            '<span class="cs-qty">x' + escapeHtml(String(item.qty || 1)) + '</span>' +
+            '<span class="cs-price">৳' + lineTotal.toLocaleString() + '</span>' +
+            '</div>';
+    });
+    itemsEl.innerHTML = html;
+    if (totalEl) totalEl.textContent = "৳" + total.toLocaleString();
+    box.style.display = "block";
+}
+
+function prefillFromCart() {
+    var cart = getOrderCart();
+    if (cart.length === 0) return;
+    var first = cart[0];
+    if (productSelect) {
+        var opts = productSelect.options;
+        for (var i = 0; i < opts.length; i++) {
+            if (opts[i].value === first.id) {
+                productSelect.selectedIndex = i;
+                break;
+            }
+        }
+    }
+    if (quantity && first.qty) quantity.value = first.qty;
+    if (typeof updatePrice === "function") updatePrice();
+}
+
+function removeOrderedFromCart(productId) {
+    try {
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart = cart.filter(function (item) { return item.id !== productId; });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        if (window.updateCartBadge) window.updateCartBadge();
+    } catch (e) { /* ignore */ }
+    renderCartSummary();
+}
+
+// ======================================
 // Auth State — Login Gate
 // ======================================
 
@@ -204,6 +276,8 @@ ${escapeHtml(String(p.name))}
         });
         calculatePrice();
         updatePrice();
+        renderCartSummary();
+        prefillFromCart();
     } catch (error) {
         console.error(error);
     }
@@ -569,6 +643,25 @@ orderForm.addEventListener("submit", async (e) => {
         }
 
         successBox.style.display = "block";
+
+        removeOrderedFromCart(option.value);
+
+        // Best-effort deep links to Track Order + Invoice.
+        // They need the Firestore document id, so we look it up by order number.
+        var successActions = document.getElementById("successActions");
+        var trackLink = document.getElementById("trackOrderLink");
+        var invoiceLink = document.getElementById("invoiceLink");
+        if (successActions) successActions.style.display = "block";
+        if (trackLink) trackLink.href = "/customer-orders.html";
+        if (invoiceLink) invoiceLink.href = "/products.html";
+        try {
+            getDocs(query(collection(db, "orders"), where("orderId", "==", orderNumber))).then(function (snap) {
+                if (snap.empty) return;
+                var docId = snap.docs[0].id;
+                if (trackLink) trackLink.href = "/track-order.html?id=" + encodeURIComponent(docId);
+                if (invoiceLink) invoiceLink.href = "/invoice.html?id=" + encodeURIComponent(docId);
+            }).catch(function () { /* fall back to customer-orders.html */ });
+        } catch (e) { /* ignore */ }
 
         successMessage.textContent = '';
 

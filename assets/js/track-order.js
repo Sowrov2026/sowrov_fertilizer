@@ -23,10 +23,15 @@ function waitForAuthUser(timeoutMs) {
     });
 }
 
-btn.addEventListener("click", async () => {
+btn.addEventListener("click", doTrack);
 
-const id =
-document.getElementById("trackOrderId").value.trim();
+function getTrackId() {
+    return document.getElementById("trackOrderId").value.trim();
+}
+
+async function doTrack() {
+
+const id = getTrackId();
 
 if (!id) {
     result.innerHTML = '<p style="color:red;">Enter Order ID.</p>';
@@ -88,4 +93,19 @@ try {
     console.error(error);
     result.innerHTML = '<p style="color:red;">Failed to track order. Please try again.</p>';
 }
-});
+}
+
+// Support deep links: /track-order.html?id=<order-doc-id>
+function initFromUrl() {
+    try {
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get("id");
+        if (!id) return;
+        var input = document.getElementById("trackOrderId");
+        if (!input) return;
+        input.value = id;
+        if (typeof doTrack === "function") doTrack();
+    } catch (e) { /* ignore */ }
+}
+
+initFromUrl();

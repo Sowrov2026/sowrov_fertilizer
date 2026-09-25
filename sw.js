@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sf-v37';
+const CACHE_VERSION = 'sf-v38';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -6,19 +6,10 @@ const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/assets/css/style.css',
-  '/assets/css/ai.css',
   '/assets/css/pages.css',
-  '/assets/js/ai.js',
   '/assets/js/component-loader.js',
   '/assets/js/floating-buttons.js',
   '/assets/js/script.js',
-  '/assets/js/v15-integration.js',
-  '/assets/js/v16-integration.js',
-  '/assets/js/v17-integration.js',
-  '/assets/js/v19-integration.js',
-  '/assets/js/v20-integration.js',
-  '/assets/js/v21-integration.js',
-  '/assets/js/v22-integration.js',
   '/assets/images/logo/logo.png',
   '/assets/images/logo/favicon.png',
   '/manifest.json',

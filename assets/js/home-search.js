@@ -11,7 +11,6 @@
     var searchClear = document.getElementById('homeSearchClear');
     var searchResults = document.getElementById('searchResults');
     var productGrid = document.getElementById('productGrid');
-    var aiHomeCta = document.getElementById('aiHomeCta');
 
     if (!searchInput) return;
 
@@ -128,20 +127,6 @@
 
         searchResults.innerHTML = html;
         searchResults.style.display = 'block';
-    }
-
-    // AI CTA button — trigger the floating AI chat
-    if (aiHomeCta) {
-        aiHomeCta.addEventListener('click', function () {
-            // Try to find and click the AI chat toggle button
-            var aiToggle = document.getElementById('chat-toggle') || document.querySelector('.sf-ai-toggle, .ai-chat-toggle, #aiChatToggle, .ai-btn');
-            if (aiToggle) {
-                aiToggle.click();
-            } else {
-                // Fallback: scroll to bottom where floating buttons are
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }
-        });
     }
 
 })();

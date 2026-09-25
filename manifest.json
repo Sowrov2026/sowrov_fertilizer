@@ -1,7 +1,7 @@
 {
-  "name": "SF AI — Smart Agriculture Assistant",
-  "short_name": "SF AI",
-  "description": "Bangladesh's Smartest Agriculture AI — Crop Management, Disease Diagnosis, Fertilizer Recommendation",
+  "name": "Sowrov Fertilizer — Organic Fertilizer Store",
+  "short_name": "Sowrov Fertilizer",
+  "description": "Premium organic fertilizers — Vermicompost and Trichoderma for sustainable agriculture in Bangladesh. Order online easily.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -17,7 +17,7 @@
   ],
   "screenshots": [],
   "shortcuts": [
-    { "name": "AI Chat", "short_name": "Chat", "url": "/#chat", "icons": [{ "src": "assets/images/icons/sf-ai.png", "sizes": "96x96" }] },
+    { "name": "Order Now", "short_name": "Order", "url": "/products.html", "icons": [{ "src": "assets/images/icons/home.png", "sizes": "96x96" }] },
     { "name": "Products", "short_name": "Products", "url": "/products.html", "icons": [{ "src": "assets/images/icons/home.png", "sizes": "96x96" }] },
     { "name": "Contact", "short_name": "Contact", "url": "/contact.html" }
   ],

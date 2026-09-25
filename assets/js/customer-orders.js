@@ -7,7 +7,8 @@
 import { auth, db } from "./firebase.js";
 
 import {
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
@@ -28,6 +29,20 @@ function escapeHtml(str) {
 
 function safeClass(str) {
     return escapeHtml(String(str || '')).toLowerCase();
+}
+
+// Backend status -> friendly display label
+const STATUS_LABELS = {
+    Pending: "Placed",
+    Approved: "Confirmed",
+    Packed: "Processing",
+    Shipped: "Shipped",
+    Delivered: "Delivered",
+    Cancelled: "Cancelled"
+};
+
+function friendlyStatus(status) {
+    return STATUS_LABELS[status] || status;
 }
 
 function waitForAuthUser(timeoutMs) {
@@ -96,7 +111,7 @@ ${escapeHtml(String(order.paymentStatus))}
 
 <td>
 <span class="status-badge ${safeClass(order.status)}">
-${escapeHtml(String(order.status))}
+${escapeHtml(friendlyStatus(order.status))}
 </span>
 </td>
 
@@ -111,6 +126,15 @@ class="btn detailsBtn"
 data-id="${escapeHtml(String(doc.id))}">
 
 View
+
+</button>
+<button
+class="btn reorderBtn"
+data-product-id="${escapeHtml(String(order.productId || ""))}"
+data-product-name="${escapeHtml(String(order.productName || ""))}"
+data-qty="${escapeHtml(String(order.quantity || 1))}">
+
+Reorder
 
 </button>
 </td>
@@ -174,7 +198,7 @@ active
 "timeline"
 }">
 
-${step}
+${friendlyStatus(step)}
 
 </div>
 
@@ -242,7 +266,7 @@ document.getElementById("orderDetails").innerHTML=`
 
 <b>Payment Status:</b> ${escapeHtml(String(order.paymentStatus))}<br>
 
-<b>Status:</b> ${escapeHtml(String(order.status))}<br><br>
+<b>Status:</b> ${escapeHtml(friendlyStatus(order.status))}<br><br>
 
 <b>Address:</b><br>
 
@@ -258,4 +282,73 @@ window.closeDetails=()=>{
 
 document.getElementById("detailsModal").style.display="none";
 
+};
+
+// ======================================
+// Reorder — add the last ordered product back to the cart
+// ======================================
+
+document.addEventListener("click", async (e) => {
+    if (!e.target.classList.contains("reorderBtn")) return;
+
+    const productId = e.target.dataset.productId;
+    const fallbackName = e.target.dataset.productName || "Product";
+    const qty = Number(e.target.dataset.qty) || 1;
+
+    if (!productId) {
+        alert("Product not found for reorder.");
+        return;
+    }
+
+    try {
+        const productSnap = await getDoc(doc(db, "products", productId));
+        if (!productSnap.exists()) {
+            alert("This product is no longer available.");
+            return;
+        }
+        const product = productSnap.data();
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find((item) => item.id === productId);
+        if (existing) {
+            existing.qty += qty;
+        } else {
+            cart.push({
+                id: productId,
+                name: product.name || fallbackName,
+                price: Number(product.retailPrice || 0),
+                image: product.image || "",
+                category: product.category || "",
+                qty: qty
+            });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        const badge = document.getElementById("cartCount");
+        if (badge) {
+            let total = 0;
+            cart.forEach((item) => { total += Number(item.qty || 0); });
+            badge.innerText = total;
+        }
+
+        window.location.href = "/cart.html";
+    } catch (error) {
+        console.error(error);
+        alert("Failed to reorder. Please try again.");
+    }
+});
+
+// ======================================
+// Logout (used by the dashboard topbar)
+// ======================================
+
+window.customerLogout = async function () {
+    try {
+        await signOut(auth);
+        alert("Logged Out Successfully");
+        window.location.href = "/customer-login.html";
+    } catch (error) {
+        console.error(error);
+        alert("Logout Failed");
+    }
 };

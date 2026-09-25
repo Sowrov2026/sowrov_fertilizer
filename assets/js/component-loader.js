@@ -1,7 +1,7 @@
 // ======================================
 // Component Loader — SINGLE SHARED COMPONENT
 // Sowrov Fertilizer — V22 Enterprise Platform
-// Injects: Navbar, Footer, AI Chat, All Modules
+// Injects: Navbar, Footer, All Modules
 // Consolidated Navigation + Theme + i18n
 // ======================================
 
@@ -199,102 +199,6 @@
     }
 
     // ========================================
-    // LOAD AI ASSISTANT
-    // ========================================
-    function loadAI() {
-        if (!document.getElementById('ai-style')) {
-            var css = document.createElement('link');
-            css.id = 'ai-style';
-            css.rel = 'stylesheet';
-            css.href = 'assets/css/ai.css';
-            document.head.appendChild(css);
-        }
-        if (!document.getElementById('ai-script')) {
-            var script = document.createElement('script');
-            script.id = 'ai-script';
-            script.src = 'assets/js/ai.js';
-            script.onload = function () {
-                console.log('AI Assistant Loaded');
-                loadV15Modules();
-                loadV16Modules();
-                loadV17Modules();
-                loadV19Modules();
-                loadV20Modules();
-                loadV21Modules();
-                loadV22Modules();
-            };
-            document.body.appendChild(script);
-        }
-    }
-
-    // ========================================
-    // V15-V22 MODULE LOADER
-    // ========================================
-    function loadV15Modules() {
-        if (document.getElementById('v15-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v15-module';
-        s.type = 'module';
-        s.src = 'assets/js/v15-integration.js';
-        s.onload = function () { console.log('V15 Smart Agriculture Loaded'); };
-        document.body.appendChild(s);
-    }
-    function loadV16Modules() {
-        if (document.getElementById('v16-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v16-module';
-        s.type = 'module';
-        s.src = 'assets/js/v16-integration.js';
-        s.onload = function () { console.log('V16 Enterprise Intelligence Loaded'); };
-        document.body.appendChild(s);
-    }
-    function loadV17Modules() {
-        if (document.getElementById('v17-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v17-module';
-        s.type = 'module';
-        s.src = 'assets/js/v17-integration.js';
-        s.onload = function () { console.log('V17 Ultimate Production Loaded'); };
-        document.body.appendChild(s);
-    }
-    function loadV19Modules() {
-        if (document.getElementById('v19-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v19-module';
-        s.type = 'module';
-        s.src = 'assets/js/v19-integration.js';
-        s.onload = function () { console.log('V19 Self-Evolving AI Loaded'); };
-        document.body.appendChild(s);
-    }
-    function loadV20Modules() {
-        if (document.getElementById('v20-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v20-module';
-        s.type = 'module';
-        s.src = 'assets/js/v20-integration.js';
-        s.onload = function () { console.log('V20 Commercial Ecosystem Loaded'); };
-        document.body.appendChild(s);
-    }
-    function loadV21Modules() {
-        if (document.getElementById('v21-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v21-module';
-        s.type = 'module';
-        s.src = 'assets/js/v21-integration.js';
-        s.onload = function () { console.log('V21 Knowledge Universe Loaded'); };
-        document.body.appendChild(s);
-    }
-    function loadV22Modules() {
-        if (document.getElementById('v22-module')) return;
-        var s = document.createElement('script');
-        s.id = 'v22-module';
-        s.type = 'module';
-        s.src = 'assets/js/v22-integration.js';
-        s.onload = function () { console.log('V22 Enterprise Platform Loaded'); };
-        document.body.appendChild(s);
-    }
-
-    // ========================================
     // SERVICE WORKER
     // ========================================
     function registerSW() {
@@ -383,7 +287,6 @@
         initThemeSystem();
         initLanguageSystem();
         initAuth();
-        loadAI();
         registerSW();
         console.log('Component Loader - V22 Enterprise Platform | Consolidated Nav + Theme + i18n');
     }

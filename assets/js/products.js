@@ -51,6 +51,7 @@ async function loadProducts() {
 
             const product = doc.data();
 
+            const safeId = escapeHtml(String(doc.id));
             const safeImage = escapeHtml(String(product.image || ''));
             const safeName = escapeHtml(String(product.name || ''));
             const safeCategory = escapeHtml(String(product.category || ''));
@@ -118,11 +119,53 @@ async function loadProducts() {
 
 </p>
 
-                        <a href="contact.html" class="btn">
+                        <div class="product-footer">
 
-                            Buy Now
+                            <a href="product-details.html?id=${safeId}" class="btn">
 
-                        </a>
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                        <div class="product-buy-row">
+
+                            <input
+                                type="number"
+                                class="product-qty"
+                                data-id="${safeId}"
+                                value="1"
+                                min="1"
+                                max="${safeStock}"
+                                aria-label="Quantity"
+                            >
+
+                            <button
+                                class="btn-outline add-cart"
+                                data-id="${safeId}"
+                                data-name="${safeName}"
+                                data-price="${safeRetail}"
+                                data-image="${safeImage}"
+                                data-category="${safeCategory}">
+
+                                Add To Cart
+
+                            </button>
+
+                            <button
+                                class="btn order-now"
+                                data-id="${safeId}"
+                                data-name="${safeName}"
+                                data-price="${safeRetail}"
+                                data-image="${safeImage}"
+                                data-category="${safeCategory}">
+
+                                Order Now
+
+                            </button>
+
+                        </div>
 
                     </div>
 
@@ -165,6 +208,68 @@ async function loadProducts() {
 }
 
 loadProducts();
+
+// ==========================================
+// Add To Cart / Order Now
+// ==========================================
+
+function getCardQty(card) {
+    var qtyInput = card ? card.querySelector('.product-qty') : null;
+    var qty = qtyInput ? Number(qtyInput.value) : 1;
+    if (!qty || qty < 1) qty = 1;
+    var max = qtyInput ? Number(qtyInput.max) : 0;
+    if (max > 0 && qty > max) qty = max;
+    return qty;
+}
+
+function addToCartFromButton(btn, qty) {
+    var cart = JSON.parse(localStorage.getItem("cart")) || [];
+    var id = btn.dataset.id;
+    var existing = cart.find(function (item) { return item.id === id; });
+    if (existing) {
+        existing.qty += qty;
+    } else {
+        cart.push({
+            id: id,
+            name: btn.dataset.name || '',
+            price: Number(btn.dataset.price) || 0,
+            image: btn.dataset.image || '',
+            category: btn.dataset.category || '',
+            qty: qty
+        });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartBadge();
+}
+
+function updateCartBadge() {
+    var badge = document.getElementById("cartCount");
+    if (!badge) return;
+    var cart = JSON.parse(localStorage.getItem("cart")) || [];
+    var total = 0;
+    cart.forEach(function (item) { total += Number(item.qty || 0); });
+    badge.innerText = total;
+}
+
+document.addEventListener("click", function (e) {
+    var btn = e.target.closest ? e.target.closest('.add-cart, .order-now') : null;
+    if (!btn) return;
+    var card = btn.closest ? btn.closest('.product-card') : null;
+    var qty = getCardQty(card);
+    addToCartFromButton(btn, qty);
+    if (btn.classList.contains('order-now')) {
+        window.location.href = '/cart.html';
+        return;
+    }
+    alert("✅ Added To Cart");
+});
+
+updateCartBadge();
+
+// ==========================================
+// Website Views Counter
+// ==========================================
+
 async function increaseWebsiteViews(){
 
 const viewRef =

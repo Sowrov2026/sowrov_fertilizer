@@ -224,6 +224,16 @@ Track
 
 </button>
 
+<button
+class="btn dash-reorder-btn"
+data-product-id="${escapeHtml(String(order.productId || ""))}"
+data-product-name="${escapeHtml(String(order.productName || ""))}"
+data-qty="${escapeHtml(String(order.quantity || 1))}">
+
+Reorder
+
+</button>
+
 <a
 href="invoice.html?id=${doc.id}"
 class="btn">
@@ -460,6 +470,60 @@ window.trackOrder = async function(id){
     }
 
 }
+
+// ======================================
+// Reorder — add the ordered product back to the cart
+// ======================================
+
+document.addEventListener("click", async (e) => {
+    if (!e.target.classList.contains("dash-reorder-btn")) return;
+
+    const productId = e.target.dataset.productId;
+    const fallbackName = e.target.dataset.productName || "Product";
+    const qty = Number(e.target.dataset.qty) || 1;
+
+    if (!productId) {
+        alert("Product not found for reorder.");
+        return;
+    }
+
+    try {
+        const productSnap = await getDoc(doc(db, "products", productId));
+        if (!productSnap.exists()) {
+            alert("This product is no longer available.");
+            return;
+        }
+        const product = productSnap.data();
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find((item) => item.id === productId);
+        if (existing) {
+            existing.qty += qty;
+        } else {
+            cart.push({
+                id: productId,
+                name: product.name || fallbackName,
+                price: Number(product.retailPrice || 0),
+                image: product.image || "",
+                category: product.category || "",
+                qty: qty
+            });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        const badge = document.getElementById("cartCount");
+        if (badge) {
+            let total = 0;
+            cart.forEach((item) => { total += Number(item.qty || 0); });
+            badge.innerText = total;
+        }
+
+        window.location.href = "/cart.html";
+    } catch (error) {
+        console.error(error);
+        alert("Failed to reorder. Please try again.");
+    }
+});
 
 import {
     signOut

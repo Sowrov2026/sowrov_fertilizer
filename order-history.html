@@ -2,42 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <script>try{var t=localStorage.getItem("sf-theme");var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;if(t==="dark"||(t==="system"&&d)){document.documentElement.classList.add("dark")}}catch(e){}</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders | Sowrov Fertilizer</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/pages.css">
+<meta charset="UTF-8">
+
+<script>try{var t=localStorage.getItem("sf-theme");var d=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;if(t==="dark"||(t==="system"&&d)){document.documentElement.classList.add("dark")}}catch(e){}</script>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Order History | Sowrov Fertilizer</title>
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+<link rel="stylesheet"
+href="assets/css/pages.css">
+
 </head>
 
 <body>
 
 <section class="contact-page">
 
-    <div class="container">
+<div class="container">
 
-        <div class="section-title">
+<div class="dash-topnav">
+    <a href="/" class="topnav-home">🏠 <span data-i18n="cust_topbar_home">Home</span></a>
+    <div class="topnav-sep"></div>
+    <a href="/customer-dashboard.html">📊 <span data-i18n="cust_topbar_dashboard">Dashboard</span></a>
+    <a href="/profile.html">👤 <span data-i18n="cust_topbar_profile">Profile</span></a>
+    <div class="topnav-sep"></div>
+    <a href="#" onclick="customerLogout()">🚪 <span data-i18n="cust_topbar_logout">Logout</span></a>
+</div>
 
-            <h2>My Orders</h2>
+<div class="section-title">
 
-            <p>View Your Order History</p>
+<h2>Order History</h2>
 
-        </div>
+<p>View All Your Orders</p>
 
-        <div id="ordersContainer">
+</div>
 
-        </div>
+<div class="table-box">
 
-    </div>
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Product</th>
+
+<th>Qty</th>
+
+<th>Total</th>
+
+<th>Payment</th>
+
+<th>Payment Status</th>
+
+<th>Order Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="customerOrdersTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
+
+
+<!-- Tracking Modal -->
+
+<div id="trackModal" class="modal">
+
+<div class="modal-content">
+
+<span
+onclick="closeTracking()"
+class="close">
+
+&times;
+
+</span>
+
+<h2>Order Tracking</h2>
+
+<div id="trackingTimeline">
+
+</div>
+
+</div>
+
+</div>
+
 <script type="module" src="assets/js/customer-orders.js"></script>
+
+<div id="detailsModal" class="modal">
+
+<div class="modal-content">
+
+<span
+class="close"
+onclick="closeDetails()">
+
+&times;
+
+</span>
+
+<h2>Order Details</h2>
+
+<div id="orderDetails">
+
+</div>
+
+</div>
+
+</div>
 
 <script src="assets/js/floating-buttons.js"></script>
 
 <script defer src="assets/js/dashboard-init.js"></script>
 
 </body>
+
 </html>

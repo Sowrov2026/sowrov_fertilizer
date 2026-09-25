@@ -46,6 +46,26 @@
 
     <div class="form-box">
 
+        <div id="cartSummaryBox" class="cart-summary-box" style="display:none;">
+
+            <h3>🛒 Your Cart</h3>
+
+            <div id="cartSummaryItems"></div>
+
+            <div class="cart-summary-total">
+
+                <strong>Total:</strong>
+
+                <span id="cartSummaryTotal">৳0</span>
+
+            </div>
+
+            <p class="cart-summary-note">
+                Checkout runs one product at a time. The first cart item is preselected below — you can change the product or quantity before placing the order.
+            </p>
+
+        </div>
+
         <div id="loginWarning" style="display:none;background:#fef2f2;border:1px solid #dc2626;border-radius:8px;padding:16px 20px;margin-bottom:20px;">
             <p style="color:#dc2626;font-weight:600;margin:0 0 12px 0;font-size:16px;">
                 Order করতে হলে আগে Login করতে হবে।
@@ -330,6 +350,36 @@ placeholder="Enter Transaction ID">
     <h2>✅ Order Placed Successfully</h2>
 
     <p id="successMessage"></p>
+
+    <div id="successActions" style="display:none;margin-top:20px;">
+
+        <a
+            id="trackOrderLink"
+            class="btn"
+            href="/customer-orders.html">
+
+            📦 Track Order
+
+        </a>
+
+        <a
+            id="invoiceLink"
+            class="btn-outline"
+            href="#">
+
+            🧾 View Invoice
+
+        </a>
+
+        <a
+            class="btn-outline"
+            href="/products.html">
+
+            Continue Shopping
+
+        </a>
+
+    </div>
 
     <button
         class="btn"
