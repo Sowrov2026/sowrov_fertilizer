@@ -1297,7 +1297,7 @@
   {
     "id": 260,
     "district_id": 3,
-    "name": "Borhan Sddin"
+    "name": "Burhanuddin"
   },
   {
     "id": 261,
@@ -1502,7 +1502,7 @@
   {
     "id": 301,
     "district_id": 59,
-    "name": "South Sunamganj"
+    "name": "Shantiganj"
   },
   {
     "id": 302,
@@ -1572,7 +1572,7 @@
   {
     "id": 315,
     "district_id": 27,
-    "name": "Raipura"
+    "name": "Roypura"
   },
   {
     "id": 316,
@@ -2468,5 +2468,35 @@
     "id": 494,
     "district_id": 23,
     "name": "Dasar"
+  },
+  {
+    "id": 495,
+    "district_id": 15,
+    "name": "Chandraganj"
+  },
+  {
+    "id": 496,
+    "district_id": 57,
+    "name": "Shayestaganj"
+  },
+  {
+    "id": 497,
+    "district_id": 41,
+    "name": "Mokamtala"
+  },
+  {
+    "id": 498,
+    "district_id": 56,
+    "name": "Ruhia"
+  },
+  {
+    "id": 499,
+    "district_id": 56,
+    "name": "Bhulli"
+  },
+  {
+    "id": 500,
+    "district_id": 11,
+    "name": "Matamuhuri"
   }
 ]
