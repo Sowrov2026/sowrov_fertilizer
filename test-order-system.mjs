@@ -38,6 +38,8 @@ const orderCode = readFileSync('api/create-order.js', 'utf8');
 const orderHtml = readFileSync('order.html', 'utf8');
 const chatCode = readFileSync('api/chat.js', 'utf8');
 const quotaCode = readFileSync('api/_shared/quota.js', 'utf8');
+const notificationCode = readFileSync('api/_shared/order-notifications.js', 'utf8');
+const orderJsCode = readFileSync('assets/js/order.js', 'utf8');
 
 const sampleOrder = {
     orderId: 'SF-1234567890',
@@ -204,6 +206,42 @@ await test('WhatsApp message contains address', () => {
 
 await test('WhatsApp message contains phone', () => {
     assert(formatOrderWhatsApp(sampleOrder).includes('01712345678'));
+});
+
+await test('WhatsApp message contains price, transaction ID, and payment number when supplied', () => {
+    const onlineOrder = {
+        ...sampleOrder,
+        paymentMethod: 'bKash',
+        transactionId: 'TXN-ORDER-123',
+        paymentNumber: '8801812345678',
+    };
+    const msg = formatOrderWhatsApp(onlineOrder);
+    assert(msg.includes('দর/কেজি'));
+    assert(msg.includes('120'));
+    assert(msg.includes('TXN-ORDER-123'));
+    assert(msg.includes('8801812345678'));
+});
+
+await test('WhatsApp notification uses the business recipient, not the SMS-only number', () => {
+    assert(notificationCode.includes("const ORDER_WHATSAPP_RECIPIENT = '01829775552'"));
+    assert(notificationCode.includes('sendWhatsApp(ORDER_WHATSAPP_RECIPIENT'));
+    assert(!notificationCode.includes("sendWhatsApp('01518902528'"));
+});
+
+await test('Order success builds an encoded WhatsApp deep link with complete order data', () => {
+    assert(orderJsCode.includes('const ORDER_WHATSAPP_NUMBER = "8801829775552"'));
+    assert(orderJsCode.includes('https://wa.me/${ORDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(formatOrderWhatsAppMessage(order))}'));
+    assert(orderJsCode.includes('customerName'));
+    assert(orderJsCode.includes('productName'));
+    assert(orderJsCode.includes('pricePerKg'));
+    assert(orderJsCode.includes('totalAmount'));
+    assert(orderJsCode.includes('transactionId'));
+    assert(orderJsCode.includes('paymentNumber'));
+    assert(orderJsCode.includes('fullAddress'));
+    assert(orderJsCode.includes('openOrderWhatsApp(whatsappWindow'));
+    const apiCall = orderJsCode.indexOf('fetch("/api/create-order"');
+    const linkOpen = orderJsCode.indexOf('openOrderWhatsApp(whatsappWindow, { ...orderPayload, orderId: orderNumber })');
+    assert(apiCall > 0 && linkOpen > apiCall, 'WhatsApp link must be prepared after order submission');
 });
 
 // ============================================
@@ -579,7 +617,7 @@ await test('Order preserves existing schema fields', () => {
         'orderId', 'userId', 'customerUid', 'customerName', 'phone',
         'productId', 'productName', 'orderType', 'quantity', 'pricePerKg',
         'totalAmount', 'division', 'district', 'upazila', 'union', 'village',
-        'postOffice', 'house', 'fullAddress', 'paymentMethod', 'paymentStatus',
+        'postOffice', 'house', 'fullAddress', 'paymentMethod', 'paymentNumber', 'paymentStatus',
         'transactionId', 'status', 'createdAt',
     ];
     for (const f of fields) {
@@ -732,9 +770,8 @@ await test('order.js shows COD notice when COD is selected', () => {
 
 await test('order.js hides COD notice when non-COD payment is selected', () => {
     const jsCode = readFileSync('assets/js/order.js', 'utf8');
-    const changeHandlerMatch = jsCode.match(/paymentMethod\.addEventListener\("change"[\s\S]*?\}\);/);
-    assert(changeHandlerMatch, 'Must have paymentMethod change handler');
-    assert(changeHandlerMatch[0].includes('codUpcomingNotice.style.display = "none"'), 'Must hide COD notice for non-COD');
+    assert(jsCode.includes('function syncPaymentMethodFields()'), 'Shared payment method handler missing');
+    assert(jsCode.includes('codUpcomingNotice.style.display = "none"'), 'Must hide COD notice for non-COD');
 });
 
 await test('COD selection blocks order submission', () => {
@@ -784,11 +821,90 @@ await test('COD selection does NOT send notifications', () => {
     assert(codBlock.includes('return'), 'COD block must return early before any notification code');
 });
 
-await test('Existing payment flow (bKash/Nagad) unaffected', () => {
+await test('Payment number field is editable and clearly labeled', () => {
+    const inputMatch = orderHtml.match(/<input\s+type="text"\s+id="paymentNumber"[\s\S]*?>/);
+    assert(inputMatch, 'Customer payment number input exists');
+    assert(!inputMatch[0].includes('readonly'), 'Payment number must be editable');
+    assert(orderHtml.includes('Customer Payment Number'), 'Customer payment number label missing');
+    assert(inputMatch[0].includes('placeholder='), 'Payment number placeholder missing');
+    assert(inputMatch[0].includes('bKash/Nagad'), 'Placeholder must mention bKash/Nagad');
+});
+
+await test('bKash/Nagad selection clears payment number and does not insert recipient placeholders', () => {
     const jsCode = readFileSync('assets/js/order.js', 'utf8');
-    assert(jsCode.includes('paymentNumber.value = "017XXXXXXXX"'), 'bKash payment number intact');
-    assert(jsCode.includes('paymentNumber.value = "018XXXXXXXX"'), 'Nagad payment number intact');
+    assert(jsCode.includes('paymentNumber.value = "";'), 'Payment number must be cleared');
+    assert(!jsCode.includes('017XXXXXXXX'), 'bKash recipient placeholder must be removed');
+    assert(!jsCode.includes('018XXXXXXXX'), 'Nagad recipient placeholder must be removed');
+    assert(jsCode.includes('paymentNumber.required = true'), 'Online payment number must be required');
+    assert(jsCode.includes('paymentNumber.required = false'), 'COD must not require payment number');
+});
+
+await test('Client validates and normalizes Bangladeshi mobile payment number', () => {
+    const jsCode = readFileSync('assets/js/order.js', 'utf8');
+    assert(jsCode.includes('normalizeBdPaymentNumber'), 'Client payment number normalizer missing');
+    assert(jsCode.includes('/^8801[3-9]\\d{8}$/'), 'Bangladeshi mobile validation missing');
+    assert(jsCode.includes('Please enter your bKash/Nagad number.'), 'Required payment number message missing');
+    assert(jsCode.includes('Enter a valid Bangladeshi mobile number.'), 'Invalid payment number message missing');
+});
+
+await test('Online payment number is included in order payload', () => {
+    const jsCode = readFileSync('assets/js/order.js', 'utf8');
+    assert(jsCode.includes('paymentNumber: paymentMethod.value === "COD" ? "" : normalizeBdPaymentNumber(paymentNumber.value)'), 'Payment number payload missing');
+});
+
+await test('Server accepts, validates, and stores paymentNumber', () => {
+    assert(orderCode.includes('paymentMethod, paymentNumber, transactionId'), 'Server must receive paymentNumber');
+    assert(orderCode.includes('normalizeBdPaymentNumber'), 'Server payment number normalizer missing');
+    assert(orderCode.includes("paymentMethod !== 'COD' && !normalizedPaymentNumber"), 'Server online payment validation missing');
+    assert(orderCode.includes('paymentNumber: normalizedPaymentNumber'), 'Server must store paymentNumber');
+});
+
+await test('COD does not require paymentNumber', () => {
+    assert(orderCode.includes("const normalizedPaymentNumber = paymentMethod === 'COD'"), 'COD must bypass payment number requirement');
+    assert(readFileSync('assets/js/order.js', 'utf8').includes('if (paymentMethod.value !== "COD")'), 'Client COD exemption missing');
+});
+
+await test('Existing payment flow (bKash/Nagad) remains available', () => {
+    const jsCode = readFileSync('assets/js/order.js', 'utf8');
     assert(jsCode.includes('onlinePaymentBox.style.display = "block"'), 'Online payment box shown for non-COD');
+    assert(orderHtml.includes('<option value="bKash">bKash</option>'), 'bKash method remains available');
+    assert(orderHtml.includes('<option value="Nagad">Nagad</option>'), 'Nagad method remains available');
+    assert(jsCode.includes('paymentMethod.value === "COD"'), 'COD method remains available');
+});
+
+await test('Post Office is a required free-text input in the order form', () => {
+    const inputMatch = orderHtml.match(/<input\s+type="text"\s+id="postOffice"\s+name="postOffice"[\s\S]*?required\s*>/);
+    assert(inputMatch, 'Post Office text input missing');
+    assert(!orderHtml.includes('<select id="postOffice"'), 'Post Office must not remain a select');
+    assert(orderHtml.includes('Enter Main Post Office'), 'Post Office placeholder missing');
+});
+
+await test('Customer order flow does not fetch or filter post-office JSON', () => {
+    assert(!orderJsCode.includes('post-offices.json'), 'Post Office JSON dependency must be removed');
+    assert(!orderJsCode.includes('postOfficesData'), 'Post Office cache must be removed');
+    assert(!orderJsCode.includes('loadVillagesAndPostOffices'), 'Post Office loader must be removed');
+    assert(!orderJsCode.includes('postOffice.options'), 'Post Office input must not be read as a select');
+    assert(orderJsCode.includes('postOffice: postOffice.value.trim()'), 'Post Office payload must use text value');
+    assert(orderJsCode.includes('postOffice.value.trim()'), 'Full address must use typed Post Office value');
+});
+
+await test('Address filtering normalizes IDs and supports both union parent spellings', () => {
+    assert(orderJsCode.includes('function normalizeAddressId(value)'), 'Address ID normalizer missing');
+    assert(orderJsCode.includes('normalizeAddressId(item.division_id)'), 'Division parent filtering must normalize IDs');
+    assert(orderJsCode.includes('normalizeAddressId(item.district_id)'), 'District parent filtering must normalize IDs');
+    assert(orderJsCode.includes('item.upazila_id, item.upazilla_id'), 'Both union parent spellings must be supported');
+    assert(orderJsCode.includes('getUnionParentIds(item).includes(selectedUpazilaId)'), 'Union filtering must use normalized parent IDs');
+
+    const normalize = (value) => value == null ? '' : String(value).trim();
+    const mixedDistricts = [{ id: 1, division_id: 7 }, { id: 2, division_id: '7' }, { id: 3, division_id: 8 }];
+    assertEqual(mixedDistricts.filter(item => normalize(item.division_id) === '7').length, 2);
+    const mixedUnions = [
+        { id: 1, upazilla_id: 9 },
+        { id: 2, upazila_id: '9' },
+        { id: 3, upazilla_id: '10' },
+    ];
+    const parentIds = (item) => [item.upazila_id, item.upazilla_id].map(normalize).filter(Boolean);
+    assert(mixedUnions.filter(item => parentIds(item).includes('9')).length === 2);
 });
 
 await test('Login gate still works (not triggered by COD selection alone)', () => {

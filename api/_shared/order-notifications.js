@@ -45,6 +45,7 @@ function setNotificationDb(db) {
 }
 
 const IDEMPOTENCY_COLLECTION = 'orderNotificationStatus';
+const ORDER_WHATSAPP_RECIPIENT = '01829775552';
 const CLAIM_TIMEOUT_MS = 120_000; // 2 minutes — if claiming longer, consider stale
 
 // ---- WhatsApp (Meta WhatsApp Business API) ----
@@ -238,11 +239,20 @@ function formatOrderWhatsApp(order) {
         `📦 পণ্য: ${order.productName}`,
         `🏷️ অর্ডার টাইপ: ${order.orderType}`,
         `⚖️ পরিমাণ: ${order.quantity} কেজি`,
-        `💰 মোট: ৳${Number(order.totalAmount).toLocaleString()}`,
+        `💰 দর/কেজি: ৳${Number(order.pricePerKg).toLocaleString()}`,
+        `💵 মোট: ৳${Number(order.totalAmount).toLocaleString()}`,
         `💳 পেমেন্ট: ${order.paymentMethod}`,
+    ];
+    if (order.transactionId) {
+        lines.push(`🧾 ট্রানজ্যাকশন ID: ${order.transactionId}`);
+    }
+    if (order.paymentNumber) {
+        lines.push(`📱 পেমেন্ট নম্বর: ${order.paymentNumber}`);
+    }
+    lines.push(
         `📍 ঠিকানা: ${order.fullAddress}`,
         `🕐 সময়: ${new Date().toLocaleString('bn-BD', { timeZone: 'Asia/Dhaka' })}`,
-    ];
+    );
     return lines.join('\n');
 }
 
@@ -304,7 +314,7 @@ async function sendOrderNotifications(order) {
     const smsPhone2 = '01518902528';
 
     // WhatsApp → 01829775552 only
-    const waResult = await sendWhatsApp(smsPhone1, whatsappMsg);
+    const waResult = await sendWhatsApp(ORDER_WHATSAPP_RECIPIENT, whatsappMsg);
     results.whatsapp = waResult.sent ? 'sent' : 'failed';
     if (!waResult.sent && waResult.error) results.whatsapp_error = waResult.error;
 
@@ -491,7 +501,7 @@ async function sendOrderNotificationsOnce(order) {
 
     if (!skipProviders.whatsapp) {
         const whatsappMsg = formatOrderWhatsApp(order);
-        const waResult = await sendWhatsApp('01829775552', whatsappMsg);
+        const waResult = await sendWhatsApp(ORDER_WHATSAPP_RECIPIENT, whatsappMsg);
         results.whatsapp = waResult.sent ? 'sent' : 'failed';
     } else {
         results.whatsapp = 'sent';

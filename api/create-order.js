@@ -59,6 +59,18 @@ async function verifyIdToken(idToken) {
     }
 }
 
+function normalizeBdPaymentNumber(value) {
+    let compact = String(value || '').trim().replace(/[\s\-()]/g, '');
+    if (compact.startsWith('+880')) {
+        compact = compact.slice(1);
+    } else if (compact.startsWith('0')) {
+        compact = '880' + compact.slice(1);
+    } else if (!compact.startsWith('880')) {
+        compact = '880' + compact;
+    }
+    return /^8801[3-9]\d{8}$/.test(compact) ? compact : null;
+}
+
 // ---- CORS ----
 
 export default async function handler(req, res) {
@@ -99,7 +111,7 @@ export default async function handler(req, res) {
             customerName, phone, productId, productName,
             orderType, quantity, pricePerKg, totalAmount,
             division, district, upazila, union, village, postOffice, house,
-            fullAddress, paymentMethod, transactionId,
+            fullAddress, paymentMethod, paymentNumber, transactionId,
         } = body;
 
         if (!customerName || !phone || !productId || !productName || !orderType || !quantity || !pricePerKg || !totalAmount) {
@@ -121,6 +133,16 @@ export default async function handler(req, res) {
                 res.end(JSON.stringify({ error: 'bad_request', message: `Please select a valid ${af.name}.` }));
                 return;
             }
+        }
+
+        const normalizedPaymentNumber = paymentMethod === 'COD'
+            ? ''
+            : normalizeBdPaymentNumber(paymentNumber);
+
+        if (paymentMethod !== 'COD' && !normalizedPaymentNumber) {
+            res.writeHead(400, corsHeaders);
+            res.end(JSON.stringify({ error: 'bad_request', message: 'A valid Bangladeshi bKash/Nagad payment number is required.' }));
+            return;
         }
 
         const qty = Number(quantity);
@@ -200,6 +222,7 @@ export default async function handler(req, res) {
             house: String(house || ''),
             fullAddress: String(fullAddress || ''),
             paymentMethod: String(paymentMethod || 'COD'),
+            paymentNumber: normalizedPaymentNumber,
             paymentStatus: paymentMethod === 'COD' ? 'Pending' : 'Unpaid',
             transactionId: String(transactionId || '').trim(),
             status: 'Pending',

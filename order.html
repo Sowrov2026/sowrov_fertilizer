@@ -230,18 +230,20 @@
 
 <div class="form-group">
 
-<label>Send Payment To</label>
+<label for="paymentNumber">Customer Payment Number</label>
 
 <input
 type="text"
 id="paymentNumber"
-readonly>
+inputmode="tel"
+autocomplete="tel"
+placeholder="Enter the bKash/Nagad number you used for payment">
 
 </div>
 
 <div class="form-group">
 
-<label>Transaction ID</label>
+<label for="transactionId">Transaction ID</label>
 
 <input
 type="text"
@@ -302,13 +304,16 @@ placeholder="Enter Transaction ID">
 </div>
 <div class="form-group">
 
-    <label>Main Post Office</label>
+    <label for="postOffice">Main Post Office</label>
 
-    <select id="postOffice" required>
-
-        <option value="">Select Main Post Office</option>
-
-    </select>
+    <input
+        type="text"
+        id="postOffice"
+        name="postOffice"
+        placeholder="Enter Main Post Office"
+        autocomplete="off"
+        required
+    >
 
 </div>
 

@@ -26,7 +26,6 @@ let districtsData = [];
 let upazilasData = [];
 let unionsData = [];
 let villagesData = [];
-let postOfficesData = [];
 let currentUser = null;
 let currentStock = 0;
 let authReady = false;
@@ -115,7 +114,10 @@ function restoreOrderContext() {
         if (village && ctx.village) village.value = ctx.village;
         if (postOffice && ctx.postOffice) postOffice.value = ctx.postOffice;
         if (house && ctx.house) house.value = ctx.house;
-        if (paymentMethod && ctx.paymentMethod) paymentMethod.value = ctx.paymentMethod;
+        if (paymentMethod && ctx.paymentMethod) {
+            paymentMethod.value = ctx.paymentMethod;
+            syncPaymentMethodFields();
+        }
         return true;
     } catch (e) {
         sessionStorage.removeItem(ORDER_CONTEXT_KEY);
@@ -381,6 +383,22 @@ async function loadAddress() {
 
 loadAddress();
 
+function normalizeAddressId(value) {
+    if (value === null || value === undefined) return "";
+    return String(value).trim();
+}
+
+function getUnionParentIds(item) {
+    return [item.upazila_id, item.upazilla_id]
+        .map(normalizeAddressId)
+        .filter(Boolean);
+}
+
+function getSelectedOptionText(select) {
+    const option = select.options[select.selectedIndex];
+    return option ? option.textContent.trim() : "";
+}
+
 // ======================================
 // Load Districts
 // ======================================
@@ -389,10 +407,9 @@ function loadDistricts() {
     district.innerHTML = '<option value="">Select District</option>';
     upazila.innerHTML = '<option value="">Select Upazila</option>';
     union.innerHTML = '<option value="">Select Union</option>';
-    postOffice.innerHTML = '<option value="">Select Post Office</option>';
 
-    const selectedDivisionId = Number(division.value);
-    const filteredDistricts = districtsData.filter(item => item.division_id === selectedDivisionId);
+    const selectedDivisionId = normalizeAddressId(division.value);
+    const filteredDistricts = districtsData.filter(item => normalizeAddressId(item.division_id) === selectedDivisionId);
     filteredDistricts.forEach(item => {
         district.innerHTML += `<option value="${item.id}">${item.name}</option>`;
     });
@@ -405,10 +422,9 @@ function loadDistricts() {
 function loadUpazilas() {
     upazila.innerHTML = '<option value="">Select Upazila</option>';
     union.innerHTML = '<option value="">Select Union</option>';
-    postOffice.innerHTML = '<option value="">Select Post Office</option>';
 
-    const selectedDistrictId = Number(district.value);
-    const filteredUpazilas = upazilasData.filter(item => item.district_id === selectedDistrictId);
+    const selectedDistrictId = normalizeAddressId(district.value);
+    const filteredUpazilas = upazilasData.filter(item => normalizeAddressId(item.district_id) === selectedDistrictId);
     filteredUpazilas.forEach(item => {
         upazila.innerHTML += `<option value="${item.id}">${item.name}</option>`;
     });
@@ -420,36 +436,16 @@ function loadUpazilas() {
 
 async function loadUnions() {
     union.innerHTML = '<option value="">Select Union</option>';
-    postOffice.innerHTML = '<option value="">Select Post Office</option>';
 
     if (unionsData.length === 0) {
         const response = await fetch("assets/data/bd-address/unions.json");
         unionsData = await response.json();
     }
 
-    const selectedUpazilaId = Number(upazila.value);
-    const filteredUnions = unionsData.filter(item => Number(item.upazilla_id) === selectedUpazilaId);
+    const selectedUpazilaId = normalizeAddressId(upazila.value);
+    const filteredUnions = unionsData.filter(item => getUnionParentIds(item).includes(selectedUpazilaId));
     filteredUnions.forEach(item => {
         union.innerHTML += `<option value="${item.id}">${item.name}</option>`;
-    });
-}
-
-// ======================================
-// Load Post Offices
-// ======================================
-
-async function loadVillagesAndPostOffices() {
-    postOffice.innerHTML = '<option value="">Select Post Office</option>';
-
-    if (postOfficesData.length === 0) {
-        const response = await fetch("assets/data/bd-address/post-offices.json");
-        postOfficesData = await response.json();
-    }
-
-    const selectedUpazilaId = Number(upazila.value);
-    const filteredPostOffices = postOfficesData.filter(item => Number(item.upazilla_id) === selectedUpazilaId);
-    filteredPostOffices.forEach(item => {
-        postOffice.innerHTML += `<option value="${item.name}">${item.name} (${item.postcode})</option>`;
     });
 }
 
@@ -457,22 +453,100 @@ async function loadVillagesAndPostOffices() {
 // Payment Method
 // ======================================
 
-paymentMethod.addEventListener("change", () => {
-    if (paymentMethod.value === "COD") {
+function normalizeBdPaymentNumber(value) {
+    let compact = String(value || "").trim().replace(/[\s\-()]/g, "");
+    if (compact.startsWith("+880")) {
+        compact = compact.slice(1);
+    } else if (compact.startsWith("0")) {
+        compact = "880" + compact.slice(1);
+    } else if (!compact.startsWith("880")) {
+        compact = "880" + compact;
+    }
+    return /^8801[3-9]\d{8}$/.test(compact) ? compact : "";
+}
+
+function syncPaymentMethodFields() {
+    const isCod = paymentMethod.value === "COD";
+    if (isCod) {
         onlinePaymentBox.style.display = "none";
         paymentNumber.value = "";
+        paymentNumber.required = false;
         transactionId.value = "";
         if (codUpcomingNotice) codUpcomingNotice.style.display = "block";
         return;
     }
     if (codUpcomingNotice) codUpcomingNotice.style.display = "none";
     onlinePaymentBox.style.display = "block";
-    if (paymentMethod.value === "bKash") {
-        paymentNumber.value = "017XXXXXXXX";
-    } else {
-        paymentNumber.value = "018XXXXXXXX";
+    paymentNumber.value = "";
+    paymentNumber.required = true;
+}
+
+const ORDER_WHATSAPP_NUMBER = "8801829775552";
+
+function formatOrderAmount(value) {
+    const amount = Number(value);
+    return Number.isFinite(amount) ? `৳${amount.toLocaleString()}` : "N/A";
+}
+
+function formatOrderWhatsAppMessage(order) {
+    const lines = [
+        "🛒 *নতুন অর্ডার — Sowrov Fertilizer*",
+        "",
+    ];
+
+    if (order.orderId) {
+        lines.push(`📋 অর্ডার নম্বর: ${order.orderId}`);
     }
-});
+    lines.push(
+        `👤 কাস্টমার: ${order.customerName || "N/A"}`,
+        `📱 ফোন: ${order.phone || "N/A"}`,
+        `📦 পণ্য: ${order.productName || "N/A"}`,
+        `🏷️ অর্ডার টাইপ: ${order.orderType || "N/A"}`,
+        `⚖️ পরিমাণ: ${order.quantity} কেজি`,
+        `💰 দর/কেজি: ${formatOrderAmount(order.pricePerKg)}`,
+        `💵 মোট: ${formatOrderAmount(order.totalAmount)}`,
+        `💳 পেমেন্ট: ${order.paymentMethod || "N/A"}`,
+    );
+    if (order.transactionId) {
+        lines.push(`🧾 ট্রানজ্যাকশন ID: ${order.transactionId}`);
+    }
+    if (order.paymentNumber) {
+        lines.push(`📱 পেমেন্ট নম্বর: ${order.paymentNumber}`);
+    }
+    lines.push(
+        `📍 ঠিকানা: ${order.fullAddress || "N/A"}`,
+        `🕐 সময়: ${new Date().toLocaleString('bn-BD', { timeZone: 'Asia/Dhaka' })}`,
+    );
+    return lines.join('\n');
+}
+
+function buildOrderWhatsAppUrl(order) {
+    return `https://wa.me/${ORDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(formatOrderWhatsAppMessage(order))}`;
+}
+
+function closeOrderWhatsAppWindow(whatsappWindow) {
+    if (whatsappWindow && !whatsappWindow.closed) {
+        whatsappWindow.close();
+    }
+}
+
+function openOrderWhatsApp(whatsappWindow, order) {
+    const url = buildOrderWhatsAppUrl(order);
+    if (whatsappWindow && !whatsappWindow.closed) {
+        whatsappWindow.opener = null;
+        whatsappWindow.location.href = url;
+        return;
+    }
+    const fallbackWindow = window.open(url, "_blank");
+    if (fallbackWindow) {
+        fallbackWindow.opener = null;
+    } else {
+        window.location.href = url;
+    }
+}
+
+paymentMethod.addEventListener("change", syncPaymentMethodFields);
+syncPaymentMethodFields();
 
 // ======================================
 // Division → District
@@ -511,7 +585,21 @@ orderForm.addEventListener("submit", async (e) => {
         return;
     }
 
+    let whatsappWindow = null;
+
         try {
+            if (paymentMethod.value !== "COD") {
+                const paymentNumberValue = paymentNumber.value.trim();
+                if (!paymentNumberValue) {
+                    showOrderError("Please enter your bKash/Nagad number.");
+                    return;
+                }
+                if (!normalizeBdPaymentNumber(paymentNumberValue)) {
+                    showOrderError("Enter a valid Bangladeshi mobile number.");
+                    return;
+                }
+            }
+
             if (paymentMethod.value !== "COD" && transactionId.value.trim() === "") {
                 showOrderError("Please enter Transaction ID.");
                 return;
@@ -557,11 +645,13 @@ orderForm.addEventListener("submit", async (e) => {
             { el: district, label: 'District' },
             { el: upazila, label: 'Upazila' },
             { el: village, label: 'Village' },
+            { el: postOffice, label: 'Post Office', action: 'enter' },
         ];
         for (const af of addressFields) {
             const val = af.el ? af.el.value.trim() : '';
             if (!val) {
-                showOrderError(`Please select a valid ${af.label}.`);
+                const action = af.action || 'select';
+                showOrderError(`Please ${action} a valid ${af.label}.`);
                 return;
             }
         }
@@ -573,11 +663,13 @@ orderForm.addEventListener("submit", async (e) => {
             submitBtn.textContent = "Processing...";
         }
 
+        whatsappWindow = window.open("", "_blank");
+
         // ---- Get Firebase ID Token ----
         const idToken = await currentUser.getIdToken();
 
         // ---- Compute full address ----
-        const fullAddr = `${house.value.trim()}, ${village.value.trim()}, ${postOffice.options[postOffice.selectedIndex].text}, ${union.options[union.selectedIndex].text}, ${upazila.options[upazila.selectedIndex].text}, ${district.options[district.selectedIndex].text}, ${division.options[division.selectedIndex].text}`;
+        const fullAddr = `${house.value.trim()}, ${village.value.trim()}, ${postOffice.value.trim()}, ${getSelectedOptionText(union)}, ${getSelectedOptionText(upazila)}, ${getSelectedOptionText(district)}, ${getSelectedOptionText(division)}`;
 
         // ---- Send to Backend API ----
         const orderPayload = {
@@ -594,10 +686,11 @@ orderForm.addEventListener("submit", async (e) => {
             upazila: upazila.value,
             union: union.value,
             village: village.value,
-            postOffice: postOffice.value,
+            postOffice: postOffice.value.trim(),
             house: house.value,
             fullAddress: fullAddr,
             paymentMethod: paymentMethod.value,
+            paymentNumber: paymentMethod.value === "COD" ? "" : normalizeBdPaymentNumber(paymentNumber.value),
             transactionId: transactionId.value.trim(),
         };
 
@@ -613,6 +706,7 @@ orderForm.addEventListener("submit", async (e) => {
         const result = await response.json();
 
         if (!response.ok) {
+            closeOrderWhatsAppWindow(whatsappWindow);
             if (response.status === 401) {
                 currentUser = null;
                 showLoginWarning();
@@ -628,6 +722,13 @@ orderForm.addEventListener("submit", async (e) => {
         clearOrderContext();
 
         const orderNumber = result.orderId || "SF-" + Date.now();
+
+        try {
+            openOrderWhatsApp(whatsappWindow, { ...orderPayload, orderId: orderNumber });
+        } catch (error) {
+            closeOrderWhatsAppWindow(whatsappWindow);
+            console.error("WhatsApp link open failed:", error);
+        }
 
         let notifInfo = "";
         if (result.notifications) {
@@ -701,7 +802,7 @@ orderForm.addEventListener("submit", async (e) => {
         frag.appendChild(document.createElement('br'));
         frag.appendChild(document.createTextNode(village.value));
         frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(postOffice.options[postOffice.selectedIndex].text));
+        frag.appendChild(document.createTextNode(postOffice.value.trim()));
         frag.appendChild(document.createElement('br'));
         frag.appendChild(document.createTextNode(union.options[union.selectedIndex].text));
         frag.appendChild(document.createElement('br'));
@@ -723,6 +824,7 @@ orderForm.addEventListener("submit", async (e) => {
         successMessage.appendChild(frag);
 
     } catch (error) {
+        closeOrderWhatsAppWindow(whatsappWindow);
         console.error(error);
         showOrderError(error.message || "অর্ডার তৈরিতে সমস্যা হয়েছে।");
     } finally {
@@ -746,12 +848,6 @@ district.addEventListener("change", loadUpazilas);
 // ======================================
 
 upazila.addEventListener("change", loadUnions);
-
-// ======================================
-// Union → Village & Post Office
-// ======================================
-
-union.addEventListener("change", loadVillagesAndPostOffices);
 
 // ======================================
 // Ready
