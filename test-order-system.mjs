@@ -933,6 +933,137 @@ await test('AI/chat/quota unaffected by COD changes', () => {
     assert(quotaCode.includes('QUOTA_MAX'));
 });
 
+// ============================================
+console.log('\n=== City Corporation Address Support ===');
+// ============================================
+
+await test('order.html has area type selector and CC field groups', () => {
+    assert(orderHtml.includes('id="areaType"'), 'areaType select missing');
+    assert(orderHtml.includes('value="rural"'), 'rural option missing');
+    assert(orderHtml.includes('value="city_corporation"'), 'city_corporation option missing');
+    assert(orderHtml.includes('id="ruralFields"'), 'ruralFields wrapper missing');
+    assert(orderHtml.includes('id="ccFields"'), 'ccFields wrapper missing');
+    assert(orderHtml.includes('id="cityCorporation"'), 'cityCorporation select missing');
+    assert(orderHtml.includes('id="ccWard"'), 'ccWard select missing');
+    assert(orderHtml.includes('id="ccThana"'), 'ccThana select missing');
+    assert(orderHtml.includes('id="ccLocality"'), 'ccLocality input missing');
+});
+
+await test('Rural fields wrapped; shared Post Office stays required free-text', () => {
+    const ruralIdx = orderHtml.indexOf('id="ruralFields"');
+    const ccIdx = orderHtml.indexOf('id="ccFields"');
+    assert(ruralIdx > -1 && ccIdx > -1 && ruralIdx < ccIdx, 'field group order invalid');
+    assert(orderHtml.includes('id="upazila" required'), 'rural upazila select missing');
+    assert(orderHtml.includes('id="union" required'), 'rural union select missing');
+    assert(orderHtml.includes('id="village"'), 'rural village input missing');
+    const inputMatch = orderHtml.match(/<input\s+type="text"\s+id="postOffice"\s+name="postOffice"[\s\S]*?required\s*>/);
+    assert(inputMatch, 'Post Office text input must stay required');
+});
+
+await test('order.js loads CC datasets with rural datasets', () => {
+    assert(orderJsCode.includes('city-corporations.json'), 'CC master dataset fetch missing');
+    assert(orderJsCode.includes('cc-wards.json'), 'CC wards dataset fetch missing');
+    assert(orderJsCode.includes('cc-thanas.json'), 'CC thanas dataset fetch missing');
+});
+
+await test('order.js branches validation and payload by areaType', () => {
+    assert(orderJsCode.includes("areaType.value === 'city_corporation'"), 'areaType branch missing');
+    assert(orderJsCode.includes('applyAddressMode'), 'applyAddressMode missing');
+    assert(orderJsCode.includes('locality: ccFieldsOut.locality'), 'locality payload missing');
+    assert(orderJsCode.includes('cityCorporation: ccFieldsOut.cityCorporation'), 'cityCorporation payload missing');
+    assert(orderJsCode.includes('ward: ccFieldsOut.ward'), 'ward payload missing');
+    assert(orderJsCode.includes('areaType: areaType.value'), 'areaType payload missing');
+});
+
+await test('Rural cascade preserved (division→district→upazila→union)', () => {
+    assert(orderJsCode.includes('division.addEventListener("change"'), 'division listener missing');
+    assert(orderJsCode.includes('loadDistricts'), 'loadDistricts missing');
+    assert(orderJsCode.includes('district.addEventListener("change"'), 'district listener missing');
+    assert(orderJsCode.includes('loadUpazilas'), 'loadUpazilas missing');
+    assert(orderJsCode.includes('upazila.addEventListener("change", loadUnions)'), 'upazila→union listener missing');
+    assert(orderJsCode.includes('Village'), 'rural village validation label missing');
+});
+
+await test('Ward and Thana are independent siblings (no Ward→Thana dependency)', () => {
+    assert(orderJsCode.includes('loadCcThanas'), 'loadCcThanas missing');
+    assert(orderJsCode.includes('item.cc_ids.includes(cc.id)'), 'thana must filter by cc, not ward');
+    const thanaFn = orderJsCode.slice(orderJsCode.indexOf('function loadCcThanas'), orderJsCode.indexOf('function clearCcSelections'));
+    assert(!thanaFn.includes('ccWard'), 'thana load must not depend on ward selection');
+});
+
+await test('order.js never activates dormant post-offices dataset', () => {
+    assert(!orderJsCode.includes('post-offices.json'), 'post-offices.json must stay dormant');
+});
+
+await test('Server validates areaType with rural default for legacy orders', () => {
+    assert(orderCode.includes("new Set(['rural', 'city_corporation'])"), 'AREA_TYPES enum missing');
+    assert(orderCode.includes(": 'rural'"), 'legacy areaType default missing');
+    assert(orderCode.includes('Invalid area type.'), 'invalid areaType message missing');
+});
+
+await test('Server validates CC orders against datasets', () => {
+    assert(orderCode.includes('function validateCcOrder'), 'validateCcOrder missing');
+    assert(orderCode.includes('city-corporations.json'), 'server CC dataset load missing');
+    assert(orderCode.includes('cc-wards.json'), 'server wards dataset load missing');
+    assert(orderCode.includes('cc-thanas.json'), 'server thanas dataset load missing');
+    assert(orderCode.includes('Division does not match'), 'division/cc consistency check missing');
+    assert(orderCode.includes('District does not match'), 'district/cc consistency check missing');
+    assert(orderCode.includes('wardRec.cc_id !== cc.id'), 'ward↔cc membership check missing');
+    assert(orderCode.includes('thanaRec.cc_ids.includes(cc.id)'), 'thana↔cc membership check missing');
+});
+
+await test('Server rebuilds CC fullAddress from server-side datasets', () => {
+    assert(orderCode.includes('ccValidation.fullAddress'), 'server-side CC fullAddress missing');
+    assert(orderCode.includes("ds.districtsById.get(String(cc.district_id))"), 'district name resolved server-side');
+    assert(orderCode.includes("ds.divisionsById.get(String(cc.division_id))"), 'division name resolved server-side');
+});
+
+await test('CC orders store empty rural hierarchy (upazila/union/village)', () => {
+    assert(orderCode.includes("upazila: normalizedAreaType === 'city_corporation' ? ''"), 'upazila cleared for CC');
+    assert(orderCode.includes("union: normalizedAreaType === 'city_corporation' ? ''"), 'union cleared for CC');
+    assert(orderCode.includes("village: normalizedAreaType === 'city_corporation' ? ''"), 'village cleared for CC');
+});
+
+await test('Order schema includes new CC fields alongside legacy fields', () => {
+    for (const f of ['areaType', 'cityCorporation', 'cityCorporationName', 'ward', 'wardNumber', 'wardName', 'thana', 'thanaName', 'locality']) {
+        assert(orderCode.includes(`${f}:`), `server field ${f} missing`);
+    }
+    for (const f of ['division', 'district', 'upazila', 'union', 'village', 'postOffice', 'house', 'fullAddress']) {
+        assert(orderCode.includes(`${f}:`), `legacy field ${f} must remain`);
+    }
+});
+
+await test('Admin orders escapes fullAddress in HTML views', () => {
+    const adminCode = readFileSync('assets/js/admin-orders.js', 'utf8');
+    assert(!adminCode.includes('${order.fullAddress}'), 'raw fullAddress interpolation must be removed');
+    assert(adminCode.includes('escapeHtml(String(order.fullAddress'), 'escaped fullAddress missing');
+    assert(adminCode.includes('function escapeHtml'), 'escapeHtml helper missing');
+});
+
+await test('Admin XLSX export includes address and CC columns with safe fallbacks', () => {
+    const adminCode = readFileSync('assets/js/admin-orders.js', 'utf8');
+    assert(adminCode.includes('"Full Address": xlsxSafeValue(order.fullAddress || \'\')'), 'Full Address export column missing');
+    assert(adminCode.includes('"Area Type": xlsxSafeValue(order.areaType || \'\')'), 'Area Type export column missing');
+    assert(adminCode.includes('"City Corporation": xlsxSafeValue(order.cityCorporationName || \'\')'), 'City Corporation export column missing');
+    assert(adminCode.includes('"Ward": xlsxSafeValue(order.wardName || \'\')'), 'Ward export column missing');
+    assert(adminCode.includes('"Thana": xlsxSafeValue(order.thanaName || \'\')'), 'Thana export column missing');
+    assert(adminCode.includes('"Locality": xlsxSafeValue(order.locality || \'\')'), 'Locality export column missing');
+    assert(adminCode.includes('function xlsxSafeValue'), 'xlsxSafeValue formula-injection guard missing');
+    assert(adminCode.includes('/^[=+\\-@\\t\\r]/'), 'xlsxSafeValue must neutralize formula-significant leading characters');
+    assert(adminCode.includes('"Upazila": order.upazila'), 'existing Upazila export column must remain');
+    assert(adminCode.includes('"House": order.house'), 'existing House export column must remain');
+});
+
+await test('Invoice prefers fullAddress with legacy address fallback', () => {
+    const invoiceCode = readFileSync('assets/js/invoice.js', 'utf8');
+    assert(invoiceCode.includes('order.fullAddress || order.address || "-"'), 'fullAddress fallback missing');
+});
+
+await test('Notifications and WhatsApp still receive fullAddress', () => {
+    assert(notificationCode.includes('order.fullAddress'), 'notifications must keep using fullAddress');
+    assert(orderJsCode.includes('order.fullAddress || "N/A"'), 'client WhatsApp address line missing');
+});
+
 } // end run()
 
 console.log('\n' + '='.repeat(60));

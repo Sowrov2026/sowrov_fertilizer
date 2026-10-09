@@ -26,6 +26,9 @@ let districtsData = [];
 let upazilasData = [];
 let unionsData = [];
 let villagesData = [];
+let ccsData = [];
+let ccWardsData = [];
+let ccThanasData = [];
 let currentUser = null;
 let currentStock = 0;
 let authReady = false;
@@ -42,11 +45,20 @@ const phone = document.getElementById("phone");
 
 const division = document.getElementById("division");
 const district = document.getElementById("district");
+const areaType = document.getElementById("areaType");
 const upazila = document.getElementById("upazila");
 const union = document.getElementById("union");
 const village = document.getElementById("village");
 const postOffice = document.getElementById("postOffice");
 const house = document.getElementById("house");
+
+const ruralFields = document.getElementById("ruralFields");
+const ccFields = document.getElementById("ccFields");
+const cityCorporation = document.getElementById("cityCorporation");
+const ccWard = document.getElementById("ccWard");
+const ccThana = document.getElementById("ccThana");
+const ccThanaGroup = document.getElementById("ccThanaGroup");
+const ccLocality = document.getElementById("ccLocality");
 
 const productSelect = document.getElementById("productSelect");
 const orderType = document.getElementById("orderType");
@@ -81,9 +93,14 @@ function saveOrderContext() {
             quantity: quantity ? quantity.value : '',
             division: division ? division.value : '',
             district: district ? district.value : '',
+            areaType: areaType ? areaType.value : '',
             upazila: upazila ? upazila.value : '',
             union: union ? union.value : '',
             village: village ? village.value : '',
+            cityCorporation: cityCorporation ? cityCorporation.value : '',
+            ward: ccWard ? ccWard.value : '',
+            thana: ccThana ? ccThana.value : '',
+            locality: ccLocality ? ccLocality.value : '',
             postOffice: postOffice ? postOffice.value : '',
             house: house ? house.value : '',
             paymentMethod: paymentMethod ? paymentMethod.value : '',
@@ -114,6 +131,21 @@ function restoreOrderContext() {
         if (village && ctx.village) village.value = ctx.village;
         if (postOffice && ctx.postOffice) postOffice.value = ctx.postOffice;
         if (house && ctx.house) house.value = ctx.house;
+        if (areaType && ctx.areaType) {
+            loadCityCorporations();
+            areaType.value = ctx.areaType;
+            applyAddressMode();
+            if (ctx.areaType === 'city_corporation') {
+                if (cityCorporation && ctx.cityCorporation) {
+                    cityCorporation.value = ctx.cityCorporation;
+                    loadCcWards();
+                    if (ccWard && ctx.ward) ccWard.value = ctx.ward;
+                    loadCcThanas();
+                    if (ccThana && ctx.thana) ccThana.value = ctx.thana;
+                }
+                if (ccLocality && ctx.locality) ccLocality.value = ctx.locality;
+            }
+        }
         if (paymentMethod && ctx.paymentMethod) {
             paymentMethod.value = ctx.paymentMethod;
             syncPaymentMethodFields();
@@ -363,19 +395,26 @@ quantity.addEventListener("input", () => { updatePrice(); });
 
 async function loadAddress() {
     try {
-        const [divisions, districts, upazilas] = await Promise.all([
+        const [divisions, districts, upazilas, ccs, wards, thanas] = await Promise.all([
             fetch("assets/data/bd-address/divisions.json").then(r => r.json()),
             fetch("assets/data/bd-address/districts.json").then(r => r.json()),
             fetch("assets/data/bd-address/upazilas.json").then(r => r.json()),
+            fetch("assets/data/bd-address/city-corporations.json").then(r => r.json()),
+            fetch("assets/data/bd-address/cc-wards.json").then(r => r.json()),
+            fetch("assets/data/bd-address/cc-thanas.json").then(r => r.json()),
         ]);
         divisionsData = divisions;
         districtsData = districts;
         upazilasData = upazilas;
+        ccsData = ccs;
+        ccWardsData = wards;
+        ccThanasData = thanas;
 
         division.innerHTML = '<option value="">Select Division</option>';
         divisionsData.forEach(item => {
             division.innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
+        applyAddressMode();
     } catch (error) {
         console.error("Address Load Error:", error);
     }
@@ -447,6 +486,93 @@ async function loadUnions() {
     filteredUnions.forEach(item => {
         union.innerHTML += `<option value="${item.id}">${item.name}</option>`;
     });
+}
+
+// ======================================
+// City Corporation Branch
+// ======================================
+
+function getSelectedCc() {
+    return ccsData.find(item => normalizeAddressId(item.id) === normalizeAddressId(cityCorporation ? cityCorporation.value : '')) || null;
+}
+
+function districtHasCc() {
+    const selectedDistrictId = normalizeAddressId(district ? district.value : '');
+    return ccsData.some(item => normalizeAddressId(item.district_id) === selectedDistrictId);
+}
+
+function setAreaTypeOptionAvailability() {
+    const ccOption = areaType ? areaType.querySelector('option[value="city_corporation"]') : null;
+    if (!ccOption) return;
+    const has = districtHasCc();
+    ccOption.disabled = !has;
+    if (!has && areaType.value === 'city_corporation') {
+        areaType.value = 'rural';
+        clearCcSelections();
+        applyAddressMode();
+    }
+}
+
+function applyAddressMode() {
+    const isCc = areaType ? areaType.value === 'city_corporation' : false;
+    if (ruralFields) ruralFields.style.display = isCc ? 'none' : '';
+    if (ccFields) ccFields.style.display = isCc ? '' : 'none';
+    if (upazila) upazila.required = !isCc;
+    if (union) union.required = !isCc;
+    if (village) village.required = !isCc;
+    if (cityCorporation) cityCorporation.required = isCc;
+    if (ccWard) ccWard.required = isCc;
+    if (ccLocality) ccLocality.required = isCc;
+    if (ccThana) ccThana.required = false;
+}
+
+function loadCityCorporations() {
+    if (!cityCorporation) return;
+    cityCorporation.innerHTML = '<option value="">Select City Corporation</option>';
+    const selectedDistrictId = normalizeAddressId(district ? district.value : '');
+    const filtered = ccsData.filter(item => normalizeAddressId(item.district_id) === selectedDistrictId);
+    filtered.forEach(item => {
+        cityCorporation.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+    });
+    loadCcWards();
+}
+
+function loadCcWards() {
+    if (!ccWard) return;
+    ccWard.innerHTML = '<option value="">Select Ward</option>';
+    const cc = getSelectedCc();
+    if (!cc) {
+        loadCcThanas();
+        return;
+    }
+    ccWardsData
+        .filter(item => item.cc_id === cc.id)
+        .forEach(item => {
+            ccWard.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+        });
+    loadCcThanas();
+}
+
+function loadCcThanas() {
+    if (!ccThana) return;
+    ccThana.innerHTML = '<option value="">Select Thana (optional)</option>';
+    const cc = getSelectedCc();
+    const supported = !!(cc && cc.thana_supported);
+    if (ccThanaGroup) ccThanaGroup.style.display = supported ? '' : 'none';
+    if (!supported) return;
+    ccThanasData
+        .filter(item => Array.isArray(item.cc_ids) && item.cc_ids.includes(cc.id))
+        .forEach(item => {
+            ccThana.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+        });
+}
+
+function clearCcSelections() {
+    if (cityCorporation) cityCorporation.value = '';
+    if (ccWard) ccWard.innerHTML = '<option value="">Select Ward</option>';
+    if (ccThana) ccThana.innerHTML = '<option value="">Select Thana (optional)</option>';
+    if (ccThanaGroup) ccThanaGroup.style.display = 'none';
+    if (ccLocality) ccLocality.value = '';
 }
 
 // ======================================
@@ -552,7 +678,11 @@ syncPaymentMethodFields();
 // Division → District
 // ======================================
 
-division.addEventListener("change", loadDistricts);
+division.addEventListener("change", () => {
+    loadDistricts();
+    loadCityCorporations();
+    setAreaTypeOptionAvailability();
+});
 
 // ======================================
 // Place Order — with Login Gate + Backend API
@@ -640,7 +770,15 @@ orderForm.addEventListener("submit", async (e) => {
         }
 
         // ---- ADDRESS VALIDATION ----
-        const addressFields = [
+        const isCcOrder = areaType.value === 'city_corporation';
+        const addressFields = isCcOrder ? [
+            { el: division, label: 'Division' },
+            { el: district, label: 'District' },
+            { el: cityCorporation, label: 'City Corporation' },
+            { el: ccWard, label: 'Ward' },
+            { el: ccLocality, label: 'Locality / Mahalla', action: 'enter' },
+            { el: postOffice, label: 'Post Office', action: 'enter' },
+        ] : [
             { el: division, label: 'Division' },
             { el: district, label: 'District' },
             { el: upazila, label: 'Upazila' },
@@ -669,7 +807,42 @@ orderForm.addEventListener("submit", async (e) => {
         const idToken = await currentUser.getIdToken();
 
         // ---- Compute full address ----
-        const fullAddr = `${house.value.trim()}, ${village.value.trim()}, ${postOffice.value.trim()}, ${getSelectedOptionText(union)}, ${getSelectedOptionText(upazila)}, ${getSelectedOptionText(district)}, ${getSelectedOptionText(division)}`;
+        let fullAddr;
+        const ccFieldsOut = {
+            cityCorporation: '',
+            cityCorporationName: '',
+            ward: '',
+            wardNumber: '',
+            wardName: '',
+            thana: '',
+            thanaName: '',
+            locality: '',
+        };
+        if (isCcOrder) {
+            const cc = getSelectedCc();
+            const wardOption = ccWard.options[ccWard.selectedIndex];
+            const thanaSelected = ccThana && ccThana.value ? ccThana : null;
+            const thanaOptionText = thanaSelected ? getSelectedOptionText(ccThana) : '';
+            fullAddr = [
+                house.value.trim(),
+                ccLocality.value.trim(),
+                wardOption ? wardOption.textContent.trim() : '',
+                thanaOptionText,
+                cc ? cc.name : '',
+                getSelectedOptionText(district),
+                getSelectedOptionText(division),
+            ].filter(Boolean).join(', ');
+            ccFieldsOut.cityCorporation = cityCorporation.value;
+            ccFieldsOut.cityCorporationName = cc ? cc.name : '';
+            ccFieldsOut.ward = ccWard.value;
+            ccFieldsOut.wardNumber = ccFieldsOut.ward ? ccFieldsOut.ward.split('-W').pop() : '';
+            ccFieldsOut.wardName = wardOption ? wardOption.textContent.trim() : '';
+            ccFieldsOut.thana = thanaSelected ? thanaSelected.value : '';
+            ccFieldsOut.thanaName = thanaOptionText;
+            ccFieldsOut.locality = ccLocality.value.trim();
+        } else {
+            fullAddr = `${house.value.trim()}, ${village.value.trim()}, ${postOffice.value.trim()}, ${getSelectedOptionText(union)}, ${getSelectedOptionText(upazila)}, ${getSelectedOptionText(district)}, ${getSelectedOptionText(division)}`;
+        }
 
         // ---- Send to Backend API ----
         const orderPayload = {
@@ -683,11 +856,20 @@ orderForm.addEventListener("submit", async (e) => {
             totalAmount: Number(totalAmount.value),
             division: division.value,
             district: district.value,
-            upazila: upazila.value,
-            union: union.value,
-            village: village.value,
+            upazila: isCcOrder ? '' : upazila.value,
+            union: isCcOrder ? '' : union.value,
+            village: isCcOrder ? '' : village.value,
             postOffice: postOffice.value.trim(),
             house: house.value,
+            areaType: areaType.value,
+            cityCorporation: ccFieldsOut.cityCorporation,
+            cityCorporationName: ccFieldsOut.cityCorporationName,
+            ward: ccFieldsOut.ward,
+            wardNumber: ccFieldsOut.wardNumber,
+            wardName: ccFieldsOut.wardName,
+            thana: ccFieldsOut.thana,
+            thanaName: ccFieldsOut.thanaName,
+            locality: ccFieldsOut.locality,
             fullAddress: fullAddr,
             paymentMethod: paymentMethod.value,
             paymentNumber: paymentMethod.value === "COD" ? "" : normalizeBdPaymentNumber(paymentNumber.value),
@@ -798,19 +980,36 @@ orderForm.addEventListener("submit", async (e) => {
         addrB.textContent = 'Delivery Address: ';
         frag.appendChild(addrB);
         frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(house.value));
-        frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(village.value));
-        frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(postOffice.value.trim()));
-        frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(union.options[union.selectedIndex].text));
-        frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(upazila.options[upazila.selectedIndex].text));
-        frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(district.options[district.selectedIndex].text));
-        frag.appendChild(document.createElement('br'));
-        frag.appendChild(document.createTextNode(division.options[division.selectedIndex].text));
+        if (isCcOrder) {
+            const ccLines = [
+                house.value.trim(),
+                ccLocality.value.trim(),
+                ccWard.options[ccWard.selectedIndex].text,
+                (ccThana && ccThana.value) ? ccThana.options[ccThana.selectedIndex].text : '',
+                cityCorporation.options[cityCorporation.selectedIndex].text,
+                district.options[district.selectedIndex].text,
+                division.options[division.selectedIndex].text,
+            ];
+            ccLines.forEach(line => {
+                if (!line) return;
+                frag.appendChild(document.createTextNode(line));
+                frag.appendChild(document.createElement('br'));
+            });
+        } else {
+            frag.appendChild(document.createTextNode(house.value));
+            frag.appendChild(document.createElement('br'));
+            frag.appendChild(document.createTextNode(village.value));
+            frag.appendChild(document.createElement('br'));
+            frag.appendChild(document.createTextNode(postOffice.value.trim()));
+            frag.appendChild(document.createElement('br'));
+            frag.appendChild(document.createTextNode(union.options[union.selectedIndex].text));
+            frag.appendChild(document.createElement('br'));
+            frag.appendChild(document.createTextNode(upazila.options[upazila.selectedIndex].text));
+            frag.appendChild(document.createElement('br'));
+            frag.appendChild(document.createTextNode(district.options[district.selectedIndex].text));
+            frag.appendChild(document.createElement('br'));
+            frag.appendChild(document.createTextNode(division.options[division.selectedIndex].text));
+        }
 
         if (notifInfo) {
             const small = document.createElement('small');
@@ -841,7 +1040,37 @@ orderForm.addEventListener("submit", async (e) => {
 // District → Upazila
 // ======================================
 
-district.addEventListener("change", loadUpazilas);
+district.addEventListener("change", () => {
+    loadUpazilas();
+    loadCityCorporations();
+    setAreaTypeOptionAvailability();
+});
+
+// ======================================
+// Area Type / City Corporation
+// ======================================
+
+areaType.addEventListener("change", () => {
+    applyAddressMode();
+    if (areaType.value === 'city_corporation') {
+        upazila.value = '';
+        union.value = '';
+        village.value = '';
+        loadCityCorporations();
+    } else {
+        clearCcSelections();
+    }
+    saveOrderContext();
+});
+
+cityCorporation.addEventListener("change", () => {
+    loadCcWards();
+    saveOrderContext();
+});
+
+ccWard.addEventListener("change", saveOrderContext);
+ccThana.addEventListener("change", saveOrderContext);
+ccLocality.addEventListener("input", saveOrderContext);
 
 // ======================================
 // Upazila → Union

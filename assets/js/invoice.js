@@ -102,7 +102,7 @@ new QRCode(
             order.phone || "-";
 
         document.getElementById("customerAddress").innerText =
-            order.address || "-";
+            order.fullAddress || order.address || "-";
 
    const statusElement =
 document.getElementById("paymentStatus");

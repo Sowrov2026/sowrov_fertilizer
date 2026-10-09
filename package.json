@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node scripts/inject-config.js && vercel dev",
     "build": "node scripts/inject-config.js",
-    "test": "node test-bd-address.mjs && echo 'Tests passed'",
+    "test": "node test-bd-address.mjs && node test-order-system.mjs && node test-routes.mjs && echo 'Tests passed'",
     "lint": "echo 'Lint passed'",
     "deploy": "vercel --prod"
   },

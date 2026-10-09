@@ -332,5 +332,121 @@ test('no duplicate union names within an upazila', () => {
     }
 });
 
+// ── City Corporation datasets ──
+console.log('=== City Corporation Datasets ===');
+
+const cityCorporations = load('city-corporations.json');
+const ccWards = load('cc-wards.json');
+const ccThanas = load('cc-thanas.json');
+const ccById = new Map(cityCorporations.map(c => [c.id, c]));
+
+test('city corporations count is 13', () => assertEq(cityCorporations.length, 13));
+test('cc ward records count is 501', () => assertEq(ccWards.length, 501));
+test('cc thana records count is 16', () => assertEq(ccThanas.length, 16));
+
+test('cc ids are unique and prefixed cc-', () => {
+    const ids = cityCorporations.map(c => c.id);
+    assertEq(new Set(ids).size, ids.length, 'duplicate cc ids');
+    for (const c of cityCorporations) assert(c.id.startsWith('cc-'), `cc id ${c.id} must start with cc-`);
+});
+
+test('cc district/division FKs valid and consistent with districts.json', () => {
+    for (const c of cityCorporations) {
+        const d = districtById.get(Number(c.district_id));
+        assert(d, `cc ${c.id} -> missing district ${c.district_id}`);
+        assertEq(d.division_id, Number(c.division_id), `cc ${c.id} division mismatch vs districts.json`);
+    }
+});
+
+test('cc names are unique with non-empty bilingual labels', () => {
+    const names = new Set();
+    for (const c of cityCorporations) {
+        assert(typeof c.name === 'string' && c.name.trim().length > 0, `cc ${c.id} empty name`);
+        assert(typeof c.name_bn === 'string' && c.name_bn.trim().length > 0, `cc ${c.id} empty name_bn`);
+        assert(!names.has(c.name), `duplicate cc name ${c.name}`);
+        names.add(c.name);
+        assert(['primary', 'strong', 'secondary'].includes(c.ward_count_evidence), `cc ${c.id} bad evidence tier`);
+        assert(typeof c.ward_count === 'number' && c.ward_count > 0, `cc ${c.id} bad ward_count`);
+        assert(typeof c.thana_supported === 'boolean', `cc ${c.id} thana_supported must be boolean`);
+    }
+});
+
+test('ward ids unique, follow cc-id-Wn scheme, FK-valid', () => {
+    const ids = ccWards.map(w => w.id);
+    assertEq(new Set(ids).size, ids.length, 'duplicate ward ids');
+    for (const w of ccWards) {
+        assert(ccById.has(w.cc_id), `ward ${w.id} -> missing cc ${w.cc_id}`);
+        assertEq(w.id, `${w.cc_id}-W${w.ward_number}`, `ward ${w.id} id scheme`);
+        assert(typeof w.name === 'string' && w.name.trim().length > 0, `ward ${w.id} empty name`);
+        assert(typeof w.name_bn === 'string' && w.name_bn.trim().length > 0, `ward ${w.id} empty name_bn`);
+    }
+});
+
+test('every cc has contiguous wards 1..ward_count with matching count', () => {
+    for (const c of cityCorporations) {
+        const ws = ccWards.filter(w => w.cc_id === c.id);
+        assertEq(ws.length, c.ward_count, `${c.id} ward count`);
+        const numbers = ws.map(w => w.ward_number).sort((a, b) => a - b);
+        for (let i = 0; i < c.ward_count; i++) assertEq(numbers[i], i + 1, `${c.id} ward numbers`);
+    }
+});
+
+test('thana ids unique, cc_ids FK-valid, containment enum valid', () => {
+    const ids = ccThanas.map(t => t.id);
+    assertEq(new Set(ids).size, ids.length, 'duplicate thana ids');
+    const allowed = new Set(['contained', 'extends_beyond', 'partially_overlapping', 'unclear']);
+    for (const t of ccThanas) {
+        assert(typeof t.name === 'string' && t.name.trim().length > 0, `thana ${t.id} empty name`);
+        assert(typeof t.name_bn === 'string' && t.name_bn.trim().length > 0, `thana ${t.id} empty name_bn`);
+        assert(Array.isArray(t.cc_ids) && t.cc_ids.length > 0, `thana ${t.id} empty cc_ids`);
+        for (const cid of t.cc_ids) assert(ccById.has(cid), `thana ${t.id} -> missing cc ${cid}`);
+        assert(allowed.has(t.containment), `thana ${t.id} bad containment ${t.containment}`);
+        const cc = ccById.get(t.cc_ids[0]);
+        assertEq(cc.thana_supported, true, `thana ${t.id} attached to cc ${cc.id} with thana_supported=false`);
+    }
+});
+
+test('thana field only enabled for officially-rostered CCs', () => {
+    const supported = cityCorporations.filter(c => c.thana_supported).map(c => c.id).sort();
+    assertSetEq(supported, ['cc-bogura', 'cc-gazipur', 'cc-rangpur'], 'thana-supported ccs');
+    const withThanas = new Set();
+    for (const t of ccThanas) for (const cid of t.cc_ids) withThanas.add(cid);
+    assertSetEq(withThanas, new Set(supported), 'ccs with thana records');
+});
+
+test('known ward counts per CC match evidence ledger', () => {
+    const expected = {
+        'cc-barishal': 30, 'cc-chattogram': 41, 'cc-cumilla': 27,
+        'cc-dhaka-north': 54, 'cc-dhaka-south': 75, 'cc-gazipur': 57,
+        'cc-narayanganj': 27, 'cc-khulna': 31, 'cc-bogura': 21,
+        'cc-rajshahi': 30, 'cc-rangpur': 33, 'cc-sylhet': 42, 'cc-mymensingh': 33,
+    };
+    for (const [id, count] of Object.entries(expected)) {
+        assert(ccById.has(id), `cc ${id} missing`);
+        assertEq(ccById.get(id).ward_count, count, `${id} ward_count`);
+    }
+});
+
+test('bogura is the only primary-evidence cc; gazette sources cited', () => {
+    const primaries = cityCorporations.filter(c => c.ward_count_evidence === 'primary').map(c => c.id);
+    assertSetEq(primaries, ['cc-bogura'], 'primary cc set');
+    assert(ccById.get('cc-bogura').sources.some(s => s.includes('dpp.gov.bd')), 'bogura must cite gazette');
+});
+
+test('ward name_bn uses Bangla ward marker; numbers cover 1-75 range', () => {
+    for (const w of ccWards) assert(w.name_bn.includes('নং ওয়ার্ড'), `ward ${w.id} name_bn format`);
+    assert(ccWards.some(w => w.ward_number === 1), 'no ward 1');
+    assert(ccWards.some(w => w.ward_number === 75), 'no ward 75');
+});
+
+test('cc sources arrays contain only https URLs', () => {
+    for (const rows of [cityCorporations, ccThanas]) {
+        for (const r of rows) {
+            assert(Array.isArray(r.sources) && r.sources.length > 0, `${r.id} missing sources`);
+            for (const s of r.sources) assert(s.startsWith('https://'), `${r.id} non-https source ${s}`);
+        }
+    }
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exitCode = 1;

@@ -37,3 +37,4 @@ for (const t of tests) {
   console.log('Test ' + t.id + ': ' + (ok ? 'PASS' : 'FAIL') + ' | expected=' + t.expectModel + ' got=' + model + ' | ' + t.q);
 }
 console.log('\n' + pass + '/' + tests.length + ' routes correct');
+if (pass < tests.length) process.exitCode = 1;

@@ -1,0 +1,3509 @@
+[
+  {
+    "id": "cc-barishal-W1",
+    "cc_id": "cc-barishal",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W2",
+    "cc_id": "cc-barishal",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W3",
+    "cc_id": "cc-barishal",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W4",
+    "cc_id": "cc-barishal",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W5",
+    "cc_id": "cc-barishal",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W6",
+    "cc_id": "cc-barishal",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W7",
+    "cc_id": "cc-barishal",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W8",
+    "cc_id": "cc-barishal",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W9",
+    "cc_id": "cc-barishal",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W10",
+    "cc_id": "cc-barishal",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W11",
+    "cc_id": "cc-barishal",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W12",
+    "cc_id": "cc-barishal",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W13",
+    "cc_id": "cc-barishal",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W14",
+    "cc_id": "cc-barishal",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W15",
+    "cc_id": "cc-barishal",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W16",
+    "cc_id": "cc-barishal",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W17",
+    "cc_id": "cc-barishal",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W18",
+    "cc_id": "cc-barishal",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W19",
+    "cc_id": "cc-barishal",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W20",
+    "cc_id": "cc-barishal",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W21",
+    "cc_id": "cc-barishal",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W22",
+    "cc_id": "cc-barishal",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W23",
+    "cc_id": "cc-barishal",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W24",
+    "cc_id": "cc-barishal",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W25",
+    "cc_id": "cc-barishal",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W26",
+    "cc_id": "cc-barishal",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W27",
+    "cc_id": "cc-barishal",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W28",
+    "cc_id": "cc-barishal",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W29",
+    "cc_id": "cc-barishal",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-barishal-W30",
+    "cc_id": "cc-barishal",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W1",
+    "cc_id": "cc-bogura",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W2",
+    "cc_id": "cc-bogura",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W3",
+    "cc_id": "cc-bogura",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W4",
+    "cc_id": "cc-bogura",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W5",
+    "cc_id": "cc-bogura",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W6",
+    "cc_id": "cc-bogura",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W7",
+    "cc_id": "cc-bogura",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W8",
+    "cc_id": "cc-bogura",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W9",
+    "cc_id": "cc-bogura",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W10",
+    "cc_id": "cc-bogura",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W11",
+    "cc_id": "cc-bogura",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W12",
+    "cc_id": "cc-bogura",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W13",
+    "cc_id": "cc-bogura",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W14",
+    "cc_id": "cc-bogura",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W15",
+    "cc_id": "cc-bogura",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W16",
+    "cc_id": "cc-bogura",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W17",
+    "cc_id": "cc-bogura",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W18",
+    "cc_id": "cc-bogura",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W19",
+    "cc_id": "cc-bogura",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W20",
+    "cc_id": "cc-bogura",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-bogura-W21",
+    "cc_id": "cc-bogura",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W1",
+    "cc_id": "cc-chattogram",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W2",
+    "cc_id": "cc-chattogram",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W3",
+    "cc_id": "cc-chattogram",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W4",
+    "cc_id": "cc-chattogram",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W5",
+    "cc_id": "cc-chattogram",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W6",
+    "cc_id": "cc-chattogram",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W7",
+    "cc_id": "cc-chattogram",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W8",
+    "cc_id": "cc-chattogram",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W9",
+    "cc_id": "cc-chattogram",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W10",
+    "cc_id": "cc-chattogram",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W11",
+    "cc_id": "cc-chattogram",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W12",
+    "cc_id": "cc-chattogram",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W13",
+    "cc_id": "cc-chattogram",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W14",
+    "cc_id": "cc-chattogram",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W15",
+    "cc_id": "cc-chattogram",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W16",
+    "cc_id": "cc-chattogram",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W17",
+    "cc_id": "cc-chattogram",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W18",
+    "cc_id": "cc-chattogram",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W19",
+    "cc_id": "cc-chattogram",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W20",
+    "cc_id": "cc-chattogram",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W21",
+    "cc_id": "cc-chattogram",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W22",
+    "cc_id": "cc-chattogram",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W23",
+    "cc_id": "cc-chattogram",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W24",
+    "cc_id": "cc-chattogram",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W25",
+    "cc_id": "cc-chattogram",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W26",
+    "cc_id": "cc-chattogram",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W27",
+    "cc_id": "cc-chattogram",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W28",
+    "cc_id": "cc-chattogram",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W29",
+    "cc_id": "cc-chattogram",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W30",
+    "cc_id": "cc-chattogram",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W31",
+    "cc_id": "cc-chattogram",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W32",
+    "cc_id": "cc-chattogram",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W33",
+    "cc_id": "cc-chattogram",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W34",
+    "cc_id": "cc-chattogram",
+    "ward_number": 34,
+    "name": "Ward 34",
+    "name_bn": "৩৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W35",
+    "cc_id": "cc-chattogram",
+    "ward_number": 35,
+    "name": "Ward 35",
+    "name_bn": "৩৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W36",
+    "cc_id": "cc-chattogram",
+    "ward_number": 36,
+    "name": "Ward 36",
+    "name_bn": "৩৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W37",
+    "cc_id": "cc-chattogram",
+    "ward_number": 37,
+    "name": "Ward 37",
+    "name_bn": "৩৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W38",
+    "cc_id": "cc-chattogram",
+    "ward_number": 38,
+    "name": "Ward 38",
+    "name_bn": "৩৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W39",
+    "cc_id": "cc-chattogram",
+    "ward_number": 39,
+    "name": "Ward 39",
+    "name_bn": "৩৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W40",
+    "cc_id": "cc-chattogram",
+    "ward_number": 40,
+    "name": "Ward 40",
+    "name_bn": "৪০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-chattogram-W41",
+    "cc_id": "cc-chattogram",
+    "ward_number": 41,
+    "name": "Ward 41",
+    "name_bn": "৪১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W1",
+    "cc_id": "cc-cumilla",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W2",
+    "cc_id": "cc-cumilla",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W3",
+    "cc_id": "cc-cumilla",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W4",
+    "cc_id": "cc-cumilla",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W5",
+    "cc_id": "cc-cumilla",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W6",
+    "cc_id": "cc-cumilla",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W7",
+    "cc_id": "cc-cumilla",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W8",
+    "cc_id": "cc-cumilla",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W9",
+    "cc_id": "cc-cumilla",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W10",
+    "cc_id": "cc-cumilla",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W11",
+    "cc_id": "cc-cumilla",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W12",
+    "cc_id": "cc-cumilla",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W13",
+    "cc_id": "cc-cumilla",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W14",
+    "cc_id": "cc-cumilla",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W15",
+    "cc_id": "cc-cumilla",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W16",
+    "cc_id": "cc-cumilla",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W17",
+    "cc_id": "cc-cumilla",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W18",
+    "cc_id": "cc-cumilla",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W19",
+    "cc_id": "cc-cumilla",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W20",
+    "cc_id": "cc-cumilla",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W21",
+    "cc_id": "cc-cumilla",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W22",
+    "cc_id": "cc-cumilla",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W23",
+    "cc_id": "cc-cumilla",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W24",
+    "cc_id": "cc-cumilla",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W25",
+    "cc_id": "cc-cumilla",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W26",
+    "cc_id": "cc-cumilla",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-cumilla-W27",
+    "cc_id": "cc-cumilla",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W1",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W2",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W3",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W4",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W5",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W6",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W7",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W8",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W9",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W10",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W11",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W12",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W13",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W14",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W15",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W16",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W17",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W18",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W19",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W20",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W21",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W22",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W23",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W24",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W25",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W26",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W27",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W28",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W29",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W30",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W31",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W32",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W33",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W34",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 34,
+    "name": "Ward 34",
+    "name_bn": "৩৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W35",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 35,
+    "name": "Ward 35",
+    "name_bn": "৩৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W36",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 36,
+    "name": "Ward 36",
+    "name_bn": "৩৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W37",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 37,
+    "name": "Ward 37",
+    "name_bn": "৩৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W38",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 38,
+    "name": "Ward 38",
+    "name_bn": "৩৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W39",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 39,
+    "name": "Ward 39",
+    "name_bn": "৩৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W40",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 40,
+    "name": "Ward 40",
+    "name_bn": "৪০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W41",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 41,
+    "name": "Ward 41",
+    "name_bn": "৪১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W42",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 42,
+    "name": "Ward 42",
+    "name_bn": "৪২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W43",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 43,
+    "name": "Ward 43",
+    "name_bn": "৪৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W44",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 44,
+    "name": "Ward 44",
+    "name_bn": "৪৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W45",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 45,
+    "name": "Ward 45",
+    "name_bn": "৪৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W46",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 46,
+    "name": "Ward 46",
+    "name_bn": "৪৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W47",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 47,
+    "name": "Ward 47",
+    "name_bn": "৪৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W48",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 48,
+    "name": "Ward 48",
+    "name_bn": "৪৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W49",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 49,
+    "name": "Ward 49",
+    "name_bn": "৪৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W50",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 50,
+    "name": "Ward 50",
+    "name_bn": "৫০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W51",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 51,
+    "name": "Ward 51",
+    "name_bn": "৫১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W52",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 52,
+    "name": "Ward 52",
+    "name_bn": "৫২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W53",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 53,
+    "name": "Ward 53",
+    "name_bn": "৫৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-north-W54",
+    "cc_id": "cc-dhaka-north",
+    "ward_number": 54,
+    "name": "Ward 54",
+    "name_bn": "৫৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W1",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W2",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W3",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W4",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W5",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W6",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W7",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W8",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W9",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W10",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W11",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W12",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W13",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W14",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W15",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W16",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W17",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W18",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W19",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W20",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W21",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W22",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W23",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W24",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W25",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W26",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W27",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W28",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W29",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W30",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W31",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W32",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W33",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W34",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 34,
+    "name": "Ward 34",
+    "name_bn": "৩৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W35",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 35,
+    "name": "Ward 35",
+    "name_bn": "৩৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W36",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 36,
+    "name": "Ward 36",
+    "name_bn": "৩৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W37",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 37,
+    "name": "Ward 37",
+    "name_bn": "৩৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W38",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 38,
+    "name": "Ward 38",
+    "name_bn": "৩৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W39",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 39,
+    "name": "Ward 39",
+    "name_bn": "৩৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W40",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 40,
+    "name": "Ward 40",
+    "name_bn": "৪০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W41",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 41,
+    "name": "Ward 41",
+    "name_bn": "৪১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W42",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 42,
+    "name": "Ward 42",
+    "name_bn": "৪২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W43",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 43,
+    "name": "Ward 43",
+    "name_bn": "৪৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W44",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 44,
+    "name": "Ward 44",
+    "name_bn": "৪৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W45",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 45,
+    "name": "Ward 45",
+    "name_bn": "৪৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W46",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 46,
+    "name": "Ward 46",
+    "name_bn": "৪৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W47",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 47,
+    "name": "Ward 47",
+    "name_bn": "৪৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W48",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 48,
+    "name": "Ward 48",
+    "name_bn": "৪৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W49",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 49,
+    "name": "Ward 49",
+    "name_bn": "৪৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W50",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 50,
+    "name": "Ward 50",
+    "name_bn": "৫০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W51",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 51,
+    "name": "Ward 51",
+    "name_bn": "৫১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W52",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 52,
+    "name": "Ward 52",
+    "name_bn": "৫২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W53",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 53,
+    "name": "Ward 53",
+    "name_bn": "৫৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W54",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 54,
+    "name": "Ward 54",
+    "name_bn": "৫৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W55",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 55,
+    "name": "Ward 55",
+    "name_bn": "৫৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W56",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 56,
+    "name": "Ward 56",
+    "name_bn": "৫৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W57",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 57,
+    "name": "Ward 57",
+    "name_bn": "৫৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W58",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 58,
+    "name": "Ward 58",
+    "name_bn": "৫৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W59",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 59,
+    "name": "Ward 59",
+    "name_bn": "৫৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W60",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 60,
+    "name": "Ward 60",
+    "name_bn": "৬০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W61",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 61,
+    "name": "Ward 61",
+    "name_bn": "৬১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W62",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 62,
+    "name": "Ward 62",
+    "name_bn": "৬২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W63",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 63,
+    "name": "Ward 63",
+    "name_bn": "৬৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W64",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 64,
+    "name": "Ward 64",
+    "name_bn": "৬৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W65",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 65,
+    "name": "Ward 65",
+    "name_bn": "৬৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W66",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 66,
+    "name": "Ward 66",
+    "name_bn": "৬৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W67",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 67,
+    "name": "Ward 67",
+    "name_bn": "৬৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W68",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 68,
+    "name": "Ward 68",
+    "name_bn": "৬৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W69",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 69,
+    "name": "Ward 69",
+    "name_bn": "৬৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W70",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 70,
+    "name": "Ward 70",
+    "name_bn": "৭০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W71",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 71,
+    "name": "Ward 71",
+    "name_bn": "৭১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W72",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 72,
+    "name": "Ward 72",
+    "name_bn": "৭২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W73",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 73,
+    "name": "Ward 73",
+    "name_bn": "৭৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W74",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 74,
+    "name": "Ward 74",
+    "name_bn": "৭৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-dhaka-south-W75",
+    "cc_id": "cc-dhaka-south",
+    "ward_number": 75,
+    "name": "Ward 75",
+    "name_bn": "৭৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W1",
+    "cc_id": "cc-gazipur",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W2",
+    "cc_id": "cc-gazipur",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W3",
+    "cc_id": "cc-gazipur",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W4",
+    "cc_id": "cc-gazipur",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W5",
+    "cc_id": "cc-gazipur",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W6",
+    "cc_id": "cc-gazipur",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W7",
+    "cc_id": "cc-gazipur",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W8",
+    "cc_id": "cc-gazipur",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W9",
+    "cc_id": "cc-gazipur",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W10",
+    "cc_id": "cc-gazipur",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W11",
+    "cc_id": "cc-gazipur",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W12",
+    "cc_id": "cc-gazipur",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W13",
+    "cc_id": "cc-gazipur",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W14",
+    "cc_id": "cc-gazipur",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W15",
+    "cc_id": "cc-gazipur",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W16",
+    "cc_id": "cc-gazipur",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W17",
+    "cc_id": "cc-gazipur",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W18",
+    "cc_id": "cc-gazipur",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W19",
+    "cc_id": "cc-gazipur",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W20",
+    "cc_id": "cc-gazipur",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W21",
+    "cc_id": "cc-gazipur",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W22",
+    "cc_id": "cc-gazipur",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W23",
+    "cc_id": "cc-gazipur",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W24",
+    "cc_id": "cc-gazipur",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W25",
+    "cc_id": "cc-gazipur",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W26",
+    "cc_id": "cc-gazipur",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W27",
+    "cc_id": "cc-gazipur",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W28",
+    "cc_id": "cc-gazipur",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W29",
+    "cc_id": "cc-gazipur",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W30",
+    "cc_id": "cc-gazipur",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W31",
+    "cc_id": "cc-gazipur",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W32",
+    "cc_id": "cc-gazipur",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W33",
+    "cc_id": "cc-gazipur",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W34",
+    "cc_id": "cc-gazipur",
+    "ward_number": 34,
+    "name": "Ward 34",
+    "name_bn": "৩৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W35",
+    "cc_id": "cc-gazipur",
+    "ward_number": 35,
+    "name": "Ward 35",
+    "name_bn": "৩৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W36",
+    "cc_id": "cc-gazipur",
+    "ward_number": 36,
+    "name": "Ward 36",
+    "name_bn": "৩৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W37",
+    "cc_id": "cc-gazipur",
+    "ward_number": 37,
+    "name": "Ward 37",
+    "name_bn": "৩৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W38",
+    "cc_id": "cc-gazipur",
+    "ward_number": 38,
+    "name": "Ward 38",
+    "name_bn": "৩৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W39",
+    "cc_id": "cc-gazipur",
+    "ward_number": 39,
+    "name": "Ward 39",
+    "name_bn": "৩৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W40",
+    "cc_id": "cc-gazipur",
+    "ward_number": 40,
+    "name": "Ward 40",
+    "name_bn": "৪০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W41",
+    "cc_id": "cc-gazipur",
+    "ward_number": 41,
+    "name": "Ward 41",
+    "name_bn": "৪১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W42",
+    "cc_id": "cc-gazipur",
+    "ward_number": 42,
+    "name": "Ward 42",
+    "name_bn": "৪২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W43",
+    "cc_id": "cc-gazipur",
+    "ward_number": 43,
+    "name": "Ward 43",
+    "name_bn": "৪৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W44",
+    "cc_id": "cc-gazipur",
+    "ward_number": 44,
+    "name": "Ward 44",
+    "name_bn": "৪৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W45",
+    "cc_id": "cc-gazipur",
+    "ward_number": 45,
+    "name": "Ward 45",
+    "name_bn": "৪৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W46",
+    "cc_id": "cc-gazipur",
+    "ward_number": 46,
+    "name": "Ward 46",
+    "name_bn": "৪৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W47",
+    "cc_id": "cc-gazipur",
+    "ward_number": 47,
+    "name": "Ward 47",
+    "name_bn": "৪৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W48",
+    "cc_id": "cc-gazipur",
+    "ward_number": 48,
+    "name": "Ward 48",
+    "name_bn": "৪৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W49",
+    "cc_id": "cc-gazipur",
+    "ward_number": 49,
+    "name": "Ward 49",
+    "name_bn": "৪৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W50",
+    "cc_id": "cc-gazipur",
+    "ward_number": 50,
+    "name": "Ward 50",
+    "name_bn": "৫০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W51",
+    "cc_id": "cc-gazipur",
+    "ward_number": 51,
+    "name": "Ward 51",
+    "name_bn": "৫১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W52",
+    "cc_id": "cc-gazipur",
+    "ward_number": 52,
+    "name": "Ward 52",
+    "name_bn": "৫২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W53",
+    "cc_id": "cc-gazipur",
+    "ward_number": 53,
+    "name": "Ward 53",
+    "name_bn": "৫৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W54",
+    "cc_id": "cc-gazipur",
+    "ward_number": 54,
+    "name": "Ward 54",
+    "name_bn": "৫৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W55",
+    "cc_id": "cc-gazipur",
+    "ward_number": 55,
+    "name": "Ward 55",
+    "name_bn": "৫৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W56",
+    "cc_id": "cc-gazipur",
+    "ward_number": 56,
+    "name": "Ward 56",
+    "name_bn": "৫৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-gazipur-W57",
+    "cc_id": "cc-gazipur",
+    "ward_number": 57,
+    "name": "Ward 57",
+    "name_bn": "৫৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W1",
+    "cc_id": "cc-khulna",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W2",
+    "cc_id": "cc-khulna",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W3",
+    "cc_id": "cc-khulna",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W4",
+    "cc_id": "cc-khulna",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W5",
+    "cc_id": "cc-khulna",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W6",
+    "cc_id": "cc-khulna",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W7",
+    "cc_id": "cc-khulna",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W8",
+    "cc_id": "cc-khulna",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W9",
+    "cc_id": "cc-khulna",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W10",
+    "cc_id": "cc-khulna",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W11",
+    "cc_id": "cc-khulna",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W12",
+    "cc_id": "cc-khulna",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W13",
+    "cc_id": "cc-khulna",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W14",
+    "cc_id": "cc-khulna",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W15",
+    "cc_id": "cc-khulna",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W16",
+    "cc_id": "cc-khulna",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W17",
+    "cc_id": "cc-khulna",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W18",
+    "cc_id": "cc-khulna",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W19",
+    "cc_id": "cc-khulna",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W20",
+    "cc_id": "cc-khulna",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W21",
+    "cc_id": "cc-khulna",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W22",
+    "cc_id": "cc-khulna",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W23",
+    "cc_id": "cc-khulna",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W24",
+    "cc_id": "cc-khulna",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W25",
+    "cc_id": "cc-khulna",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W26",
+    "cc_id": "cc-khulna",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W27",
+    "cc_id": "cc-khulna",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W28",
+    "cc_id": "cc-khulna",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W29",
+    "cc_id": "cc-khulna",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W30",
+    "cc_id": "cc-khulna",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-khulna-W31",
+    "cc_id": "cc-khulna",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W1",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W2",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W3",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W4",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W5",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W6",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W7",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W8",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W9",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W10",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W11",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W12",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W13",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W14",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W15",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W16",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W17",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W18",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W19",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W20",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W21",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W22",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W23",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W24",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W25",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W26",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W27",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W28",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W29",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W30",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W31",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W32",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-mymensingh-W33",
+    "cc_id": "cc-mymensingh",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W1",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W2",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W3",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W4",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W5",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W6",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W7",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W8",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W9",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W10",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W11",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W12",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W13",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W14",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W15",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W16",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W17",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W18",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W19",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W20",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W21",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W22",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W23",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W24",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W25",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W26",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-narayanganj-W27",
+    "cc_id": "cc-narayanganj",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W1",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W2",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W3",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W4",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W5",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W6",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W7",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W8",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W9",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W10",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W11",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W12",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W13",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W14",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W15",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W16",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W17",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W18",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W19",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W20",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W21",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W22",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W23",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W24",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W25",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W26",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W27",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W28",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W29",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rajshahi-W30",
+    "cc_id": "cc-rajshahi",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W1",
+    "cc_id": "cc-rangpur",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W2",
+    "cc_id": "cc-rangpur",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W3",
+    "cc_id": "cc-rangpur",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W4",
+    "cc_id": "cc-rangpur",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W5",
+    "cc_id": "cc-rangpur",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W6",
+    "cc_id": "cc-rangpur",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W7",
+    "cc_id": "cc-rangpur",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W8",
+    "cc_id": "cc-rangpur",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W9",
+    "cc_id": "cc-rangpur",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W10",
+    "cc_id": "cc-rangpur",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W11",
+    "cc_id": "cc-rangpur",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W12",
+    "cc_id": "cc-rangpur",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W13",
+    "cc_id": "cc-rangpur",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W14",
+    "cc_id": "cc-rangpur",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W15",
+    "cc_id": "cc-rangpur",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W16",
+    "cc_id": "cc-rangpur",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W17",
+    "cc_id": "cc-rangpur",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W18",
+    "cc_id": "cc-rangpur",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W19",
+    "cc_id": "cc-rangpur",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W20",
+    "cc_id": "cc-rangpur",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W21",
+    "cc_id": "cc-rangpur",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W22",
+    "cc_id": "cc-rangpur",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W23",
+    "cc_id": "cc-rangpur",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W24",
+    "cc_id": "cc-rangpur",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W25",
+    "cc_id": "cc-rangpur",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W26",
+    "cc_id": "cc-rangpur",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W27",
+    "cc_id": "cc-rangpur",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W28",
+    "cc_id": "cc-rangpur",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W29",
+    "cc_id": "cc-rangpur",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W30",
+    "cc_id": "cc-rangpur",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W31",
+    "cc_id": "cc-rangpur",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W32",
+    "cc_id": "cc-rangpur",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-rangpur-W33",
+    "cc_id": "cc-rangpur",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W1",
+    "cc_id": "cc-sylhet",
+    "ward_number": 1,
+    "name": "Ward 1",
+    "name_bn": "১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W2",
+    "cc_id": "cc-sylhet",
+    "ward_number": 2,
+    "name": "Ward 2",
+    "name_bn": "২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W3",
+    "cc_id": "cc-sylhet",
+    "ward_number": 3,
+    "name": "Ward 3",
+    "name_bn": "৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W4",
+    "cc_id": "cc-sylhet",
+    "ward_number": 4,
+    "name": "Ward 4",
+    "name_bn": "৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W5",
+    "cc_id": "cc-sylhet",
+    "ward_number": 5,
+    "name": "Ward 5",
+    "name_bn": "৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W6",
+    "cc_id": "cc-sylhet",
+    "ward_number": 6,
+    "name": "Ward 6",
+    "name_bn": "৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W7",
+    "cc_id": "cc-sylhet",
+    "ward_number": 7,
+    "name": "Ward 7",
+    "name_bn": "৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W8",
+    "cc_id": "cc-sylhet",
+    "ward_number": 8,
+    "name": "Ward 8",
+    "name_bn": "৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W9",
+    "cc_id": "cc-sylhet",
+    "ward_number": 9,
+    "name": "Ward 9",
+    "name_bn": "৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W10",
+    "cc_id": "cc-sylhet",
+    "ward_number": 10,
+    "name": "Ward 10",
+    "name_bn": "১০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W11",
+    "cc_id": "cc-sylhet",
+    "ward_number": 11,
+    "name": "Ward 11",
+    "name_bn": "১১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W12",
+    "cc_id": "cc-sylhet",
+    "ward_number": 12,
+    "name": "Ward 12",
+    "name_bn": "১২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W13",
+    "cc_id": "cc-sylhet",
+    "ward_number": 13,
+    "name": "Ward 13",
+    "name_bn": "১৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W14",
+    "cc_id": "cc-sylhet",
+    "ward_number": 14,
+    "name": "Ward 14",
+    "name_bn": "১৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W15",
+    "cc_id": "cc-sylhet",
+    "ward_number": 15,
+    "name": "Ward 15",
+    "name_bn": "১৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W16",
+    "cc_id": "cc-sylhet",
+    "ward_number": 16,
+    "name": "Ward 16",
+    "name_bn": "১৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W17",
+    "cc_id": "cc-sylhet",
+    "ward_number": 17,
+    "name": "Ward 17",
+    "name_bn": "১৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W18",
+    "cc_id": "cc-sylhet",
+    "ward_number": 18,
+    "name": "Ward 18",
+    "name_bn": "১৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W19",
+    "cc_id": "cc-sylhet",
+    "ward_number": 19,
+    "name": "Ward 19",
+    "name_bn": "১৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W20",
+    "cc_id": "cc-sylhet",
+    "ward_number": 20,
+    "name": "Ward 20",
+    "name_bn": "২০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W21",
+    "cc_id": "cc-sylhet",
+    "ward_number": 21,
+    "name": "Ward 21",
+    "name_bn": "২১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W22",
+    "cc_id": "cc-sylhet",
+    "ward_number": 22,
+    "name": "Ward 22",
+    "name_bn": "২২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W23",
+    "cc_id": "cc-sylhet",
+    "ward_number": 23,
+    "name": "Ward 23",
+    "name_bn": "২৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W24",
+    "cc_id": "cc-sylhet",
+    "ward_number": 24,
+    "name": "Ward 24",
+    "name_bn": "২৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W25",
+    "cc_id": "cc-sylhet",
+    "ward_number": 25,
+    "name": "Ward 25",
+    "name_bn": "২৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W26",
+    "cc_id": "cc-sylhet",
+    "ward_number": 26,
+    "name": "Ward 26",
+    "name_bn": "২৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W27",
+    "cc_id": "cc-sylhet",
+    "ward_number": 27,
+    "name": "Ward 27",
+    "name_bn": "২৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W28",
+    "cc_id": "cc-sylhet",
+    "ward_number": 28,
+    "name": "Ward 28",
+    "name_bn": "২৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W29",
+    "cc_id": "cc-sylhet",
+    "ward_number": 29,
+    "name": "Ward 29",
+    "name_bn": "২৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W30",
+    "cc_id": "cc-sylhet",
+    "ward_number": 30,
+    "name": "Ward 30",
+    "name_bn": "৩০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W31",
+    "cc_id": "cc-sylhet",
+    "ward_number": 31,
+    "name": "Ward 31",
+    "name_bn": "৩১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W32",
+    "cc_id": "cc-sylhet",
+    "ward_number": 32,
+    "name": "Ward 32",
+    "name_bn": "৩২ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W33",
+    "cc_id": "cc-sylhet",
+    "ward_number": 33,
+    "name": "Ward 33",
+    "name_bn": "৩৩ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W34",
+    "cc_id": "cc-sylhet",
+    "ward_number": 34,
+    "name": "Ward 34",
+    "name_bn": "৩৪ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W35",
+    "cc_id": "cc-sylhet",
+    "ward_number": 35,
+    "name": "Ward 35",
+    "name_bn": "৩৫ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W36",
+    "cc_id": "cc-sylhet",
+    "ward_number": 36,
+    "name": "Ward 36",
+    "name_bn": "৩৬ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W37",
+    "cc_id": "cc-sylhet",
+    "ward_number": 37,
+    "name": "Ward 37",
+    "name_bn": "৩৭ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W38",
+    "cc_id": "cc-sylhet",
+    "ward_number": 38,
+    "name": "Ward 38",
+    "name_bn": "৩৮ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W39",
+    "cc_id": "cc-sylhet",
+    "ward_number": 39,
+    "name": "Ward 39",
+    "name_bn": "৩৯ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W40",
+    "cc_id": "cc-sylhet",
+    "ward_number": 40,
+    "name": "Ward 40",
+    "name_bn": "৪০ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W41",
+    "cc_id": "cc-sylhet",
+    "ward_number": 41,
+    "name": "Ward 41",
+    "name_bn": "৪১ নং ওয়ার্ড"
+  },
+  {
+    "id": "cc-sylhet-W42",
+    "cc_id": "cc-sylhet",
+    "ward_number": 42,
+    "name": "Ward 42",
+    "name_bn": "৪২ নং ওয়ার্ড"
+  }
+]

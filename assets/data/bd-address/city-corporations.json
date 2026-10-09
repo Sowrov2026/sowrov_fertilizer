@@ -1,0 +1,202 @@
+[
+  {
+    "id": "cc-barishal",
+    "name": "Barishal City Corporation",
+    "name_bn": "বরিশাল সিটি কর্পোরেশন",
+    "district_id": 2,
+    "division_id": 1,
+    "ward_count": 30,
+    "ward_count_evidence": "secondary",
+    "thana_supported": false,
+    "source_note": "EC 2023 election reporting (30 general + 10 reserved seats); BBC 2018 three-CC election coverage.",
+    "sources": [
+      "https://www.bbc.com/bengali/news-45007894",
+      "https://ecs.gov.bd"
+    ]
+  },
+  {
+    "id": "cc-chattogram",
+    "name": "Chattogram City Corporation",
+    "name_bn": "চট্টগ্রাম সিটি কর্পোরেশন",
+    "district_id": 10,
+    "division_id": 2,
+    "ward_count": 41,
+    "ward_count_evidence": "strong",
+    "thana_supported": false,
+    "source_note": "EC 2021 gazette-era delimitation reporting (41 general + 14 reserved).",
+    "sources": [
+      "https://ecs.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "cc-cumilla",
+    "name": "Cumilla City Corporation",
+    "name_bn": "কুমিল্লা সিটি কর্পোরেশন",
+    "district_id": 12,
+    "division_id": 2,
+    "ward_count": 27,
+    "ward_count_evidence": "secondary",
+    "thana_supported": false,
+    "source_note": "Media + institutional reporting (27 general + 9 reserved seats).",
+    "sources": [
+      "https://ecs.gov.bd"
+    ]
+  },
+  {
+    "id": "cc-dhaka-north",
+    "name": "Dhaka North City Corporation",
+    "name_bn": "ঢাকা উত্তর সিটি কর্পোরেশন",
+    "district_id": 18,
+    "division_id": 3,
+    "ward_count": 54,
+    "ward_count_evidence": "secondary",
+    "thana_supported": false,
+    "source_note": "EC 2020 election results (media quoting EC: 54 general + 18 reserved seats).",
+    "sources": [
+      "https://ecs.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "cc-dhaka-south",
+    "name": "Dhaka South City Corporation",
+    "name_bn": "ঢাকা দক্ষিণ সিটি কর্পোরেশন",
+    "district_id": 18,
+    "division_id": 3,
+    "ward_count": 75,
+    "ward_count_evidence": "secondary",
+    "thana_supported": false,
+    "source_note": "EC 2020 election results (media quoting EC: 75 general + 25 reserved seats).",
+    "sources": [
+      "https://ecs.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "cc-gazipur",
+    "name": "Gazipur City Corporation",
+    "name_bn": "গাজীপুর সিটি কর্পোরেশন",
+    "district_id": 20,
+    "division_id": 3,
+    "ward_count": 57,
+    "ward_count_evidence": "strong",
+    "thana_supported": true,
+    "source_note": "GMP official site + EC 2018/2023 election reporting (57 general + 19 reserved seats).",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://ecs.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "cc-narayanganj",
+    "name": "Narayanganj City Corporation",
+    "name_bn": "নারায়ণগঞ্জ সিটি কর্পোরেশন",
+    "district_id": 26,
+    "division_id": 3,
+    "ward_count": 27,
+    "ward_count_evidence": "secondary",
+    "thana_supported": false,
+    "source_note": "Banglapedia + institutional reporting (27 general + 9 reserved seats).",
+    "sources": [
+      "https://ecs.gov.bd"
+    ]
+  },
+  {
+    "id": "cc-khulna",
+    "name": "Khulna City Corporation",
+    "name_bn": "খুলনা সিটি কর্পোরেশন",
+    "district_id": 35,
+    "division_id": 4,
+    "ward_count": 31,
+    "ward_count_evidence": "strong",
+    "thana_supported": false,
+    "source_note": "KMP official + EC 2018 election reporting (31 general + 10 reserved seats).",
+    "sources": [
+      "https://ecs.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "cc-bogura",
+    "name": "Bogura City Corporation",
+    "name_bn": "বগুড়া সিটি কর্পোরেশন",
+    "district_id": 41,
+    "division_id": 5,
+    "ward_count": 21,
+    "ward_count_evidence": "primary",
+    "thana_supported": true,
+    "source_note": "Constitutional/gazette evidence: DPP extraordinary gazette SRO 116-Law/2026 (Bogura City Corporation Act, 2019 delimitation: 21 wards from Bogura Sadar + Shajahanpur upazila mouzas).",
+    "sources": [
+      "https://dpp.gov.bd/bgpress/index.php/document/get_extraordinary/61653",
+      "https://bogura.judiciary.gov.bd",
+      "https://digrajshahirange.gov.bd/bogura/thanas",
+      "https://bdlaws.minlaw.gov.bd/act-1026.html"
+    ]
+  },
+  {
+    "id": "cc-rajshahi",
+    "name": "Rajshahi City Corporation",
+    "name_bn": "রাজশাহী সিটি কর্পোরেশন",
+    "district_id": 47,
+    "division_id": 5,
+    "ward_count": 30,
+    "ward_count_evidence": "strong",
+    "thana_supported": false,
+    "source_note": "EC 2018 election coverage (30 general + 10 reserved wards; councilors listed for wards 1-30); SUCJ election observation report.",
+    "sources": [
+      "https://www.jagonews24.com/m/country/news/442659",
+      "https://www.channelionline.com/councilors-in-30-wards-in-rajshahi-city-corporation-elections/",
+      "https://en.wikipedia.org/wiki/2018_Rajshahi_City_Corporation_election",
+      "https://shujan.org/wp-content/uploads/2023/04/Report-on-Rajshahi-City-Corporation-Election-2018.pdf",
+      "https://ecs.gov.bd/en/page/rajshahi-city-corporation-election-result"
+    ]
+  },
+  {
+    "id": "cc-rangpur",
+    "name": "Rangpur City Corporation",
+    "name_bn": "রংপুর সিটি কর্পোরেশন",
+    "district_id": 55,
+    "division_id": 6,
+    "ward_count": 33,
+    "ward_count_evidence": "strong",
+    "thana_supported": true,
+    "source_note": "RPMP official site ward references (incl. ward 33) + EC 2018/2023 election reporting.",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://ecs.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "cc-sylhet",
+    "name": "Sylhet City Corporation",
+    "name_bn": "সিলেট সিটি কর্পোরেশন",
+    "district_id": 60,
+    "division_id": 7,
+    "ward_count": 42,
+    "ward_count_evidence": "strong",
+    "thana_supported": false,
+    "source_note": "scc.gov.bd official delimitation notice (+11 wards, 2022: total 42) + EC 2023 election reporting.",
+    "sources": [
+      "https://scc.gov.bd",
+      "https://ecs.gov.bd",
+      "https://www.bbc.com/bengali/news-45007894"
+    ]
+  },
+  {
+    "id": "cc-mymensingh",
+    "name": "Mymensingh City Corporation",
+    "name_bn": "ময়মনসিংহ সিটি কর্পোরেশন",
+    "district_id": 62,
+    "division_id": 8,
+    "ward_count": 33,
+    "ward_count_evidence": "strong",
+    "thana_supported": false,
+    "source_note": "BSS + EC 2024 election reporting (33 general + 11 reserved seats).",
+    "sources": [
+      "https://ecs.gov.bd"
+    ]
+  }
+]

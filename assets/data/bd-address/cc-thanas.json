@@ -1,0 +1,196 @@
+[
+  {
+    "id": "th-cc-bogura-sadar",
+    "name": "Bogura Sadar Thana",
+    "name_bn": "বগুড়া সদর থানা",
+    "cc_ids": ["cc-bogura"],
+    "containment": "extends_beyond",
+    "source_note": "Gazette-derived: Bogura City Corporation formed by absorbing mouzas of Bogura Sadar and Shajahanpur upazilas; district police (not metro) covers CC territory.",
+    "sources": [
+      "https://dpp.gov.bd/bgpress/index.php/document/get_extraordinary/61653",
+      "https://digrajshahirange.gov.bd/bogura/thanas",
+      "https://bogura.judiciary.gov.bd"
+    ]
+  },
+  {
+    "id": "th-cc-bogura-shajahanpur",
+    "name": "Shajahanpur Thana",
+    "name_bn": "শাজাহানপুর থানা",
+    "cc_ids": ["cc-bogura"],
+    "containment": "extends_beyond",
+    "source_note": "Gazette-derived: same delimitation as Bogura Sadar; thana extends beyond CC boundary.",
+    "sources": [
+      "https://dpp.gov.bd/bgpress/index.php/document/get_extraordinary/61653",
+      "https://digrajshahirange.gov.bd/bogura/thanas",
+      "https://bogura.judiciary.gov.bd"
+    ]
+  },
+  {
+    "id": "th-gmp-sadar",
+    "name": "Sadar Thana",
+    "name_bn": "সদর থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-bason",
+    "name": "Bason Thana",
+    "name_bn": "বসন থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-konabari",
+    "name": "Konabari Thana",
+    "name_bn": "কোনাবাড়ী থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-kashimpur",
+    "name": "Kashimpur Thana",
+    "name_bn": "কাশিমপুর থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-gacha",
+    "name": "Gacha Thana",
+    "name_bn": "গাচা থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-pubail",
+    "name": "Pubail Thana",
+    "name_bn": "পুবাইল থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-tongi-east",
+    "name": "Tongi East Thana",
+    "name_bn": "টঙ্গী পূর্ব থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-gmp-tongi-west",
+    "name": "Tongi West Thana",
+    "name_bn": "টঙ্গী পশ্চিম থানা",
+    "cc_ids": ["cc-gazipur"],
+    "containment": "contained",
+    "source_note": "Gazipur Metropolitan Police official station roster.",
+    "sources": [
+      "https://gmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-rpmp-kotwali",
+    "name": "Kotwali Thana",
+    "name_bn": "কোতয়ালী থানা",
+    "cc_ids": ["cc-rangpur"],
+    "containment": "partially_overlapping",
+    "source_note": "Rangpur Metropolitan Police official station list (RPMP covers RCC + parts of neighboring areas).",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-rpmp-tajhat",
+    "name": "Tajhat Thana",
+    "name_bn": "তাজহাট থানা",
+    "cc_ids": ["cc-rangpur"],
+    "containment": "partially_overlapping",
+    "source_note": "Rangpur Metropolitan Police official station list.",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-rpmp-mahiganj",
+    "name": "Mahiganj Thana",
+    "name_bn": "মাহিগঞ্জ থানা",
+    "cc_ids": ["cc-rangpur"],
+    "containment": "partially_overlapping",
+    "source_note": "Rangpur Metropolitan Police; covers RCC wards 29, 30, 33 plus Pirganj union (extends beyond CC).",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-rpmp-haragach",
+    "name": "Haragach Thana",
+    "name_bn": "হারাগাছ থানা",
+    "cc_ids": ["cc-rangpur"],
+    "containment": "partially_overlapping",
+    "source_note": "Rangpur Metropolitan Police official station list.",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-rpmp-parshuram",
+    "name": "Parshuram Thana",
+    "name_bn": "পরশুরাম থানা",
+    "cc_ids": ["cc-rangpur"],
+    "containment": "partially_overlapping",
+    "source_note": "Rangpur Metropolitan Police official station list.",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  },
+  {
+    "id": "th-rpmp-hajirhat",
+    "name": "Hajirhat Thana",
+    "name_bn": "হাজিরহাট থানা",
+    "cc_ids": ["cc-rangpur"],
+    "containment": "partially_overlapping",
+    "source_note": "Rangpur Metropolitan Police official station list.",
+    "sources": [
+      "https://rpmp.gov.bd",
+      "https://police.gov.bd/en/metropolitan_police"
+    ]
+  }
+]

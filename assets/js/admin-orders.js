@@ -27,6 +27,16 @@ const printInvoiceBtn =
 
 const tableBody = document.getElementById("ordersTableBody");
 let allOrders = [];
+
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+function xlsxSafeValue(value) {
+    const s = (value === null || value === undefined) ? '' : String(value);
+    return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+}
 // ======================================
 // ORDER STATUS
 // ======================================
@@ -769,7 +779,7 @@ ${order.paymentStatus}
 
 <p>
 
-${order.fullAddress}
+${escapeHtml(String(order.fullAddress || ''))}
 
 </p>
 
@@ -994,7 +1004,7 @@ Order Invoice
 
 <td>
 
-${order.fullAddress}
+${escapeHtml(String(order.fullAddress || ''))}
 
 </td>
 
@@ -1128,6 +1138,18 @@ exportOrdersBtn.addEventListener("click", async () => {
                 "Post Office": order.postOffice,
 
                 "House": order.house,
+
+                "Full Address": xlsxSafeValue(order.fullAddress || ''),
+
+                "Area Type": xlsxSafeValue(order.areaType || ''),
+
+                "City Corporation": xlsxSafeValue(order.cityCorporationName || ''),
+
+                "Ward": xlsxSafeValue(order.wardName || ''),
+
+                "Thana": xlsxSafeValue(order.thanaName || ''),
+
+                "Locality": xlsxSafeValue(order.locality || ''),
 
                 "Payment Method": order.paymentMethod,
 

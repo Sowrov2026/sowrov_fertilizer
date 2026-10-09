@@ -9,6 +9,104 @@ import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { getAuth } from 'firebase-admin/auth';
 import { sendOrderNotificationsOnce } from './_shared/order-notifications.js';
 import { buildCorsHeaders, handleOptions } from './_shared/cors.js';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+// ---- Bangladesh Address Datasets (City Corporation support) ----
+
+const AREA_TYPES = new Set(['rural', 'city_corporation']);
+
+let _ccDatasets = null;
+
+function loadCcDatasets() {
+    if (_ccDatasets) return _ccDatasets;
+    try {
+        const base = join(process.cwd(), 'assets', 'data', 'bd-address');
+        const divisions = JSON.parse(readFileSync(join(base, 'divisions.json'), 'utf8'));
+        const districts = JSON.parse(readFileSync(join(base, 'districts.json'), 'utf8'));
+        const ccs = JSON.parse(readFileSync(join(base, 'city-corporations.json'), 'utf8'));
+        const wards = JSON.parse(readFileSync(join(base, 'cc-wards.json'), 'utf8'));
+        const thanas = JSON.parse(readFileSync(join(base, 'cc-thanas.json'), 'utf8'));
+        const wardsByCc = new Map();
+        for (const w of wards) {
+            if (!wardsByCc.has(w.cc_id)) wardsByCc.set(w.cc_id, []);
+            wardsByCc.get(w.cc_id).push(w);
+        }
+        const thanasById = new Map(thanas.map(t => [t.id, t]));
+        _ccDatasets = {
+            ccsById: new Map(ccs.map(c => [c.id, c])),
+            wardsById: new Map(wards.map(w => [w.id, w])),
+            wardsByCc,
+            thanasById,
+            districtsById: new Map(districts.map(d => [String(d.id), d.name])),
+            divisionsById: new Map(divisions.map(d => [String(d.id), d.name])),
+        };
+        return _ccDatasets;
+    } catch (err) {
+        console.error('[OrderAPI] Failed to load CC address datasets:', err.message);
+        return null;
+    }
+}
+
+function validateCcOrder(body) {
+    const { division, district, cityCorporation, ward, wardNumber, thana, locality } = body;
+    const ds = loadCcDatasets();
+    if (!ds) {
+        return { error: 'City Corporation address data is unavailable. Please try again later.' };
+    }
+    if (!cityCorporation || !String(cityCorporation).trim()) {
+        return { error: 'Please select a valid City Corporation.' };
+    }
+    const cc = ds.ccsById.get(String(cityCorporation).trim());
+    if (!cc) {
+        return { error: 'Please select a valid City Corporation.' };
+    }
+    if (!division || String(division).trim() !== String(cc.division_id)) {
+        return { error: 'Division does not match the selected City Corporation.' };
+    }
+    if (!district || String(district).trim() !== String(cc.district_id)) {
+        return { error: 'District does not match the selected City Corporation.' };
+    }
+    if (!ward || !String(ward).trim()) {
+        return { error: 'Please select a valid Ward.' };
+    }
+    const wardId = String(ward).trim();
+    const wardRec = ds.wardsById.get(wardId);
+    if (!wardRec || wardRec.cc_id !== cc.id) {
+        return { error: 'Please select a valid Ward.' };
+    }
+    if (wardNumber !== undefined && wardNumber !== null && String(wardNumber).trim() !== String(wardRec.ward_number)) {
+        return { error: 'Ward number does not match the selected Ward.' };
+    }
+    let thanaRec = null;
+    if (thana && String(thana).trim()) {
+        thanaRec = ds.thanasById.get(String(thana).trim());
+        if (!thanaRec || !Array.isArray(thanaRec.cc_ids) || !thanaRec.cc_ids.includes(cc.id)) {
+            return { error: 'Please select a valid Thana for this City Corporation.' };
+        }
+    }
+    if (!locality || !String(locality).trim()) {
+        return { error: 'Please enter a valid Locality / Mahalla.' };
+    }
+    const districtName = ds.districtsById.get(String(cc.district_id)) || '';
+    const divisionName = ds.divisionsById.get(String(cc.division_id)) || '';
+    const parts = [
+        String(body.house || '').trim(),
+        String(locality).trim(),
+        wardRec.name,
+        thanaRec ? thanaRec.name : '',
+        cc.name,
+        districtName,
+        divisionName,
+    ].filter(Boolean);
+    return {
+        cc,
+        wardRec,
+        thanaRec,
+        locality: String(locality).trim(),
+        fullAddress: parts.join(', '),
+    };
+}
 
 // ---- Firebase Admin Init (reuse pattern from quota.js) ----
 
@@ -112,6 +210,7 @@ export default async function handler(req, res) {
             orderType, quantity, pricePerKg, totalAmount,
             division, district, upazila, union, village, postOffice, house,
             fullAddress, paymentMethod, paymentNumber, transactionId,
+            areaType, cityCorporation, ward, wardNumber, thana, locality,
         } = body;
 
         if (!customerName || !phone || !productId || !productName || !orderType || !quantity || !pricePerKg || !totalAmount) {
@@ -120,18 +219,36 @@ export default async function handler(req, res) {
             return;
         }
 
+        // ---- Validate area type (missing => rural, legacy compatible) ----
+        const normalizedAreaType = (areaType && String(areaType).trim()) ? String(areaType).trim() : 'rural';
+        if (!AREA_TYPES.has(normalizedAreaType)) {
+            res.writeHead(400, corsHeaders);
+            res.end(JSON.stringify({ error: 'bad_request', message: 'Invalid area type.' }));
+            return;
+        }
+
         // ---- Validate required address fields ----
-        const requiredAddressFields = [
-            { value: division, name: 'Division' },
-            { value: district, name: 'District' },
-            { value: upazila, name: 'Upazila' },
-            { value: village, name: 'Village' },
-        ];
-        for (const af of requiredAddressFields) {
-            if (!af.value || !String(af.value).trim()) {
+        let ccValidation = null;
+        if (normalizedAreaType === 'city_corporation') {
+            ccValidation = validateCcOrder({ ...body, house: String(house || '') });
+            if (ccValidation.error) {
                 res.writeHead(400, corsHeaders);
-                res.end(JSON.stringify({ error: 'bad_request', message: `Please select a valid ${af.name}.` }));
+                res.end(JSON.stringify({ error: 'bad_request', message: ccValidation.error }));
                 return;
+            }
+        } else {
+            const requiredAddressFields = [
+                { value: division, name: 'Division' },
+                { value: district, name: 'District' },
+                { value: upazila, name: 'Upazila' },
+                { value: village, name: 'Village' },
+            ];
+            for (const af of requiredAddressFields) {
+                if (!af.value || !String(af.value).trim()) {
+                    res.writeHead(400, corsHeaders);
+                    res.end(JSON.stringify({ error: 'bad_request', message: `Please select a valid ${af.name}.` }));
+                    return;
+                }
             }
         }
 
@@ -215,12 +332,21 @@ export default async function handler(req, res) {
             totalAmount: Number(totalAmount),
             division: String(division || ''),
             district: String(district || ''),
-            upazila: String(upazila || ''),
-            union: String(union || ''),
-            village: String(village || ''),
+            upazila: normalizedAreaType === 'city_corporation' ? '' : String(upazila || ''),
+            union: normalizedAreaType === 'city_corporation' ? '' : String(union || ''),
+            village: normalizedAreaType === 'city_corporation' ? '' : String(village || ''),
             postOffice: String(postOffice || ''),
             house: String(house || ''),
-            fullAddress: String(fullAddress || ''),
+            areaType: normalizedAreaType,
+            cityCorporation: ccValidation ? ccValidation.cc.id : '',
+            cityCorporationName: ccValidation ? ccValidation.cc.name : '',
+            ward: ccValidation ? ccValidation.wardRec.id : '',
+            wardNumber: ccValidation ? String(ccValidation.wardRec.ward_number) : '',
+            wardName: ccValidation ? ccValidation.wardRec.name : '',
+            thana: ccValidation && ccValidation.thanaRec ? ccValidation.thanaRec.id : '',
+            thanaName: ccValidation && ccValidation.thanaRec ? ccValidation.thanaRec.name : '',
+            locality: ccValidation ? ccValidation.locality : '',
+            fullAddress: ccValidation ? ccValidation.fullAddress : String(fullAddress || ''),
             paymentMethod: String(paymentMethod || 'COD'),
             paymentNumber: normalizedPaymentNumber,
             paymentStatus: paymentMethod === 'COD' ? 'Pending' : 'Unpaid',
